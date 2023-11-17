@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3.556" height="16" viewBox="0 0 3.556 16">
+  <g id="Menu" transform="translate(-24.428)">
+    <g id="Dots" transform="translate(27.983) rotate(90)">
+      <circle id="Ellipse_2" data-name="Ellipse 2" cx="1.778" cy="1.778" r="1.778" fill="#393c46"/>
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="1.778" cy="1.778" r="1.778" transform="translate(6.222)" fill="#393c46"/>
+      <circle id="Ellipse_4" data-name="Ellipse 4" cx="1.778" cy="1.778" r="1.778" transform="translate(12.444)" fill="#393c46"/>
+    </g>
+  </g>
+</svg>

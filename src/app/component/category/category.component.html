@@ -1,0 +1,87 @@
+<div class="head">
+
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-5 col-12 my-1">
+            <h5 class="head_title">Category Management</h5>
+            <p class="my-1">View list of category and modify them....</p>
+        </div>
+
+        <div class="col-lg-8 col-md-7 col-12">
+            <div class="row">
+                <div class="col-md-9 col-8 my-1">
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="Search results " [(ngModel)]="textSearch" (input)="onSearch()"
+                            class="w-100 searchInput">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div class="col-md-3 col-4 my-1">
+                    <div class="ms-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+
+                                <div class="row align-items-center">
+                                    <div class="col-11 text-start">
+                                        <span>New </span>
+
+                                    </div>
+                                    <div class="col-1">
+                                        <img class="" width="10px"
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list1">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Category')">
+                                    Category</span>
+                                <span class="dropdown-item my-1"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Notifications')">
+                                    Subcategory</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row  categoryContainer my-2">
+        <div class="head p-3 text-light">
+            <h5>Category</h5>
+        </div>
+        <div *ngIf="categoryList.length ; else noCategory" class="categoryContainerBody px-5 py-2 ">
+            <div class="row p-3">
+                <div *ngFor="let category of categoryList ; index as i" class="col-lg-2 col-md-6  my-2">
+                    <div class="p-3" (click)="getCategoryDetails(category.id)">
+                        <div class="imageConatiner">
+                            <img class="" src="{{category.categoryPhoto?.fullLink}}" alt="" srcset="">
+                        </div>
+                        <div class="w-100  text-center my-2">
+                            <p class="categoryName">{{category.nameEn}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #noCategory>
+            <div class="text-center p-5">
+                <h3>Ops it look's empty.....</h3>
+            </div>
+        </ng-template>
+    </div>
+</div>

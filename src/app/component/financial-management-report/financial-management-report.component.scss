@@ -1,0 +1,36 @@
+@import '../financial-management/financial-management.component.scss';
+
+.head_title{
+    float:  left;
+}
+.downloadBtn{
+    float: right;
+    border: 1px  solid $lightGray;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.reportContainer {
+    border-radius: 15px;
+    background-color: $whiteColor ;
+    border: 1px solid $lightGray;
+    background-color: $blackColor;
+}
+
+.reportContainer .reportHead {
+    color: $whiteColor;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 10px;
+}
+.con{
+    background-color: $whiteColor;
+    padding: 20px;
+}
+.con2{
+    background-color: $lighterGrayColor;
+}
+
+.chartBackGround{
+    background-color: $whiteColor;
+    border-radius: 15px;
+}

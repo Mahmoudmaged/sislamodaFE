@@ -1,0 +1,138 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+h2,
+h3 {
+    overflow: hidden;
+}
+
+.overLay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 5555555555555555;
+}
+
+.sideAlert {
+    background-color: $redColor;
+    color: $whiteColor;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    position: fixed;
+    right: -100%;
+    top: 15%;
+    padding: 10px 20px;
+    transition: all 1s;
+    z-index: 9999999999999;
+}
+
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../../../assets/images/Sislimoda/user/1/mainImage.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    // background-position-x: center;
+    // background-position-y: center;
+}
+
+.Form {
+    background-color: rgba($color: #000000, $alpha: .3);
+    color: $whiteColor;
+    // background-color:$whiteColor; 
+    border: 1px solid $lightGray;
+    border-radius: 15px;
+
+}
+
+.logoImage {
+    width: 100px;
+    margin: auto;
+}
+
+.welcomeSec {
+    color: $lightGray;
+}
+
+.form-control {
+    padding: 5px 10px;
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #d1d1d1;
+}
+
+.btn-dark {
+    border-radius: 5px;
+    background-color: $blackColor !important;
+
+}
+
+
+.checkBoxInput:checked {
+    accent-color: $redColor;
+}
+
+.forgetLink {
+    color: $redColor;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.passwordContainer {
+    position: relative;
+}
+
+.fa-eye {
+    display: none;
+}
+
+.passwordContainer i {
+    color: #000000;
+    position: absolute;
+    right: 2%;
+    top: 30%;
+    cursor: pointer;
+}
+
+.fa-arrow-left {
+    cursor: pointer;
+}
+
+.formError {
+    color: $redColor;
+}
+
+.forgetCode,
+.resetScreen,
+.forgetEmail {
+    display: none;
+}
+.btn-dark{
+    background-color: $blackColor;
+}
+.newAccount{
+    background-color: transparent;
+    color: $blackColor;
+    border: 1px solid $blackColor;
+}

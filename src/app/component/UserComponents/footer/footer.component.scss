@@ -1,0 +1,84 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+.div {
+    background-color: #F6F0F2;
+}
+
+
+.div p {
+    font-size: 16px;
+}
+
+.div p a {
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.div p a:hover {
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.div h3 {
+
+    font-size: 22px;
+}
+
+.div .socialIcons a{
+    margin-left: 2px ;
+
+}
+.div .socialIcons a i{
+    color: $redColor;
+
+}
+
+.aboutDesc{
+    word-wrap: normal;
+}
+.socialLinks i{
+    cursor: pointer;
+}
+
+
+
+
+
+
+// 
+
+
+
+
+.foorterImage{
+    width: 120px;
+}
+
+.socialLinks{
+    color: $redColor;
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .secCol{
+        padding: 10px !important;
+    }
+   
+
+}

@@ -1,0 +1,90 @@
+<section class="OrderDetailsSec  p-3">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="text-end w-100">
+        <!-- <i (click)="closeProductDetailsSec()" class="fa fa-times  ms-auto" aria-hidden="true"></i> -->
+        <div>
+            <!-- <i class="fa fa-calendar  ms-auto" aria-hidden="true"></i>
+            <span class="ms-1">Friday27 Oct 2023</span> -->
+        </div>
+
+    </div>
+    <div class="productDataContainer">
+        <div class="info ">
+            <div class="row w-100 mb-1 text-center">
+                <div *ngFor="let image of product?.productImages" class="col-md-3 col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div class="orderDetailsImage">
+                            <img class="img-fluid productImage" src="{{image?.photo?.fullLink}}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="px-2 pb-1">
+                <p class="OrderDetailsInfo">Product Details</p>
+                <p class="">
+                    {{product?.descriptionEn}}
+                </p>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p> Inventory Name</p>
+                <p class="">
+                    {{product?.inventory || ' Dummy Name'}}
+                </p>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p>Category</p>
+                <p class=""> 
+                    {{product?.category?.nameEn || 'Smart Phone'}}
+                    </p>
+            </div>
+
+        </div>
+        <hr>
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p>Brand</p>
+                <p class="">{{product?.brand?.nameEn}}</p>
+            </div>
+
+        </div>
+        <hr>
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p>Availability</p>
+                <div class="ms-3 AvailabilityOption my-2">
+                    <div *ngIf="product?.isActive" class="available">
+                        <input type="radio" class="me-2" name="productAvailable" [checked]="product?.isActive"> <span>Available</span>
+                    </div>
+                    <div *ngIf="!product?.isActive" class="unavailable ms-5">
+                        <input type="radio" class="me-2" name="productAvailable" [checked]="!product?.isActive"> <span>Unavailable</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div class="w-100 text-end mt-2 mb-2 ">
+            <button class="btn btn-dark px-5 py-1" (click)="closeProductDetailsSec()">Back</button>
+        </div>
+    </div>
+
+</section>

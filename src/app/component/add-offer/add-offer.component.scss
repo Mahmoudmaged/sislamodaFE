@@ -1,0 +1,36 @@
+@import '../category/category.component.scss';
+@import '../add-product/add-product.component.scss';
+@import '../order-management/order-management.component.scss';
+*:not(i){
+    font-family: 'Poppins', sans-serif;
+
+}
+$redColor: #D80008;
+
+.head_title {
+  color: $redColor
+}
+.head h5{
+  font-size: 15px;
+}
+
+::ng-deep .p-calendar {
+  max-width: unset;
+  width: 100%;
+}
+
+
+.form-check-input:checked {
+  background-color: #04C45C;
+  border-color: #04C45C;
+}
+
+.uploadDiv p{
+  font-size: 13px;
+  color: gray;
+}
+.p11{
+  width: 15px;
+  height: 1px;
+  background-color: gray;
+}

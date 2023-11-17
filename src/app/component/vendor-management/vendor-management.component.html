@@ -1,0 +1,175 @@
+<div class="head">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4  col-md-5 col-12">
+            <h6 class="head_title">Vendor Management</h6>
+            <p class="my-1  head_Desc">View list of registered vendors on the platform...</p>
+        </div>
+        <div class="col-lg-8 col-md-7 col-12 VendorTable">
+            <div class="row ">
+                <div class="col-lg-9 col-md-7 col-12 my-1">
+
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="Search results " class="w-100 searchInput"
+                            [(ngModel)]="textSearch" (input)="onSearch()">
+                        <i class="fa fa-search"></i>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-3 col-md-5 col-12 my-1">
+                    <div class="ms-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown(0)"
+                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton0"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+
+                                <div class="row align-items-center">
+                                    <div class="col-11 text-start">
+                                        <span> Vendor Status</span>
+
+                                    </div>
+                                    <div class="col-1">
+                                        <img class="" width="10px"
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list0">
+                                <span class="dropdown-item" (click)="changeOrderStatus(0,'Vendor Status')">All</span>
+                                <span class="dropdown-item" (click)="changeOrderStatus(0,'continue')">Continue</span>
+                                <span class="dropdown-item" (click)="changeOrderStatus(0,'suspended')">Suspended</span>
+                                <span class="dropdown-item" (click)="changeOrderStatus(0,'declined')">Declined</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Order Table  -->
+    <section class="VendorTable">
+        <div class="my-2">
+            <table class=" table contentTable bordered text-center">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 5%;">Image</th>
+                        <th scope="col" style="width: 15%;">Name</th>
+                        <th scope="col" style="width: 20%;">Email</th>
+                        <th scope="col" style="width: 15%;">Phone</th>
+                        <th scope="col" style="width: 20%;">Store name</th>
+                        <th scope="col" style="width: 15%;">Action</th>
+                        <!-- <th scope="col" style="width: 13%;">Vendor</th> -->
+                        <th scope="col" style="width: 10%;">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vendor of vendorList;index as i">
+                        <td class="text-center">
+                            <img class="img-fluid tableImage" src="{{vendor.logo?.fullLink || defaultImage}}" alt=""
+                                srcset="">
+                        </td>
+                        <td>
+                            <p>{{vendor.nameEn}}</p>
+                        </td>
+                        <td>
+                            <p>{{vendor.email || 'DummyEmail'}}</p>
+                        </td>
+                        <td>
+                            <p>{{vendor.ownerPhoneNumber}}</p>
+                        </td>
+                        <td>
+                            <p>{{vendor.storeName || 'DummyName'}}</p>
+                        </td>
+
+                        <td>
+                            <div class="search_dropdown">
+                                <button (click)="showDropDown(i+1)"
+                                    class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i+1}}"
+                                    type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+
+                                    <div class="row align-items-center">
+                                        <div class="col-11 text-start">
+                                            <span>Vendor Action</span>
+
+                                        </div>
+                                        <div class="col-1">
+                                            <img class="" width="10px"
+                                                src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
+                                                srcset="">
+                                        </div>
+                                    </div>
+                                </button>
+                                <div class="dropdown-menu-list  dropdown-menu-list{{i+1}} text-start">
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus(i+1,'continue')">Continue</span>
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus(i+1,'suspended')">Suspended</span>
+                                    <span class="dropdown-item"
+                                        (click)="changeOrderStatus(i+1,'declined')">Declined</span>
+
+
+                                </div>
+                            </div>
+                        </td>
+
+
+                        <td class="optionsActions text-center">
+
+
+
+                            <span  class="p-2">
+                                <!-- <i class="fa fa-trash"></i> -->
+                                <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt=""
+                                    srcset="">
+                            </span>
+                            <span class="p-2" (click)="displayVendorProf(vendor.id)">
+                                <!-- <i class="fa fa-ellipsis-v" aria-hidden="true"></i> -->
+                                <img width="3px" src="../../../assets/images/Sislimoda/Menu.svg" alt="" srcset="">
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="pages > 0" class=" paginateSection my-2">
+            <ul class="ul">
+                <li class=" mx-1" (click)="previousPage()">
+                    <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+                </li>
+
+                <li *ngFor="let item of [].constructor(pages); index as i">
+                    <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                        (click)="getPageContent(i+1)">
+                        {{i+1}}
+                    </p>
+                    <ng-template #notCurrent>
+                        <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                            {{i+1}}
+                        </p>
+                    </ng-template>
+
+                </li>
+
+                <li class="mx-1" (click)="nextPage()">
+                    <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+
+</div>

@@ -1,0 +1,61 @@
+@import '../user-management/user-management.component.scss';
+
+.head {
+    height: 100vh;
+}
+
+.reportContainer {
+    border-radius: 15px;
+    background-color: $whiteColor ;
+    border: 1px solid $lightGray;
+    background-color: $blackColor;
+}
+
+.reportContainer .reportHead {
+    color: $whiteColor;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 10px;
+}
+
+.con {
+    background-color: $whiteColor;
+    padding: 20px;
+}
+
+.con2 {
+    background-color: $lighterGrayColor;
+}
+
+.chartBackGround {
+    background-color: $whiteColor;
+    border-radius: 15px;
+}
+
+.form-control {
+    padding: 5px 10px;
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #d1d1d1;
+}
+
+.Notifications {
+    display: none;
+}
+.cardHolder{
+    width: 50%;
+    border: 1px solid blue;
+}
+.option {
+    padding: 10px 10px;
+
+}
+
+.cardsIcon {
+    float: right;
+}

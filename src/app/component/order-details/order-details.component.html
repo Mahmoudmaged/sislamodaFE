@@ -1,0 +1,130 @@
+<section class="OrderDetailsSec  p-3">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+    <div class="text-end w-100">
+        <!-- <i (click)="closeOrderDetailsSec()" class="fa fa-times  ms-auto" aria-hidden="true"></i> -->
+        <!-- <div>
+            <i class="fa fa-calendar  ms-auto" aria-hidden="true"></i>
+            <span class="ms-1">Friday27 Oct 2023</span>
+        </div> -->
+
+    </div>
+    <div class="info mb-1">
+        <div class="row w-100 my-1 text-center">
+            <div *ngFor="let  product of order?.orderProducts ; index as i" class="col-md-2 my-1">
+                <div class="px-2 py-1">
+                    <div class="orderDetailsImage d-flex align-items-center">
+                        <img class="img-fluid" [src]="product.product?.defaultPhoto?.fullLink" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="p-2">
+            <p class="OrderDetailsInfo">Order Details</p>
+            <p class="w-75">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus fugiat, dicta quod sed ab nesciunt
+                facilis totam enim veritatis perferendis?
+                Modi, ea accusantium officiis est expedita at maiores fugit quia.
+            </p>
+        </div>
+
+    </div>
+    <hr>
+    <div class="mb-1 venderDetails py-1">
+        <div class="row  align-items-center">
+            <div class="col-lg-3 col-6 mb-1">
+                <div class="p-2">
+                    <p class="ms-2">Shipping Address</p>
+                    <p> <i class="fa fa-map-marker mx-1" aria-hidden="true"></i>{{order?.address || 'Dummy Address'}}
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-6 mb-1">
+                <div class="p-2">
+                    <p class="ms-2"> Customer Name</p>
+                    <p> <i class="fa fa-user  mx-1" aria-hidden="true"></i> {{order?.user?.firstName}}
+                        {{order?.user?.lastName}}</p>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-6 mb-1">
+                <div class="p-2">
+                    <p class="ms-2">Vendor Name</p>
+                    <p><i class="fa fa-user  mx-1" aria-hidden="true"></i> DummyName</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6  mb-1">
+                <div class="p-2">
+                    <p class="">Order Status</p>
+                    <div class="search_dropdown vendorProfileAc">
+                        <button (click)="showDropDown(22)"
+                            class="btn w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton22"
+                            type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                            <div class="row align-items-center">
+                                <div class="col-11 text-start">
+                                    <span>Order Status </span>
+                                   
+                                </div>
+                                <div class="col-1">
+                                    <img class="" width="10px"
+                                        src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
+                                        srcset="">
+                                </div>
+                            </div>
+                        </button>
+                        <div class="dropdown-menu-list  dropdown-menu-list22">
+                            <span class="dropdown-item" (click)="changeOrderStatus(22,'shipped')">Shipped</span>
+                            <span class="dropdown-item" (click)="changeOrderStatus(22,'delivered')">Delivered</span>
+                            <span class="dropdown-item" (click)="changeOrderStatus(22,'canceled')">canceled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="mb-1">
+        <div class="p-2">
+            <p><i class="fa fa-undo mx-1" aria-hidden="true"></i> Order Returns</p>
+            <p class="ms-4">There are no return for this order</p>
+        </div>
+
+    </div>
+    <hr>
+
+    <div class="mb-1">
+        <div class="p-2">
+            <p><i class="fa fa-undo mx-1" aria-hidden="true"></i> Refunds</p>
+            <p class="ms-4">There are no refund for this order</p>
+        </div>
+
+    </div>
+    <hr>
+
+    <div class="mb-1">
+        <div class="px-2 py-1">
+            <p>
+                <span class="cancellationIcon mx-1">
+                    <i class="fa fa-close"></i>
+                </span> Cancellation
+            </p>
+            <p class="ms-4">There are no Cancellation for this order</p>
+        </div>
+
+    </div>
+
+    <div class="w-100 text-end">
+        <button *ngIf="userInfo.isVendor" class="btn btn-dark px-3 pb-1">Save</button>
+        <button *ngIf="userInfo.isAdmin" class="btn btn-dark px-3 pb-1" (click)="closeOrderDetailsSec()">Back</button>
+    </div>
+
+</section>

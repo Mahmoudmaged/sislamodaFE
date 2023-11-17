@@ -1,0 +1,90 @@
+<div class="head">
+  <div class="row">
+
+    <div class="col-lg-4 col-md-5 col-12 my-2">
+      <h4 class="head_title">Financial Management</h4>
+      <p class="my-1  head_Desc">List of all financial transaction....</p>
+    </div>
+    <div class="col-lg-8 col-md-7 col-12 VendorTable">
+      <div class="row ">
+        <div class="col-md-6 col-8 my-2">
+          <div class="searchInputContainer">
+            <input type="text" placeholder="Search results " class="w-100 searchInput">
+            <i class="fa fa-search"></i>
+          </div>
+        </div>
+        <div class="col-md-6 my-2 px-2">
+
+          <p-calendar id="cal" [(ngModel)]="rangeDates" selectionMode="range" [numberOfMonths]="2" [showIcon]="true">
+            <!-- <ng-template pTemplate="footer">
+                            <button class="btn btn-dark ApplyDate">Apply</button>
+                        </ng-template> -->
+          </p-calendar>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Order Table  -->
+  <section class="VendorTable">
+    <div class="my-2">
+      <table class=" table contentTable bordered">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 13%;">Transaction ID </th>
+            <th scope="col" style="width: 15%;">Transaction Date</th>
+            <th scope="col" style="width: 13%;">Transaction Cost</th>
+            <th scope="col" style="width: 20%;">Admin Commission SAR &%</th>
+            <th scope="col" style="width: 15%;">Customer Name </th>
+            <th scope="col" style="width: 15%;">Report</th>
+            <th scope="col" style="width: 10%;">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>123456789</td>
+            <td>12 March 2023</td>
+            <td>1000 SAR</td>
+            <td>50SAR 15%</td>
+            <td>Mahmoud Elwan</td>
+            <td>
+              <p class="detailedReport">
+                Detailed Report <i class="fa fa-file-text ms-1" aria-hidden="true"></i>
+              </p>
+            </td>
+            <td class="optionsActions">
+              <span class="p-1"> <i class="fa fa-edit"></i></span>
+              <span class="p-1"> <i class="fa fa-trash"></i></span>
+              <span class="p-1" (click)="displayFinancialReport('65965')"> <i class="fa fa-ellipsis-v"
+                  aria-hidden="true"></i></span>
+
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="paginateSection my-2">
+      <ul class="ul">
+        <li class="" (click)="previousPage()"><i class="fa fa-angle-left"></i></li>
+
+        <li *ngFor="let item of [].constructor(pages); index as i">
+          <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+          <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+            (click)="getPageContent(i+1)">
+            {{i+1}}
+          </p>
+          <ng-template #notCurrent>
+            <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+              {{i+1}}
+            </p>
+          </ng-template>
+        </li>
+
+        <li class="" (click)="nextPage()"><i class="fa fa-angle-right"></i></li>
+
+      </ul>
+    </div>
+  </section>
+
+
+</div>

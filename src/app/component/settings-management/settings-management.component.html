@@ -1,0 +1,112 @@
+<div class="head">
+    <div class="row">
+        <div class="col-lg-3  col-md-5 col-12">
+            <h4 class="head_title">Settings Management</h4>
+            <p class="my-1  head_Desc">Configure platform settings.</p>
+        </div>
+        <div class="col-lg-9 col-md-7 col-12">
+            <div class="row ">
+                <div class="col-md-8 col-8">
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="Search results " class="w-100 searchInput">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3 col-4">
+                    <div class="ms-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                                class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                Payment gateways
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list1">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Payment gateways')">
+                                    Payment gateways</span>
+                                <span class="dropdown-item my-1"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Notifications')">
+                                    Notifications</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row  reportContainer Notifications">
+        <div class="col-12  reportHead">
+            <div class="p-2">
+                <h4 class="px-2">Notifications</h4>
+            </div>
+        </div>
+        <div class="col-12 con">
+            <div class="p-3">
+                <p class="my-2">Notifications sent by the admin to users</p>
+                <div class="form-group my-1">
+                    <textarea name="" class="form-control" id="" cols="20" rows="5"
+                        placeholder="Type anything you want to tell the users..."></textarea>
+                </div>
+                <div class="form-group mt-3  text-end w-100">
+                    <button class="btn btn-dark px-3 py-2">Send</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row  reportContainer PaymentGateways">
+        <div class="col-12  reportHead">
+            <div class="p-2">
+                <h4 class="px-2">Payment</h4>
+            </div>
+        </div>
+        <div class="col-12 con">
+            <div class="p-3">
+                <p class="my-2">Payment gateways</p>
+                <div class="my-1">
+                    <div class="cardHolder">
+                        <div class="option">
+                            <input type="radio" name="cardOpt" id="" checked> <label for=""> Credit Card (Stripe)</label>
+                            <div class="cardsIcon">
+                                <i class="fa-brands fa-cc-visa mx-1"></i>
+                                <i class="fa-brands fa-cc-mastercard mx-1"></i>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div>
+                                <label for="ccn">Credit Card Number:</label>
+                                <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
+                                    autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardHolder my-2">
+                        <div class="option">
+                            <input type="radio" name="cardOpt" id=""> <label for=""> PayPal Card</label>
+                            <div class="cardsIcon">
+                                <i class="fa-brands fa-cc-visa mx-1"></i>
+                                <i class="fa-brands fa-cc-mastercard mx-1"></i>
+                            </div>
+                        </div>
+                        <div class="bg-light">
+                            <p class="p-2">You can pay with Credit card  if you don't have PayPal account</p>
+                         </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3  text-end w-100">
+                    <button class="btn btn-dark px-3 py-2">Send</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</div>

@@ -1,0 +1,233 @@
+<div class="head">
+  <div class="sideAlert">
+    {{sideMessage}}
+  </div>
+  <div class="overLay" *ngIf="load">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+      <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-5 col-12">
+      <h4 class="head_title">Offers</h4>
+      <p class="my-1">View all offers and their details....</p>
+    </div>
+
+  </div>
+  <div class="row  categoryContainer my-1">
+    <div class="head p-3 text-light">
+      <h5>Add new offer</h5>
+    </div>
+    <div class="categoryContainerBody px-5 py-2">
+      <div class="px-3">
+        <form [formGroup]="addOfferForm" (ngSubmit)="addOfferForm.valid && handelAddOffer()">
+          <div class="row pe-5">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-lg-4  mt-1  mb-2">
+                  <div class="px-2 py-1">
+                    <div class="px-2 py-2 w-100 text-center uploadParent">
+                      <div class="uploadDiv p-2 text-center">
+                        <i class="fa fa-file fa-3x"></i>
+                        <p>Attach image here to start uploading</p>
+                        <div class="d-flex align-items-center justify-content-center">
+                           <p class="p11 me-1"></p> <p>Or</p>  <p class="ms-1 p11"></p></div>
+                        <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">Browse
+                          file</label>
+                        <input formControlName="photoId" class="d-none" multiple type="file" id="uploadImage"
+                          (change)="selectImage($event)">
+
+                        <div
+                          *ngIf="addOfferForm.controls['photoId'].errors && addOfferForm.controls['photoId'].touched"
+                          class=" my-1 xx">
+                          <p class="formError">In-valid product image</p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="selectedImage" class="col-lg-4 mb-2">
+                  <div class="px-2 py-2 displayImageCont">
+                    <div class="text-end trashSection">
+                      <i class="fa fa-trash text-danger" (click)="removeImage()"></i>
+                    </div>
+                    <div class="px-2 py-1 w-100 text-center uploadParent">
+                      <img class="img-fluid" [src]="selectedImage" alt="" srcset="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Name(Arabic)</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="title" class="form-control" />
+                    <div *ngIf="addOfferForm.controls['title'].errors && addOfferForm.controls['title'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid title</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Name(English)</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="titleEn" class="form-control" />
+                    <div *ngIf="addOfferForm.controls['titleEn'].errors && addOfferForm.controls['titleEn'].touched"
+                      class="my-1 xx">
+                      <p  class="formError">In-valid offer titleEn </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Description</p>
+                  <div class="form-group">
+                    <textarea formControlName="description" class="form-control" name="" id="" cols="30"
+                      rows="1"></textarea>
+
+                    <div
+                      *ngIf="addOfferForm.controls['description'].errors && addOfferForm.controls['description'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid offer description</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>DescriptionEn</p>
+                  <div class="form-group">
+                    <textarea formControlName="descriptionEn" class="form-control" name="" id="" cols="30"
+                      rows="1"></textarea>
+                    <div
+                      *ngIf="addOfferForm.controls['descriptionEn'].errors && addOfferForm.controls['descriptionEn'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid offer descriptionEn</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Discount code</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="code" class="form-control" />
+
+                    <div *ngIf="addOfferForm.controls['code'].errors && addOfferForm.controls['code'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid offer code </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Offer Rate</p>
+                  <div class="form-group">
+                    <input type="text" formControlName="percent" class="form-control" />
+
+                    <div *ngIf="addOfferForm.controls['percent'].errors && addOfferForm.controls['percent'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid offer percent </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Offer Type</p>
+                  <div class="form-group">
+                    <select formControlName="offerType" class="form-select p-2" aria-label="Default select example">
+                      <option *ngFor="let item of [].constructor(4); index as i" [value]="i+1" [selected]=" i== 0">
+                        {{i+1}}</option>
+                    </select>
+                    <div *ngIf="addOfferForm.controls['offerType'].errors && addOfferForm.controls['offerType'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid offerType </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-1">
+              <div class="p-2">
+                <div>
+                  <p>Category</p>
+                  <div class="form-group">
+                    <select formControlName="offerCategoryId" class="form-select p-2"
+                      aria-label="Default select example">
+                      <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
+                        [selected]=" i== 0">
+                        {{category.nameEn}}</option>
+                    </select>
+                    <div
+                      *ngIf="addOfferForm.controls['offerCategoryId'].errors && addOfferForm.controls['offerCategoryId'].touched"
+                      class=" my-1 xx">
+                      <p class="formError">In-valid category </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-1">
+              <div class="p-2">
+                <p>Start Date</p>
+                <p-calendar formControlName="startDate" class="bg-danger">
+                </p-calendar>
+                <div *ngIf="addOfferForm.controls['startDate'].errors && addOfferForm.controls['startDate'].touched"
+                  class=" my-1 xx">
+                  <p class="formError">In-valid offer startDate</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4  mb-1">
+              <div class="p-2">
+                <p>End Date</p>
+                <p-calendar formControlName="endDate">
+                </p-calendar>
+                <div *ngIf="addOfferForm.controls['endDate'].errors && addOfferForm.controls['endDate'].touched"
+                  class=" my-1 xx">
+                  <p class="formError">In-valid offer endDate</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12  mb-1">
+              <div class="p-2">
+                <p>Offer state</p>
+                <div class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
+                  <input class="form-check-input mt-1" formControlName="isActive" type="checkbox" role="switch"
+                    id="flexSwitchCheckChecked" checked>
+                </div>
+              </div>
+            </div>
+            <div class="w-100 text-end mt-4 mb-1 ">
+              <button type="submit" class="btn btn-dark px-5 py-2 my-1" [disabled]="addOfferForm.invalid"><span
+                  class="px-2">Add</span></button>
+              <button type=" button" class="btn btn-outline-dark px-5 py-2 ms-2 my-1" (click)="close()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

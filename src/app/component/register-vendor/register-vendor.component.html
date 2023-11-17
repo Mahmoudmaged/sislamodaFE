@@ -1,0 +1,317 @@
+<div class="loginPage ">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="row justify-content-end align-items-start my-2 w-100 h-100 px-3 py-2 xx">
+        <div class="col-lg-3 col-md-5 col-9 loginSections loginScreen">
+            <form class="Form px-3 py-2" [formGroup]="signupForm" (ngSubmit)="signupForm.valid && handelSignUp()">
+                <div class="text-center">
+                    <img class="logoImage" src="../../../assets/images/Sislimoda/logo.png" alt="" srcset="">
+                    <div class="welcomeSec text-center mt-3 mb-1">
+                        <h3>Create Account</h3>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-md-6">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">First Name</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="First Name" name="" id=""
+                                        formControlName="firstName">
+
+                                    <div *ngIf="signupForm.controls['firstName'].errors && signupForm.controls['firstName'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid firstName</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Last Name</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Last Name" name="" id=""
+                                        formControlName="lastName">
+
+                                    <div *ngIf="signupForm.controls['lastName'].errors && signupForm.controls['lastName'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid lastName</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <div>
+                                    <input class="form-control my-1" type="email" placeholder="Email" name="" id=""
+                                        formControlName="email">
+
+                                    <div *ngIf="signupForm.controls['email'].errors && signupForm.controls['email'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid Email</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Address</label>
+                                <div>
+                                    <input class="form-control my-1" type="address" placeholder="Address" name="" id=""
+                                        formControlName="address">
+
+                                    <div *ngIf="signupForm.controls['address'].errors && signupForm.controls['address'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid address</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Phone Number</label>
+                                <div>
+                                    <input class="form-control my-1" type="phone" placeholder="Phone" name="" id=""
+                                        formControlName="phone">
+
+                                    <div *ngIf="signupForm.controls['phone'].errors && signupForm.controls['phone'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid phone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <div class="passwordContainer">
+                                    <i class="fa fa-eye-slash " (click)="showPassword('show' ,'password')"></i>
+                                    <i class="fa fa-eye" (click)="showPassword('hide' , 'password')"></i>
+                                    <input class="form-control my-1" type="password" placeholder="Password" name=""
+                                        id="password" formControlName="password">
+
+                                </div>
+                                <div *ngIf="signupForm.controls['password'].errors && signupForm.controls['password'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError">In-valid Password</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Confirm Password</label>
+                                <div class="passwordContainer">
+                                    <i class="fa fa-eye-slash " (click)="showPassword('show' ,'cPassword')"></i>
+                                    <i class="fa fa-eye" (click)="showPassword('hide' , 'cPassword')"></i>
+                                    <input class="form-control my-1" type="password" placeholder="C-Password" name=""
+                                        id="cPassword" formControlName="confirmPassword">
+
+                                </div>
+                                <div *ngIf="signupForm.controls['confirmPassword'].errors && signupForm.controls['confirmPassword'].touched"
+                                    class="my-1 xx">
+                                    <p class="formError"> MisMatch.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group mt-2 ">
+                            <button [disabled]="signupForm.invalid" class="btn btn-danger w-100 px-2 py-1">Next</button>
+                            <button class="btn btn-outline-danger w-100 px-2 py-1 mt-2" (click)="login()">Already have
+                                account </button>
+                        </div>
+                    </div>
+                    <!-- <div class="col-12 mt-1">
+                        <div class="d-flex">
+                            <input type="checkbox" checked name="" id="rememberBox" class="checkBoxInput">
+                            <p class="ms-1 agreeLinkP">By logging you agree to <a href="" class="agreeLink">the terms
+                                    and
+                                    conditions</a>
+                            </p>
+                        </div>
+                    </div> -->
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-lg-3 col-md-5 col-9 loginSections storeData">
+            <form class="Form px-3 py-1" [formGroup]="storeForm"
+                (ngSubmit)="storeForm.valid && signupForm.valid  && handelStorePhone()">
+                <div>
+                    <i class="fa fa-arrow-left mt-2" (click)="showSection('loginScreen')"></i>
+                </div>
+                <div class="text-center">
+                    <img class="logoImage" src="../../../assets/images/Sislimoda/logo.png" alt="" srcset="">
+
+                    <div class="welcomeSec text-center mt-2 mb-1">
+                        <h3>Add Store Data</h3>
+                    </div>
+                </div>
+                <div class="row my-2">
+
+                    <div class="col-md-6 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Name(Arabic)</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Name Arabic" name="" id=""
+                                        formControlName="name">
+
+                                    <div *ngIf="storeForm.controls['name'].errors && storeForm.controls['name'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Name(English)</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Name English" name=""
+                                        id="" formControlName="nameEn">
+
+                                    <div *ngIf="storeForm.controls['nameEn'].errors && storeForm.controls['nameEn'].touched"
+                                        class="my-1 xx">
+                                        <p class="formError">In-valid nameEn</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 ">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Description(Arabic)</label>
+                                <div>
+                                    <textarea class="form-control my-1" type="text" placeholder="Description Arabic"
+                                        name="" id="" formControlName="description" rows="1"></textarea>
+
+                                    <div *ngIf="storeForm.controls['description'].errors && storeForm.controls['description'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Description(English)</label>
+                                <div>
+                                    <textarea class="form-control my-1" type="text" placeholder="Description English"
+                                        name="" id="" formControlName="descriptionEn" rows="1"></textarea>
+
+                                    <div *ngIf="storeForm.controls['descriptionEn'].errors && storeForm.controls['descriptionEn'].touched"
+                                        class=" my-1 xx">
+                                        <p  class="formError">In-valid description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-6">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Phone Number(1)</label>
+                                <div>
+                                    <input class="form-control my-1" type="number" placeholder="Phone" name="" id=""
+                                        formControlName="phone">
+
+                                    <div *ngIf="storeForm.controls['phone'].errors && storeForm.controls['phone'].touched"
+                                        class=" my-1 xx">
+                                        <p  class="formError">In-valid phone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Phone Number(2)</label>
+                                <div>
+                                    <input class="form-control my-1" type="number" placeholder="Phone" name="" id=""
+                                        formControlName="phone2">
+
+                                    <div *ngIf="storeForm.controls['phone2'].errors && storeForm.controls['phone2'].touched"
+                                        class=" my-1 xx">
+                                        <p  class="formError">In-valid phone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <div class="form-group mt-3 ">
+                            <button [disabled]="storeForm.invalid || signupForm.invalid"
+                                class="btn btn-danger w-100 px-2 py-1 storeBtn">Add Store Data
+                                Account</button>
+                        </div>
+                    </div>
+                    <div class="col-12 my-2">
+                        <div class="d-flex ms-2">
+                            <input type="checkbox" checked name="" id="rememberBox" class="checkBoxInput">
+                            <p class="ms-1 agreeLinkP">By logging you agree to <a href="" class="agreeLink">the terms
+                                    and
+                                    conditions</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-10 loginSections registerDone">
+            <div class="Form text-center p-5">
+                <img class="logoImage" src="../../../assets/images/Sislimoda/logo.png" alt="" srcset="">
+
+                <div>
+                    <img class="img-fluid" src="../../../assets/images/Sislimoda/SislimodaAdmin/items/accept-icon.svg"
+                        alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="head">
+  <div class="sideAlert">
+    {{sideMessage}}
+  </div>
+  <div class="overLay" *ngIf="load">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+      <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-3  col-md-5 col-12">
+      <h4 class="head_title">Offers</h4>
+      <p class="my-1  head_Desc">View all offers and their details</p>
+    </div>
+    <div class="col-lg-9 col-md-7 col-12 VendorTable">
+      <div class="row justify-content-end ">
+        <div class="col-md-10 col-8">
+          <div class="searchInputContainer">
+            <input type="text" placeholder="Search results" [(ngModel)]="textSearch" class="w-100 searchInput"
+              (input)="onSearch()">
+            <i class="fa fa-search"></i>
+          </div>
+        </div>
+        <div *ngIf="userInfo.isVendor" class="col-md-2 col-4">
+          <div class="ms-1">
+            <!-- <div class="search_dropdown">
+                          <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                              class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                              type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                              Inquiries
+                          </button>
+                          <div class="dropdown-menu-list  dropdown-menu-list1">
+                              <span class="dropdown-item"
+                                  (click)="changeOrderStatus('search_dropdownMenuButton1','Inquiries')">Inquiries</span>
+
+                          </div>
+                      </div> -->
+
+            <button class="btn btn-danger addProductBtn w-100" (click)="addOffer()">Add <i
+                class="fa fa-plus mx-1"></i></button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Order Table  -->
+  <section class="VendorTable">
+    <div class="my-2">
+      <table class=" table contentTable bordered text-center">
+        <thead class="text-center">
+          <tr>
+            <th scope="col" style="width: 5%;">image</th>
+            <th scope="col">Name</th>
+            <th scope="col" style="width: 25%;">Desscreption</th>
+            <th scope="col">Offer Rate</th>
+            <th scope="col">Offer Date</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr *ngFor="let offer of offerList">
+            <td>
+              <img class="img-fluid  tableImage" [src]="offer?.photo?.fullLink" alt="" srcset="">
+            </td>
+            <td>
+              <p>{{offer.titleEn}}</p>
+            </td>
+            <td>
+              <p>{{offer.descriptionEn?.slice(0,30)}}...</p>
+            </td>
+            <td>
+              <p>{{offer.percent | percent}}</p>
+            </td>
+            <td>
+              {{offer.startDate?.split(" ")[0]}}
+            </td>
+
+            <td class="optionsActions">
+              <span *ngIf="userInfo?.isVendor" class="p-1">
+                <img (click)="editOffer(offer.id)" width="15px"
+                  src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt="" srcset="">
+              </span>
+              <span *ngIf="userInfo?.isVendor" class="p-1">
+                <img (click)="deleteOffer(offer.id)" width="15px"
+                  src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt="" srcset="">
+              </span>
+              <span class="p-1">
+                <img (click)="showOfferDetails(offer.id)" width="3px" src="../../../assets/images/Sislimoda/Menu.svg"
+                  alt="" srcset="">
+
+              </span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="orderTable paginateSection my-2">
+      <ul class="ul">
+          <li class=" mx-1" (click)="previousPage()">
+              <!-- <i class="fa fa-angle-left"></i> -->
+              <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+          </li>
+
+          <li *ngFor="let item of [].constructor(pages); index as i">
+              <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+              <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                  (click)="getPageContent(i+1)">
+                  {{i+1}}
+              </p>
+              <ng-template #notCurrent>
+                  <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                      {{i+1}}
+                  </p>
+              </ng-template>
+
+              <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+              <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
+              <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+          </li>
+
+          <li class="mx-1" (click)="nextPage()">
+              <!-- <i class="fa fa-angle-right"></i> -->
+              <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+
+          </li>
+
+      </ul>
+  </div>
+  </section>
+
+
+</div>

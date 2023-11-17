@@ -1,0 +1,247 @@
+<div class="head">
+    <div class="row">
+        <div class="col-lg-3  col-md-5 col-12">
+            <h4 class="head_title">Vendor Profile</h4>
+            <p class="my-1  head_Desc">View and update my data...</p>
+        </div>
+    </div>
+    <form [formGroup]="personalForm" (ngSubmit)="personalForm.valid && handelUpdateData()">
+
+        <section class="VendorProfSec  p-5">
+
+            <h4>Personal Data</h4>
+
+            <div class="personalForm my-2">
+                <div class="row">
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">First Name</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="First Name" name="" id=""
+                                        formControlName="firstName">
+
+                                    <div *ngIf="personalForm.controls['firstName'].errors && personalForm.controls['firstName'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid first name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Last Name</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Last Name" name="" id=""
+                                        formControlName="lastName">
+
+                                    <div *ngIf="personalForm.controls['lastName'].errors && personalForm.controls['lastName'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid last name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <div>
+                                    <input class="form-control mb-1" type="email" placeholder="Email" name="" id=""
+                                        formControlName="email">
+
+                                    <div *ngIf="personalForm.controls['email'].errors && personalForm.controls['email'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid email</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Address</label>
+                                <div>
+                                    <input class="form-control mb-1" type="text" placeholder="Address" name="" id=""
+                                        formControlName="address">
+
+                                    <div *ngIf="personalForm.controls['address'].errors && personalForm.controls['address'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid address</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <div>
+                                    <input class="form-control mb-1" type="number" placeholder="Phone" name="" id=""
+                                        formControlName="phone">
+
+                                    <div *ngIf="personalForm.controls['phone'].errors && personalForm.controls['phone'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid phone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <div class="passwordContainer">
+                                    <i class="fa fa-eye-slash " (click)="showPassword('show' ,'password')"></i>
+                                    <i class="fa fa-eye" (click)="showPassword('hide' , 'password')"></i>
+                                    <input class="form-control my-1" type="password" placeholder="Password" name=""
+                                        id="password" formControlName="password">
+                                    <div *ngIf="personalForm.controls['password'].errors && personalForm.controls['password'].touched"
+                                        class="text-center my-1 xx">
+                                        <p>In-valid Password</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="VendorProfSec  p-5 my-2">
+
+            <h4>Store data</h4>
+
+            <div class="personalForm my-2">
+                <div class="row">
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Name(Arabic)</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Name (Arabic)" name=""
+                                        id="" formControlName="name">
+
+                                    <div *ngIf="personalForm.controls['name'].errors && personalForm.controls['name'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Name(English)</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Name (English)" name=""
+                                        id="" formControlName="nameEn">
+
+                                    <div *ngIf="personalForm.controls['nameEn'].errors && personalForm.controls['nameEn'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Description(Arabic)</label>
+                                <div>
+                                    <textarea class="form-control my-1" type="text" placeholder="Description(Arabic)"
+                                        name="" id="" formControlName="description"></textarea>
+
+                                    <div *ngIf="personalForm.controls['description'].errors && personalForm.controls['description'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for="">Description(English)</label>
+                                <div>
+                                    <textarea class="form-control my-1" type="text" placeholder="Description(English)"
+                                        name="" id="" formControlName="descriptionEn"></textarea>
+
+                                    <div *ngIf="personalForm.controls['descriptionEn'].errors && personalForm.controls['descriptionEn'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for=""> Store Phone(one)</label>
+                                <div>
+                                    <input class="form-control mb-1" type="number" placeholder="Phone" name="" id=""
+                                        formControlName="phoneNumber">
+
+                                    <div *ngIf="personalForm.controls['phoneNumber'].errors && personalForm.controls['phoneNumber'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid phone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-1">
+                        <div class="p-2">
+                            <div class="form-group">
+                                <label for=""> Store Phone(Two)</label>
+                                <div>
+                                    <input class="form-control mb-1" type="number" placeholder="Phone" name="" id=""
+                                        formControlName="phoneNumber2">
+
+                                    <div *ngIf="personalForm.controls['phoneNumber2'].errors && personalForm.controls['phoneNumber2'].touched"
+                                        class="text-center my-1 xx">
+                                        <p class="formError">In-valid phone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="my-3">
+            <div class="text-end">
+                <button  [disabled]="personalForm.invalid"  class="btn btn-dark px-3 py-2">Update</button>
+                <button class="btn btn-outline-dark px-3 py-2 ms-1">Cancel</button>
+            </div>
+        </section>
+    </form>
+
+</div>

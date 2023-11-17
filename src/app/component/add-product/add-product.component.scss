@@ -1,0 +1,107 @@
+@import '../product-details/product-details.component.scss';
+
+.overLay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 5555555555555555;
+}
+
+.formError {
+    color: $redColor;
+    font-size: 12px;
+}
+
+.uploadDiv p {
+    font-size: 13px;
+    color: gray;
+}
+
+.p11 {
+    width: 15px;
+    height: 1px;
+    background-color: gray;
+}
+
+.sideAlert {
+    background-color: $redColor;
+    color: $whiteColor;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    position: fixed;
+    right: -100%;
+    top: 15%;
+    padding: 10px 20px;
+    transition: all 1s;
+    z-index: 9999999999999;
+}
+
+.uploadParent {
+    border: 1px solid $lightGray;
+    border-radius: 15px;
+    background-color: $whiteColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: blue;
+}
+
+.displayImageCont {
+    position: relative;
+}
+
+.trashSection {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    right: 5%;
+    text-align: right;
+    padding: 5px;
+
+}
+
+.trashSection i {
+    cursor: pointer;
+}
+
+// $whiteColor: #ffffff;
+// $blackColor: #000000;
+// $lightGreen: #81ffca;
+// $lightPink: #FFDCDC;
+// $lightGray: #d1d1d1;
+// $lighterGrayColor: #EFEFFF;
+// $middleGrayColor: #EAEAFF;
+// $redColor: #D80008;
+.uploadDiv {
+    background-color: $lighterGrayColor;
+    border-radius: 15px;
+    border: 2px dashed $lightGray;
+
+}
+
+.form-control,
+.form-select {
+    padding: 5px 10px;
+    outline: none;
+    box-shadow: none;
+    transition: all .5;
+}
+
+.form-control,
+.form-select {
+    border-color: $lightGray ;
+}
+
+.btn-dark {
+    background-color: $blackColor !important;
+}
+
+.btn-dark:hover {
+    // background-color: $blackColor !important;
+    background-color: $whiteColor !important;
+    border-color: 1px $blackColor;
+    color: $blackColor;
+}

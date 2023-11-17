@@ -1,0 +1,181 @@
+<div class="head ">
+  <div class="sideAlert">
+    {{sideMessage}}
+  </div>
+  <div class="overLay" *ngIf="load">
+    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+      <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+    </div>
+  </div>
+
+  <div class="row align-items-start">
+    <div class="col-lg-4  col-12 my-1">
+      <h4 class="head_title">Product Management</h4>
+      <p class="">View Products details....</p>
+    </div>
+
+
+    <div class="col-lg-8 col-12">
+      <div class="row align-items-center justify-content-end  px-2">
+        <div class="col-12 mt-1">
+          <div class="px-2">
+            <div class="searchInputContainer">
+              <input type="text" placeholder="Search results" [(ngModel)]="textSearch" class="w-100 searchInput"
+                (input)="onSearch()">
+              <i class="fa fa-search"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row  w-100 justify-content-end align-items-center">
+        <div class="col-lg-2 my-1">
+          <div class="px-2">
+            <div class="">
+              <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" optionLabel="nameEn"
+                placeholder="category" [filter]="true" (onChange)="FilterByCategory()"
+                [style]="{'maxWidth':'100%'}"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="subcategoryList.length" class="col-lg-2 my-1">
+          <div class="px-2">
+            <div class="">
+              <p-dropdown [options]="subcategoryList" [(ngModel)]="selectedSubcategory" optionLabel="nameEn"
+                placeholder="Subcategory" [filter]="true" (onChange)="FilterBySubcategory()"
+                [style]="{'maxWidth':'100%'}"></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 mb-1">
+          <div class="px-2">
+            <div class="">
+              <p-dropdown [options]="brandList" [(ngModel)]="selectedBrand" optionLabel="nameEn" [filter]="true"
+                (onChange)="FilterByBrand()" [style]="{'maxWidth':'100%'}"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 mb-1">
+          <div class="px-2">
+            <div class="ps-1">
+              <div>
+                <p-dropdown [options]="status" optionLabel="isActive" [(ngModel)]="selectedStatus"
+                  (onChange)="statusChange()" [style]="{'maxWidth':'100%'}"></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="userInfo.isVendor" class="col-lg-2  mb-1">
+          <div class="px-2">
+            <div class="ps-1">
+              <button class="btn btn-danger addProductBtn" (click)="addProduct()">Add <i class="fa fa-plus mx-1"
+                  [style]="{'maxWidth':'100%'}"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Order Table  -->
+  <div *ngIf="productList.length; else noProduct">
+    <div class="my-2">
+      <table class="table contentTable bordered text-center ">
+        <thead id="myTableHead">
+          <tr>
+            <th scope="col" style="width: 10%;">Image</th>
+            <th scope="col" style="width: 15%;">Product name</th>
+            <th scope="col" style="width: 20%;">Inventory</th>
+            <th scope="col" style="width: 15%;">Category</th>
+            <th scope="col" style="width: 10%;">Brand</th>
+            <th scope="col" style="width: 15%;">Delivery Available </th>
+            <th scope="col" style="width: 10%;">options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList ; index as i">
+            <td>
+              <img class="img-fluid tableImage" src="{{product?.defaultPhoto?.fullLink}}" alt="" srcset="">
+            </td>
+            <td>
+              <p>{{product?.nameEn}}</p>
+            </td>
+            <td>{{product?.inventory?.nameEn || 'Amazon Egypt'}}</td>
+            <td>{{product?.category?.nameEn}}</td>
+            <td>{{product?.brand?.nameEn}}</td>
+            <td>
+              <div *ngIf="product.isActive ==true" class="available">
+                <i class="fa fa-circle  mx-1"></i> <span>Available</span>
+              </div>
+              <div *ngIf="!product.isActive" class="unavailable">
+                <i class="fa fa-circle  mx-1"></i> <span>Unavailable</span>
+              </div>
+            </td>
+            <td class="optionsActions">
+              <span *ngIf="userInfo?.isVendor" class="p-2" (click)="updateProductDetails(product.id)">
+                <!-- <i class="fa fa-edit"></i> -->
+                <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt="" srcset="">
+              </span>
+              <span *ngIf="userInfo?.isVendor" class="p-2" (click)="deleteProduct(product.id)">
+                <!-- <i class="fa fa-trash"></i> -->
+                <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt="" srcset="">
+              </span>
+              <span class="p-2" (click)="displayProductDetails(product.id)">
+                <!-- <i class="fa fa-ellipsis-v" aria-hidden="true"></i> -->
+                <img width="3px" src="../../../assets/images/Sislimoda/Menu.svg" alt="" srcset="">
+
+              </span>
+
+
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="pages > 0" class=" paginateSection my-2">
+      <ul class="ul">
+        <li class=" mx-1" (click)="previousPage()">
+          <!-- <i class="fa fa-angle-left"></i> -->
+          <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+        </li>
+
+        <li *ngFor="let item of [].constructor(pages); index as i">
+          <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+          <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+            (click)="getPageContent(i+1)">
+            {{i+1}}
+          </p>
+          <ng-template #notCurrent>
+            <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+              {{i+1}}
+            </p>
+          </ng-template>
+
+          <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+              <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
+          <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+        </li>
+
+        <li class="mx-1" (click)="nextPage()">
+          <!-- <i class="fa fa-angle-right"></i> -->
+          <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <ng-template #noProduct>
+    <div class="row align-items-center justify-content-center text-center p-5 text-danger">
+      <p>No Matching Results.</p>
+    </div>
+  </ng-template>
+
+</div>

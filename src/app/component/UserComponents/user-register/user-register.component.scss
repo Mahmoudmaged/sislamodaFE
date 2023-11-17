@@ -1,0 +1,22 @@
+@import '../userLogin/user-login.component.scss';
+h3{
+color: $blackColor;
+}
+.agreeLinkP{
+    font-size: 13px;
+}
+.agreeLink{
+    color: $redColor;
+}
+.registerDone,
+.storeData{
+    display: none;
+}
+.registerDone img{
+    width: 150px;
+}
+.loginBtn{
+    color: $redColor;
+    text-decoration: underline;
+    cursor: pointer;
+}

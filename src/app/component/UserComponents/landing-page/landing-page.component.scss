@@ -1,0 +1,65 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: auto;
+    margin: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button {
+    overflow: hidden;
+}
+
+.overLay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 5555555555555555;
+}
+
+// Start MainCategory section
+.mainCategory {
+    position: relative;
+}
+
+.mainCategory .contentContainer {
+    text-align: start;
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+// End MainCategory section
+
+// Start mainBrand section
+
+.BrandLine {
+    width: 8%;
+    padding: 1px;
+    background-color: $redColor;
+}
+
+// End mainBrand section

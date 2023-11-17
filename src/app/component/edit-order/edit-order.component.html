@@ -1,0 +1,291 @@
+<section class="OrderDetailsSec  p-3">
+
+    
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+
+    
+    <div class="text-end w-100">
+        <i (click)="closeProductDetailsSec()" class="fa fa-times  ms-auto" aria-hidden="true"></i>
+    </div>
+    <div class="my-2">
+        <form [formGroup]="addProductForm" (ngSubmit)="addProductForm.valid && handelAddProduct()">
+            <div class="row pe-5">
+                <div class="col-lg-4  uploadParent my-2">
+                    <div class="p-3 w-100 text-center">
+                        <div class="uploadDiv p-2 text-center">
+                            <i class="fa fa-file fa-5x"></i>
+                            <p>Attach images here to start uploading</p>
+                            <p>or</p>
+                            <label for="uploadImage" class="btn btn-primary browseFile px-3 py-2">Browse files</label>
+                            <input formControlName="image" class="d-none" multiple type="file" id="uploadImage"
+                                (change)="selectImage($event)">
+
+                            <div *ngIf="addProductForm.controls['image'].errors && addProductForm.controls['image'].touched"
+                                class="text-center my-1 xx">
+                                <p>In-valid product image</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8"></div>
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product Name</p>
+                            <div class="form-group">
+                                <input type="text" formControlName="productName" class="form-control" />
+
+                                <div *ngIf="addProductForm.controls['productName'].errors && addProductForm.controls['productName'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid productName</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product NameEN</p>
+                            <div class="form-group">
+                                <input type="text" formControlName="productNameEn" class="form-control" />
+
+                                <div *ngIf="addProductForm.controls['productNameEn'].errors && addProductForm.controls['productNameEn'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid productNameEn </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product price</p>
+                            <div class="form-group">
+                                <input type="number" min="1" formControlName="oldPrice" class="form-control" />
+
+                                <div *ngIf="addProductForm.controls['oldPrice'].errors && addProductForm.controls['oldPrice'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid price </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product price(discount)</p>
+                            <div class="form-group">
+                                <input type="number" min="1" formControlName="defaultPrice" class="form-control" />
+
+                                <div *ngIf="addProductForm.controls['defaultPrice'].errors && addProductForm.controls['defaultPrice'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid price </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product Description</p>
+                            <div class="form-group">
+                                <textarea formControlName="productDescription" class="form-control" name="" id=""
+                                    cols="30" rows="3"></textarea>
+
+                                <div *ngIf="addProductForm.controls['productDescription'].errors && addProductForm.controls['productDescription'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid product description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product DescriptionEn</p>
+                            <div class="form-group">
+                                <textarea formControlName="productDescriptionEn" class="form-control" name="" id=""
+                                    cols="30" rows="3"></textarea>
+
+                                <div *ngIf="addProductForm.controls['productDescriptionEn'].errors && addProductForm.controls['productDescriptionEn'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid product descriptionEn</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-6 my-2">
+                    <div class="p-2">
+                        <p>Inventory Name</p>
+                        <div class="form-group">
+                            <input formControlName="InventoryName" type="text" class="form-control p-2" name="">
+                            <div *ngIf="addProductForm.controls['InventoryName'].errors && addProductForm.controls['InventoryName'].touched"
+                                class="text-center my-1 xx">
+                                <p>In-valid Inventory name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="col-6 my-2">
+                    <div class="p-2">
+                        <p>Product amount</p>
+                        <div class="form-group">
+                            <input type="number" min="1" formControlName="amount" class="form-control" />
+                            <div *ngIf="addProductForm.controls['amount'].errors && addProductForm.controls['amount'].touched"
+                                class="text-center my-1 xx">
+                                <p>In-valid Product amount</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="p-2 ">
+                        <div>
+                            <p>Brand</p>
+                            <div class="form-group my-1">
+                                <select formControlName="brand" class="form-select p-2"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let brand of brandList ;  index as i" [value]="brand.id"
+                                        [selected]="i==0">
+                                        {{brand.nameEn }}</option>
+                                </select>
+                                <div *ngIf="addProductForm.controls['brand'].errors && addProductForm.controls['brand'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid brand name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Category</p>
+                            <div class="form-group">
+                                <select (change)="getSubCategory('')" formControlName="category" class="form-select p-2"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
+                                        [selected]=" i== 0">
+                                        {{category.nameEn}}</option>
+                                </select>
+
+                                <div *ngIf="addProductForm.controls['category'].errors && addProductForm.controls['category'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid category name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="col-md-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Subcategory</p>
+                            <div class="form-group">
+                                <select id="subcategory" formControlName="subcategory" class="form-select p-2"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let subcategory of subcategoryList ;  index as i"
+                                        [value]="subcategory.id" [selected]=" i== 0">
+                                        {{subcategory.nameEn}}</option>
+                                </select>
+
+                                <div *ngIf="addProductForm.controls['subcategory'].errors && addProductForm.controls['subcategory'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid subcategory </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product options</p>
+
+                            <!-- <select multiple [(ngModel)]="selectedValues" formControlName="productOptions"
+                                class="form-select " aria-label=".form-select-lg example">
+                            
+                                <option *ngFor="let option of optionList ;  index as i" [value]="option.id"
+                                [selected]="i==0">
+                                {{option.nameEn }}</option>
+                            </select> -->
+
+
+                            <p-multiSelect formControlName="productOptions" [options]="optionList" optionLabel="name"
+                                [style]="{'width':'100%'}"></p-multiSelect>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-2">
+                        <p>Availability</p>
+                        <div class="ms-3 AvailabilityOption my-2">
+                            <div class="available">
+                                <input value="available" formControlName="available" type="radio" class="me-2"
+                                    name="productAvailable" checked>
+                                <span>Available</span>
+                            </div>
+                            <div class="unavailable ms-5">
+                                <input value="unavailable" formControlName="available" type="radio" class="me-2"
+                                    name="productAvailable">
+                                <span>Unavailable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-12 my-2">
+                    <div class="p-2">
+                        <div>
+                            <p>Product note for return</p>
+                            <div class="form-group">
+                                <textarea formControlName="noteForReturn" class="form-control" name="" id="" cols="30"
+                                    rows="3"></textarea>
+
+                                <div *ngIf="addProductForm.controls['noteForReturn'].errors && addProductForm.controls['noteForReturn'].touched"
+                                    class="text-center my-1 xx">
+                                    <p>In-valid product note For Return</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 text-end mt-4 mb-2 ">
+                    <button type="submit" class="btn btn-dark px-5 py-2 my-1" [disabled]="addProductForm.invalid"><span
+                            class="px-2">Update</span></button>
+                    <button class="btn btn-outline-dark px-5 py-2 ms-2 my-1"
+                        (click)="closeProductDetailsSec()">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</section>

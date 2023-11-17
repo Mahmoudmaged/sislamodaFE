@@ -1,0 +1,175 @@
+<div class="head">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4  col-md-5 col-12">
+            <h5 class="head_title">Order Management</h5>
+            <p class="my-1 head_Desc">View Order details and modify them....</p>
+        </div>
+        <div class="col-lg-8 col-md-7 col-12">
+            <div class="row ">
+                <div class="col-md-9 col-8">
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="Search results " class="w-100 searchInput"
+                            [(ngModel)]="textSearch" (input)="onSearch()">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div class="col-md-3 col-4">
+                    <div class="ms-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDownFilter('search_dropdownMenuButton00', 'dropdown-menu-list00')"
+                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton00"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                <div class="row align-items-center">
+                                    <div class="col-11 text-start">
+                                        <span>Order Status </span>
+                                       
+                                    </div>
+                                    <div class="col-1">
+                                        <img class="" width="10px"
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
+                                            srcset="">
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list00">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','Order Status')">All</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','processing')">processing</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','chipped')">chipped</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','delivered')">delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Order Table  -->
+    <div class="my-2 orderTable">
+        <table class="table contentTable bordered">
+            <thead id="myTableHead">
+                <tr class="text-center">
+                    <th scope="col" style="width: 5%;">Image</th>
+                    <th scope="col" style="width: 25%;">Order details</th>
+                    <th scope="col" style="width: 20%;">Shipping address</th>
+                    <th scope="col" style="width: 20%;">Customer name</th>
+                    <th scope="col" style="width: 15%;">Order status</th>
+                    <th scope="col" style="width: 10%;">Options</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr *ngFor="let order of orderList ; index as i">
+                    <td class="">
+                        <img class="img-fluid tableImage"
+                            src="{{order.orderProducts[0]?.product?.defaultPhoto?.fullLink || defaultImage}}" alt=""
+                            srcset="">
+                    </td>
+                    <td>
+                        <p>{{order.addressDetails?.slice(0,50) || 'DummyDetails'}}...</p>
+                    </td>
+                    <td>
+                        <div class="row text-center w-100 ">
+
+                            <div class="col-12 px-2 d-flex justify-contnet-center">
+                                <img width="12px" src="../../../assets/images/Sislimoda/location.svg" alt="" srcset="">
+
+                                <p class="ms-1">{{order.addressDetails?.slice(0,50) || 'DummyDetails'}}...</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{order.user?.firstName}} {{order.user?.lastName}}</td>
+                    <td>
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown(i)"
+                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i}}"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                <div class="row align-items-center">
+                                    <div class="col-11 text-start">
+                                        <span>Order Status </span>
+                                       
+                                    </div>
+                                    <div class="col-1">
+                                        <img class="" width="10px"
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
+                                            srcset="">
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list{{i}} text-start">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus(i,'processing')">processing</span>
+                                <span class="dropdown-item" (click)="changeOrderStatus(i,'chipped')">chipped</span>
+                                <span class="dropdown-item" (click)="changeOrderStatus(i,'delivered')">delivered</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="optionsActions text-center">
+                        <span *ngIf="userInfo?.isVendor" class="p-2">
+                            <!-- <i class="fa fa-edit"></i> -->
+                            <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt=""
+                                srcset="">
+                        </span>
+                        <span *ngIf="userInfo?.isVendor" class="p-2" (click)="deleteOrder(order.id)">
+                            <!-- <i class="fa fa-trash"></i> -->
+                            <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt=""
+                                srcset="">
+                        </span>
+                        <span class="p-2" (click)="displayOrderDetails(order.id)">
+                            <!-- <i class="fa fa-ellipsis-v" aria-hidden="true"></i> -->
+                            <img width="3px" src="../../../assets/images/Sislimoda/Menu.svg" alt="" srcset="">
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="orderTable paginateSection my-2">
+        <ul class="ul">
+            <li class=" mx-1" (click)="previousPage()">
+                <!-- <i class="fa fa-angle-left"></i> -->
+                <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+            </li>
+
+            <li *ngFor="let item of [].constructor(pages); index as i">
+                <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+                <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                    (click)="getPageContent(i+1)">
+                    {{i+1}}
+                </p>
+                <ng-template #notCurrent>
+                    <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                        {{i+1}}
+                    </p>
+                </ng-template>
+
+                <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+                <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
+                <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+            </li>
+
+            <li class="mx-1" (click)="nextPage()">
+                <!-- <i class="fa fa-angle-right"></i> -->
+                <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+
+            </li>
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,162 @@
+<section>
+    <h4 class="offerhead my-2">Offer Details</h4>
+</section>
+<section class="OrderDetailsSec  p-3">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="text-end w-100">
+        <!-- <i (click)="closeProductDetailsSec()" class="fa fa-times  ms-auto" aria-hidden="true"></i> -->
+    </div>
+    <div class="productDataContainer">
+       
+        <div class="info mb-1">
+            <div class="row w-100 mb-1 text-center">
+                <div class="col-md-2">
+                    <div class="px-2 py-1">
+                        <div class="orderDetailsImage d-flex align-items-center">
+                            <img class="img-fluid" [src]="offer?.photo?.fullLink" alt="">
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="px-2">
+                <p class="OrderDetailsInfo">Description</p>
+                <p class="w-75">
+                    {{offer?.descriptionEn}}
+                </p>
+            </div>
+    
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p> Name</p>
+                <p class="">
+                    {{offer?.titleEn}}
+                </p>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-4 my-1">
+                        <div class="px-2 py-1">
+                            <p> Discount Code</p>
+                            <p class="">
+                                {{offer?.code}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-1">
+                        <div class="px-2 py-1">
+                            <p> Offer Rate</p>
+                            <p class="">
+                                {{offer?.percent |percent}} 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-4 my-1">
+                        <div class="px-2 py-1">
+                            <p> Start Date</p>
+                            <p class="">
+                                {{offer?.startDate |date}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-1">
+                        <div class="px-2 py-1">
+                            <p> End Date</p>
+                            <p class="">
+                                {{offer?.endDate |date}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p> Offer Status</p>
+                <p *ngIf="offer?.isActive ; else notActive" class="">
+                    <i class="fa fa-circle text-success mr-2" aria-hidden="true"></i>
+                    Available
+                </p>
+                <ng-template #notActive>
+                    <p>
+                        <i class="fa fa-circle text-danger mr-2" aria-hidden="true"></i>
+                        Not Available
+                    </p>
+                </ng-template>
+            </div>
+
+        </div>
+        <hr>
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <div class="row align-items-center">
+                    <div *ngFor="let product of offer?.offersProducts" class="col-md-4 my-2">
+                        <div class="p-2">
+                            <div class="offerProductList py-3 ps-3 pe-1">
+                                <div class="row justify-content-center">
+                                    <div class="col-10">
+                                        <div class=" my-2">
+                                            <img class="img-fluid" [src]="product.product?.defaultPhoto?.fullLink"
+                                                alt="" srcset="" (click)="showProduct(product?.product?.id)">
+                                        </div>
+
+                                    </div>
+                                    <div *ngIf="userInfo?.isVendor" class="col-2 p-2 text-end ">
+                                        <div class=" w-100 text-end p-2 mb-1 icontainer">
+                                            <i class="fa fa-close text-danger"
+                                                (click)="deleteProductFromOffer(product?.product?.id)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="containerData">
+                                    <h6 class="title my-1 text-center">{{product.product?.nameEn}}.</h6>
+                                    <p class="Desc my-2">{{product.product?.descriptionEn.slice(0,50)}}...</p>
+                                    <p class="price my-1 text-danger">{{product.product?.defaultPrice}}$</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div *ngIf="userInfo?.isVendor" class="col-md-4">
+                        <div class="p-2">
+                            <button class="btn btn-danger px-2 py-1"><i class="fa fa-plus mx-1"> </i> Add Product</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="w-100 text-end mt-4 mb-2 ">
+            <button class="btn btn-dark px-3 py-1" (click)="closeProductDetailsSec()">Back</button>
+        </div>
+    </div>
+
+</section>

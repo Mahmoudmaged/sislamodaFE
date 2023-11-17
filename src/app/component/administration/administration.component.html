@@ -1,0 +1,195 @@
+<div class="dashBoard p-2">
+  <div class="row p-2 h-100">
+
+    <div class="col-3 col-md-3 col-lg-2 sideNav " >
+
+      <div class="imageContainer text-center">
+        <img class="" src="../../../assets/images/Sislimoda/logo.png" alt="" srcset="">
+      </div>
+      <!-- contentList -->
+      <div class="contentList p-2">
+        <ul class="text">
+          <li class="my-1 py-1  listItem listItem1" (click)="changeDisplay('listItem1' , 'dashboard')">
+            <i class="fa fa-circle"></i>
+            <p class="ActiveCheck ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1" src="../../../assets/images/Sislimoda/Group 1.svg" alt="" srcset="">
+              Dashboard Overview
+            </p>
+          </li>
+
+          <li class="my-1  listItem listItem2" (click)="changeDisplay('listItem2' , 'order')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1" src="../../../assets/images/Sislimoda/011.svg" alt="" srcset="">
+              Order Management
+            </p>
+          </li>
+
+          <li class="mb-1  listItem listItem12" (click)="changeDisplay('listItem12' , 'offers')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1" src="../../../assets/images/Sislimoda/33.svg" alt="" srcset="">
+              offers
+            </p>
+          </li>
+
+
+          <li class="mb-1 listItem listItem3" (click)="changeDisplay('listItem3', 'product')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1" src="../../../assets/images/Sislimoda/002.svg" alt="" srcset="">
+              Product Management
+            </p>
+          </li>
+
+
+          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem4"
+            (click)="changeDisplay('listItem4' , 'vendor')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <i class="fa fa-user mx-1 me-1 py-2"></i>
+              Vendor Management
+            </p>
+          </li>
+
+
+          <li class="mb-1  listItem listItem5" (click)="changeDisplay('listItem5' , 'inventory')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1" src="../../../assets/images/Sislimoda/004.svg" alt="" srcset="">
+              Inventory Management
+            </p>
+          </li>
+
+
+          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem6" (click)="changeDisplay('listItem6' ,'user')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <i class="fa fa-users mx-1 py-2"></i>
+              Users Management
+            </p>
+          </li>
+
+          <li class="mb-1  listItem listItem7" (click)="changeDisplay('listItem7'  ,'financial')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="img-fluid" src="../../../assets/images/Sislimoda/006.svg" alt="" srcset="" class="image">
+            <span class="ms-1"> Financial Management</span>
+            </p>
+          </li>
+
+
+          <!-- <li *ngIf="userInfo?.isAdmin" class="my-2 py-2 listItem listItem8" (click)="changeDisplay('listItem8' , 'content')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-3 px-2">
+              <i class="fa fa-users mx-1"></i>
+              Content Management
+            </p>
+          </li> -->
+
+          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem9"
+            (click)="changeDisplay('listItem9' , 'category')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <i class="fa fa-users mx-1 my-1 py-2"></i>
+              Category Management
+            </p>
+          </li>
+
+          <li class="mb-1 listItem listItem10" (click)="changeDisplay('listItem10' , 'sales')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1" src="../../../assets/images/Sislimoda/008.svg" alt="" srcset="">
+              Sales Management
+            </p>
+          </li>
+
+
+          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem11"
+            (click)="changeDisplay('listItem11', 'settings')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <i class="fa fa-cog mx-1 py-2"></i>
+              Settings
+            </p>
+          </li>
+
+          <li class="mb-1 listItem listItem13" (click)="logout()">
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <i class="fa fa-sign-out  mx-1 py-2" aria-hidden="true"></i>
+              Logout
+            </p>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- footer -->
+      <div class="sideNav_footer">
+        <i class="fa fa-headphones mx-1" aria-hidden="true"></i>
+        <span>Support and Help</span>
+      </div>
+    </div>
+
+    <div class="col-9  col-md-9 col-lg-10 px-2">
+      <div class="w-100">
+        <div class="w-100 p-2 profileAndLang">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-2  col-lg-1">
+                  <div class="p-1">
+                    <div class="container_profile_Image" (click)="loadProfile(vendorData?.id)">
+                      <img class="img-fluid" [src]="photo" alt="">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-10  col-lg-11">
+                  <div class="p-2">
+                    <h6>{{userInfo?.firstName |uppercase }} {{userInfo?.lastName |uppercase }}</h6>
+                    <p>{{userInfo?.email}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="row">
+                <div class="col-lg-8 col-6 notifyPart text-light text-end">
+                  <div class="row pe-1">
+                    <div class="col-lg-9 col-6 text-end commentNotify">
+                      <!-- <i class=" fa fa-comment me-2 "></i>
+                      <i class="fa fa-circle"></i> -->
+                      <img class="img-fluid" src="../../../assets/images/Sislimoda/comment.svg" alt="" srcset="">
+
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-lg-2  col-5 commentNotify  commentNotify2 text-start">
+                      <!-- <i class="fa fa-circle  ms-1"></i>
+                      <i class=" fa fa-bell "></i> -->
+                      <img class="img-fluid" src="../../../assets/images/Sislimoda/notification.svg" alt="" srcset="">
+
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="col-lg-4 col-6  px-2 changeLang ">
+                  <div class="d-flex align-items-center justify-content-center h-100 w-100  p-1">
+                    <i class="fa fa-globe me-2"></i>
+                    <span class="text-center">English</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-100  my-1 px-1  py-3">
+        <router-outlet></router-outlet>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,13 +24,19 @@ export class AdministrationComponent implements OnInit {
     { item: 'listItem11', com: 'settings' },
     { item: 'listItem12', com: 'offers' },
   ]
-
+  itemBar: any = {}
+  dir: string = ''
+  sideMessage: string = ''
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
   vendorData: any;
+  lang: string = 'English'
   constructor(
     public _Router: Router, public _ActivatedRoute: ActivatedRoute) {
+    console.log({ dir: localStorage.getItem('dir') });
 
+    this.dir = localStorage.getItem('dir') || 'ltr';
+    // this.dir = 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     if (this.userInfo?.isVendor) {
 
@@ -44,9 +50,9 @@ export class AdministrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
-    this.changeDisplay(itemBar?.item || this.mainBar[0].item, itemBar?.com || this.mainBar[0].com)
-    console.log({ itemBar });
+    this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
+    this.changeDisplay(this.itemBar?.item || this.mainBar[0].item, this.itemBar?.com || this.mainBar[0].com)
+    console.log({ itemBar: this.itemBar });
   }
 
   changeDisplay(item: string, component: string): any {
@@ -81,6 +87,37 @@ export class AdministrationComponent implements OnInit {
       this._Router.navigateByUrl("/vendor/login")
 
     }
+  }
+  load: boolean = false
+  changeLanguage() {
+    this.load = true
+    // this.dir = this.dir == 'rtl' ? 'ltr' : 'rtl'
+
+
+    if (this.dir == 'rtl') {
+      this.dir = 'ltr'
+      this.lang = 'Arabic'
+    } else {
+      this.dir = 'rtl'
+      this.lang = 'English'
+    }
+    localStorage.setItem('dir', `${this.dir}`);
+    this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
+    // this.changeDisplay(this.itemBar?.item || this.mainBar[0].item, this.itemBar?.com || this.mainBar[0].com)
+    this.load = false
+    this.reloadComponent(true)
+  }
+
+
+  reloadComponent(self: boolean, urlToNavigateTo?: string) {
+    //skipLocationChange:true means dont update the url to / when navigating
+    console.log("Current route I am on:", this._Router.url);
+    const url = self ? this._Router.url : urlToNavigateTo;
+    this._Router.navigateByUrl(`/admin/${url}`, { skipLocationChange: true }).then(() => {
+      this._Router.navigate([`/${url}`]).then(() => {
+        console.log(`After navigation I am on:${this._Router.url}`)
+      })
+    })
   }
 
 }

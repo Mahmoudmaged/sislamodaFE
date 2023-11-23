@@ -18,7 +18,7 @@ export class OrderManagementComponent implements OnInit {
   userInfo: any;
   load: boolean = false;
   sideMessage: string = '';
-
+  dir: string = 'ltr'
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -28,6 +28,8 @@ export class OrderManagementComponent implements OnInit {
   }
 
   constructor(private _Router: Router, private _OrderService: OrderService) {
+
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.photo = this.userInfo?.photo || this.photo;
     this.getAllOrders(this.userInfo?.id)
@@ -36,6 +38,7 @@ export class OrderManagementComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
   }
 
   getAllOrders(userId: string) {
@@ -174,8 +177,8 @@ export class OrderManagementComponent implements OnInit {
     this._Router.navigateByUrl(`admin/order/${id}/details`)
   }
 
-  deleteOrder(id:string){
-    
+  deleteOrder(id: string) {
+
   }
   closeOrderDetailsSec() {
     $(".OrderDetailsSec").hide(200)

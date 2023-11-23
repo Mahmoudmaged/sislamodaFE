@@ -121,6 +121,11 @@ $barColorE7: #E7E7E7E7;
     border-bottom-right-radius: 8px !important;
     background-color: $middleGrayColor;
     display: none;
+    text-align: left;
+}
+.dropdown-menu-list-RTL{
+    text-align: right;
+    
 }
 
 .dropdown-menu-list span {
@@ -179,6 +184,17 @@ table th:last-child {
     border-top-right-radius: 6px;
 }
 
+.tableRTL th:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 6px;
+}
+
+.tableRTL th:last-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 0px;
+}
+
+
 
 
 table td:first-child {
@@ -186,6 +202,16 @@ table td:first-child {
 }
 
 table td:last-child {
+    border-bottom-right-radius: 6px;
+}
+
+.tableRTL  td:first-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 0px;
+}
+
+.tableRTL td:last-child {
+    border-bottom-left-radius: 0px;
     border-bottom-right-radius: 6px;
 }
 
@@ -200,7 +226,10 @@ table td:last-child {
     text-align: center;
 
 }
+.paginateSectionRTL{
+    float: left;
 
+}
 .paginateSection ul {
     // background-color: $lighterGrayColor;
     background-color:transparent;

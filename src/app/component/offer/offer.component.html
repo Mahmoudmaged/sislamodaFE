@@ -49,7 +49,7 @@
   <!-- Order Table  -->
   <section class="VendorTable">
     <div class="my-2">
-      <table class=" table contentTable bordered text-center">
+      <table class=" table contentTable bordered text-center" [class]="dir=='rtl'?'tableRTL':''">
         <thead class="text-center">
           <tr>
             <th scope="col" style="width: 5%;">image</th>
@@ -98,8 +98,8 @@
         </tbody>
       </table>
     </div>
-    <div class="orderTable paginateSection my-2">
-      <ul class="ul">
+    <div *ngIf="pages > 0" class="orderTable paginateSection my-2"  [class]="dir=='rtl'?'paginateSectionRTL':''">
+      <ul class="ul" dir="ltr">
           <li class=" mx-1" (click)="previousPage()">
               <!-- <i class="fa fa-angle-left"></i> -->
               <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">

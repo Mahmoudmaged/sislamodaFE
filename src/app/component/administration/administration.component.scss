@@ -21,6 +21,30 @@ $borderColor70: #707070;
   overflow-x: hidden;
 }
 
+
+.overLay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 5555555555555555;
+}
+
+.sideAlert {
+  background-color: $redColor;
+  color: $whiteColor;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: fixed;
+  right: -100%;
+  top: 15%;
+  padding: 10px 20px;
+  transition: all 1s;
+  z-index: 9999999999999;
+}
+
 .dashBoard {
   height: 100%;
   overflow: hidden;
@@ -86,12 +110,18 @@ $borderColor70: #707070;
 .listItem .fa-circle {
   font-size: .5em;
   display: none;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .listItem1 .fa-circle {
   display: inline-block;
 }
 
+.listItem p img {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 .ActiveCheck {
   background-color: $blackColor;
@@ -150,6 +180,12 @@ $borderColor70: #707070;
 
 .changeLang {
   border-left: 2px solid $borderColor;
+  cursor: pointer;
+}
+.changeLangRTL{
+  border: 0px;
+  border-right: 2px solid $borderColor;
+
 }
 
 .changeLang div {

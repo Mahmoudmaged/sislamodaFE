@@ -20,7 +20,10 @@ export class OfferComponent {
   load: boolean = false;
   sideMessage: String = '';
   photo: string = `../../../assets/images/avatar/ava.png`
+  dir:string='ltr'
   constructor(private _Router: Router, private _OfferService: OfferService) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
+
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     console.log(this.userInfo);

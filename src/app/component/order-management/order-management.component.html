@@ -1,4 +1,4 @@
-<div class="head" >
+<div class="head">
     <div class="sideAlert">
         {{sideMessage}}
     </div>
@@ -10,33 +10,33 @@
 
     <div class="row">
         <div class="col-lg-4  col-md-5 col-12">
-            <h5 class="head_title">Order Management</h5>
-            <p class="my-1 head_Desc">View Order details and modify them....</p>
+            <h5 class="head_title">{{dir=='ltr'?'Order Management' :'اداره الطلبيات'}}</h5>
+            <p class="my-1 head_Desc">{{
+                dir=='ltr'?'View Order details and modify them....' :' عرض وتعديل قائمه الطلبيات '}}</p>
         </div>
         <div class="col-lg-8 col-md-7 col-12">
             <div class="row ">
                 <div class="col-md-9 col-8">
                     <div class="searchInputContainer">
-                        <input type="text" placeholder="Search results " class="w-100 searchInput"
+                        <input type="text" placeholder="{{dir=='ltr'?'Search results':'نتيجه البحث'}}" class="w-100 searchInput"
                             [(ngModel)]="textSearch" (input)="onSearch()">
                         <i class="fa fa-search"></i>
                     </div>
                 </div>
                 <div class="col-md-3 col-4">
-                    <div class="ms-1">
+                    <div class="mx-1">
                         <div class="search_dropdown">
                             <button (click)="showDropDownFilter('search_dropdownMenuButton00', 'dropdown-menu-list00')"
                                 class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton00"
                                 type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                                 <div class="row align-items-center">
-                                    <div class="col-11 text-start">
+                                    <div class="col-11 " [class]="dir=='rtl'?'text-end':'text-start'">
                                         <span>Order Status </span>
-                                       
+
                                     </div>
                                     <div class="col-1">
                                         <img class="" width="10px"
-                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
-                                            srcset="">
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
                                     </div>
                                 </div>
                             </button>
@@ -58,15 +58,15 @@
     </div>
     <!-- Order Table  -->
     <div class="my-2 orderTable">
-        <table class="table contentTable bordered">
+        <table class="table contentTable bordered" [class]="dir=='rtl'?'tableRTL':''">
             <thead id="myTableHead">
                 <tr class="text-center">
-                    <th scope="col" style="width: 5%;">Image</th>
-                    <th scope="col" style="width: 25%;">Order details</th>
-                    <th scope="col" style="width: 20%;">Shipping address</th>
-                    <th scope="col" style="width: 20%;">Customer name</th>
-                    <th scope="col" style="width: 15%;">Order status</th>
-                    <th scope="col" style="width: 10%;">Options</th>
+                    <th scope="col" style="width: 5%;"> {{dir=='rtl'?'صوره' : 'Image'}}</th>
+                    <th scope="col" style="width: 25%;">{{dir=='rtl'?'تفاصيل الطلبيه' : 'Order details'}}</th>
+                    <th scope="col" style="width: 20%;"> {{dir=='rtl'?'عنوان الشحن' : 'Shipping address'}}</th>
+                    <th scope="col" style="width: 20%;">{{dir=='rtl'?'اسم العميل' : 'Customer name'}}</th>
+                    <th scope="col" style="width: 15%;">{{dir=='rtl'?'حاله الطلبيه' : 'Order status'}}</th>
+                    <th scope="col" style="width: 10%;">{{dir=='rtl'?'خيارات' : 'Options'}}</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -85,7 +85,8 @@
                             <div class="col-12 px-2 d-flex justify-contnet-center">
                                 <img width="12px" src="../../../assets/images/Sislimoda/location.svg" alt="" srcset="">
 
-                                <p class="ms-1">{{order.addressDetails?.slice(0,50) || 'DummyDetails'}}...</p>
+                                <p class="mx-1">{{dir=='ltr'? order.addressDetails?.slice(0,50) || 'DummyDetails'
+                                    :order.addressDetails?.slice(0,50) || 'داتا وهميه للمنتج'}}...</p>
                             </div>
                         </div>
                     </td>
@@ -96,18 +97,18 @@
                                 class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i}}"
                                 type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                                 <div class="row align-items-center">
-                                    <div class="col-11 text-start">
+                                    <div class="col-11 " [class]="dir=='rtl'?'text-end':'text-start'">
                                         <span>Order Status </span>
-                                       
+
                                     </div>
                                     <div class="col-1">
                                         <img class="" width="10px"
-                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
-                                            srcset="">
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
                                     </div>
                                 </div>
                             </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list{{i}} text-start">
+                            <div class="dropdown-menu-list  dropdown-menu-list{{i}}"
+                                [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                                 <span class="dropdown-item"
                                     (click)="changeOrderStatus(i,'processing')">processing</span>
                                 <span class="dropdown-item" (click)="changeOrderStatus(i,'chipped')">chipped</span>
@@ -140,8 +141,8 @@
         </table>
     </div>
 
-    <div class="orderTable paginateSection my-2">
-        <ul class="ul">
+    <div *ngIf="pages > 0" class="orderTable paginateSection  my-2"  [class]="dir=='rtl'?'paginateSectionRTL':''">
+        <ul class="ul" dir="ltr">
             <li class=" mx-1" (click)="previousPage()">
                 <!-- <i class="fa fa-angle-left"></i> -->
                 <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">

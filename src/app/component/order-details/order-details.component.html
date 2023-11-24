@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="p-2">
-            <p class="OrderDetailsInfo">Order Details</p>
+            <p class="OrderDetailsInfo"> {{dir=='ltr'?'Order Details':'تفاصيل الطلبيه'}} </p>
             <p class="w-75">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus fugiat, dicta quod sed ab nesciunt
                 facilis totam enim veritatis perferendis?
@@ -41,7 +41,7 @@
         <div class="row  align-items-center">
             <div class="col-lg-3 col-6 mb-1">
                 <div class="p-2">
-                    <p class="ms-2">Shipping Address</p>
+                    <p class="ms-2">{{dir=='ltr'?'Shipping Address':'عنوان الشحن '}}</p>
                     <p> <i class="fa fa-map-marker mx-1" aria-hidden="true"></i>{{order?.address || 'Dummy Address'}}
                     </p>
                 </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="col-lg-3 col-6 mb-1">
                 <div class="p-2">
-                    <p class="ms-2"> Customer Name</p>
+                    <p class="mx-2"> {{dir=='ltr'?'Customer Name':'اسم العميل'}} </p>
                     <p> <i class="fa fa-user  mx-1" aria-hidden="true"></i> {{order?.user?.firstName}}
                         {{order?.user?.lastName}}</p>
                 </div>
@@ -57,30 +57,30 @@
             </div>
             <div class="col-lg-3 col-6 mb-1">
                 <div class="p-2">
-                    <p class="ms-2">Vendor Name</p>
+                    <p class="ms-2">{{dir=='ltr'?'Vendor Name':'اسم المورد '}}</p>
                     <p><i class="fa fa-user  mx-1" aria-hidden="true"></i> DummyName</p>
                 </div>
             </div>
             <div class="col-lg-3 col-6  mb-1">
                 <div class="p-2">
-                    <p class="">Order Status</p>
+                    <p class="">{{dir=='ltr'?'Order Status':'الحاله'}}</p>
                     <div class="search_dropdown vendorProfileAc">
                         <button (click)="showDropDown(22)"
                             class="btn w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton22"
                             type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                             <div class="row align-items-center">
-                                <div class="col-11 text-start">
-                                    <span>Order Status </span>
-                                   
+                                <div class="col-11 " [class]="dir=='rtl'?'text-end':'text-start'">
+                                    <span>{{dir=='ltr'?'Order Status':'الحاله'}}</span>
+
                                 </div>
                                 <div class="col-1">
-                                    <img class="" width="10px"
-                                        src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
-                                        srcset="">
+                                    <img class="" width="10px" src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg"
+                                        alt="" srcset="">
                                 </div>
                             </div>
                         </button>
-                        <div class="dropdown-menu-list  dropdown-menu-list22">
+                        <div class="dropdown-menu-list  dropdown-menu-list22"
+                            [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                             <span class="dropdown-item" (click)="changeOrderStatus(22,'shipped')">Shipped</span>
                             <span class="dropdown-item" (click)="changeOrderStatus(22,'delivered')">Delivered</span>
                             <span class="dropdown-item" (click)="changeOrderStatus(22,'canceled')">canceled</span>
@@ -94,7 +94,8 @@
 
     <div class="mb-1">
         <div class="p-2">
-            <p><i class="fa fa-undo mx-1" aria-hidden="true"></i> Order Returns</p>
+            <p><i class="fa fa-undo mx-1" aria-hidden="true"></i>
+                {{dir=='ltr'?'Order Returns':'اعاده الطلبيه '}} </p>
             <p class="ms-4">There are no return for this order</p>
         </div>
 
@@ -103,7 +104,10 @@
 
     <div class="mb-1">
         <div class="p-2">
-            <p><i class="fa fa-undo mx-1" aria-hidden="true"></i> Refunds</p>
+            <p>
+                <i class="fa fa-undo mx-1" aria-hidden="true"></i>
+                {{dir=='ltr'?'Refunds':'استرداد الاموال '}}
+            </p>
             <p class="ms-4">There are no refund for this order</p>
         </div>
 
@@ -115,14 +119,16 @@
             <p>
                 <span class="cancellationIcon mx-1">
                     <i class="fa fa-close"></i>
-                </span> Cancellation
+                </span>
+                {{dir=='ltr'?'Cancellation':' الغاء '}}
+                 
             </p>
             <p class="ms-4">There are no Cancellation for this order</p>
         </div>
 
     </div>
 
-    <div class="w-100 text-end">
+    <div class="w-100" [class]="dir=='ltr'?'text-end':'text-start'">
         <button *ngIf="userInfo.isVendor" class="btn btn-dark px-3 pb-1">Save</button>
         <button *ngIf="userInfo.isAdmin" class="btn btn-dark px-3 pb-1" (click)="closeOrderDetailsSec()">Back</button>
     </div>

@@ -29,16 +29,23 @@ export class ProductComponent implements OnInit {
   currentPage: number = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
-  vendorData:any;
+  vendorData: any;
+  dir: string = 'ltr'
+  statusFilter: string = 'isActive'
   status = [
     {
-      isActive: "Status"
+      isActive: "Status",
+      isActiveAr: "الحاله"
     },
     {
-      isActive: "available"
+      isActive: "available",
+      isActiveAr: "متاح"
+
     },
     {
-      isActive: "notAvailable"
+      isActive: "notAvailable",
+      isActiveAr: "غير متاح"
+
     }
   ]
 
@@ -54,6 +61,11 @@ export class ProductComponent implements OnInit {
     private _CategoryService: CategoryService,
     private _BrandService: BrandService,
     public _ActivatedRoute: ActivatedRoute) {
+
+    this.dir = localStorage.getItem('dir')! || 'ltr';
+    if (this.dir == 'rtl') {
+      this.statusFilter = 'isActiveAr'
+    }
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
 
@@ -67,31 +79,51 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  categoryNameFilter: string = 'nameEn'
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
       this.categoryList = res;
-      this.categoryList.unshift({
-        nameEn: "Category"
-      })
+
+      if (this.dir == 'ltr') {
+        this.categoryList.unshift({
+          nameEn: "Category"
+        })
+      } else {
+        this.categoryNameFilter = 'name'
+        this.categoryList.unshift({
+          name: "فئه",
+        })
+      }
+
     }, err => {
       this.showSideError(`Fail to load category list please reload`)
 
     }
     )
   }
+  BrandNameFilter: string = 'nameEn'
+
   getAllBrands() {
     return this._BrandService.brandList().subscribe(res => {
-      console.log({ res });
+      console.log({ br: res });
       this.brandList = res;
-      this.brandList.unshift({
-        nameEn: "Brands"
-      })
+
+      if (this.dir == 'ltr') {
+        this.brandList.unshift({
+          nameEn: "Brands"
+        })
+      } else {
+        this.BrandNameFilter = 'name'
+        this.brandList.unshift({
+          name: "علامه تجاريه"
+        })
+      }
     }, err => {
       this.showSideError(`Fail to load brand list please reload`)
     }
     )
   }
+
   getAllProducts() {
     this.load = true;
     if (this.userInfo.isVendor) {
@@ -217,13 +249,13 @@ export class ProductComponent implements OnInit {
     this._Router.navigateByUrl(`admin/product/${id}/update`)
   }
   deleteProduct(id: string) {
-    this.load= true;
+    this.load = true;
     this._ProductService.deleteProductById(id).subscribe(res => {
-      this.load= false;
+      this.load = false;
       this.currentPage = 1;
       return this.getAllProducts()
     }, err => {
-      this.load= false;
+      this.load = false;
       this.showSideError(`Fail to delete this product.`);
     })
   }
@@ -252,10 +284,22 @@ export class ProductComponent implements OnInit {
       this.getAllProducts()
     }
   }
+  subcategoryNameFilter: string = 'nameEn'
 
   getAllProductsByCategoryId(id: string) {
     this._CategoryService.getListOfSubCategoriesById(id).subscribe(res => {
       this.subcategoryList = res
+
+      if (this.dir == 'ltr') {
+        this.subcategoryList.unshift({
+          nameEn: "Subcategory"
+        })
+      } else {
+        this.subcategoryNameFilter = 'name'
+        this.subcategoryList.unshift({
+          name: " فئه الفرعيه"
+        })
+      }
     }, err => {
       console.log({ err });
     })

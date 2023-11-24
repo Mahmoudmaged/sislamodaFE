@@ -10,8 +10,8 @@
 
   <div class="row align-items-start">
     <div class="col-lg-4  col-12 my-1">
-      <h4 class="head_title">Product Management</h4>
-      <p class="">View Products details....</p>
+      <h4 class="head_title">{{dir=="ltr"? 'Product Management' :"اداره المنتجات"}}</h4>
+      <p class="">{{dir=='ltr'?'View Products details....':'عرض قائمه المنتجات'}}</p>
     </div>
 
 
@@ -20,8 +20,8 @@
         <div class="col-12 mt-1">
           <div class="px-2">
             <div class="searchInputContainer">
-              <input type="text" placeholder="Search results" [(ngModel)]="textSearch" class="w-100 searchInput"
-                (input)="onSearch()">
+              <input type="text" placeholder="{{dir=='ltr'?'Search results':'نتيجه البحث'}}" [(ngModel)]="textSearch"
+                class="w-100 searchInput" (input)="onSearch()">
               <i class="fa fa-search"></i>
             </div>
           </div>
@@ -34,7 +34,7 @@
         <div class="col-lg-2 my-1">
           <div class="px-2">
             <div class="">
-              <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" optionLabel="nameEn"
+              <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" [optionLabel]="categoryNameFilter"
                 placeholder="category" [filter]="true" (onChange)="FilterByCategory()"
                 [style]="{'maxWidth':'100%'}"></p-dropdown>
             </div>
@@ -44,17 +44,17 @@
         <div *ngIf="subcategoryList.length" class="col-lg-2 my-1">
           <div class="px-2">
             <div class="">
-              <p-dropdown [options]="subcategoryList" [(ngModel)]="selectedSubcategory" optionLabel="nameEn"
-                placeholder="Subcategory" [filter]="true" (onChange)="FilterBySubcategory()"
-                [style]="{'maxWidth':'100%'}"></p-dropdown>
+              <p-dropdown [options]="subcategoryList" [(ngModel)]="selectedSubcategory"
+                [optionLabel]="subcategoryNameFilter" placeholder="Subcategory" [filter]="true"
+                (onChange)="FilterBySubcategory()" [style]="{'maxWidth':'100%'}"></p-dropdown>
             </div>
           </div>
         </div>
         <div class="col-lg-2 mb-1">
           <div class="px-2">
             <div class="">
-              <p-dropdown [options]="brandList" [(ngModel)]="selectedBrand" optionLabel="nameEn" [filter]="true"
-                (onChange)="FilterByBrand()" [style]="{'maxWidth':'100%'}"></p-dropdown>
+              <p-dropdown [options]="brandList" [(ngModel)]="selectedBrand" [optionLabel]="BrandNameFilter"
+                [filter]="true" (onChange)="FilterByBrand()" [style]="{'maxWidth':'100%'}"></p-dropdown>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@
           <div class="px-2">
             <div class="ps-1">
               <div>
-                <p-dropdown [options]="status" optionLabel="isActive" [(ngModel)]="selectedStatus"
+                <p-dropdown [options]="status" [optionLabel]="statusFilter" [(ngModel)]="selectedStatus"
                   (onChange)="statusChange()" [style]="{'maxWidth':'100%'}"></p-dropdown>
               </div>
             </div>
@@ -73,8 +73,8 @@
         <div *ngIf="userInfo.isVendor" class="col-lg-2  mb-1">
           <div class="px-2">
             <div class="ps-1">
-              <button class="btn btn-danger addProductBtn" (click)="addProduct()">Add <i class="fa fa-plus mx-1"
-                  [style]="{'maxWidth':'100%'}"></i></button>
+              <button class="btn btn-danger addProductBtn" (click)="addProduct()">{{dir=='ltr'?'Add':'اضافه منتج'}} <i
+                  class="fa fa-plus mx-1" [style]="{'maxWidth':'100%'}"></i></button>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
   <!-- Order Table  -->
   <div *ngIf="productList.length; else noProduct">
     <div class="my-2">
-      <table class="table contentTable bordered text-center ">
+      <table class="table contentTable bordered text-center " [class]="dir=='rtl'?'tableRTL':''">
         <thead id="myTableHead">
           <tr>
             <th scope="col" style="width: 10%;">Image</th>
@@ -102,17 +102,18 @@
               <img class="img-fluid tableImage" src="{{product?.defaultPhoto?.fullLink}}" alt="" srcset="">
             </td>
             <td>
-              <p>{{product?.nameEn}}</p>
+              <p>{{dir=='ltr'?product?.nameEn :product?.name}}</p>
             </td>
-            <td>{{product?.inventory?.nameEn || 'Amazon Egypt'}}</td>
-            <td>{{product?.category?.nameEn}}</td>
-            <td>{{product?.brand?.nameEn}}</td>
+            <td>{{dir=='ltr'?product?.inventory?.nameEn || 'Dummy Store' : product?.inventory?.name || 'مجهول الهويه'}}
+            </td>
+            <td>{{dir=='ltr'?product?.category?.nameEn:product?.category?.name}}</td>
+            <td>{{dir=='ltr'?product?.brand?.nameEn:product?.brand?.name}}</td>
             <td>
               <div *ngIf="product.isActive ==true" class="available">
-                <i class="fa fa-circle  mx-1"></i> <span>Available</span>
+                <i class="fa fa-circle  mx-1"></i> <span>{{dir=='ltr'?'Available':'متاح'}}</span>
               </div>
               <div *ngIf="!product.isActive" class="unavailable">
-                <i class="fa fa-circle  mx-1"></i> <span>Unavailable</span>
+                <i class="fa fa-circle  mx-1"></i> <span>{{dir=='ltr'?'Unavailable':'غير متاح'}}</span>
               </div>
             </td>
             <td class="optionsActions">
@@ -138,43 +139,43 @@
       </table>
     </div>
 
-    <div *ngIf="pages > 0" class=" paginateSection my-2">
-      <ul class="ul">
-        <li class=" mx-1" (click)="previousPage()">
-          <!-- <i class="fa fa-angle-left"></i> -->
-          <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
-        </li>
+    <div *ngIf="pages > 0" class="orderTable paginateSection  my-2"  [class]="dir=='rtl'?'paginateSectionRTL':''">
+      <ul class="ul" dir="ltr">
+          <li class=" mx-1" (click)="previousPage()">
+              <!-- <i class="fa fa-angle-left"></i> -->
+              <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+          </li>
 
-        <li *ngFor="let item of [].constructor(pages); index as i">
-          <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
-          <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
-            (click)="getPageContent(i+1)">
-            {{i+1}}
-          </p>
-          <ng-template #notCurrent>
-            <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
-              {{i+1}}
-            </p>
-          </ng-template>
+          <li *ngFor="let item of [].constructor(pages); index as i">
+              <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+              <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                  (click)="getPageContent(i+1)">
+                  {{i+1}}
+              </p>
+              <ng-template #notCurrent>
+                  <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                      {{i+1}}
+                  </p>
+              </ng-template>
 
-          <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+              <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
               <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
-          <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
-        </li>
+              <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+          </li>
 
-        <li class="mx-1" (click)="nextPage()">
-          <!-- <i class="fa fa-angle-right"></i> -->
-          <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+          <li class="mx-1" (click)="nextPage()">
+              <!-- <i class="fa fa-angle-right"></i> -->
+              <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
 
-        </li>
+          </li>
 
       </ul>
-    </div>
+  </div>
   </div>
 
   <ng-template #noProduct>
     <div class="row align-items-center justify-content-center text-center p-5 text-danger">
-      <p>No Matching Results.</p>
+      <p>{{dir=='ltr'? 'No Matching Results.':'لم يتم العثور علي نتائج بحث مشابه'}}</p>
     </div>
   </ng-template>
 

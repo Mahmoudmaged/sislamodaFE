@@ -18,7 +18,7 @@ export class OfferDetailsComponent implements OnInit {
   currentPage = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
-
+  dir:string='ltr'
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -30,6 +30,9 @@ export class OfferDetailsComponent implements OnInit {
     private _ProductService: ProductService,
     private _OfferService: OfferService,
     public _ActivatedRoute: ActivatedRoute) {
+
+    this.dir = localStorage.getItem('dir') || 'ltr';
+
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.photo = this.userInfo?.photo || this.photo;
     this.getOffer(this._ActivatedRoute.snapshot.paramMap.get('id')!)

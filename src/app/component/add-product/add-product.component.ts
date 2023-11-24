@@ -30,7 +30,7 @@ export class AddProductComponent implements OnInit {
   selectedImages: any[] = []
   imagesList: any = []
   vendorData: any;
-
+  dir: string = 'ltr'
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -44,7 +44,7 @@ export class AddProductComponent implements OnInit {
     private _CategoryService: CategoryService,
     private _BrandService: BrandService,
     private _AttachmentsService: AttachmentsService) {
-
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.getAllCategory()

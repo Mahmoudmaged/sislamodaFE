@@ -28,6 +28,7 @@ export class EditProductComponent implements OnInit {
   selectedImage: string = '';
   imagesList: any = []
 
+  dir: string = 'ltr'
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -79,6 +80,7 @@ export class EditProductComponent implements OnInit {
     private _BrandService: BrandService,
     private _AttachmentsService: AttachmentsService,
     private _ActivatedRoute: ActivatedRoute) {
+      this.dir = localStorage.getItem('dir') || 'ltr';
 
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);

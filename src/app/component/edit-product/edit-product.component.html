@@ -23,20 +23,28 @@
                                 <div class="px-2 py-2 w-100 text-center uploadParent">
                                     <div class="uploadDiv p-2 text-center">
                                         <i class="fa fa-file fa-3x"></i>
-                                        <p>Attach image here to start uploading</p>
+
+                                        <p>
+                                            {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره
+                                            المناسبه للبدء في تحميلها '}}
+                                        </p>
                                         <div class="d-flex align-items-center justify-content-center">
                                             <p class="p11 me-1"></p>
-                                            <p>Or</p>
+                                            <p>{{dir=='ltr'?'Or':'او'}}</p>
                                             <p class="ms-1 p11"></p>
                                         </div>
-                                        <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">Browse
-                                            file</label>
+                                        <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">
+                                            {{dir=='ltr'?' Browse file' :'اختيار الملف'}}
+                                        </label>
                                         <input formControlName="image" class="d-none" multiple type="file"
                                             id="uploadImage" (change)="selectImage($event)">
 
                                         <div *ngIf="addProductForm.controls['image'].errors && addProductForm.controls['image'].touched"
                                             class=" my-1 xx">
-                                            <p class="formError">In-valid product image</p>
+
+                                            <p class="formError">
+                                                {{dir=='ltr'?'In-valid product image' :'ملف خاطئ'}}
+                                            </p>
                                         </div>
 
                                     </div>
@@ -61,13 +69,17 @@
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product Name</p>
+                            <p>
+                                {{dir=='ltr'?' Product Name(Arabic)' :'اسم المنتج (عربي) '}}
+                            </p>
                             <div class="form-group">
                                 <input type="text" formControlName="productName" class="form-control" />
 
                                 <div *ngIf="addProductForm.controls['productName'].errors && addProductForm.controls['productName'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid productName</p>
+                                    <p class="formError">
+                                        {{dir=='ltr'?'In-valid product name' :'خطاء'}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -76,13 +88,16 @@
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product NameEN</p>
+
+                            <p> {{dir=='ltr'?' Product Name(English)' :'اسم المنتج (الانجليزيه) '}} </p>
                             <div class="form-group">
                                 <input type="text" formControlName="productNameEn" class="form-control" />
 
                                 <div *ngIf="addProductForm.controls['productNameEn'].errors && addProductForm.controls['productNameEn'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid productNameEn </p>
+
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product name' :'خطاء'}} </p>
+
                                 </div>
                             </div>
                         </div>
@@ -92,13 +107,14 @@
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product price</p>
+                            <p> {{dir=='ltr'?' Product price' :'سعر المنتج'}}</p>
                             <div class="form-group">
                                 <input type="number" min="1" formControlName="oldPrice" class="form-control" />
 
                                 <div *ngIf="addProductForm.controls['oldPrice'].errors && addProductForm.controls['oldPrice'].touched"
                                     class="my-1 xx">
-                                    <p class="formError">In-valid price </p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product price' :'خطاء'}} </p>
+
                                 </div>
                             </div>
                         </div>
@@ -108,13 +124,14 @@
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product price(discount)</p>
+                            <p> {{dir=='ltr'?'Product price(discount)' :'(خصم)سعر المنتج'}}</p>
+
                             <div class="form-group">
                                 <input type="number" min="1" formControlName="defaultPrice" class="form-control" />
 
                                 <div *ngIf="addProductForm.controls['defaultPrice'].errors && addProductForm.controls['defaultPrice'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid price </p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product discount' :'خطاء'}} </p>
                                 </div>
                             </div>
                         </div>
@@ -124,14 +141,16 @@
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product Description</p>
+                            <p> {{dir=='ltr'?'Product Description(Arabic)' :'وصف المنتج (عربي)'}}</p>
+
                             <div class="form-group">
                                 <textarea formControlName="productDescription" class="form-control" name="" id=""
                                     cols="30" rows="1"></textarea>
 
                                 <div *ngIf="addProductForm.controls['productDescription'].errors && addProductForm.controls['productDescription'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid product description</p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product description' :'خطاء'}} </p>
+
                                 </div>
                             </div>
                         </div>
@@ -140,14 +159,15 @@
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product DescriptionEn</p>
+                            <p> {{dir=='ltr'?'Product Description(English)' :'وصف المنتج (الانجليزيه)'}}</p>
                             <div class="form-group">
                                 <textarea formControlName="productDescriptionEn" class="form-control" name="" id=""
                                     cols="30" rows="1"></textarea>
 
                                 <div *ngIf="addProductForm.controls['productDescriptionEn'].errors && addProductForm.controls['productDescriptionEn'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid product descriptionEn</p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product description' :'خطاء'}} </p>
+
                                 </div>
                             </div>
                         </div>
@@ -169,12 +189,13 @@
 
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
-                        <p>Product amount</p>
+                        <p> {{dir=='ltr'?'Product amount' :'الكميه'}}</p>
                         <div class="form-group">
                             <input type="number" min="1" formControlName="amount" class="form-control" />
                             <div *ngIf="addProductForm.controls['amount'].errors && addProductForm.controls['amount'].touched"
                                 class=" my-1 xx">
-                                <p class="formError">In-valid Product amount</p>
+                                <p class="formError"> {{dir=='ltr'?'In-valid product amount' :'خطاء'}} </p>
+
                             </div>
                         </div>
                     </div>
@@ -182,17 +203,18 @@
                 <div class="col-md-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Brand</p>
+                            <p> {{dir=='ltr'?'Brand' :'علامه التجاريه'}}</p>
+
                             <div class="form-group my-1">
-                                <select formControlName="brand" class="form-select p-1"
+                                <select formControlName="brand" class="form-select p-1 text-start"
                                     aria-label="Default select example">
                                     <option *ngFor="let brand of brandList ;  index as i" [value]="brand.id"
                                         [selected]="i==0">
-                                        {{brand.nameEn }}</option>
+                                        {{dir=='ltr'?brand.nameEn :brand.name}}</option>
                                 </select>
                                 <div *ngIf="addProductForm.controls['brand'].errors && addProductForm.controls['brand'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid brand name</p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product brand' :'خطاء'}} </p>
                                 </div>
                             </div>
                         </div>
@@ -201,18 +223,20 @@
                 <div class="col-md-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Category</p>
+                            <p> {{dir=='ltr'?'Category' :'الفئه'}}</p>
+
                             <div class="form-group">
                                 <select id="subVal" (change)="getSubCategory('')" formControlName="category"
-                                    class="form-select p-2" aria-label="Default select example">
+                                    class="form-select p-2 text-start" aria-label="Default select example">
                                     <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
                                         [selected]=" i== 0">
-                                        {{category.nameEn}}</option>
+                                        {{dir=='ltr'?category.nameEn:category.name}}</option>
                                 </select>
 
                                 <div *ngIf="addProductForm.controls['category'].errors && addProductForm.controls['category'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid category name</p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid category ' :'خطاء'}} </p>
+
                                 </div>
                             </div>
                         </div>
@@ -221,18 +245,20 @@
                 <div *ngIf="subcategoryList.length" class="col-md-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Subcategory</p>
+                            <p> {{dir=='ltr'?'Subcategory' :'الفئه الفرعيه'}}</p>
+
                             <div class="form-group">
-                                <select formControlName="subcategory" class="form-select p-2"
+                                <select formControlName="subcategory" class="form-select p-2 text-start"
                                     aria-label="Default select example">
                                     <option *ngFor="let subcategory of subcategoryList ;  index as i"
                                         [value]="subcategory.id" [selected]=" i== 0">
-                                        {{subcategory.nameEn}}</option>
+                                        {{dir=='ltr'?subcategory.nameEn:subcategory.name}}</option>
                                 </select>
 
                                 <div *ngIf="addProductForm.controls['subcategory'].errors && addProductForm.controls['subcategory'].touched"
                                     class=" my-1 xx">
-                                    <p class="formError">In-valid subcategory </p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid subcategory ' :'خطاء'}} </p>
+
                                 </div>
                             </div>
                         </div>
@@ -242,7 +268,7 @@
                 <div class="col-md-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product options</p>
+                            <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
 
                             <p-multiSelect formControlName="productOptions" [options]="optionList" optionLabel="name"
                                 [style]="{'width':'100%'}"></p-multiSelect>
@@ -252,17 +278,18 @@
                 </div>
                 <div class="col-md-6 mb-1">
                     <div class="px-2 py-1">
-                        <p>Availability</p>
+                        <p> {{dir=='ltr'?'Availability ' :'الاتاحه'}} </p>
+
                         <div class="ms-3 AvailabilityOption my-2">
                             <div class="available">
                                 <input value="available" formControlName="available" type="radio" class="me-2"
                                     name="productAvailable" checked>
-                                <span>Available</span>
+                                <span> {{dir=='ltr'?'Available ' :'متاح'}}</span>
                             </div>
                             <div class="unavailable ms-5">
                                 <input value="unavailable" formControlName="available" type="radio" class="me-2"
                                     name="productAvailable">
-                                <span>Unavailable</span>
+                                <span> {{dir=='ltr'?'Unavailable ' :'غير متاح'}}</span>
                             </div>
                         </div>
                     </div>
@@ -272,24 +299,26 @@
                 <div class="col-12 mb-1">
                     <div class="px-2 py-1">
                         <div>
-                            <p>Product note for return</p>
+                            <p>
+                                {{dir=='ltr'?'Product note for return ' :'ملاحظات لاعاده المنتج'}}
+                            </p>
                             <div class="form-group">
                                 <textarea formControlName="noteForReturn" class="form-control" name="" id="" cols="30"
                                     rows="1"></textarea>
 
                                 <div *ngIf="addProductForm.controls['noteForReturn'].errors && addProductForm.controls['noteForReturn'].touched"
                                     class="my-1 xx">
-                                    <p class="formError">In-valid product note For Return</p>
+                                    <p class="formError"> {{dir=='ltr'?'In-valid product note For Return ' :'خطاء'}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 text-end mt-4 mb-2 ">
+                <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
                     <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addProductForm.invalid"><span
-                            class="px-2">Update</span></button>
-                    <button class="btn btn-outline-dark px-5 py-1 ms-2 my-1"
-                        (click)="closeProductDetailsSec()">Cancel</button>
+                            class="px-2"> {{dir=='ltr'?'update ' :'حفظ'}}</span></button>
+                    <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
+                        (click)="closeProductDetailsSec()">{{dir=='ltr'?'Cancel ' :'الغاء'}}</button>
                 </div>
             </div>
 

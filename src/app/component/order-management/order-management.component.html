@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list00">
+                            <div class="dropdown-menu-list  dropdown-menu-list00" [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                                 <span class="dropdown-item"
                                     (click)="changeOrderStatusFilter('search_dropdownMenuButton00','Order Status')">All</span>
                                 <span class="dropdown-item"

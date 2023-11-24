@@ -15,7 +15,7 @@
         <!-- <i (click)="closeProductDetailsSec()" class="fa fa-times  ms-auto" aria-hidden="true"></i> -->
     </div>
     <div class="productDataContainer">
-       
+
         <div class="info mb-1">
             <div class="row w-100 mb-1 text-center">
                 <div class="col-md-2">
@@ -23,25 +23,28 @@
                         <div class="orderDetailsImage d-flex align-items-center">
                             <img class="img-fluid" [src]="offer?.photo?.fullLink" alt="">
                         </div>
-    
+
                     </div>
                 </div>
             </div>
             <div class="px-2">
-                <p class="OrderDetailsInfo">Description</p>
+                <p class="OrderDetailsInfo"> {{dir=='ltr'?'Description':'الوصف'}}</p>
                 <p class="w-75">
-                    {{offer?.descriptionEn}}
+                    {{dir=='ltr'?offer?.descriptionEn :offer?.description}}
                 </p>
             </div>
-    
+
         </div>
         <hr>
 
         <div class="mb-1">
             <div class="px-2 py-1">
-                <p> Name</p>
+                <p>
+                    {{dir=='ltr'?'Name':'الاسم'}}
+                </p>
                 <p class="">
-                    {{offer?.titleEn}}
+                    {{dir=='ltr'?offer?.titleEn :offer?.title}}
+
                 </p>
             </div>
 
@@ -53,7 +56,9 @@
                 <div class="row">
                     <div class="col-md-4 my-1">
                         <div class="px-2 py-1">
-                            <p> Discount Code</p>
+                            <p>
+                                {{dir=='ltr'?' Discount Code':'كود الخصم'}}
+                            </p>
                             <p class="">
                                 {{offer?.code}}
                             </p>
@@ -61,9 +66,11 @@
                     </div>
                     <div class="col-md-4 my-1">
                         <div class="px-2 py-1">
-                            <p> Offer Rate</p>
+                            <p>
+                                {{dir=='ltr'?'Offer Rate':'نسبه الخصم'}}
+                            </p>
                             <p class="">
-                                {{offer?.percent |percent}} 
+                                {{offer?.percent |percent}}
                             </p>
                         </div>
                     </div>
@@ -78,17 +85,19 @@
                 <div class="row">
                     <div class="col-md-4 my-1">
                         <div class="px-2 py-1">
-                            <p> Start Date</p>
+                            <p>
+                                {{dir=='ltr'?'Start Date':' التاريخ'}}
+                            </p>
                             <p class="">
-                                {{offer?.startDate |date}}
+                                {{offer?.startDate.split(" ")[0]}}
                             </p>
                         </div>
                     </div>
                     <div class="col-md-4 my-1">
                         <div class="px-2 py-1">
-                            <p> End Date</p>
+                            {{dir=='ltr'?'End Date':' تاريخ الانتهاء '}}
                             <p class="">
-                                {{offer?.endDate |date}}
+                                {{offer?.endDate.split(" ")[0]}}
                             </p>
                         </div>
                     </div>
@@ -100,15 +109,20 @@
 
         <div class="mb-1">
             <div class="px-2 py-1">
-                <p> Offer Status</p>
+
+                <p>
+                    {{dir=='ltr'?'Offer Status':' الحاله'}} </p>
                 <p *ngIf="offer?.isActive ; else notActive" class="">
                     <i class="fa fa-circle text-success mr-2" aria-hidden="true"></i>
-                    Available
+                    {{dir=='ltr'?'Available':' متاح'}}
+
                 </p>
                 <ng-template #notActive>
                     <p>
                         <i class="fa fa-circle text-danger mr-2" aria-hidden="true"></i>
-                        Not Available
+
+                        {{dir=='ltr'?' Not Available':' غير متاح'}}
+
                     </p>
                 </ng-template>
             </div>
@@ -142,20 +156,26 @@
                                     <p class="price my-1 text-danger">{{product.product?.defaultPrice}}$</p>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div *ngIf="userInfo?.isVendor" class="col-md-4">
                         <div class="p-2">
-                            <button class="btn btn-danger px-2 py-1"><i class="fa fa-plus mx-1"> </i> Add Product</button>
+                            <button class="btn btn-danger px-2 py-1"><i class="fa fa-plus mx-1"> </i>
+                                {{dir=='ltr'?'Add Product':' اضافه منتج'}}
+
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="w-100 text-end mt-4 mb-2 ">
-            <button class="btn btn-dark px-3 py-1" (click)="closeProductDetailsSec()">Back</button>
+        <div class="w-100 text-end mt-4 mb-2 mx-2">
+            <button class="btn btn-dark px-3 py-1 mx-1" (click)="closeProductDetailsSec()">
+                {{dir=='ltr'?'Back':' رجوع'}}
+
+            </button>
         </div>
     </div>
 

@@ -16,6 +16,8 @@ export class OrderDetailsComponent implements OnInit {
   currentPage = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
+  dir: string = 'ltr'
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -24,8 +26,8 @@ export class OrderDetailsComponent implements OnInit {
     }, 3000);
   }
   constructor(private _Router: Router, private _OrderService: OrderService, public _ActivatedRoute: ActivatedRoute) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
-
     this.photo = this.userInfo?.photo || this.photo;
     this.getOrder(this._ActivatedRoute.snapshot.paramMap.get('id')!)
 

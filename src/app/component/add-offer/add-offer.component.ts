@@ -22,6 +22,7 @@ export class AddOfferComponent {
   categoryList: any = [];
   load: boolean = false;
   sideMessage: string = '';
+  dir: string = 'ltr';
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -39,7 +40,8 @@ export class AddOfferComponent {
 
   constructor(
     private _CategoryService: CategoryService, private _AttachmentsService: AttachmentsService, private _OfferService: OfferService, private _Router: Router) {
-      this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
+    this.dir = localStorage.getItem('dir') || 'ltr';
+    this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.getAllCategory()
   }
 
@@ -74,7 +76,7 @@ export class AddOfferComponent {
     }
     let data = this.addOfferForm.value
     data.photoId = this.image
-    data.vendorId=this.vendorData?.id
+    data.vendorId = this.vendorData?.id
     this._OfferService.addOffer(data).subscribe((res) => {
       this.load = false
       this._Router.navigateByUrl("/admin/offers")

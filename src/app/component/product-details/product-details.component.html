@@ -29,9 +29,9 @@
 
             </div>
             <div class="px-2 pb-1">
-                <p class="OrderDetailsInfo">Product Details</p>
+                <p class="OrderDetailsInfo">{{dir=='ltr'?'Product Details':'تفاصيل المنتج'}}</p>
                 <p class="">
-                    {{product?.descriptionEn}}
+                    {{dir=='ltr'?product?.descriptionEn :product?.description}}
                 </p>
             </div>
 
@@ -40,9 +40,13 @@
 
         <div class="mb-1">
             <div class="px-2 py-1">
-                <p> Inventory Name</p>
+                <p> {{dir=='ltr'?'Inventory Name':"اسم المورد"}}</p>
                 <p class="">
-                    {{product?.inventory || ' Dummy Name'}}
+                    {{
+                    dir=='ltr'?
+                    product?.inventory?.nameEn || ' Dummy Name':
+                    product?.inventory?.name || 'مجهول الهويه'
+                    }}
                 </p>
             </div>
 
@@ -51,39 +55,52 @@
 
         <div class="mb-1">
             <div class="px-2 py-1">
-                <p>Category</p>
-                <p class=""> 
-                    {{product?.category?.nameEn || 'Smart Phone'}}
-                    </p>
+                <p> {{dir=='ltr'?'Category':"الفئه"}}</p>
+                <p class="">
+                    {{ dir=='ltr'?
+                    product?.category?.nameEn || 'Smart Phone' :
+                    product?.category?.name || 'مجهول الهويه'
+                    }}
+                </p>
             </div>
 
         </div>
         <hr>
         <div class="mb-1">
             <div class="px-2 py-1">
-                <p>Brand</p>
-                <p class="">{{product?.brand?.nameEn}}</p>
+                <p> {{dir=='ltr'?'Brand':"علامه التجاريه"}}</p>
+
+                <p class="">
+                    {{
+                    dir=='ltr'?
+                    product?.brand?.nameEn :
+                    product?.brand?.name
+                    }}
+                </p>
             </div>
 
         </div>
         <hr>
         <div class="mb-1">
             <div class="px-2 py-1">
-                <p>Availability</p>
+                <p>{{ dir=='ltr'?'Availability':'الاتاحه'}}</p>
                 <div class="ms-3 AvailabilityOption my-2">
                     <div *ngIf="product?.isActive" class="available">
-                        <input type="radio" class="me-2" name="productAvailable" [checked]="product?.isActive"> <span>Available</span>
+                        <input type="radio" class="mx-2" name="productAvailable" [checked]="product?.isActive">
+                        <span>{{dir=='ltr'?'Available':'متاح'}}</span>
                     </div>
-                    <div *ngIf="!product?.isActive" class="unavailable ms-5">
-                        <input type="radio" class="me-2" name="productAvailable" [checked]="!product?.isActive"> <span>Unavailable</span>
+                    <div *ngIf="!product?.isActive" class="unavailable ms-5 me-2">
+                        <input type="radio" class="mx-2" name="productAvailable" [checked]="!product?.isActive">
+                        <span> {{dir=='ltr'?'Unavailable':'غير متاح'}}</span>
                     </div>
                 </div>
             </div>
 
         </div>
         <hr>
-        <div class="w-100 text-end mt-2 mb-2 ">
-            <button class="btn btn-dark px-5 py-1" (click)="closeProductDetailsSec()">Back</button>
+        <div class="w-100 mt-2 mb-2 " [ngClass]="{'text-end':dir=='ltr' , 'text-start':dir=='rtl'}">
+            <button class="btn btn-dark px-5 py-1"
+                (click)="closeProductDetailsSec()">{{dir=='ltr'?'Back':'رجوع'}}</button>
         </div>
     </div>
 

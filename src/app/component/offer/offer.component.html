@@ -11,8 +11,12 @@
 
   <div class="row">
     <div class="col-lg-3  col-md-5 col-12">
-      <h4 class="head_title">Offers</h4>
-      <p class="my-1  head_Desc">View all offers and their details</p>
+      <h4 class="head_title">
+        {{dir=='ltr'?'Offers':'عروض'}}
+      </h4>
+      <p class="my-1  head_Desc">
+        {{dir=='ltr'?'View all offers and their details':'عرض قائمه العروض '}}
+      </p>
     </div>
     <div class="col-lg-9 col-md-7 col-12 VendorTable">
       <div class="row justify-content-end ">
@@ -24,7 +28,7 @@
           </div>
         </div>
         <div *ngIf="userInfo.isVendor" class="col-md-2 col-4">
-          <div class="ms-1">
+          <div class="mx-1">
             <!-- <div class="search_dropdown">
                           <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
                               class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
@@ -38,8 +42,9 @@
                           </div>
                       </div> -->
 
-            <button class="btn btn-danger addProductBtn w-100" (click)="addOffer()">Add <i
-                class="fa fa-plus mx-1"></i></button>
+            <button class="btn btn-danger addProductBtn w-100" (click)="addOffer()">
+              {{dir=='ltr'?'Add':'اضافه '}}
+              <i class="fa fa-plus mx-1"></i></button>
 
           </div>
         </div>
@@ -52,12 +57,24 @@
       <table class=" table contentTable bordered text-center" [class]="dir=='rtl'?'tableRTL':''">
         <thead class="text-center">
           <tr>
-            <th scope="col" style="width: 5%;">image</th>
-            <th scope="col">Name</th>
-            <th scope="col" style="width: 25%;">Desscreption</th>
-            <th scope="col">Offer Rate</th>
-            <th scope="col">Offer Date</th>
-            <th scope="col">Options</th>
+            <th scope="col" style="width: 5%;">
+              {{dir=='ltr'?'image':'صوره '}}
+            </th>
+            <th scope="col">
+              {{dir=='ltr'?'Name':'الاسم '}}
+            </th>
+            <th scope="col" style="width: 25%;">
+              {{dir=='ltr'?'Description':'الوصف '}}
+            </th>
+            <th scope="col">
+              {{dir=='ltr'?'Offer Rate':'الخصم '}}
+            </th>
+            <th scope="col">
+              {{dir=='ltr'?'Offer Date':'التاريخ '}}
+            </th>
+            <th scope="col">
+              {{dir=='ltr'?'Options':'خيارات '}}
+              </th>
           </tr>
         </thead>
         <tbody class="text-center">
@@ -66,10 +83,10 @@
               <img class="img-fluid  tableImage" [src]="offer?.photo?.fullLink" alt="" srcset="">
             </td>
             <td>
-              <p>{{offer.titleEn}}</p>
+              <p>{{dir=='ltr'?offer.titleEn:offer.title}}</p>
             </td>
             <td>
-              <p>{{offer.descriptionEn?.slice(0,30)}}...</p>
+              <p>{{dir=='ltr'?offer.descriptionEn?.slice(0,30) :offer.description?.slice(0,30) }}...</p>
             </td>
             <td>
               <p>{{offer.percent | percent}}</p>
@@ -98,38 +115,38 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="pages > 0" class="orderTable paginateSection my-2"  [class]="dir=='rtl'?'paginateSectionRTL':''">
+    <div *ngIf="pages > 0" class="orderTable paginateSection my-2" [class]="dir=='rtl'?'paginateSectionRTL':''">
       <ul class="ul" dir="ltr">
-          <li class=" mx-1" (click)="previousPage()">
-              <!-- <i class="fa fa-angle-left"></i> -->
-              <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
-          </li>
+        <li class=" mx-1" (click)="previousPage()">
+          <!-- <i class="fa fa-angle-left"></i> -->
+          <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+        </li>
 
-          <li *ngFor="let item of [].constructor(pages); index as i">
-              <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
-              <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
-                  (click)="getPageContent(i+1)">
-                  {{i+1}}
-              </p>
-              <ng-template #notCurrent>
-                  <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
-                      {{i+1}}
-                  </p>
-              </ng-template>
+        <li *ngFor="let item of [].constructor(pages); index as i">
+          <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+          <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+            (click)="getPageContent(i+1)">
+            {{i+1}}
+          </p>
+          <ng-template #notCurrent>
+            <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+              {{i+1}}
+            </p>
+          </ng-template>
 
-              <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+          <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
               <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
-              <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
-          </li>
+          <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+        </li>
 
-          <li class="mx-1" (click)="nextPage()">
-              <!-- <i class="fa fa-angle-right"></i> -->
-              <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+        <li class="mx-1" (click)="nextPage()">
+          <!-- <i class="fa fa-angle-right"></i> -->
+          <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
 
-          </li>
+        </li>
 
       </ul>
-  </div>
+    </div>
   </section>
 
 

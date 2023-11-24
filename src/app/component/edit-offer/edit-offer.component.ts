@@ -23,6 +23,8 @@ export class EditOfferComponent implements OnInit {
   sideMessage: string = '';
   offer: any;
   vendorData:any;
+  dir: string = 'ltr';
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -36,6 +38,8 @@ export class EditOfferComponent implements OnInit {
     private _AttachmentsService: AttachmentsService,
     private _OfferService: OfferService,
     private _Router: Router) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
+
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
 
     this.getAllCategory()

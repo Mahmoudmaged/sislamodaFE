@@ -9,14 +9,14 @@
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-5 col-12">
-      <h4 class="head_title">Offers</h4>
-      <p class="my-1">View all offers and their details....</p>
+      <h4 class="head_title"> {{dir=='ltr'?'Offers':'العروض'}}Offers</h4>
+      <!-- <p class="my-1">View all offers and their details....</p> -->
     </div>
 
   </div>
   <div class="row  categoryContainer my-1">
     <div class="head p-3 text-light">
-      <h5>Add new offer</h5>
+      <h5> {{dir=='ltr'?'Add new offer':'اضافه عرض جديد'}}</h5>
     </div>
     <div class="categoryContainerBody px-5 py-2">
       <div class="px-3">
@@ -29,18 +29,26 @@
                     <div class="px-2 py-2 w-100 text-center uploadParent">
                       <div class="uploadDiv p-2 text-center">
                         <i class="fa fa-file fa-3x"></i>
-                        <p>Attach image here to start uploading</p>
+                        <p>
+
+                          {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره المناسبه للبدء  في تحميلها '}}
+                        </p>
                         <div class="d-flex align-items-center justify-content-center">
-                           <p class="p11 me-1"></p> <p>Or</p>  <p class="ms-1 p11"></p></div>
-                        <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">Browse
-                          file</label>
+                          <p class="p11 me-1"></p>
+                          <p>{{dir=='ltr'?'Or':'او'}}</p>
+                          <p class="ms-1 p11"></p>
+                        </div>
+                        <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">
+                          {{dir=='ltr'?' Browse file' :'اختيار الملف'}}
+                        </label>
                         <input formControlName="photoId" class="d-none" multiple type="file" id="uploadImage"
                           (change)="selectImage($event)">
 
-                        <div
-                          *ngIf="addOfferForm.controls['photoId'].errors && addOfferForm.controls['photoId'].touched"
+                        <div *ngIf="addOfferForm.controls['photoId'].errors && addOfferForm.controls['photoId'].touched"
                           class=" my-1 xx">
-                          <p class="formError">In-valid product image</p>
+                          <p class="formError">
+                            {{dir=='ltr'?'In-valid offer image' :'ملف خاطئ'}}
+                          </p>
                         </div>
 
                       </div>
@@ -63,12 +71,16 @@
             <div class="col-6 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Name(Arabic)</p>
+                  <p>
+                    {{dir=='ltr'?'Name(Arabic)' :' (عربي) الاسم '}}
+                  </p>
                   <div class="form-group">
                     <input type="text" formControlName="title" class="form-control" />
                     <div *ngIf="addOfferForm.controls['title'].errors && addOfferForm.controls['title'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid title</p>
+                      <p class="formError">
+                        {{dir=='ltr'?' In-valid title' :'يوجد خطاء بالاسم'}}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -77,12 +89,16 @@
             <div class="col-6 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Name(English)</p>
+                  <p>
+                    {{dir=='ltr'?'Name(English)' :'(بلانجليزيه)الاسم'}}
+                  </p>
                   <div class="form-group">
                     <input type="text" formControlName="titleEn" class="form-control" />
                     <div *ngIf="addOfferForm.controls['titleEn'].errors && addOfferForm.controls['titleEn'].touched"
                       class="my-1 xx">
-                      <p  class="formError">In-valid offer titleEn </p>
+                      <p class="formError">
+                        {{dir=='ltr'?' In-valid title' :'يوجد خطاء بالاسم'}}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -91,7 +107,9 @@
             <div class="col-6 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Description</p>
+                  <p>
+                    {{dir=='ltr'?'Description(Arabic)' :'(عربي) الوصف'}}
+                  </p>
                   <div class="form-group">
                     <textarea formControlName="description" class="form-control" name="" id="" cols="30"
                       rows="1"></textarea>
@@ -99,7 +117,9 @@
                     <div
                       *ngIf="addOfferForm.controls['description'].errors && addOfferForm.controls['description'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid offer description</p>
+                      <p class="formError">
+                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}} 
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -108,14 +128,19 @@
             <div class="col-6 mb-1">
               <div class="p-2">
                 <div>
-                  <p>DescriptionEn</p>
+                  <p>
+                    {{dir=='ltr'?'Description(English)' :'(بلانجليزيه) الوصف'}}
+                  </p>
                   <div class="form-group">
                     <textarea formControlName="descriptionEn" class="form-control" name="" id="" cols="30"
                       rows="1"></textarea>
                     <div
                       *ngIf="addOfferForm.controls['descriptionEn'].errors && addOfferForm.controls['descriptionEn'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid offer descriptionEn</p>
+                      <p class="formError">
+                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}} 
+
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -124,13 +149,17 @@
             <div class="col-md-4 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Discount code</p>
+                  <p>
+                    {{dir=='ltr'?'Discount code ' :'كود الخصم'}}
+                  </p>
                   <div class="form-group">
                     <input type="text" formControlName="code" class="form-control" />
 
                     <div *ngIf="addOfferForm.controls['code'].errors && addOfferForm.controls['code'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid offer code </p>
+                      <p class="formError">
+                        {{dir=='ltr'?' In-valid offer code' :'خطاء بالكود'}}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -139,13 +168,17 @@
             <div class="col-md-4 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Offer Rate</p>
+                  <p>
+                    {{dir=='ltr'?'Offer Rate' :'سعر العرض'}}
+                  </p>
                   <div class="form-group">
                     <input type="text" formControlName="percent" class="form-control" />
 
                     <div *ngIf="addOfferForm.controls['percent'].errors && addOfferForm.controls['percent'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid offer percent </p>
+                      <p class="formError">
+                        {{dir=='ltr'?' In-valid offer code' :'خطاء بسعر العرض'}}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -154,7 +187,9 @@
             <div class="col-md-4 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Offer Type</p>
+                  <p>
+                    {{dir=='ltr'?'Offer Type' :'نوع العرض'}}
+                  </p>
                   <div class="form-group">
                     <select formControlName="offerType" class="form-select p-2" aria-label="Default select example">
                       <option *ngFor="let item of [].constructor(4); index as i" [value]="i+1" [selected]=" i== 0">
@@ -162,7 +197,9 @@
                     </select>
                     <div *ngIf="addOfferForm.controls['offerType'].errors && addOfferForm.controls['offerType'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid offerType </p>
+                      <p class="formError">
+                        {{dir=='ltr'?'In-valid offer type' :'خطاء بنوع العرض '}}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -171,18 +208,20 @@
             <div class="col-md-4 mb-1">
               <div class="p-2">
                 <div>
-                  <p>Category</p>
+                  <p>{{dir=='ltr'?'Category':'فئة'}}</p>
                   <div class="form-group">
                     <select formControlName="offerCategoryId" class="form-select p-2"
                       aria-label="Default select example">
                       <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
                         [selected]=" i== 0">
-                        {{category.nameEn}}</option>
+                        {{dir=='ltr'?category.nameEn:category.name}}
+                      
+                      </option>
                     </select>
                     <div
                       *ngIf="addOfferForm.controls['offerCategoryId'].errors && addOfferForm.controls['offerCategoryId'].touched"
                       class=" my-1 xx">
-                      <p class="formError">In-valid category </p>
+                      <p class="formError">{{dir=='ltr'?'In-valid category ':'خطاء '}}</p>
                     </div>
                   </div>
                 </div>
@@ -190,40 +229,44 @@
             </div>
             <div class="col-md-4 mb-1">
               <div class="p-2">
-                <p>Start Date</p>
+                <p>{{dir=='ltr'?'Start Date' :'تاريخ بدء العرض'}}</p>
                 <p-calendar formControlName="startDate" class="bg-danger">
                 </p-calendar>
                 <div *ngIf="addOfferForm.controls['startDate'].errors && addOfferForm.controls['startDate'].touched"
                   class=" my-1 xx">
-                  <p class="formError">In-valid offer startDate</p>
+                  <p class="formError">{{dir=='ltr'?'In-valid offer startDate ':'خطاء '}}</p>
+
                 </div>
               </div>
             </div>
             <div class="col-md-4  mb-1">
               <div class="p-2">
-                <p>End Date</p>
+                <p>{{dir=='ltr'?'End Date' :'تاريخ انتهاء العرض'}}</p>
+
                 <p-calendar formControlName="endDate">
                 </p-calendar>
                 <div *ngIf="addOfferForm.controls['endDate'].errors && addOfferForm.controls['endDate'].touched"
                   class=" my-1 xx">
-                  <p class="formError">In-valid offer endDate</p>
+                  <p class="formError">{{dir=='ltr'?'In-valid offer startDate ':'خطاء '}}</p>
                 </div>
               </div>
             </div>
-            <div class="col-12  mb-1">
+            <div class="col-12  mb-1" dir="ltr">
               <div class="p-2">
-                <p>Offer state</p>
+                <p>{{dir=='ltr'?'Offer state' :'حاله العرض'}}</p>
+
                 <div class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
-                  <label class="form-check-label" for="flexSwitchCheckChecked">Active</label>
+                  <label class="form-check-label" for="flexSwitchCheckChecked"> {{dir=='ltr'?'Active' :' متاح'}}</label>
                   <input class="form-check-input mt-1" formControlName="isActive" type="checkbox" role="switch"
                     id="flexSwitchCheckChecked" checked>
                 </div>
               </div>
             </div>
-            <div class="w-100 text-end mt-4 mb-1 ">
+            <div class="w-100  mt-4 mb-1 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
               <button type="submit" class="btn btn-dark px-5 py-2 my-1" [disabled]="addOfferForm.invalid"><span
-                  class="px-2">Add</span></button>
-              <button type=" button" class="btn btn-outline-dark px-5 py-2 ms-2 my-1" (click)="close()">Cancel</button>
+                  class="px-2">{{dir=='ltr'?'Add' :' اضافه'}}</span></button>
+              <button type=" button" class="btn btn-outline-dark px-5 py-2 mx-2 my-1"
+                (click)="close()">{{dir=='ltr'?'Cancel' :' الغاء'}}</button>
             </div>
           </div>
         </form>

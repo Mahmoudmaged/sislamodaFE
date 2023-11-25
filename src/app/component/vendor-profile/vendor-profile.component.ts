@@ -11,7 +11,7 @@ declare let $: any;
 })
 export class VendorProfileComponent implements OnInit {
   defaultImage: string = '../../../assets/images/Sislimoda/SislimodaAdmin/items/images.png'
-  vendor:any;
+  vendor: any;
   orderList: any = []
   pages: number = 10;
   pageSize = 8
@@ -50,6 +50,7 @@ export class VendorProfileComponent implements OnInit {
 
   load: boolean = false;
   sideMessage: string = '';
+  dir: string = 'ltr'
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -58,9 +59,11 @@ export class VendorProfileComponent implements OnInit {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
+
   constructor(
-    private _ActivatedRoute:ActivatedRoute,
+    private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _vendorService: VendorService) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
 
     Chart.register(...registerables)
     Chart.register(Colors)

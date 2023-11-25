@@ -5,7 +5,6 @@ declare let $: any;
 
 
 import { ChartComponent } from "ng-apexcharts";
-
 @Component({
   selector: 'app-financial-management',
   templateUrl: './financial-management.component.html',
@@ -14,9 +13,11 @@ import { ChartComponent } from "ng-apexcharts";
 
 
 export class FinancialManagementComponent implements OnInit {
+  dir: string = 'ltr'
 
 
   constructor(private _Router: Router) {
+    this.dir = localStorage.getItem('dir') || 'ltr'
   }
 
 

@@ -10,50 +10,56 @@
     </div>
     <div class="row">
         <div class="col-lg-3  col-md-5 col-12">
-            <h6 class="head_title">Vendor Management</h6>
-            <p class="my-1  head_Desc">View Vendor profile on the platform...</p>
+            <h6 class="head_title">{{dir=='ltr'?'Vendor Management':'اداره الموردين'}}</h6>
+            <p class="my-1  head_Desc">
+                {{dir=='ltr'?'View list of registered vendors on the platform...':'عرض قائمه بالموردين'}}</p>
+
         </div>
     </div>
     <section class="VendorProfSec  p-3">
-        <div class="text-end w-100">
+        <!-- <div class="text-end w-100">
             <i (click)="closeVendorProf()" class="fa fa-times  ms-auto" aria-hidden="true"></i>
-        </div>
-        <div class="info my-1">
-            <img class="imagePart" src="{{vendor?.logo?.fullLink || defaultImage}}" alt="">
-            <div class="title my-3">
-                <h5>{{vendor?.nameEn}}</h5>
+        </div> -->
+        <div class="info mb-1">
+            <div class="orderDetailsImage d-flex align-items-center">
+                <img class="img-fluid" src="{{vendor?.logo?.fullLink || defaultImage}}" alt="">
+
+            </div>
+            <div class="title my-1">
+                <h5>{{dir=='ltr'?vendor.nameEn :vendor.name}}</h5>
             </div>
         </div>
         <hr>
-        <div class="my-1 venderDetails px-2 py-3">
+        <div class="mb-1 venderDetails px-2 py-2">
             <div class="row justify-content-center align-items-center">
-                <div class="col-lg-4 col-6 my-1">
-                    <div class="p-2">
-                        <p>Email Address</p>
-                        <p class="mt-1"> <i class="fa fa-map-marker me-1 " aria-hidden="true"></i>{{vendor?.owner?.email || 'Dummy@gmail.com'}}</p>
+                <div class="col-lg-4 col-6 mb-1">
+                    <div class="px-2">
+                        <p>{{dir=='ltr'?'Email Address' :'البريد الالكتروني'}}</p>
+                        <p class="mt-1"> <i class="fa fa-map-marker me-1 " aria-hidden="true"></i>{{vendor?.owner?.email
+                            || 'Dummy@gmail.com'}}</p>
                     </div>
 
                 </div>
 
-                <div class="col-lg-3 col-6 my-1">
-                    <div class="p-2">
-                        <p>Phone Number</p>
+                <div class="col-lg-3 col-6 mb-1">
+                    <div class="px-2">
+                        <p>{{dir=='ltr'?'Phone Number ' :'رقم الهاتف'}}</p>
                         <p class="mt-1"> {{vendor?.ownerPhoneNumber}}</p>
                     </div>
 
                 </div>
 
 
-                <div class="col-lg-3 col-6 my-1">
-                    <div class="p-2">
-                        <p>Store Name</p>
+                <div class="col-lg-3 col-6 mb-1">
+                    <div class="px-2">
+                        <p>{{dir=='ltr'?'Store Name':'اسم المتجر'}}</p>
                         <p class="mt-1"> {{vendor?.ownerPhoneNumber || 'DummyName'}}</p>
                     </div>
                 </div>
 
 
-                <div class="col-lg-2 col-6 my-1">
-                    <div class="p-2">
+                <div class="col-lg-2 col-6 mb-1">
+                    <div class="px-2">
                         <p class="">Vendor action</p>
                         <div class="search_dropdown vendorProfileAc mt-1">
                             <button (click)="showDropDown('search_dropdownMenuButton22', 'dropdown-menu-list22')"
@@ -61,7 +67,7 @@
                                 type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                                 continue
                             </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list22">
+                            <div class="dropdown-menu-list  dropdown-menu-list22" [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                                 <span class="dropdown-item"
                                     (click)="changeVendorStatus('search_dropdownMenuButton22','continue')">Continue</span>
                                 <span class="dropdown-item"
@@ -77,30 +83,35 @@
 
         <hr>
 
-        <div class="my-1 venderStatics px-2 py-3">
+        <div class="mb-1 venderStatics px-2 py-2">
             <div class="row align-items-center">
-                <div class="col-12 my-1">
-                    <div class="p-2">
-                        <p>Vendor statistics</p>
+                <div class="col-12 mb-1">
+                    <div class="px-2">
+                        <p>{{dir=='ltr'?'Vendor statistics ' :'احصائيات المورد'}}</p>
                     </div>
 
                 </div>
                 <div class="col-lg-8">
-                    <div class="p-2 METRICS d-flex align-items-center">
-                        <p>SALES METRICS</p>
-                        <div class="search_dropdown w-25">
+                    <div class="px-2 METRICS d-flex align-items-center">
+                        <p>
+                            {{dir=='ltr'?'SALES METRICS' :'معادلات المبيعات '}}
+                        </p>
+                        <div class="search_dropdown w-25"   [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                             <button (click)="showDropDown('search_dropdownMenuButton21', 'dropdown-menu-list21')"
                                 class="btn dropdown-toggle w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton21"
                                 type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-                                Year
+                                {{dir=='ltr'?'Year' :'سنوي'}}
                             </button>
                             <div class="dropdown-menu-list  dropdown-menu-list21">
                                 <span class="dropdown-item"
-                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','year')">year</span>
+                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','year')">
+                                    {{dir=='ltr'?'Year' :'سنوي'}}</span>
                                 <span class="dropdown-item"
-                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','month')">month</span>
+                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','month')">
+                                    {{dir=='ltr'?'month' :'شهري'}}</span>
                                 <span class="dropdown-item"
-                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','day')">day</span>
+                                    (click)="changeOrderStatusGraph('search_dropdownMenuButton21','day')">
+                                    {{dir=='ltr'?'day' :'يومي'}}</span>
                             </div>
                         </div>
                     </div>
@@ -110,11 +121,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="p-3">
-                        <div class=" my-1">
+                    <div class="px-2 py-1">
+                        <div class="mb-1">
                             <p>Products overview</p>
                         </div>
-                        <div class="diplayChart w-100 p-2">
+                        <div class="diplayChart w-100 px-2 py-1">
                             <canvas id="myChart2">
                             </canvas>
                         </div>
@@ -123,7 +134,7 @@
             </div>
         </div>
 
-        <div class="w-100 text-end">
+        <div class="w-100 " [ngClass]="{'text-end':dir=='ltr' , 'text-start':dir=='rtl'}">
             <button class="btn btn-dark px-3 py-2">Save</button>
         </div>
 

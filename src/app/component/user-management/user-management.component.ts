@@ -15,6 +15,8 @@ export class UserManagementComponent implements OnInit {
   currentPage = 1
   sideMessage: string = '';
   load: boolean = false
+  dir: string = 'ltr'
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -23,7 +25,7 @@ export class UserManagementComponent implements OnInit {
     }, 3000);
   }
   constructor(private _UserService: UserService) {
-
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.getAllUsers()
   }
 

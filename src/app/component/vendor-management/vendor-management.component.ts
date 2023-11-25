@@ -19,6 +19,7 @@ export class VendorManagementComponent implements OnInit {
   currentPage = 1
   load: boolean = false;
   sideMessage: string = '';
+  dir: string = 'ltr'
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -29,6 +30,8 @@ export class VendorManagementComponent implements OnInit {
   }
 
   constructor(private _Router: Router, private _vendorService: VendorService) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
+
     this.getVendorList()
   }
 

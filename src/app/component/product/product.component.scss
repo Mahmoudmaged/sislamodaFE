@@ -1,8 +1,10 @@
 @import '../order-management/order-management.component.scss';
-*:not(i){
-      font-family: 'Poppins', sans-serif;
+
+*:not(i) {
+  font-family: 'Poppins', sans-serif;
 
 }
+
 .overLay {
   position: fixed;
   top: 0;
@@ -55,6 +57,20 @@
 
 .addProductBtn {
   width: 100%;
+}
+.addProductBtn2{
+  padding: 5px 5px;
+  border-radius: 6px;
+}
+
+::ng-deep {
+  .p-dropdown {
+    height: 36px !important;
+  }
+
+  .p-dropdown span {
+    padding: 5px 5px 2px 5px !important;
+  }
 }
 
 // Right part header media

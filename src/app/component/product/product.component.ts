@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
 
     },
     {
-      isActive: "notAvailable",
+      isActive: "Un-Available",
       isActiveAr: "غير متاح"
 
     }

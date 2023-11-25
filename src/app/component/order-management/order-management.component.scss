@@ -7,10 +7,12 @@ $lighterGrayColor: #EFEFFF;
 $middleGrayColor: #EAEAFF;
 $redColor: #D80008;
 $barColorE7: #E7E7E7E7;
-*:not(i){
+
+*:not(i) {
     font-family: 'Poppins', sans-serif;
 
 }
+
 * {
     padding: 0px;
     margin: 0px;
@@ -27,9 +29,9 @@ $barColorE7: #E7E7E7E7;
     height: 100%;
     background-color: rgba(0, 0, 0, .7);
     z-index: 5555555555555555;
-  }
-  
-  .sideAlert {
+}
+
+.sideAlert {
     background-color: $redColor;
     color: $whiteColor;
     border-top-left-radius: 20px;
@@ -40,13 +42,15 @@ $barColorE7: #E7E7E7E7;
     padding: 10px 20px;
     transition: all 1s;
     z-index: 9999999999999;
-  }
+}
+
 .head_title {
     color: $redColor ;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
 }
-.head_Desc{
+
+.head_Desc {
     font-size: 12px;
 }
 
@@ -90,7 +94,8 @@ $barColorE7: #E7E7E7E7;
     font-size: 13px;
 
 }
-.search_dropdownMenuButton i{
+
+.search_dropdownMenuButton i {
     font-size: 13px;
 }
 
@@ -123,13 +128,20 @@ $barColorE7: #E7E7E7E7;
     display: none;
     text-align: left;
 }
-.dropdown-menu-list-RTL{
+
+.dropdown-menu-list-RTL {
     text-align: right;
-    
+
 }
 
 .dropdown-menu-list span {
     cursor: pointer;
+}
+
+::ng-deep {
+    .p-dropdown-header {
+        display: none;
+    }
 }
 
 // Order table
@@ -147,7 +159,7 @@ $barColorE7: #E7E7E7E7;
 .contentTable thead th {
     background-color: $blackColor !important;
     color: $whiteColor;
-    font-size: 12px !important; 
+    font-size: 12px !important;
     font-family: 'Poppins', sans-serif;
     padding-top: 14px;
     padding-bottom: 14px;
@@ -205,7 +217,7 @@ table td:last-child {
     border-bottom-right-radius: 6px;
 }
 
-.tableRTL  td:first-child {
+.tableRTL td:first-child {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 0px;
 }
@@ -226,14 +238,16 @@ table td:last-child {
     text-align: center;
 
 }
-.paginateSectionRTL{
+
+.paginateSectionRTL {
     float: left;
 
 }
+
 .paginateSection ul {
     // background-color: $lighterGrayColor;
-    background-color:transparent;
-    border:1px solid $barColorE7;
+    background-color: transparent;
+    border: 1px solid $barColorE7;
     border-radius: 25px;
     padding: 5px;
 }

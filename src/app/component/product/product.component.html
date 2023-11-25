@@ -32,7 +32,7 @@
     <div class="col-12">
       <div class="row  w-100 justify-content-end align-items-center">
         <div class="col-lg-2 my-1">
-          <div class="px-2">
+          <div class="px-1 text-center">
             <div class="">
               <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" [optionLabel]="categoryNameFilter"
                 placeholder="category" [filter]="true" (onChange)="FilterByCategory()"
@@ -42,7 +42,7 @@
         </div>
 
         <div *ngIf="subcategoryList.length" class="col-lg-2 my-1">
-          <div class="px-2">
+          <div class="px-1 text-center">
             <div class="">
               <p-dropdown [options]="subcategoryList" [(ngModel)]="selectedSubcategory"
                 [optionLabel]="subcategoryNameFilter" placeholder="Subcategory" [filter]="true"
@@ -50,8 +50,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-2 mb-1">
-          <div class="px-2">
+        <div class="col-lg-2 my-1">
+          <div class="px-1 text-center">
             <div class="">
               <p-dropdown [options]="brandList" [(ngModel)]="selectedBrand" [optionLabel]="BrandNameFilter"
                 [filter]="true" (onChange)="FilterByBrand()" [style]="{'maxWidth':'100%'}"></p-dropdown>
@@ -59,9 +59,9 @@
           </div>
         </div>
 
-        <div class="col-lg-2 mb-1">
-          <div class="px-2">
-            <div class="ps-1">
+        <div class="col-lg-2 my-1">
+          <div class="px-1 text-center">
+            <div class="">
               <div>
                 <p-dropdown [options]="status" [optionLabel]="statusFilter" [(ngModel)]="selectedStatus"
                   (onChange)="statusChange()" [style]="{'maxWidth':'100%'}"></p-dropdown>
@@ -70,10 +70,10 @@
           </div>
         </div>
 
-        <div *ngIf="userInfo.isVendor" class="col-lg-2  mb-1">
-          <div class="px-2">
-            <div class="ps-1">
-              <button class="btn btn-danger addProductBtn" (click)="addProduct()">{{dir=='ltr'?'Add':'اضافه منتج'}} <i
+        <div *ngIf="userInfo.isVendor" class="col-lg-2  my-1">
+          <div class="px-1">
+            <div class="">
+              <button class="btn btn-danger addProductBtn addProductBtn2" (click)="addProduct()">{{dir=='ltr'?'Add':'اضافه منتج'}} <i
                   class="fa fa-plus mx-1" [style]="{'maxWidth':'100%'}"></i></button>
             </div>
           </div>

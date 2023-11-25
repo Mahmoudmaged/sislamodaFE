@@ -38,8 +38,20 @@ th {
     width: 25px !important;
     height: 25px !important;
   }
-}
 
-::ng-deep.p-calendar .p-datepicker {
-  left: -340px !important;
+  .p-calendar .p-datepicker {
+    direction: ltr;
+  }
+
+  .lol .p-calendar .p-datepicker {
+    left: -122% !important;
+  }
+
+  .lol2 .p-calendar .p-datepicker {
+    left: 5% !important;
+  }
+
+  .p-calendar {
+    height: 36px !important;
+  }
 }

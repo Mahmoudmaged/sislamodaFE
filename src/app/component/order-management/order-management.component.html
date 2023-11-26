@@ -85,8 +85,8 @@
                             <div class="col-12 px-2 d-flex justify-contnet-center">
                                 <img width="12px" src="../../../assets/images/Sislimoda/location.svg" alt="" srcset="">
 
-                                <p class="mx-1">{{dir=='ltr'? order.addressDetails?.slice(0,50) || 'DummyDetails'
-                                    :order.addressDetails?.slice(0,50) || 'داتا وهميه للمنتج'}}...</p>
+                                <p class="mx-1">{{dir=='ltr'? (order.address||order.address2)?.slice(0,50) || 'DummyDetails'
+                                    :(order.address||order.address2)?.slice(0,50) || 'داتا وهميه للمنتج'}}...</p>
                             </div>
                         </div>
                     </td>

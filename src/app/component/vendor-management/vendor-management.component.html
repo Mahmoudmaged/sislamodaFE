@@ -79,16 +79,16 @@
                                 srcset="">
                         </td>
                         <td>
-                            <p>{{dir=='ltr'?vendor.nameEn :vendor.name}}</p>
+                            <p>{{vendor.owner?.userName}}</p>
                         </td>
                         <td>
-                            <p>{{vendor.email || 'DummyEmail'}}</p>
+                            <p>{{vendor.owner?.email || 'DummyEmail'}}</p>
                         </td>
                         <td>
                             <p>{{vendor.ownerPhoneNumber}}</p>
                         </td>
                         <td>
-                            <p>{{vendor.storeName || 'DummyName'}}</p>
+                            <p>{{dir=='ltr'?vendor.nameEn || 'DummyName' : vendor.name || 'مجهول الهويه'}}</p>
                         </td>
 
                         <td>

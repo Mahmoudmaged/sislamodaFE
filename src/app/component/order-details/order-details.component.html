@@ -42,7 +42,7 @@
             <div class="col-lg-3 col-6 mb-1">
                 <div class="p-2">
                     <p class="ms-2">{{dir=='ltr'?'Shipping Address':'عنوان الشحن '}}</p>
-                    <p> <i class="fa fa-map-marker mx-1" aria-hidden="true"></i>{{order?.address || 'Dummy Address'}}
+                    <p> <i class="fa fa-map-marker mx-1" aria-hidden="true"></i>{{(order?.address||order?.address2)?.slice(0,50)  || 'Dummy Address'}}
                     </p>
                 </div>
 

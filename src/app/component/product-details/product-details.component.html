@@ -43,9 +43,7 @@
                 <p> {{dir=='ltr'?'Inventory Name':"اسم المورد"}}</p>
                 <p class="">
                     {{
-                    dir=='ltr'?
-                    product?.inventory?.nameEn || ' Dummy Name':
-                    product?.inventory?.name || 'مجهول الهويه'
+                    product?.amount 
                     }}
                 </p>
             </div>

@@ -11,6 +11,16 @@ export class SalesManagementComponent implements OnInit {
   pageSize = 8
   currentPage = 1
 
+  load: boolean = false;
+  sideMessage: string = '';
+
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
   constructor() {
 
 
@@ -105,5 +115,28 @@ export class SalesManagementComponent implements OnInit {
   closeVendorProf() {
     $(".VendorProfSec").css({ "visibility": "hidden" })
     $(".VendorTable").show(300)
+  }
+
+  deleteById(id:string){
+
+  }
+
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteById(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
+    }
   }
 }

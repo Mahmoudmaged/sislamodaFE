@@ -113,4 +113,23 @@ export class CategoryDetailsComponent {
       this.showSideError(`Fail to delete`)
     })
   }
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteCategory(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
+    }
+  }
+
 }

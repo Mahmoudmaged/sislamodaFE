@@ -144,7 +144,7 @@ export class VendorManagementComponent implements OnInit {
   textSearch: string = ''
   onSearch() {
     if (this.textSearch) {
-    
+
       this.fullVendorList = this.fullVendorList.filter(ele => {
         return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase())
       });
@@ -156,5 +156,40 @@ export class VendorManagementComponent implements OnInit {
       this.getVendorList()
     }
 
+  }
+
+
+
+  deleteVendor(id: string) {
+    this.load = true;
+    this._vendorService.deleteVendorById(id).subscribe(res => {
+      this.load = false;
+      this.currentPage = 1;
+      this.showSideError(`Done`);
+
+      return this.getVendorList()
+    }, err => {
+      this.load = false;
+      this.showSideError(`Fail to delete this vendor.`);
+    })
+  }
+
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteVendor(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
+    }
   }
 }

@@ -14,7 +14,16 @@ import { ChartComponent } from "ng-apexcharts";
 
 export class FinancialManagementComponent implements OnInit {
   dir: string = 'ltr'
+  load: boolean = false;
+  sideMessage: string = '';
 
+  showSideError(message: string) {
+    this.sideMessage = message
+    $(".sideAlert").css({ "right": "0%" })
+    setTimeout(() => {
+      $(".sideAlert").css({ "right": "-200%" })
+    }, 3000);
+  }
 
   constructor(private _Router: Router) {
     this.dir = localStorage.getItem('dir') || 'ltr'
@@ -120,6 +129,29 @@ export class FinancialManagementComponent implements OnInit {
 
     this._Router.navigateByUrl(`/admin/financial/${id}/report`)
 
+  }
+  deleteById(id:string){
+    
+  }
+
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteById(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
+    }
   }
 
 }

@@ -25,4 +25,7 @@ export class VendorService {
   getAllVendor(): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetAll`)
   }
+  deleteVendorById(id: string): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Delete?Id=${id}`,{})
+  }
 }

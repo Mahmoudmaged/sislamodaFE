@@ -161,10 +161,31 @@ export class UserManagementComponent implements OnInit {
     this.load = true
     this._UserService.deleteUser(id).subscribe(res => {
       this.load = false
+      this.showSideError("Done")
       this.getAllUsers()
     }, err => {
       this.load = false;
       this.showSideError(`Fail`)
     })
+  }
+
+  
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteUserById(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
+    }
   }
 }

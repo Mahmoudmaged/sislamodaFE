@@ -38,7 +38,7 @@ export class OrderManagementComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
   }
 
   getAllOrders(userId: string) {
@@ -177,8 +177,27 @@ export class OrderManagementComponent implements OnInit {
     this._Router.navigateByUrl(`admin/order/${id}/details`)
   }
 
+  deleteItemId: string = ''
   deleteOrder(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
 
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this._OrderService.deleteOrderById(this.deleteItemId).subscribe(res => {
+        this.showSideError(`Done`)
+      }, err => {
+        this.showSideError(`Fail`)
+      })
+    } else {
+      this.showSideError(`Fail`)
+    }
   }
   closeOrderDetailsSec() {
     $(".OrderDetailsSec").hide(200)

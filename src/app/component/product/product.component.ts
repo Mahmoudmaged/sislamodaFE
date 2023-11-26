@@ -248,17 +248,7 @@ export class ProductComponent implements OnInit {
   updateProductDetails(id: string) {
     this._Router.navigateByUrl(`admin/product/${id}/update`)
   }
-  deleteProduct(id: string) {
-    this.load = true;
-    this._ProductService.deleteProductById(id).subscribe(res => {
-      this.load = false;
-      this.currentPage = 1;
-      return this.getAllProducts()
-    }, err => {
-      this.load = false;
-      this.showSideError(`Fail to delete this product.`);
-    })
-  }
+
   addProduct() {
     this._Router.navigateByUrl(`admin/product/add`)
   }
@@ -379,6 +369,38 @@ export class ProductComponent implements OnInit {
     }
     else if (this.selectedStatus?.isActive == "all status") {
       this.getAllProducts()
+    }
+  }
+
+  deleteProduct(id: string) {
+    this.load = true;
+    this._ProductService.deleteProductById(id).subscribe(res => {
+      this.load = false;
+      this.currentPage = 1;
+      return this.getAllProducts()
+    }, err => {
+      this.load = false;
+      this.showSideError(`Fail to delete this product.`);
+    })
+  }
+
+
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteProduct(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
     }
   }
 }

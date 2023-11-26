@@ -144,4 +144,23 @@ export class OfferComponent {
     })
   }
 
+  deleteItemId: string = ''
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    if (this.deleteItemId) {
+      this.deleteOffer(this.deleteItemId)
+    } else {
+      this.showSideError(`Fail`)
+    }
+  }
+
 }

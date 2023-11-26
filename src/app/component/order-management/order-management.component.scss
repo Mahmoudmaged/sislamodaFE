@@ -301,3 +301,47 @@ table td:last-child {
 .fa-times {
     cursor: pointer;
 }
+
+// deleteAlert
+
+.deleteLayer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 5555555555;
+    display: none;
+}
+
+.deleteAlert {
+    position: absolute;
+
+    border-radius: 15px;
+    width: auto;
+    font-size: 14px;
+    border-top: 5px solid $redColor;
+}
+
+.deleteAlert i {
+    position: absolute;
+    top: -15%;
+    left: 45%;
+    background-color: $redColor;
+    color: $whiteColor ;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.deleteAlert h3 {
+    font-size: 14px;
+
+}
+
+.cancelBtn {
+    background-color: lightgray;
+}
+.dropdown-item{
+    font-size: 12px;
+}

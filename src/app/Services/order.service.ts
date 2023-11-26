@@ -14,11 +14,15 @@ export class OrderService {
   }
 
 
-  getOrderList(id: string):Observable<any> {
+  getOrderList(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetAll?Id=${id}`);
 
   }
-  getOrderById(id: string):Observable<any> {
+  getOrderById(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`);
+
+  }
+  deleteOrderById(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`);
 
   }

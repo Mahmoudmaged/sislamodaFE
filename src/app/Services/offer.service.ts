@@ -24,6 +24,11 @@ export class OfferService {
   }
 
 
+  addProductToOffer(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}AddProductToOffer`, data);
+  }
+
+
 
   getOfferById(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetById?id=${id}`);

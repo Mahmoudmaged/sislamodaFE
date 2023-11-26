@@ -52,6 +52,10 @@ export class AddOfferComponent {
       this.showSideError("Fail to load product category list ")
     })
   }
+   randomIntFromInterval(min:number, max:number) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  
 
   addOfferForm = new FormGroup({
     photoId: new FormControl('', [Validators.required]),
@@ -61,7 +65,7 @@ export class AddOfferComponent {
     description: new FormControl('', [Validators.required]),
     descriptionEn: new FormControl('', [Validators.required]),
     percent: new FormControl('', [Validators.required]),
-    offerType: new FormControl('', [Validators.required]),
+    offerType: new FormControl(this.randomIntFromInterval(1, 4), []),
     startDate: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),
     isActive: new FormControl(true, [Validators.required]),

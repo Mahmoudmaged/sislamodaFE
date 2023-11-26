@@ -30,9 +30,9 @@ export class RegisterVendorComponent implements OnInit {
   }
   constructor(private _AuthService: AuthService, public _Router: Router) {
 
-    $("#SuperAdmin").show()
-    $(".nav-signUp").show()
-    $(".nav-login , .nav-link , .nav-logout").hide()
+    if (localStorage.getItem("token")) {
+      this._Router.navigateByUrl("/admin/")
+    }
     localStorage.clear();
   }
 
@@ -156,8 +156,8 @@ export class RegisterVendorComponent implements OnInit {
     $(`.${sec}`).show(300);
   }
 
-  login(){
-    
+  login() {
+
     this._Router.navigateByUrl(`/vendor/login`)
   }
 }

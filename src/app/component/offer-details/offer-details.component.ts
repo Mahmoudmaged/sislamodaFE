@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OfferService } from 'src/app/Services/offer.service';
 import { OrderService } from 'src/app/Services/order.service';
@@ -18,7 +19,8 @@ export class OfferDetailsComponent implements OnInit {
   currentPage = 1
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
-  dir:string='ltr'
+  dir: string = 'ltr'
+  optionList: any = []
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -36,10 +38,21 @@ export class OfferDetailsComponent implements OnInit {
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.photo = this.userInfo?.photo || this.photo;
     this.getOffer(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+
+    this.getAllProduct()
   }
 
 
 
+  getAllProduct() {
+    return this._ProductService.getProductsList().subscribe(res => {
+      this.optionList = res;
+    }, err => {
+      console.log({ err });
+      this.showSideError('Fail to load product options');
+
+    })
+  }
   ngOnInit(): void {
   }
 
@@ -47,6 +60,8 @@ export class OfferDetailsComponent implements OnInit {
     this.load = true;
     return this._OfferService.getOfferById(id).subscribe(res => {
       this.offer = res;
+      console.log({off: this.offer });
+      
       this.load = false;
     }, err => {
       this.load = false;
@@ -79,4 +94,40 @@ export class OfferDetailsComponent implements OnInit {
       this.showSideError(`Fail`)
     })
   }
+
+  addProductForm = new FormGroup({
+    productOptions: new FormControl('', []),
+  })
+  addProducts() {
+    let selectedOptions: any[] = []
+    if (this.addProductForm.controls.productOptions.value) {
+      let selectOptions = this.addProductForm.controls.productOptions.value
+      for (let i = 0; i < selectOptions.length; i++) {
+        selectedOptions.push(selectOptions[i])
+      }
+
+      selectedOptions = selectedOptions.map(ele => {
+        return ele.id;
+      })
+
+      for (const product of selectedOptions) {
+
+        this._OfferService.addProductToOffer({
+          offersId: this._ActivatedRoute.snapshot.paramMap.get('id'),
+          productId: product,
+        }).subscribe(res => {
+          this.getOffer(this.offer.id)
+        }, err => {
+          this.showSideError("Fail")
+        })
+      }
+
+    } else {
+      this.showSideError("please select products first")
+    }
+
+  }
+
+
+
 }

@@ -137,16 +137,16 @@
                             <div class="offerProductList py-3 ps-3 pe-1">
                                 <div class="row justify-content-center">
                                     <div class="col-10">
-                                        <div class=" my-2">
-                                            <img class="img-fluid" [src]="product.product?.defaultPhoto?.fullLink"
-                                                alt="" srcset="" (click)="showProduct(product?.product?.id)">
+                                        <div class=" my-2 ">
+                                            <img class="productsImage" [src]="product.product?.defaultPhoto?.fullLink" alt=""
+                                                srcset="" (click)="showProduct(product?.product?.id)">
                                         </div>
 
                                     </div>
                                     <div *ngIf="userInfo?.isVendor" class="col-2 p-2 text-end ">
                                         <div class=" w-100 text-end p-2 mb-1 icontainer">
                                             <i class="fa fa-close text-danger"
-                                                (click)="deleteProductFromOffer(product?.product?.id)"></i>
+                                                (click)="deleteProductFromOffer(product?.id)"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -159,12 +159,18 @@
 
                         </div>
                     </div>
-                    <div *ngIf="userInfo?.isVendor" class="col-md-4">
-                        <div class="p-2">
-                            <button class="btn btn-danger px-2 py-1"><i class="fa fa-plus mx-1"> </i>
-                                {{dir=='ltr'?'Add Product':' اضافه منتج'}}
+            
+                    <div class="col-12"></div>
+                    <div *ngIf="userInfo?.isVendor" class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
+                            <div>
+                                <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
+                                <form [formGroup]="addProductForm">
+                                    <p-multiSelect formControlName="productOptions" [options]="optionList"
+                                        optionLabel="nameEn" [style]="{'width':'100%'}"></p-multiSelect>
+                                </form>
+                            </div>
 
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -174,6 +180,11 @@
         <div class="w-100 text-end mt-4 mb-2 mx-2">
             <button class="btn btn-dark px-3 py-1 mx-1" (click)="closeProductDetailsSec()">
                 {{dir=='ltr'?'Back':' رجوع'}}
+
+            </button>
+
+            <button class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
+                {{dir=='ltr'?'Save':'حفظ'}}
 
             </button>
         </div>

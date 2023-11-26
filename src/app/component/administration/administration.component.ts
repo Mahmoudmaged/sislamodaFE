@@ -60,11 +60,17 @@ export class AdministrationComponent implements OnInit {
 
     console.log({ item, component });
 
-    $(`.listItem`).children("p").removeClass("ActiveCheck")
     $(`.listItem`).children("i").hide();
+    $(`.listItem`).children("p").removeClass("ActiveCheck")
+    $(`.listItem`).children('p').children(".image").show()
+    $(`.listItem`).children("p").children(".image2").hide()
+
     //Display 
-    $(`.${item}`).children("p").addClass("ActiveCheck")
     $(`.${item}`).children("i").show()
+    $(`.${item}`).children("p").addClass("ActiveCheck")
+    $(`.${item}`).children('p').children(".image2").show()
+    $(`.${item}`).children('p').children(".image").hide()
+
 
     this._Router.navigateByUrl(`/admin/${component}`) // thanks to lazyLoading with nesting routing
     window.scrollTo(0, 0)
@@ -81,6 +87,7 @@ export class AdministrationComponent implements OnInit {
   }
 
   logout() {
+    localStorage.clear();
     if (this.userInfo?.isAdmin) {
       this._Router.navigateByUrl("/admin/login")
     } else {

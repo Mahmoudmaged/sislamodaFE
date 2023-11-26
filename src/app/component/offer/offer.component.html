@@ -114,16 +114,16 @@
             </td>
 
             <td class="optionsActions">
-              <span *ngIf="userInfo?.isVendor" class="p-1">
-                <img (click)="editOffer(offer.id)" width="15px"
+              <span *ngIf="userInfo?.isVendor" class="p-1" (click)="editOffer(offer.id)">
+                <img  width="15px"
                   src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt="" srcset="">
               </span>
-              <span *ngIf="userInfo?.isVendor" class="p-1">
-                <img (click)="deletePromote(offer.id)" width="15px"
+              <span (click)="deletePromote(offer.id)" *ngIf="userInfo?.isVendor" class="p-1">
+                <img  width="15px"
                   src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt="" srcset="">
               </span>
-              <span class="p-1">
-                <img (click)="showOfferDetails(offer.id)" width="3px" src="../../../assets/images/Sislimoda/Menu.svg"
+              <span class="p-1" (click)="showOfferDetails(offer.id)">
+                <img  width="3px" src="../../../assets/images/Sislimoda/Menu.svg"
                   alt="" srcset="">
 
               </span>

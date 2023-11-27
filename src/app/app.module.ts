@@ -52,8 +52,19 @@ import { UpdateBrandComponent } from './component/Brand/update-brand/update-bran
 import { DeleteBrandComponent } from './component/Brand/delete-brand/delete-brand.component';
 import { DisplayBrandComponent } from './component/Brand/display-brand/display-brand.component';
 import { AddBrandComponent } from './component/Brand/add-brand/add-brand.component';
-
-
+import { OptionsetManagementComponent } from './component/optionSet/optionset-management/optionset-management.component';
+import { AddOptionsetComponent } from './component/optionSet/add-optionset/add-optionset.component';
+import { UpdateOptionsetComponent } from './component/optionSet/update-optionset/update-optionset.component';
+import { DisplayOptionsetComponent } from './component/optionSet/display-optionset/display-optionset.component';
+import { DisplayOptionSetItemComponent } from './component/optionSetItem/display-option-set-item/display-option-set-item.component';
+import { AddOptionSetItemComponent } from './component/optionSetItem/add-option-set-item/add-option-set-item.component';
+import { UpdateOptionSetItemComponent } from './component/optionSetItem/update-option-set-item/update-option-set-item.component';
+// import { ColorPickerModule } from 'ngx-color-picker';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { OptionsManagmentComponent } from './component/options/options-managment/options-managment.component';
+import { AddOptionsComponent } from './component/options/add-options/add-options.component';
+import { EditOptionsComponent } from './component/options/edit-options/edit-options.component';
+import { DisplayOptionComponent } from './component/options/display-option/display-option.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +109,18 @@ import { AddBrandComponent } from './component/Brand/add-brand/add-brand.compone
     UpdateBrandComponent,
     DeleteBrandComponent,
     DisplayBrandComponent,
-    AddBrandComponent
+    AddBrandComponent,
+    OptionsetManagementComponent,
+    AddOptionsetComponent,
+    UpdateOptionsetComponent,
+    DisplayOptionsetComponent,
+    DisplayOptionSetItemComponent,
+    AddOptionSetItemComponent,
+    UpdateOptionSetItemComponent,
+    OptionsManagmentComponent,
+    AddOptionsComponent,
+    EditOptionsComponent,
+    DisplayOptionComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +133,7 @@ import { AddBrandComponent } from './component/Brand/add-brand/add-brand.compone
     NgApexchartsModule,
     DropdownModule,
     MultiSelectModule,
+    ColorPickerModule
 
   ],
   providers: [],

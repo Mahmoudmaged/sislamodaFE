@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
-declare let $:any;
+declare let $: any;
 @Component({
   selector: 'app-settings-management',
   templateUrl: './settings-management.component.html',
   styleUrls: ['./settings-management.component.scss']
 })
-export class SettingsManagementComponent implements OnInit{
+export class SettingsManagementComponent implements OnInit {
 
-  constructor(private  _Router:Router) {
+  constructor(private _Router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,13 +32,17 @@ export class SettingsManagementComponent implements OnInit{
     $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
 
     if (status == 'Notifications') {
-       $(".Notifications").show()
-       $(".PaymentGateways").hide()
-    }else{
+      $(".Notifications").show()
+      $(".PaymentGateways").hide()
+    } else {
       $(".Notifications").hide()
       $(".PaymentGateways").show()
     }
-  
+
+  }
+
+  navTo(path: string) {
+    return this._Router.navigateByUrl(path)
   }
 
 

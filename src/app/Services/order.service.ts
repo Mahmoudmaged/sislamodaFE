@@ -18,6 +18,10 @@ export class OrderService {
     return this._HttpClient.get(`${this.baseURL}GetAll?Id=${id}`);
 
   }
+  GetVendorOrderedProductByIDs(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetVendorOrderedProduct?VendorId=${id}`);
+
+  }
   getOrderById(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`);
 

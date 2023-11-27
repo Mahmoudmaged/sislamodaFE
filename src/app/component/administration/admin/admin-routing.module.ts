@@ -29,6 +29,15 @@ import { BrandManagementComponent } from '../../Brand/brand-management/brand-man
 import { AddBrandComponent } from '../../Brand/add-brand/add-brand.component';
 import { UpdateBrandComponent } from '../../Brand/update-brand/update-brand.component';
 import { DisplayBrandComponent } from '../../Brand/display-brand/display-brand.component';
+import { OptionsetManagementComponent } from '../../optionSet/optionset-management/optionset-management.component';
+import { AddOptionsetComponent } from '../../optionSet/add-optionset/add-optionset.component';
+import { UpdateOptionsetComponent } from '../../optionSet/update-optionset/update-optionset.component';
+import { DisplayOptionsetComponent } from '../../optionSet/display-optionset/display-optionset.component';
+import { AddOptionSetItemComponent } from '../../optionSetItem/add-option-set-item/add-option-set-item.component';
+import { UpdateOptionSetItemComponent } from '../../optionSetItem/update-option-set-item/update-option-set-item.component';
+import { OptionsManagmentComponent } from '../../options/options-managment/options-managment.component';
+import { AddOptionsComponent } from '../../options/add-options/add-options.component';
+import { EditOptionsComponent } from '../../options/edit-options/edit-options.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -59,6 +68,27 @@ const routes: Routes = [
   { path: "brand/add", component: AddBrandComponent },
   { path: "brand/:id/update", component: UpdateBrandComponent },
   { path: "brand/:id/details", component: DisplayBrandComponent },
+
+
+  
+  { path: "optionSet", component: OptionsetManagementComponent },
+  { path: "optionSet/add", component: AddOptionsetComponent },
+  { path: "optionSet/:id/update", component: UpdateOptionsetComponent },
+  { path: "optionSet/:id/details", component: DisplayOptionsetComponent },
+
+
+  { path: "optionSet/item/add", component: AddOptionSetItemComponent },
+  { path: "optionSet/item/:id/update", component: UpdateOptionSetItemComponent },
+
+  { path: "options", component: OptionsManagmentComponent },
+  { path: "options/add", component: AddOptionsComponent },
+  { path: "options/:id/edit", component: EditOptionsComponent },
+
+
+
+  // { path: "optionSet", component: OptionsetManagementComponent },
+  // { path: "optionSet/:id/update", component: UpdateOptionsetComponent },
+  // { path: "optionSet/:id/details", component: DisplayOptionsetComponent },
   { path: "**", component: NotAvailableComponent },
 
 ];

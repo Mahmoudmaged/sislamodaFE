@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BrandService } from 'src/app/Services/brand.service';
 import { VendorService } from 'src/app/Services/vendor.service';
@@ -8,7 +8,7 @@ declare let $: any;
   templateUrl: './brand-management.component.html',
   styleUrls: ['./brand-management.component.scss']
 })
-export class BrandManagementComponent {
+export class BrandManagementComponent implements OnInit{
   defaultImage: string = '../../../assets/images/Sislimoda/SislimodaAdmin/items/images.png'
   brandList: any[] = []
   fullBrandList: any[] = [];

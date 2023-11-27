@@ -35,7 +35,7 @@ export class OrderManagementComponent implements OnInit {
     if (this._ActivatedRoute.snapshot.queryParams['vendorId']) {
       console.log("lllllllllllol");
       
-      this.getAllOrders(this._ActivatedRoute.snapshot.queryParams['vendorId'])
+      this.GetVendorOrderedProduct(this._ActivatedRoute.snapshot.queryParams['vendorId'])
     } else {
       this.getAllOrders(this.userInfo?.id)
 
@@ -51,6 +51,22 @@ export class OrderManagementComponent implements OnInit {
   getAllOrders(userId: string) {
     this.load = true;
     return this._OrderService.getOrderList(userId).subscribe(res => {
+      this.pages = Math.ceil(res.length / this.pageSize);
+      this.fullOrderList = res;
+      this.orderList = this.fullOrderList.slice(0, this.pageSize);
+      this.orderList = res
+      this.load = false;
+
+    }, err => {
+      this.load = false;
+      this.showSideError(`Fail`)
+    }
+    )
+  }
+
+  GetVendorOrderedProduct(userId: string) {
+    this.load = true;
+    return this._OrderService.GetVendorOrderedProductByIDs(userId).subscribe(res => {
       this.pages = Math.ceil(res.length / this.pageSize);
       this.fullOrderList = res;
       this.orderList = this.fullOrderList.slice(0, this.pageSize);

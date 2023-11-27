@@ -1,0 +1,154 @@
+<section class="OrderDetailsSec  px-3 py-2">
+
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="my-1">
+        <form [formGroup]="addBrandForm" (ngSubmit)="addBrandForm.valid && handelAddBrand()">
+            <div class="row pe-5 ">
+                <div class="col-12 mb-1">
+                    <div class="row">
+                        <div class="col-lg-4  mt-1  mb-2">
+                            <div class="px-2 py-1">
+                                <div class="px-2 py-2 w-100 text-center uploadParent">
+                                    <div class="uploadDiv p-2 text-center">
+                                        <i class="fa fa-file fa-3x"></i>
+
+                                        <p>
+                                            {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره
+                                            المناسبه للبدء في تحميلها '}}
+                                        </p>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <p class="p11 me-1"></p>
+                                            <p>{{dir=='ltr'?'Or':'او'}}</p>
+                                            <p class="ms-1 p11"></p>
+                                        </div>
+                                        <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">
+                                            {{dir=='ltr'?' Browse file' :'اختيار الملف'}}
+                                        </label>
+                                        <input formControlName="image" class="d-none" type="file" id="uploadImage"
+                                            (change)="selectImage($event)">
+
+                                        <div *ngIf="addBrandForm.controls['image'].errors && addBrandForm.controls['image'].touched"
+                                            class=" my-1 xx">
+
+                                            <p class="formError">
+                                                {{dir=='ltr'?'In-valid brand image' :'ملف خاطئ'}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="selectedImage" class="col-lg-4 mb-2">
+                            <div class="px-2 py-2 displayImageCont">
+                                <div class="text-end trashSection">
+                                    <i class="fa fa-trash text-danger" (click)="removeImage()"></i>
+                                </div>
+                                <div class="px-2 py-1 w-100 text-center uploadParent">
+                                    <img class="img-fluid" [src]="selectedImage" alt="" srcset="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p>
+                                {{dir=='ltr'?' Brand Name(Arabic)' :'اسم المنتج (عربي) '}}
+                            </p>
+                            <div class="form-group">
+                                <input type="text" formControlName="name" class="form-control" />
+
+                                <div *ngIf="addBrandForm.controls['name'].errors && addBrandForm.controls['name'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError">
+                                        {{dir=='ltr'?'In-valid brand name' :'خطاء'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+
+                            <p> {{dir=='ltr'?' brand Name(English)' :'اسم المنتج (الانجليزيه) '}} </p>
+                            <div class="form-group">
+                                <input type="text" formControlName="nameEn" class="form-control" />
+
+                                <div *ngIf="addBrandForm.controls['nameEn'].errors && addBrandForm.controls['nameEn'].touched"
+                                    class=" my-1 xx">
+
+                                    <p class="formError"> {{dir=='ltr'?'In-valid brand name' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p> {{dir=='ltr'?'brand Description(Arabic)' :'وصف المنتج (عربي)'}}</p>
+
+                            <div class="form-group">
+                                <textarea formControlName="description" class="form-control" name="" id=""
+                                    cols="30" rows="1"></textarea>
+
+                                <div *ngIf="addBrandForm.controls['description'].errors && addBrandForm.controls['description'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError"> {{dir=='ltr'?'In-valid brand description' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p> {{dir=='ltr'?'brand Description(English)' :'وصف المنتج (الانجليزيه)'}}</p>
+                            <div class="form-group">
+                                <textarea formControlName="descriptionEn" class="form-control" name="" id=""
+                                    cols="30" rows="1"></textarea>
+
+                                <div *ngIf="addBrandForm.controls['descriptionEn'].errors && addBrandForm.controls['descriptionEn'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError"> {{dir=='ltr'?'In-valid brand description' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        
+                <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
+                    <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addBrandForm.invalid"><span
+                            class="px-2"> {{dir=='ltr'?'Add ' :'اضافه'}}</span></button>
+                    <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
+                        (click)="cancel()">{{dir=='ltr'?'Cancel ' :'الغاء'}}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</section>

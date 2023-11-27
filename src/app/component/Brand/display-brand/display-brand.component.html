@@ -1,0 +1,46 @@
+<section class="OrderDetailsSec  p-3">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="info mb-1">
+        <div class="row w-100 my-1">
+            <div class="col-md-2 my-1 text-center align-items-center">
+                <div class="px-2 py-1">
+                    <div class="orderDetailsImage d-flex align-items-center">
+                        <img class="img-fluid" [src]="brand.brandPhoto?.fullLink" alt="">
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="p-2">
+            <p class="OrderDetailsInfo"> {{dir=='ltr'?'Brand':' العلامه التجاريه'}} </p>
+            <p class="w-75">
+                {{dir=='ltr'?brand?.nameEn:brand?.name}}
+            </p>
+        </div>
+        <hr>
+        <div class="p-2">
+            <p class="OrderDetailsInfo"> {{dir=='ltr'?'Brand Details':'تفاصيل العلامه التجاريه'}} </p>
+            <p class="w-75">
+                {{dir=='ltr'?brand?.descriptionEn:brand.description}}
+            </p>
+        </div>
+
+
+    </div>
+
+
+    <div class="w-100" [class]="dir=='ltr'?'text-end':'text-start'">
+        <button class="btn btn-dark px-3 pb-1" (click)="close()">Back</button>
+    </div>
+
+</section>

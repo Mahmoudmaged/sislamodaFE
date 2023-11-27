@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandService } from 'src/app/Services/brand.service';
 import { CategoryService } from 'src/app/Services/category.service';
-import { OrderService } from 'src/app/Services/order.service';
 import { ProductService } from 'src/app/Services/product.service';
 declare let $: any;
 @Component({
@@ -73,6 +72,8 @@ export class ProductComponent implements OnInit {
     this.getAllCategory()
     this.getAllBrands()
     this.getAllProducts()
+
+   
   }
 
 
@@ -126,10 +127,9 @@ export class ProductComponent implements OnInit {
 
   getAllProducts() {
     this.load = true;
-    if (this.userInfo.isVendor) {
-      "06eff051-2254-4eb7-d4fc-08dbbb387eb9"
+    if (this.userInfo.isVendor || this._ActivatedRoute.snapshot.queryParams['vendorId']) {
       // this.userInfo.id
-      return this._ProductService.getProductsListByVendor(this.vendorData.id).subscribe(res => {
+      return this._ProductService.getProductsListByVendor(this.vendorData?.id || this._ActivatedRoute.snapshot.queryParams['vendorId']!).subscribe(res => {
 
         this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
         console.log(this.pages);

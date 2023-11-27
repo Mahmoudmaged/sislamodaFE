@@ -19,4 +19,20 @@ export class BrandService {
     return this._HttpClient.get(`${this.baseURL}GetAllBrand`);
   }
 
+
+  addBrand(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Add`, data);
+  }
+  updateBrand(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Update`, data);
+  }
+
+  deleteBrandById(id: string): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});
+  }
+  getById(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetById?catId=${id}`);
+  }
+
+
 }

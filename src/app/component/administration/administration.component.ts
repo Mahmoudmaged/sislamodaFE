@@ -23,6 +23,7 @@ export class AdministrationComponent implements OnInit {
     { item: 'listItem10', com: 'sales' },
     { item: 'listItem11', com: 'settings' },
     { item: 'listItem12', com: 'offers' },
+    { item: 'listItem13', com: 'brand' },
   ]
   itemBar: any = {}
   dir: string = ''

@@ -21,8 +21,9 @@
           <li class="my-1 py-1  listItem listItem1" (click)="changeDisplay('listItem1' , 'dashboard')">
             <i class="fa fa-circle"></i>
             <p class="ActiveCheck ms-1 py-2 px-2 d-flex align-items-center">
-              <img class="me-1 image1" src="../../../assets/images/Sislimoda/white/dashboardBalck.svg" alt="" srcset="">
-              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/01.svg" alt="" srcset="">
+              <img class="me-1 image" src="../../../assets/images/Sislimoda/white/dashboardBalck.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/white_dashboard.svg" alt=""
+                srcset="">
               Dashboard Overview
             </p>
           </li>
@@ -42,7 +43,7 @@
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/offerBlack.svg" alt="" srcset="">
-              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/offerBlack.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/offerWhite.svg" alt="" srcset="">
               offers
             </p>
           </li>
@@ -74,7 +75,8 @@
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/inventoryBlack.svg" alt="" srcset="">
-              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/inventory_white.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/inventory_white.svg" alt=""
+                srcset="">
               Inventory Management
             </p>
           </li>
@@ -93,7 +95,7 @@
           <li class="mb-1  listItem listItem7" (click)="changeDisplay('listItem7'  ,'financial')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
-              <img class="image" src="../../../assets/images/Sislimoda/white/finaincialBalck.svg" alt="" srcset="" >
+              <img class="image" src="../../../assets/images/Sislimoda/white/finaincialBalck.svg" alt="" srcset="">
               <img class="image2" src="../../../assets/images/Sislimoda/white/financial_white.svg" alt="" srcset="">
               <span class="ms-1"> Financial Management</span>
             </p>
@@ -113,9 +115,20 @@
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/categories.svg" alt="" srcset="">
-              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/categories_white.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/categories_white.svg" alt=""
+                srcset="">
 
               Category Management
+            </p>
+          </li>
+          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem13"
+            (click)="changeDisplay('listItem13' , 'brand')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1 image" src="../../../assets/images/Sislimoda/white/categories.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/categories_white.svg" alt=""
+                srcset="">
+              Brand Management
             </p>
           </li>
 
@@ -141,7 +154,7 @@
             </p>
           </li>
 
-          <li class="mb-1 listItem listItem13" (click)="logout()">
+          <li class="mb-1 listItem listItem14" (click)="logout()">
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <i class="fa fa-sign-out  mx-1 py-2" aria-hidden="true"></i>
               Logout
@@ -190,8 +203,7 @@
                       <img class="img-fluid" src="../../../assets/images/Sislimoda/comment.svg" alt="" srcset="">
 
                     </div> -->
-                    <div class="col-12 commentNotify  commentNotify2  "
-                      [class]="dir=='rtl'?'text-start':'text-end'">
+                    <div class="col-12 commentNotify  commentNotify2  " [class]="dir=='rtl'?'text-start':'text-end'">
                       <!-- <i class="fa fa-circle  ms-1"></i>
                       <i class=" fa fa-bell "></i> -->
                       <div class="mx-2">

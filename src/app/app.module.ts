@@ -47,6 +47,11 @@ import { LandingPageComponent } from './component/UserComponents/landing-page/la
 import { FooterComponent } from './component/UserComponents/footer/footer.component';
 import { NavBarComponent } from './component/UserComponents/nav-bar/nav-bar.component';
 import { EditOrderComponent } from './component/edit-order/edit-order.component';
+import { BrandManagementComponent } from './component/Brand/brand-management/brand-management.component';
+import { UpdateBrandComponent } from './component/Brand/update-brand/update-brand.component';
+import { DeleteBrandComponent } from './component/Brand/delete-brand/delete-brand.component';
+import { DisplayBrandComponent } from './component/Brand/display-brand/display-brand.component';
+import { AddBrandComponent } from './component/Brand/add-brand/add-brand.component';
 
 
 
@@ -88,7 +93,12 @@ import { EditOrderComponent } from './component/edit-order/edit-order.component'
     UserRegisterComponent,
     LandingPageComponent,
     NavBarComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    BrandManagementComponent,
+    UpdateBrandComponent,
+    DeleteBrandComponent,
+    DisplayBrandComponent,
+    AddBrandComponent
   ],
   imports: [
     BrowserModule,

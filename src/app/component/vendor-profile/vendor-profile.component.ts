@@ -70,6 +70,13 @@ export class VendorProfileComponent implements OnInit {
     this.getVendorData(this._ActivatedRoute.snapshot.paramMap.get('id')!)
   }
 
+  getVendorProducts() {
+    this._Router.navigateByUrl(`/admin/product?vendorId=${this._ActivatedRoute.snapshot.paramMap.get('id')}`)
+  }
+  getVendorOrders(){
+    this._Router.navigateByUrl(`/admin/order?vendorId=${this._ActivatedRoute.snapshot.paramMap.get('id')}`)
+
+  }
 
   ngOnInit(): void {
 

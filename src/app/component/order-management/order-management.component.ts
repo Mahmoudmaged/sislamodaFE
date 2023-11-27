@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from 'src/app/Services/order.service';
 declare let $: any;
 @Component({
@@ -27,12 +27,19 @@ export class OrderManagementComponent implements OnInit {
     }, 3000);
   }
 
-  constructor(private _Router: Router, private _OrderService: OrderService) {
+  constructor(private _Router: Router, private _OrderService: OrderService , private _ActivatedRoute:ActivatedRoute) {
 
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.photo = this.userInfo?.photo || this.photo;
-    this.getAllOrders(this.userInfo?.id)
+    if (this._ActivatedRoute.snapshot.queryParams['vendorId']) {
+      console.log("lllllllllllol");
+      
+      this.getAllOrders(this._ActivatedRoute.snapshot.queryParams['vendorId'])
+    } else {
+      this.getAllOrders(this.userInfo?.id)
+
+    }
   }
 
 

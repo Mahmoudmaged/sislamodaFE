@@ -25,6 +25,10 @@ import { AddOfferComponent } from '../../add-offer/add-offer.component';
 import { EditOfferComponent } from '../../edit-offer/edit-offer.component';
 import { OfferDetailsComponent } from '../../offer-details/offer-details.component';
 import { VendorProfileDetailsComponent } from '../../vendor-profile-details/vendor-profile-details.component';
+import { BrandManagementComponent } from '../../Brand/brand-management/brand-management.component';
+import { AddBrandComponent } from '../../Brand/add-brand/add-brand.component';
+import { UpdateBrandComponent } from '../../Brand/update-brand/update-brand.component';
+import { DisplayBrandComponent } from '../../Brand/display-brand/display-brand.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -51,6 +55,10 @@ const routes: Routes = [
   { path: "offers/add", component: AddOfferComponent },
   { path: "offer/:id/edit", component: EditOfferComponent },
   { path: "offer/:id/details", component: OfferDetailsComponent },
+  { path: "brand", component: BrandManagementComponent },
+  { path: "brand/add", component: AddBrandComponent },
+  { path: "brand/:id/update", component: UpdateBrandComponent },
+  { path: "brand/:id/details", component: DisplayBrandComponent },
   { path: "**", component: NotAvailableComponent },
 
 ];

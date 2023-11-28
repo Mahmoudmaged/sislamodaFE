@@ -20,7 +20,6 @@ export class EditProductComponent implements OnInit {
   subcategoryList: any = []
   brandList: any = []
   images: any = [];
-  optionList: any = []
   errorMessage: string = ''
   vendorData: any;
   userInfo: any;
@@ -29,6 +28,82 @@ export class EditProductComponent implements OnInit {
   imagesList: any = []
 
   dir: string = 'ltr'
+
+
+  optionList: any[] = [];
+  optionsGroups: any[] = [];
+  selectedOptions: any[] = [];
+  getAllOption() {
+    return this._ProductService.getOptionList().subscribe(res => {
+      this.optionList = res;
+
+      let color = [];
+      let size = [];
+      let price = [];
+      let materials = [];
+      let occasion = [];
+      let lastArrival = [];
+      for (let i = 0; i < this.optionList.length; i++) {
+
+        switch (this.optionList[i].optionType) {
+          case 1:
+            color.push(this.optionList[i])
+            break;
+          case 2:
+            size.push(this.optionList[i])
+            break;
+          case 3:
+            price.push(this.optionList[i])
+            break;
+          case 4:
+            materials.push(this.optionList[i])
+            break;
+          case 5:
+            occasion.push(this.optionList[i])
+            break;
+          case 6:
+            lastArrival.push(this.optionList[i])
+            break;
+          default:
+            break;
+        }
+
+      }
+      console.log({ res });
+      console.log({ color, size, price });
+      this.optionsGroups = [
+        {
+          groupName: 'color',
+          data: color
+        },
+        {
+          groupName: 'size',
+          data: size
+        },
+        {
+          groupName: 'price',
+          data: price
+        },
+        {
+          groupName: 'materials',
+          data: materials
+        },
+        {
+          groupName: 'occasion',
+          data: occasion
+        },
+        {
+          groupName: 'last arrival',
+          data: lastArrival
+        }
+      ]
+
+
+    }, err => {
+      this.showSideError('Fail to load product options please try again.')
+    }
+    )
+  }
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -41,8 +116,8 @@ export class EditProductComponent implements OnInit {
 
   selectImage(event: any) {
 
-    this.selectedImages = []
-    this.imagesList = []
+    // this.selectedImages = []
+    // this.imagesList = []
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i];
       const reader = new FileReader();
@@ -80,7 +155,7 @@ export class EditProductComponent implements OnInit {
     private _BrandService: BrandService,
     private _AttachmentsService: AttachmentsService,
     private _ActivatedRoute: ActivatedRoute) {
-      this.dir = localStorage.getItem('dir') || 'ltr';
+    this.dir = localStorage.getItem('dir') || 'ltr';
 
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
@@ -95,19 +170,6 @@ export class EditProductComponent implements OnInit {
   }
 
 
-
-
-  getAllOption() {
-    return this._ProductService.getOptionList().subscribe(res => {
-      this.optionList = res;
-      console.log({ op: this.optionList });
-
-    }, err => {
-      console.log({ err });
-      this.showSideError('Fail to load product options');
-
-    })
-  }
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
       console.log({ res });

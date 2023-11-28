@@ -42,7 +42,8 @@
             <div class="col-lg-3 col-6 mb-1">
                 <div class="p-2">
                     <p class="ms-2">{{dir=='ltr'?'Shipping Address':'عنوان الشحن '}}</p>
-                    <p> <i class="fa fa-map-marker mx-1" aria-hidden="true"></i>{{(order?.address||order?.address2)?.slice(0,50)  || 'Dummy Address'}}
+                    <p> <i class="fa fa-map-marker mx-1"
+                            aria-hidden="true"></i>{{(order?.address||order?.address2)?.slice(0,50) || 'Dummy Address'}}
                     </p>
                 </div>
 
@@ -67,10 +68,11 @@
                     <div class="search_dropdown vendorProfileAc">
                         <button (click)="showDropDown(22)"
                             class="btn w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton22"
-                            type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                            type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"
+                            [ngStyle]="{'background-color': order?.orderStatus?.color}">
                             <div class="row align-items-center">
                                 <div class="col-11 " [class]="dir=='rtl'?'text-end':'text-start'">
-                                    <span>{{dir=='ltr'?'Order Status':'الحاله'}}</span>
+                                    <span>{{dir=='ltr'?order?.orderStatus.nameEn:order?.orderStatus.nameAr}}</span>
 
                                 </div>
                                 <div class="col-1">
@@ -81,9 +83,8 @@
                         </button>
                         <div class="dropdown-menu-list  dropdown-menu-list22"
                             [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
-                            <span class="dropdown-item" (click)="changeOrderStatus(22,'shipped')">Shipped</span>
-                            <span class="dropdown-item" (click)="changeOrderStatus(22,'delivered')">Delivered</span>
-                            <span class="dropdown-item" (click)="changeOrderStatus(22,'canceled')">canceled</span>
+                            <span *ngFor="let option of optionSet.optionSetItems" class="dropdown-item"
+                                (click)="changeOrderStatus(order?.id,22,option.color,option.id,option.value,option.nameEn , option.nameAr)">{{dir=='ltr'?option.nameEn:option.nameAr}}</span>
                         </div>
                     </div>
                 </div>
@@ -121,7 +122,7 @@
                     <i class="fa fa-close"></i>
                 </span>
                 {{dir=='ltr'?'Cancellation':' الغاء '}}
-                 
+
             </p>
             <p class="ms-4">There are no Cancellation for this order</p>
         </div>
@@ -129,8 +130,9 @@
     </div>
 
     <div class="w-100" [class]="dir=='ltr'?'text-end':'text-start'">
-        <button *ngIf="userInfo.isVendor" class="btn btn-dark px-3 pb-1">Save</button>
-        <button *ngIf="userInfo.isAdmin" class="btn btn-dark px-3 pb-1" (click)="closeOrderDetailsSec()">Back</button>
+        <!-- <button *ngIf="userInfo.isVendor" class="btn btn-dark px-3 pb-1">Save</button> -->
+        <!-- <button *ngIf="userInfo.isAdmin" class="btn btn-dark px-3 pb-1" (click)="closeOrderDetailsSec()">Back</button> -->
+        <button class="btn btn-dark px-3 pb-1" (click)="closeOrderDetailsSec()">Back</button>
     </div>
 
 </section>

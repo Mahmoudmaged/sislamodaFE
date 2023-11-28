@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OptionSetService } from 'src/app/Services/optionset.service';
 import { OrderService } from 'src/app/Services/order.service';
 declare let $: any;
 @Component({
@@ -18,7 +19,27 @@ export class OrderManagementComponent implements OnInit {
   userInfo: any;
   load: boolean = false;
   sideMessage: string = '';
-  dir: string = 'ltr'
+  dir: string = 'ltr';
+  optionSet: any = {};
+
+  optionSetList: any = []
+  selectedOption: string = '';
+  selectedOPtionFilter: string = 'nameEn'
+
+
+  getOptionSetByNames() {
+    this._OptionSetService.getOptionSetByNames(['orderStatus']).subscribe(res => {
+      this.optionSet = res[0];
+    }, err => {
+      this.showSideError('Fail')
+    })
+  }
+
+  FilterByOption() {
+
+  }
+
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -27,36 +48,37 @@ export class OrderManagementComponent implements OnInit {
     }, 3000);
   }
 
-  constructor(private _Router: Router, private _OrderService: OrderService , private _ActivatedRoute:ActivatedRoute) {
+  constructor(private _Router: Router,
+    private _OrderService: OrderService,
+    private _ActivatedRoute: ActivatedRoute,
+    private _OptionSetService: OptionSetService) {
 
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.photo = this.userInfo?.photo || this.photo;
     if (this._ActivatedRoute.snapshot.queryParams['vendorId']) {
-      console.log("lllllllllllol");
-      
       this.GetVendorOrderedProduct(this._ActivatedRoute.snapshot.queryParams['vendorId'])
     } else {
       this.getAllOrders(this.userInfo?.id)
-
     }
+
   }
 
 
 
   ngOnInit(): void {
-
+    this.getOptionSetByNames()
   }
 
   getAllOrders(userId: string) {
     this.load = true;
     return this._OrderService.getOrderList(userId).subscribe(res => {
-      this.pages = Math.ceil(res.length / this.pageSize);
       this.fullOrderList = res;
+      this.pages = Math.ceil(this.fullOrderList.length / this.pageSize);
       this.orderList = this.fullOrderList.slice(0, this.pageSize);
-      this.orderList = res
-      this.load = false;
 
+
+      this.load = false;
     }, err => {
       this.load = false;
       this.showSideError(`Fail`)
@@ -99,51 +121,66 @@ export class OrderManagementComponent implements OnInit {
     $(`.${dropdownSelector}`).slideToggle(300)
     $(`.${classSelector}`).toggleClass('search_dropdownMenuButton_click')
   }
-  changeOrderStatusFilter(btn: string, status: string) {
+  changeOrderStatusFilter(btn: string, color: string, nameEn: string, nameAr: string) {
+    let status = nameEn;
+    if (this.dir == 'rtl') {
+      status = nameAr
+    }
     $(`.${btn}`).text(status)
     $(`.dropdown-menu-list`).slideUp(300)
     $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
+    $(`.${btn}`).css({ 'background-color': color })
 
-    switch (status) {
-      case "processing":
-        $(`.${btn}`).css({ 'background-color': '#ffedc3' })
-        break;
-      case "chipped":
-        $(`.${btn}`).css({ 'background-color': '#ffdcdc' })
-        break;
-      case "delivered":
-        $(`.${btn}`).css({ 'background-color': '#81ffca' })
-        break;
-      case "Order Status":
-        $(`.${btn}`).css({ 'background-color': '#ffff' })
-        break;
-      default:
-        break;
+
+    if (status == 'Order Status' || status == 'التصنيف') {
+      this.currentPage = 1;
+      this.pages = Math.ceil(this.fullOrderList.length / this.pageSize);
+      this.orderList = this.fullOrderList.slice(0, this.pageSize);
+      return this.orderList
+    } else {
+      this.orderList = this.fullOrderList.filter(ele => {
+        return ele.orderStatus.nameAr.toLowerCase() == status || ele.orderStatus.nameEn.toLowerCase() == status.toLowerCase()
+      })
+      return this.orderList
     }
+
+
+
+
   }
 
 
-  changeOrderStatus(btnIndicator: number, status: string) {
+  changeOrderStatus(orderId: string, btnIndicator: number, color: string, statusId: string, value: any, nameEn: string, nameAr: string) {
+    this.load = true;
+    let status = nameEn;
+    if (this.dir == 'rtl') {
+      status = nameAr
+    }
+    console.log({ color });
+
     $(`.search_dropdownMenuButton${btnIndicator}`).text(status)
     $(`.dropdown-menu-list`).slideUp(300)
     $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
+    $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': color })
 
-    switch (status) {
-      case "processing":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#ffedc3' })
-        break;
-      case "chipped":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#ffdcdc' })
-        break;
-      case "delivered":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#81ffca' })
-        break;
-      case "Order Status":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#ffff' })
-        break;
-      default:
-        break;
+
+    const data = {
+      Id: orderId,
+      Value: value,
+      Name: this.optionSet.name
     }
+    console.log({ data });
+    this._OrderService.updateOrderStatus(data).subscribe(res => {
+      this.load = false
+      this.showSideError("Done")
+
+    }, err => {
+      this.load = false
+      console.log({ err });
+      this.showSideError("fail")
+    })
+
+
   }
 
   getPageContent(page: number) {

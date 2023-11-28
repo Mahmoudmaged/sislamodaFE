@@ -59,7 +59,7 @@
                                     <i class="fa fa-trash text-danger" (click)="removeImage(i)"></i>
                                 </div>
                                 <div class="px-2 py-1 w-100 text-center uploadParent">
-                                    <img class="img-fluid" [src]="image" alt="" srcset="">
+                                    <img class="" [src]="image" alt="" srcset="">
                                 </div>
                             </div>
                         </div>
@@ -270,8 +270,9 @@
                         <div>
                             <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
 
-                            <p-multiSelect formControlName="productOptions" [options]="optionList" optionLabel="name"
-                                [style]="{'width':'100%'}"></p-multiSelect>
+                            <p-multiSelect display="chip" optionLabel="name" optionGroupLabel="groupName"
+                                optionGroupChildren="data" [options]="optionsGroups" [group]="true"
+                                formControlName="productOptions" [style]="{'width':'100%'}"></p-multiSelect>
 
                         </div>
                     </div>

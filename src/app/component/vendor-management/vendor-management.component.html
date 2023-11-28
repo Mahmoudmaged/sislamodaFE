@@ -44,16 +44,18 @@
 
 
                 </div>
-                <div class="col-lg-3 col-md-5 col-12 my-1">
+         
+
+
+                <div class="col-md-3 col-4 my-1">
                     <div class="mx-1">
                         <div class="search_dropdown">
-                            <button (click)="showDropDown(0)"
-                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton0"
+                            <button (click)="showDropDownFilter('search_dropdownMenuButton00', 'dropdown-menu-list00')"
+                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton00"
                                 type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-
                                 <div class="row align-items-center">
                                     <div class="col-11 " [class]="dir=='rtl'?'text-end':'text-start'">
-                                        <span> Vendor Status</span>
+                                        <span>Vendor Status </span>
 
                                     </div>
                                     <div class="col-1">
@@ -62,12 +64,12 @@
                                     </div>
                                 </div>
                             </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list0"
+                            <div class="dropdown-menu-list  dropdown-menu-list00"
                                 [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
-                                <span class="dropdown-item" (click)="changeOrderStatus(0,'Vendor Status')">All</span>
-                                <span class="dropdown-item" (click)="changeOrderStatus(0,'continue')">Continue</span>
-                                <span class="dropdown-item" (click)="changeOrderStatus(0,'suspended')">Suspended</span>
-                                <span class="dropdown-item" (click)="changeOrderStatus(0,'declined')">Declined</span>
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','#ffff','Vendor Status', 'التصنيف')"> {{dir=='ltr'?'All':'الجميع'}}</span>
+                                <span *ngFor="let option of optionSet.optionSetItems" class="dropdown-item"
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00', option.color,option.nameEn,option.nameAr)">{{dir=='ltr'?option.nameEn:option.nameAr}}</span>
                             </div>
                         </div>
                     </div>
@@ -111,33 +113,26 @@
                         </td>
 
                         <td>
-                            <div class="search_dropdown">
-                                <button (click)="showDropDown(i+1)"
-                                    class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i+1}}"
-                                    type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-
+                            <div *ngIf="optionSet" class="search_dropdown  text-center">
+                                <button (click)="showDropDown(i)"
+                                    class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i}}"
+                                    type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"
+                                    [ngStyle]="{'background-color': vendor.vendorStatus?.color}" >
                                     <div class="row align-items-center">
-                                        <div class="col-11" [class]="dir=='rtl'?'text-end':'text-start'">
-                                            <span>Vendor Action</span>
-
+                                        <div class="col-11 text-center" >
+                                            <span>{{dir=='ltr'?vendor.vendorStatus?.nameEn:vendor.vendorStatus.nameAr}}</span>
+    
                                         </div>
                                         <div class="col-1">
                                             <img class="" width="10px"
-                                                src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
-                                                srcset="">
+                                                src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
                                         </div>
                                     </div>
                                 </button>
-                                <div class="dropdown-menu-list  dropdown-menu-list{{i+1}} "
+                                <div class="dropdown-menu-list  dropdown-menu-list{{i}}"
                                     [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
-                                    <span class="dropdown-item"
-                                        (click)="changeOrderStatus(i+1,'continue')">Continue</span>
-                                    <span class="dropdown-item"
-                                        (click)="changeOrderStatus(i+1,'suspended')">Suspended</span>
-                                    <span class="dropdown-item"
-                                        (click)="changeOrderStatus(i+1,'declined')">Declined</span>
-
-
+                                    <span *ngFor="let option of optionSet.optionSetItems" class="dropdown-item"
+                                        (click)="changeOrderStatus(vendor.id,i,option.color,option.id,option.value,option.nameEn , option.nameAr)">{{dir=='ltr'?option.nameEn:option.nameAr}}</span>
                                 </div>
                             </div>
                         </td>

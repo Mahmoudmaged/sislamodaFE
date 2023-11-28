@@ -28,4 +28,9 @@ export class VendorService {
   deleteVendorById(id: string): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Delete?Id=${id}`,{})
   }
+
+  updateVendorStatus(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}UpdateStatus?Id=${data.Id}&Value=${data.Value}&Name=${data.Name}`, {});
+
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OptionSetService } from 'src/app/Services/optionset.service';
 import { OrderService } from 'src/app/Services/order.service';
 declare let $: any;
 @Component({
@@ -17,7 +18,17 @@ export class OrderDetailsComponent implements OnInit {
   photo: string = `../../../assets/images/avatar/ava.png`
   userInfo: any;
   dir: string = 'ltr'
+  optionSet: any = {};
 
+
+  getOptionSetByNames() {
+    this._OptionSetService.getOptionSetByNames(['orderStatus']).subscribe(res => {
+      this.optionSet = res[0]
+      console.log({ res: this.optionSet });
+    }, err => {
+      this.showSideError('Fail')
+    })
+  }
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -25,7 +36,11 @@ export class OrderDetailsComponent implements OnInit {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
-  constructor(private _Router: Router, private _OrderService: OrderService, public _ActivatedRoute: ActivatedRoute) {
+
+  constructor(private _Router: Router,
+    private _OrderService: OrderService,
+    public _ActivatedRoute: ActivatedRoute,
+    private _OptionSetService: OptionSetService,) {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.photo = this.userInfo?.photo || this.photo;
@@ -36,6 +51,7 @@ export class OrderDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getOptionSetByNames()
   }
 
   getOrder(orderId: any) {
@@ -96,30 +112,38 @@ export class OrderDetailsComponent implements OnInit {
   }
 
 
-  changeOrderStatus(btnIndicator: number, status: string) {
+  changeOrderStatus(orderId: string, btnIndicator: number, color: string, statusId: string, value: any, nameEn: string, nameAr: string) {
+    this.load = true;
+    let status = nameEn;
+    if (this.dir == 'rtl') {
+      status = nameAr
+    }
+    console.log({ color });
+
     $(`.search_dropdownMenuButton${btnIndicator}`).text(status)
     $(`.dropdown-menu-list`).slideUp(300)
     $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
+    $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': color })
 
-    switch (status) {
-      case "processing":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#ffedc3' })
-        break;
-      case "chipped":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#ffdcdc' })
-        break;
-      case "delivered":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#81ffca' })
-        break;
-      case "Order Status":
-        $(`.search_dropdownMenuButton${btnIndicator}`).css({ 'background-color': '#ffff' })
-        break;
-      default:
-        break;
+
+    const data = {
+      Id: orderId,
+      Value: value,
+      Name: this.optionSet.name
     }
+    console.log({ data });
+    this._OrderService.updateOrderStatus(data).subscribe(res => {
+      this.load = false
+      this.showSideError("Done")
+
+    }, err => {
+      this.load = false
+      console.log({ err });
+      this.showSideError("fail")
+    })
+
+
   }
-
-
 
 
   changeVendorStatusGraph(x: any, y: any) {

@@ -21,7 +21,13 @@ export class AddProductComponent implements OnInit {
   selectedValues: string[] = [];
   subcategoryList: any[] = []
   categoryList: any = []
-  optionList: any = []
+
+  optionList: any[] = [];
+
+  optionsGroups: any[] = [];
+  selectedOptions: any[] = [];
+
+
   brandList: any = []
   images: any = [];
   errorMessage: string = ''
@@ -31,6 +37,7 @@ export class AddProductComponent implements OnInit {
   imagesList: any = []
   vendorData: any;
   dir: string = 'ltr'
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -59,8 +66,8 @@ export class AddProductComponent implements OnInit {
 
   selectImage(event: any) {
 
-    this.selectedImages = []
-    this.imagesList = []
+    // this.selectedImages = []
+    // this.imagesList = []
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i];
       const reader = new FileReader();
@@ -96,6 +103,69 @@ export class AddProductComponent implements OnInit {
   getAllOption() {
     return this._ProductService.getOptionList().subscribe(res => {
       this.optionList = res;
+
+      let color = [];
+      let size = [];
+      let price = [];
+      let materials = [];
+      let occasion = [];
+      let lastArrival = [];
+      for (let i = 0; i < this.optionList.length; i++) {
+
+        switch (this.optionList[i].optionType) {
+          case 1:
+            color.push(this.optionList[i])
+            break;
+          case 2:
+            size.push(this.optionList[i])
+            break;
+          case 3:
+            price.push(this.optionList[i])
+            break;
+          case 4:
+            materials.push(this.optionList[i])
+            break;
+          case 5:
+            occasion.push(this.optionList[i])
+            break;
+          case 6:
+            lastArrival.push(this.optionList[i])
+            break;
+          default:
+            break;
+        }
+
+      }
+      console.log({ res });
+      console.log({ color, size, price });
+      this.optionsGroups = [
+        {
+          groupName: 'color',
+          data: color
+        },
+        {
+          groupName: 'size',
+          data: size
+        },
+        {
+          groupName: 'price',
+          data: price
+        },
+        {
+          groupName: 'materials',
+          data: materials
+        },
+        {
+          groupName: 'occasion',
+          data: occasion
+        },
+        {
+          groupName: 'last arrival',
+          data: lastArrival
+        }
+      ]
+
+
     }, err => {
       this.showSideError('Fail to load product options please try again.')
     }
@@ -165,6 +235,7 @@ export class AddProductComponent implements OnInit {
 
     let selectedOptions: any[] = []
     if (this.addProductForm.controls.productOptions.value) {
+      
       let selectOptions = this.addProductForm.controls.productOptions.value
       for (let i = 0; i < selectOptions.length; i++) {
         selectedOptions.push({
@@ -181,6 +252,8 @@ export class AddProductComponent implements OnInit {
           price: 0
         }
       })
+
+      
 
     }
 
@@ -228,8 +301,6 @@ export class AddProductComponent implements OnInit {
       }
     )
   }
-
-
 
   ngOnInit(): void {
 

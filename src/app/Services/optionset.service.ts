@@ -31,6 +31,9 @@ export class OptionSetService {
   getOptionSet(): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetAll?`);
   }
+  getOptionSetByNames(data: [string]): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}GetAllByNames?`, data);
+  }
   getOptionSetById(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`);
   }

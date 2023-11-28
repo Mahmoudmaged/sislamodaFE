@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandService } from 'src/app/Services/brand.service';
 import { CategoryService } from 'src/app/Services/category.service';
+import { OptionSetService } from 'src/app/Services/optionset.service';
 import { ProductService } from 'src/app/Services/product.service';
 declare let $: any;
 @Component({
@@ -47,6 +48,9 @@ export class ProductComponent implements OnInit {
 
     }
   ]
+
+ 
+
 
   showSideError(message: string) {
     this.sideMessage = message

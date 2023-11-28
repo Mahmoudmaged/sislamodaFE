@@ -61,7 +61,8 @@
                             <div class="dropdown-menu-list  dropdown-menu-list00"
                                 [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                                 <span class="dropdown-item"
-                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','#ffff','Order Status', 'التصنيف')"> {{dir=='ltr'?'All':'الجميع'}}</span>
+                                    (click)="changeOrderStatusFilter('search_dropdownMenuButton00','#ffff','Order Status', 'التصنيف')">
+                                    {{dir=='ltr'?'All':'الجميع'}}</span>
                                 <span *ngFor="let option of optionSet.optionSetItems" class="dropdown-item"
                                     (click)="changeOrderStatusFilter('search_dropdownMenuButton00', option.color,option.nameEn,option.nameAr)">{{dir=='ltr'?option.nameEn:option.nameAr}}</span>
                             </div>
@@ -72,121 +73,134 @@
         </div>
     </div>
     <!-- Order Table  -->
-    <div class="my-2 orderTable">
-        <table class="table contentTable bordered" [class]="dir=='rtl'?'tableRTL':''">
-            <thead id="myTableHead">
-                <tr class="text-center">
-                    <th scope="col" style="width: 5%;"> {{dir=='rtl'?'صوره' : 'Image'}}</th>
-                    <th scope="col" style="width: 25%;">{{dir=='rtl'?'تفاصيل الطلبيه' : 'Order details'}}</th>
-                    <th scope="col" style="width: 20%;"> {{dir=='rtl'?'عنوان الشحن' : 'Shipping address'}}</th>
-                    <th scope="col" style="width: 20%;">{{dir=='rtl'?'اسم العميل' : 'Customer name'}}</th>
-                    <th scope="col" style="width: 15%;">{{dir=='rtl'?'حاله الطلبيه' : 'Order status'}}</th>
-                    <th scope="col" style="width: 10%;">{{dir=='rtl'?'خيارات' : 'Options'}}</th>
-                </tr>
-            </thead>
-            <tbody class="text-center">
-                <tr *ngFor="let order of orderList ; index as i">
-                    <td class="">
-                        <img class="img-fluid tableImage"
-                            src="{{order.orderProducts[0]?.product?.defaultPhoto?.fullLink || defaultImage}}" alt=""
-                            srcset="">
-                    </td>
-                    <td>
-                        <p>{{order.addressDetails?.slice(0,50) || 'DummyDetails'}}...</p>
-                    </td>
-                    <td>
-                        <div class="row text-center w-100 ">
+    <div *ngIf="orderList.length; else noOrders">
+        <div class="my-2 orderTable">
+            <table class="table contentTable bordered" [class]="dir=='rtl'?'tableRTL':''">
+                <thead id="myTableHead">
+                    <tr class="text-center">
+                        <th scope="col" style="width: 5%;"> {{dir=='rtl'?'صوره' : 'Image'}}</th>
+                        <th scope="col" style="width: 25%;">{{dir=='rtl'?'تفاصيل الطلبيه' : 'Order details'}}</th>
+                        <th scope="col" style="width: 20%;"> {{dir=='rtl'?'عنوان الشحن' : 'Shipping address'}}</th>
+                        <th scope="col" style="width: 20%;">{{dir=='rtl'?'اسم العميل' : 'Customer name'}}</th>
+                        <th scope="col" style="width: 15%;">{{dir=='rtl'?'حاله الطلبيه' : 'Order status'}}</th>
+                        <th scope="col" style="width: 10%;">{{dir=='rtl'?'خيارات' : 'Options'}}</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr *ngFor="let order of orderList ; index as i">
+                        <td class="">
+                            <img class="img-fluid tableImage"
+                                src="{{order.orderProducts[0]?.product?.defaultPhoto?.fullLink || defaultImage}}" alt=""
+                                srcset="">
+                        </td>
+                        <td>
+                            <p>{{order.addressDetails?.slice(0,50) || 'DummyDetails'}}...</p>
+                        </td>
+                        <td>
+                            <div class="row text-center w-100 ">
 
-                            <div class="col-12 px-2 d-flex justify-contnet-center">
-                                <img width="12px" src="../../../assets/images/Sislimoda/location.svg" alt="" srcset="">
+                                <div class="col-12 px-2 d-flex justify-contnet-center">
+                                    <img width="12px" src="../../../assets/images/Sislimoda/location.svg" alt=""
+                                        srcset="">
 
-                                <p class="mx-1">{{dir=='ltr'? (order.address||order.address2)?.slice(0,50) ||
-                                    'DummyDetails'
-                                    :(order.address||order.address2)?.slice(0,50) || 'داتا وهميه للمنتج'}}...</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>{{order.user?.firstName}} {{order.user?.lastName}}</td>
-                    <td>
-
-                        <div *ngIf="optionSet" class="search_dropdown  text-center">
-                            <button (click)="showDropDown(i)"
-                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i}}"
-                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"
-                                [ngStyle]="{'background-color': order.orderStatus.color}" >
-                                <div class="row align-items-center">
-                                    <div class="col-11 text-center" >
-                                        <span>{{dir=='ltr'?order.orderStatus.nameEn:order.orderStatus.nameAr}}</span>
-
-                                    </div>
-                                    <div class="col-1">
-                                        <img class="" width="10px"
-                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
-                                    </div>
+                                    <p class="mx-1">{{dir=='ltr'? (order.address||order.address2)?.slice(0,50) ||
+                                        'DummyDetails'
+                                        :(order.address||order.address2)?.slice(0,50) || 'داتا وهميه للمنتج'}}...</p>
                                 </div>
-                            </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list{{i}}"
-                                [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
-                                <span *ngFor="let option of optionSet.optionSetItems" class="dropdown-item"
-                                    (click)="changeOrderStatus(order.id,i,option.color,option.id,option.value,option.nameEn , option.nameAr)">{{dir=='ltr'?option.nameEn:option.nameAr}}</span>
                             </div>
-                        </div>
-                    </td>
+                        </td>
+                        <td>{{order.user?.firstName}} {{order.user?.lastName}}</td>
+                        <td>
 
-                    <td class="optionsActions text-center">
-                        <!-- <span *ngIf="userInfo?.isVendor" class="p-2">
+                            <div *ngIf="optionSet" class="search_dropdown  text-center">
+                                <button (click)="showDropDown(i)"
+                                    class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton{{i}}"
+                                    type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"
+                                    [ngStyle]="{'background-color': order.orderStatus.color}">
+                                    <div class="row align-items-center">
+                                        <div class="col-11 text-center">
+                                            <span>{{dir=='ltr'?order.orderStatus.nameEn:order.orderStatus.nameAr}}</span>
+
+                                        </div>
+                                        <div class="col-1">
+                                            <img class="" width="10px"
+                                                src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt=""
+                                                srcset="">
+                                        </div>
+                                    </div>
+                                </button>
+                                <div class="dropdown-menu-list  dropdown-menu-list{{i}}"
+                                    [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
+                                    <span *ngFor="let option of optionSet.optionSetItems" class="dropdown-item"
+                                        (click)="changeOrderStatus(order.id,i,option.color,option.id,option.value,option.nameEn , option.nameAr)">{{dir=='ltr'?option.nameEn:option.nameAr}}</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="optionsActions text-center">
+                            <!-- <span *ngIf="userInfo?.isVendor" class="p-2">
                             <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt=""
                                 srcset="">
                         </span> -->
-                        <span *ngIf="userInfo?.isVendor" class="p-2" (click)="deleteOrder(order.id)">
-                            <!-- <i class="fa fa-trash"></i> -->
-                            <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt=""
-                                srcset="">
-                        </span>
-                        <span class="p-2" (click)="displayOrderDetails(order.id)">
-                            <!-- <i class="fa fa-ellipsis-v" aria-hidden="true"></i> -->
-                            <img width="3px" src="../../../assets/images/Sislimoda/Menu.svg" alt="" srcset="">
+                            <span *ngIf="userInfo?.isVendor" class="p-2" (click)="deleteOrder(order.id)">
+                                <!-- <i class="fa fa-trash"></i> -->
+                                <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt=""
+                                    srcset="">
+                            </span>
+                            <span class="p-2" (click)="displayOrderDetails(order.id)">
+                                <!-- <i class="fa fa-ellipsis-v" aria-hidden="true"></i> -->
+                                <img width="3px" src="../../../assets/images/Sislimoda/Menu.svg" alt="" srcset="">
 
-                        </span>
+                            </span>
 
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
-    <div *ngIf="pages > 0" class="orderTable paginateSection  my-2" [class]="dir=='rtl'?'paginateSectionRTL':''">
-        <ul class="ul" dir="ltr">
-            <li class=" mx-1" (click)="previousPage()">
-                <!-- <i class="fa fa-angle-left"></i> -->
-                <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
-            </li>
+        <div *ngIf="pages > 0" class="orderTable paginateSection  my-2" [class]="dir=='rtl'?'paginateSectionRTL':''">
+            <ul class="ul" dir="ltr">
+                <li class=" mx-1" (click)="previousPage()">
+                    <!-- <i class="fa fa-angle-left"></i> -->
+                    <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+                </li>
 
-            <li *ngFor="let item of [].constructor(pages); index as i">
-                <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
-                <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
-                    (click)="getPageContent(i+1)">
-                    {{i+1}}
-                </p>
-                <ng-template #notCurrent>
-                    <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                <li *ngFor="let item of [].constructor(pages); index as i">
+                    <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+                    <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                        (click)="getPageContent(i+1)">
                         {{i+1}}
                     </p>
-                </ng-template>
+                    <ng-template #notCurrent>
+                        <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                            {{i+1}}
+                        </p>
+                    </ng-template>
 
-                <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+                    <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
                 <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
-                <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
-            </li>
+                    <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+                </li>
 
-            <li class="mx-1" (click)="nextPage()">
-                <!-- <i class="fa fa-angle-right"></i> -->
-                <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+                <li class="mx-1" (click)="nextPage()">
+                    <!-- <i class="fa fa-angle-right"></i> -->
+                    <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
 
-            </li>
+                </li>
 
-        </ul>
+            </ul>
+        </div>
+
     </div>
+
+    <ng-template #noOrders>
+        <div class="row align-items-center justify-content-center text-center p-5 text-danger">
+            <p>{{dir=='ltr'? 'No Matching Results.':'لم يتم العثور علي نتائج بحث مشابه'}}</p>
+        </div>
+    </ng-template>
+
+
 </div>

@@ -32,9 +32,9 @@ export class AdminLoginComponent {
   constructor(
     private _CookieService: CookieService,
     private _AuthService: AuthService, public _Router: Router) {
-      if (localStorage.getItem("token")) {
-        this._Router.navigateByUrl("/admin/")
-      }
+    if (localStorage.getItem("token")) {
+      this._Router.navigateByUrl("/admin/")
+    }
   }
 
 
@@ -95,6 +95,7 @@ export class AdminLoginComponent {
       localStorage.setItem('token', res.token);
       localStorage.setItem('user', JSON.stringify(res.user));
       localStorage.setItem('dir', 'ltr');
+      console.log({ ressss:res });
 
       if (res.vendorData) {
         localStorage.setItem('vendorData', JSON.stringify(res.vendorData));
@@ -104,9 +105,9 @@ export class AdminLoginComponent {
         this._CookieService.set('loginCredential', JSON.stringify(Data), 30 * 12);
 
       }
-      //redirect homePage
+      // redirect homePage
       this._Router.navigateByUrl("/admin")
-      //Navigate DashBored
+      // Navigate DashBored
       this.loginForm.reset();
     },
       err => {

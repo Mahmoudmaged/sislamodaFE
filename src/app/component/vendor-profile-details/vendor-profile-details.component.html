@@ -1,4 +1,12 @@
 <div class="head">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3  col-md-5 col-12">
             <h4 class="head_title">Vendor Profile</h4>
@@ -7,14 +15,54 @@
     </div>
     <form [formGroup]="personalForm" (ngSubmit)="personalForm.valid && handelUpdateData()">
 
-        <section class="VendorProfSec  p-5">
+        <section class="VendorProfSec  px-5 py-2">
 
-            <h4>Personal Data</h4>
+            <h6>Personal Data</h6>
 
             <div class="personalForm my-2">
                 <div class="row">
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-lg-4  mt-1  mb-2">
+                                <div class="px-2 py-1">
+                                    <div class="px-2 py-2 w-100 text-center uploadParent">
+                                        <div class="uploadDiv p-2 text-center">
+                                            <i class="fa fa-file fa-3x"></i>
+                                            <p>Attach image here to start uploading</p>
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <p class="p11 me-1"></p>
+                                                <p>Or</p>
+                                                <p class="ms-1 p11"></p>
+                                            </div>
+                                            <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">Browse
+                                                file</label>
+                                            <input formControlName="photoId" class="d-none" multiple type="file"
+                                                id="uploadImage" (change)="selectImage($event)">
+
+                                            <div *ngIf="personalForm.controls['photoId'].errors && personalForm.controls['photoId'].touched"
+                                                class=" my-1 xx">
+                                                <p class="formError">In-valid category image</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="selectedImage" class="col-lg-4 mb-2">
+                                <div class="px-2 py-2 displayImageCont">
+                                    <div class="text-end trashSection">
+                                        <i class="fa fa-trash text-danger" (click)="removeImage()"></i>
+                                    </div>
+                                    <div class="px-2 py-1 w-100 text-center uploadParent">
+                                        <img class="img-fluid" [src]="selectedImage" alt="" srcset="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">First Name</label>
                                 <div>
@@ -22,7 +70,7 @@
                                         formControlName="firstName">
 
                                     <div *ngIf="personalForm.controls['firstName'].errors && personalForm.controls['firstName'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid first name</p>
                                     </div>
                                 </div>
@@ -30,8 +78,24 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for="">Middle Name</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Middle Name" name="" id=""
+                                        formControlName="middleName">
+
+                                    <div *ngIf="personalForm.controls['middleName'].errors && personalForm.controls['middleName'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid middle name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Last Name</label>
                                 <div>
@@ -39,7 +103,7 @@
                                         formControlName="lastName">
 
                                     <div *ngIf="personalForm.controls['lastName'].errors && personalForm.controls['lastName'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid last name</p>
                                     </div>
                                 </div>
@@ -47,9 +111,26 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
+                            <div class="form-group">
+                                <label for=""> Username</label>
+                                <div>
+                                    <input class="form-control my-1" type="text" placeholder="Username" name="" id=""
+                                        formControlName="userName">
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                                    <div *ngIf="personalForm.controls['userName'].errors && personalForm.controls['userName'].touched"
+                                        class="my-1 xx">
+                                        <p class="formError">In-valid Username</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <div>
@@ -66,8 +147,8 @@
                     </div>
 
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Address</label>
                                 <div>
@@ -83,8 +164,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Phone</label>
                                 <div>
@@ -100,36 +181,20 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
-                            <div class="form-group">
-                                <label for="">Password</label>
-                                <div class="passwordContainer">
-                                    <i class="fa fa-eye-slash " (click)="showPassword('show' ,'password')"></i>
-                                    <i class="fa fa-eye" (click)="showPassword('hide' , 'password')"></i>
-                                    <input class="form-control my-1" type="password" placeholder="Password" name=""
-                                        id="password" formControlName="password">
-                                    <div *ngIf="personalForm.controls['password'].errors && personalForm.controls['password'].touched"
-                                        class="text-center my-1 xx">
-                                        <p>In-valid Password</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
         </section>
 
-        <section class="VendorProfSec  p-5 my-2">
+        <section class="VendorProfSec  px-5 py-2 my-2">
 
-            <h4>Store data</h4>
+            <h6>Store data</h6>
 
-            <div class="personalForm my-2">
+            <div class="personalForm mb-2">
                 <div class="row">
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Name(Arabic)</label>
                                 <div>
@@ -137,7 +202,7 @@
                                         id="" formControlName="name">
 
                                     <div *ngIf="personalForm.controls['name'].errors && personalForm.controls['name'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid name</p>
                                     </div>
                                 </div>
@@ -145,8 +210,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Name(English)</label>
                                 <div>
@@ -154,7 +219,7 @@
                                         id="" formControlName="nameEn">
 
                                     <div *ngIf="personalForm.controls['nameEn'].errors && personalForm.controls['nameEn'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid name</p>
                                     </div>
                                 </div>
@@ -162,8 +227,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Description(Arabic)</label>
                                 <div>
@@ -171,7 +236,7 @@
                                         name="" id="" formControlName="description"></textarea>
 
                                     <div *ngIf="personalForm.controls['description'].errors && personalForm.controls['description'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid description</p>
                                     </div>
                                 </div>
@@ -179,8 +244,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for="">Description(English)</label>
                                 <div>
@@ -188,7 +253,7 @@
                                         name="" id="" formControlName="descriptionEn"></textarea>
 
                                     <div *ngIf="personalForm.controls['descriptionEn'].errors && personalForm.controls['descriptionEn'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid description</p>
                                     </div>
                                 </div>
@@ -198,8 +263,8 @@
 
 
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for=""> Store Phone(one)</label>
                                 <div>
@@ -207,7 +272,7 @@
                                         formControlName="phoneNumber">
 
                                     <div *ngIf="personalForm.controls['phoneNumber'].errors && personalForm.controls['phoneNumber'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid phone</p>
                                     </div>
                                 </div>
@@ -215,8 +280,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 my-1">
-                        <div class="p-2">
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div class="form-group">
                                 <label for=""> Store Phone(Two)</label>
                                 <div>
@@ -224,7 +289,7 @@
                                         formControlName="phoneNumber2">
 
                                     <div *ngIf="personalForm.controls['phoneNumber2'].errors && personalForm.controls['phoneNumber2'].touched"
-                                        class="text-center my-1 xx">
+                                        class=" my-1 xx">
                                         <p class="formError">In-valid phone</p>
                                     </div>
                                 </div>
@@ -238,7 +303,7 @@
 
         <section class="my-3">
             <div class="text-end">
-                <button  [disabled]="personalForm.invalid"  class="btn btn-dark px-3 py-2">Update</button>
+                <button [disabled]="personalForm.invalid" class="btn btn-dark px-3 py-2">Update</button>
                 <button class="btn btn-outline-dark px-3 py-2 ms-1">Cancel</button>
             </div>
         </section>

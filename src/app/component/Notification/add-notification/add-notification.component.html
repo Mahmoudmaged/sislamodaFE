@@ -1,0 +1,108 @@
+<section class="OrderDetailsSec  px-3 py-2">
+
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="my-1">
+        <form [formGroup]="addForm" (ngSubmit)="addForm.valid && handelAddNotification()">
+            <div class="row pe-5 ">
+             c
+
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p>
+                                {{dir=='ltr'?' Title(Arabic)' :'عنوان  (عربي) '}}
+                            </p>
+                            <div class="form-group">
+                                <input type="text" formControlName="title" class="form-control" />
+
+                                <div *ngIf="addForm.controls['title'].errors && addForm.controls['title'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError">
+                                        {{dir=='ltr'?'In-valid  title' :'خطاء'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+
+                            <p> {{dir=='ltr'?'Title(English)' :'عنوان  (الانجليزيه) '}} </p>
+                            <div class="form-group">
+                                <input type="text" formControlName="titleEn" class="form-control" />
+
+                                <div *ngIf="addForm.controls['titleEn'].errors && addForm.controls['titleEn'].touched"
+                                    class=" my-1 xx">
+
+                                    <p class="formError"> {{dir=='ltr'?'In-valid  title' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+
+           
+
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p> {{dir=='ltr'?'Description(Arabic)' :'وصف  (عربي)'}}</p>
+
+                            <div class="form-group">
+                                <textarea formControlName="description" class="form-control" name="" id=""
+                                    cols="30" rows="1"></textarea>
+
+                                <div *ngIf="addForm.controls['description'].errors && addForm.controls['description'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError"> {{dir=='ltr'?'In-valid  description' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p> {{dir=='ltr'?'Product Description(English)' :'وصف المنتج (الانجليزيه)'}}</p>
+                            <div class="form-group">
+                                <textarea formControlName="descriptionEn" class="form-control" name="" id=""
+                                    cols="30" rows="1"></textarea>
+
+                                <div *ngIf="addForm.controls['descriptionEn'].errors && addForm.controls['descriptionEn'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError"> {{dir=='ltr'?'In-valid  description' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        
+                <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
+                    <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addForm.invalid"><span
+                            class="px-2"> {{dir=='ltr'?'Add ' :'اضافه'}}</span></button>
+                    <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
+                        (click)="closeProductDetailsSec()">{{dir=='ltr'?'Cancel ' :'الغاء'}}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</section>

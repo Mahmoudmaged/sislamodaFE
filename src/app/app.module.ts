@@ -65,6 +65,10 @@ import { OptionsManagmentComponent } from './component/options/options-managment
 import { AddOptionsComponent } from './component/options/add-options/add-options.component';
 import { EditOptionsComponent } from './component/options/edit-options/edit-options.component';
 import { DisplayOptionComponent } from './component/options/display-option/display-option.component';
+import { NotificationManagementComponent } from './component/Notification/notification-management/notification-management.component';
+import { AddNotificationComponent } from './component/Notification/add-notification/add-notification.component';
+import { UpdateNotificationComponent } from './component/Notification/update-notification/update-notification.component';
+import { DisplayNotificationComponent } from './component/Notification/display-notification/display-notification.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +124,11 @@ import { DisplayOptionComponent } from './component/options/display-option/displ
     OptionsManagmentComponent,
     AddOptionsComponent,
     EditOptionsComponent,
-    DisplayOptionComponent
+    DisplayOptionComponent,
+    NotificationManagementComponent,
+    AddNotificationComponent,
+    UpdateNotificationComponent,
+    DisplayNotificationComponent
   ],
   imports: [
     BrowserModule,

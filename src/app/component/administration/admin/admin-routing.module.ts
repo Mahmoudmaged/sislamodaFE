@@ -38,6 +38,10 @@ import { UpdateOptionSetItemComponent } from '../../optionSetItem/update-option-
 import { OptionsManagmentComponent } from '../../options/options-managment/options-managment.component';
 import { AddOptionsComponent } from '../../options/add-options/add-options.component';
 import { EditOptionsComponent } from '../../options/edit-options/edit-options.component';
+import { NotificationManagementComponent } from '../../Notification/notification-management/notification-management.component';
+import { AddNotificationComponent } from '../../Notification/add-notification/add-notification.component';
+import { DisplayNotificationComponent } from '../../Notification/display-notification/display-notification.component';
+import { UpdateNotificationComponent } from '../../Notification/update-notification/update-notification.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -84,11 +88,12 @@ const routes: Routes = [
   { path: "options/add", component: AddOptionsComponent },
   { path: "options/:id/edit", component: EditOptionsComponent },
 
+  { path: "notification", component: NotificationManagementComponent },
+  { path: "notification/add", component: AddNotificationComponent },
+  { path: "notification/:id/edit", component: UpdateNotificationComponent },
+  { path: "notification/:id/display", component: DisplayNotificationComponent },
 
 
-  // { path: "optionSet", component: OptionsetManagementComponent },
-  // { path: "optionSet/:id/update", component: UpdateOptionsetComponent },
-  // { path: "optionSet/:id/details", component: DisplayOptionsetComponent },
   { path: "**", component: NotAvailableComponent },
 
 ];

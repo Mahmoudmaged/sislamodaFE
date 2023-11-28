@@ -1,5 +1,10 @@
 @import '../vendor-management/vendor-management.component.scss';
+@import '../add-product/add-product.component.scss';
 @import '../admin-login/admin-login.component.scss';
+*:not(i) {
+    font-family: 'Poppins', sans-serif;
+
+}
 
 $whiteColor: #ffffff;
 $blackColor: #000000;

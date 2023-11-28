@@ -33,7 +33,10 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private _CookieService: CookieService,
     private _AuthService: AuthService, public _Router: Router) {
-    localStorage.clear();
+    // localStorage.clear();
+    // if (localStorage.getItem("token")) {
+    //   this._Router.navigateByUrl("/admin/")
+    // }
   }
 
 

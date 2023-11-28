@@ -126,7 +126,7 @@ $borderColor70: #707070;
 .ActiveCheck {
   background-color: $blackColor;
   font-size: 0.8em;
-  border-radius: 15px;
+  border-radius: 8px;
   color: $whiteColor;
   width: 90%;
 }
@@ -148,6 +148,9 @@ $borderColor70: #707070;
 // End
 
 // Start RightPart Head Section
+.noti img{
+  cursor: pointer;
+}
 .profileAndLang {
   background-color: $barColor;
   border-radius: 15px;

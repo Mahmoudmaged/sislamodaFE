@@ -33,4 +33,8 @@ export class AuthService {
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }
+
+  updateUserData(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}updateUser`, data);
+  }
 }

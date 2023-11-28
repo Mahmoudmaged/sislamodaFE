@@ -47,7 +47,7 @@ export class OrderManagementComponent implements OnInit {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
-
+  vendorData:any;
   constructor(private _Router: Router,
     private _OrderService: OrderService,
     private _ActivatedRoute: ActivatedRoute,
@@ -55,9 +55,11 @@ export class OrderManagementComponent implements OnInit {
 
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
+    this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.photo = this.userInfo?.photo || this.photo;
-    if (this._ActivatedRoute.snapshot.queryParams['vendorId']) {
-      this.GetVendorOrderedProduct(this._ActivatedRoute.snapshot.queryParams['vendorId'])
+    if (this.userInfo.isVendor || this._ActivatedRoute.snapshot.queryParams['vendorId']) {
+      console.log(({ vh: this._ActivatedRoute.snapshot.queryParams['vendorId'] }));
+      this.GetVendorOrderedProduct(this.vendorData?.id || this._ActivatedRoute.snapshot.queryParams['vendorId'])
     } else {
       this.getAllOrders(this.userInfo?.id)
     }

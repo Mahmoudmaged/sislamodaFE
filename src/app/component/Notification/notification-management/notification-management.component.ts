@@ -1,16 +1,16 @@
 import { Component ,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/Services/notification.service';
 import { OfferService } from 'src/app/Services/offer.service';
 declare let $: any;
 @Component({
-  selector: 'app-offer',
-  templateUrl: './offer.component.html',
-  styleUrls: ['./offer.component.scss']
+  selector: 'app-notification-management',
+  templateUrl: './notification-management.component.html',
+  styleUrls: ['./notification-management.component.scss']
 })
-
-export class OfferComponent implements OnInit {
-  offerList: any[] = []
-  fullOfferList: any[] = []
+export class NotificationManagementComponent  implements OnInit {
+  notificationList: any[] = []
+  fullNotificationList: any[] = []
   userInfo: any;
   vendorData: any;
   pages: number = 10;
@@ -21,14 +21,14 @@ export class OfferComponent implements OnInit {
   sideMessage: String = '';
   photo: string = `../../../assets/images/avatar/ava.png`
   dir:string='ltr'
-  constructor(private _Router: Router, private _OfferService: OfferService) {
-    this.dir = localStorage.getItem('dir') || 'ltr';
 
+  constructor(private _Router: Router, private _OfferService: OfferService , private _NotificationService:NotificationService) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     console.log(this.userInfo);
     this.photo = this.userInfo?.photo || this.photo;
-    this.getOffersList()
+    this.getNotifications()
 
   }
   ngOnInit(): void {
@@ -46,49 +46,32 @@ export class OfferComponent implements OnInit {
 
   onSearch() {
     if (this.textSearch) {
-      this.fullOfferList = this.fullOfferList.filter(ele => {
+      this.fullNotificationList = this.fullNotificationList.filter(ele => {
         return ele.titleEn.toLowerCase().includes(this.textSearch.toLowerCase())
       });
-
-      this.pages = Math.ceil(this.fullOfferList.length / this.pageSize);//(`${res.length / this.pageSize}`);
-      this.offerList = this.fullOfferList.slice(0, this.pageSize);
+      this.pages = Math.ceil(this.fullNotificationList.length / this.pageSize);//(`${res.length / this.pageSize}`);
+      this.notificationList = this.fullNotificationList.slice(0, this.pageSize);
 
     } else {
-      this.getOffersList()
+      this.getNotifications()
     }
-
   }
 
 
 
 
-  getOffersList() {
+  getNotifications() {
     this.load = true
-
-    if (this.userInfo.isAdmin) {
-      return this._OfferService.allOffers().subscribe(res => {
+      return this._NotificationService.allNotification().subscribe(res => {
         this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
-        this.fullOfferList = res;
-        this.offerList = this.fullOfferList.slice(0, this.pageSize);
+        this.fullNotificationList = res;
+        this.notificationList = this.fullNotificationList.slice(0, this.pageSize);
         this.load = false
       }, err => {
         this.load = false
         this.showSideError('Fail')
       }
       )
-    } else {
-      return this._OfferService.allOffersByVendor(this.vendorData.id).subscribe(res => {
-        this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
-        this.fullOfferList = res;
-        this.offerList = this.fullOfferList.slice(0, this.pageSize);
-        this.load = false
-      }, err => {
-        this.load = false
-        this.showSideError('Fail')
-      }
-      )
-    }
-
   }
 
 
@@ -106,12 +89,11 @@ export class OfferComponent implements OnInit {
       return;
     }
 
-    console.log({ page });
     $(`.page`).removeClass('ActivePage')
     $(`.page${page}`).addClass('ActivePage')
     this.currentPage = page
     const skip = ((this.currentPage - 1) * this.pageSize)
-    this.offerList = this.fullOfferList.slice(skip, skip + this.pageSize);
+    this.notificationList = this.fullNotificationList.slice(skip, skip + this.pageSize);
 
   }
 
@@ -122,21 +104,22 @@ export class OfferComponent implements OnInit {
     this.getPageContent(this.currentPage + 1)
   }
 
-  addOffer() {
-    this._Router.navigateByUrl(`admin/offers/add`)
+
+  add() {
+    this._Router.navigateByUrl(`admin/notification/add`)
   }
 
-  showOfferDetails(id: string) {
-    this._Router.navigateByUrl(`/admin/offer/${id}/details`)
+  details(id: string) {
+    this._Router.navigateByUrl(`/admin/notification/${id}/display`)
 
   }
-  editOffer(id: string) {
-    this._Router.navigateByUrl(`/admin/offer/${id}/edit`)
+  edit(id: string) {
+    this._Router.navigateByUrl(`/admin/notification/${id}/edit`)
   }
-  deleteOffer(id: string) {
+  delete(id: string) {
     this.load = true;
-    this._OfferService.deleteOfferById(id).subscribe(res => {
-      this.getOffersList()
+    this._NotificationService.deleteById(id).subscribe(res => {
+      this.getNotifications()
       this.load = false;
     }, err => {
       this.load = false;
@@ -157,7 +140,7 @@ export class OfferComponent implements OnInit {
   confirmDelete() {
     this.closeDeleteAlert()
     if (this.deleteItemId) {
-      this.deleteOffer(this.deleteItemId)
+      this.delete(this.deleteItemId)
     } else {
       this.showSideError(`Fail`)
     }

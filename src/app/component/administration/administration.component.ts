@@ -39,10 +39,12 @@ export class AdministrationComponent implements OnInit {
     this.dir = localStorage.getItem('dir') || 'ltr';
     // this.dir = 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
+    console.log({userInfo:this.userInfo});
+    
     if (this.userInfo?.isVendor) {
 
       this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-      console.log(this.vendorData);
+      console.log({vv:this.vendorData});
 
     }
 
@@ -54,6 +56,10 @@ export class AdministrationComponent implements OnInit {
     this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
     this.changeDisplay(this.itemBar?.item || this.mainBar[0].item, this.itemBar?.com || this.mainBar[0].com)
     console.log({ itemBar: this.itemBar });
+  }
+
+  getNotification(){
+    this._Router.navigateByUrl("/admin/notification")
   }
 
   changeDisplay(item: string, component: string): any {

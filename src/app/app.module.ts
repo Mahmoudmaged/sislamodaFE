@@ -69,6 +69,11 @@ import { NotificationManagementComponent } from './component/Notification/notifi
 import { AddNotificationComponent } from './component/Notification/add-notification/add-notification.component';
 import { UpdateNotificationComponent } from './component/Notification/update-notification/update-notification.component';
 import { DisplayNotificationComponent } from './component/Notification/display-notification/display-notification.component';
+import { TicketManagementComponent } from './component/ticket/ticket-management/ticket-management.component';
+import { DisplayTicketComponent } from './component/ticket/display-ticket/display-ticket.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { CarouselModule } from 'primeng/carousel';
+
 
 @NgModule({
   declarations: [
@@ -128,7 +133,10 @@ import { DisplayNotificationComponent } from './component/Notification/display-n
     NotificationManagementComponent,
     AddNotificationComponent,
     UpdateNotificationComponent,
-    DisplayNotificationComponent
+    DisplayNotificationComponent,
+    TicketManagementComponent,
+    DisplayTicketComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -141,7 +149,8 @@ import { DisplayNotificationComponent } from './component/Notification/display-n
     NgApexchartsModule,
     DropdownModule,
     MultiSelectModule,
-    ColorPickerModule
+    ColorPickerModule,
+    CarouselModule
 
   ],
   providers: [],

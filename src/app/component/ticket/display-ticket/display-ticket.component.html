@@ -1,0 +1,43 @@
+<section class="OrderDetailsSec  p-3">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="info mb-1">
+
+        <div class="p-2">
+            <p class="OrderDetailsInfo"> {{dir=='ltr'?'Message':' رساله '}} </p>
+            <p class="w-75">
+                {{ticket?.message}}
+            </p>
+        </div>
+        <hr>
+
+        <div class="p-2">
+            <p class="OrderDetailsInfo"> {{dir=='ltr'?'ticket Details':'ticket Details'}} </p>
+            <p class="w-75">
+                {{ticket?.description}}
+            </p>
+        </div>
+        <hr>
+        <div class="p-2">
+            <p class="OrderDetailsInfo"> {{dir=='ltr'?'Phone':'رقم الهاتف'}} </p>
+            <p class="w-75">
+                {{ticket?.phone}}
+            </p>
+        </div>
+
+
+    </div>
+
+
+    <div class="w-100" [class]="dir=='ltr'?'text-end':'text-start'">
+        <button class="btn btn-dark px-3 pb-1" (click)="close()">Back</button>
+    </div>
+
+</section>

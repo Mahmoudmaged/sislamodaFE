@@ -35,4 +35,9 @@ export class OrderService {
     return this._HttpClient.post(`${this.baseURL}UpdateStatus?Id=${data.Id}&Value=${data.Value}&Name=${data.Name}`, {});
 
   }
+
+  dashboard(): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAdminStatistics`);
+
+  }
 }

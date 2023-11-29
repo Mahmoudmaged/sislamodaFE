@@ -278,7 +278,7 @@ export class AddProductComponent implements OnInit {
       defaultPhotoId: this.imagesList[0].photoId,
       categoryId: this.addProductForm.controls.subcategory.value,
       brandId: this.addProductForm.controls.brand.value,
-      vendorId: this.vendorData.id,//this.userInfo.id ,//"06eff051-2254-4eb7-d4fc-08dbbb387eb9",
+      vendorId: this.vendorData?.id,//this.userInfo.id ,//"06eff051-2254-4eb7-d4fc-08dbbb387eb9",
       paymentType: "string",
       noteForReturn: this.addProductForm.controls.noteForReturn.value || 'string',
       amount: this.addProductForm.controls.amount.value,

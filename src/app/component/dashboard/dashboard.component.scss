@@ -1,0 +1,74 @@
+
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+
+
+$barColor: #f7f7f7f7;
+$barColorE7: #E7E7E7E7;
+$borderColor: #c5c5c5;
+$borderColor70: #707070;
+
+*:not(i) {
+    font-family: 'Poppins', sans-serif;
+
+}
+.sellingHead{
+    font-size: 14px;
+}
+.itemHolder{
+    border-radius: 6px;
+}
+h6 , h4 {
+    font-size: 12px;
+}
+.itemHolder h6{
+    font-size: 12px;
+    max-width: 95%;
+    margin: auto;
+}
+.itemHolder img{
+    width: 25px;
+}
+.slideImage{
+    height: 100px;
+}
+.holder{
+    text-align: center;
+    // border: 1px solid $barColorE7;
+    // border-radius: 6px;
+}
+
+::ng-deep{
+    .p-carousel-content ul li button{
+        display: none;
+        // background-color: $redColor !important;
+    }
+}
+.xx{
+    width: 100%;
+    height: 120px;
+    // background-image: url('../../../assets/images/Sislimoda/logo.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 8px;
+    
+}
+.holderContainer{
+    border-radius: 8px;
+    background-color: rgba($color: #000000, $alpha: .5);
+    color: $whiteColor;
+    width: 95%;
+    font-size: 13px;
+
+}
+.holderContainer div{
+    vertical-align: middle;
+}

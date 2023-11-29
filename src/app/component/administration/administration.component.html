@@ -33,8 +33,6 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/orderBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/orderWhite.svg" alt="" srcset="">
-
-
               Order Management
             </p>
           </li>
@@ -54,12 +52,12 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/productBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/productWhite.svg" alt="" srcset="">
-
               Product Management
             </p>
           </li>
 
 
+         
           <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem4"
             (click)="changeDisplay('listItem4' , 'vendor')">
             <i class="fa fa-circle"></i>
@@ -102,13 +100,6 @@
           </li>
 
 
-          <!-- <li *ngIf="userInfo?.isAdmin" class="my-2 py-2 listItem listItem8" (click)="changeDisplay('listItem8' , 'content')">
-            <i class="fa fa-circle"></i>
-            <p class="ms-1 py-3 px-2">
-              <i class="fa fa-users mx-1"></i>
-              Content Management
-            </p>
-          </li> -->
 
           <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem9"
             (click)="changeDisplay('listItem9' , 'category')">
@@ -131,8 +122,18 @@
               Brand Management
             </p>
           </li>
+          <li class="mb-1  listItem listItem18" (click)="changeDisplay('listItem18' , 'ticket')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1 image" width="20px" src="../../../assets/images/Sislimoda/white/support-ticket.svg" alt=""
+                srcset="">
+              <img class="me-1 image2" width="20px" src="../../../assets/images/Sislimoda/white/support_white.svg"
+                alt="" srcset="">
+              ticket
+            </p>
+          </li>
 
-          <li class="mb-1 listItem listItem10" (click)="changeDisplay('listItem10' , 'sales')">
+          <li class="mb-1 listItem listItem10 d-none" (click)="changeDisplay('listItem10' , 'sales')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/analysisBlack.svg" alt="" srcset="">
@@ -166,7 +167,7 @@
 
       <!-- footer -->
       <div class="sideNav_footer">
-        <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/support.svg" alt="" srcset="">
+        <img class="me-1 image" src="../../../assets/images/Sislimoda/white/support.svg" alt="" srcset="">
 
         <span>Support and Help</span>
       </div>

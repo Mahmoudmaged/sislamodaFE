@@ -42,6 +42,8 @@ import { NotificationManagementComponent } from '../../Notification/notification
 import { AddNotificationComponent } from '../../Notification/add-notification/add-notification.component';
 import { DisplayNotificationComponent } from '../../Notification/display-notification/display-notification.component';
 import { UpdateNotificationComponent } from '../../Notification/update-notification/update-notification.component';
+import { TicketManagementComponent } from '../../ticket/ticket-management/ticket-management.component';
+import { DashboardComponent } from '../../dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -92,6 +94,10 @@ const routes: Routes = [
   { path: "notification/add", component: AddNotificationComponent },
   { path: "notification/:id/edit", component: UpdateNotificationComponent },
   { path: "notification/:id/display", component: DisplayNotificationComponent },
+
+
+  { path: "ticket", component: TicketManagementComponent },
+  { path: "dashboard", component: DashboardComponent },
 
 
   { path: "**", component: NotAvailableComponent },

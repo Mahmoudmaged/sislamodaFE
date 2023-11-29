@@ -38,4 +38,9 @@ export class VendorService {
     return this._HttpClient.post(`${this.baseURL}Update`, data);
 
   }
+
+  dashboard(id:string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetVendorStatistics?vendorId=${id}`);
+
+  }
 }

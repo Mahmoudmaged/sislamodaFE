@@ -1,0 +1,161 @@
+<div class="head">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h5 class="head_title">Category Management</h5>
+            <p class="my-1"></p>
+        </div>
+    </div>
+
+    <div class="row  categoryContainer my-2">
+        <div class="head p-3 text-light">
+            <h5>Update  Subcategory</h5>
+        </div>
+        <div class="categoryContainerBody px-5 ">
+            <div class="px-3 py-1">
+                <form [formGroup]="addCategoryForm" (ngSubmit)="addCategoryForm.valid && handelAddCategory()">
+                    <div class="row pe-5">
+                        <div class="col-12">
+                            <div class="row">
+                              <div class="col-lg-4  mt-1  mb-2">
+                                <div class="px-2 py-1">
+                                  <div class="px-2 py-2 w-100 text-center uploadParent">
+                                    <div class="uploadDiv p-2 text-center">
+                                      <i class="fa fa-file fa-3x"></i>
+                                      <p>Attach image here to start uploading</p>
+                                      <div class="d-flex align-items-center justify-content-center">
+                                         <p class="p11 me-1"></p> <p>Or</p>  <p class="ms-1 p11"></p></div>
+                                      <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">Browse
+                                        file</label>
+                                      <input formControlName="image" class="d-none" multiple type="file" id="uploadImage"
+                                        (change)="selectImage($event)">
+              
+                                      <div
+                                        *ngIf="addCategoryForm.controls['image'].errors && addCategoryForm.controls['image'].touched"
+                                        class=" my-1 xx">
+                                        <p class="formError">In-valid category image</p>
+                                      </div>
+              
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+              
+                              <div *ngIf="selectedImage" class="col-lg-4 mb-2">
+                                <div class="px-2 py-2 displayImageCont">
+                                  <div class="text-end trashSection">
+                                    <i class="fa fa-trash text-danger" (click)="removeImage()"></i>
+                                  </div>
+                                  <div class="px-2 py-1 w-100 text-center uploadParent">
+                                    <img class="img-fluid" [src]="selectedImage" alt="" srcset="">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       
+                        <div class="col-6 mb-1">
+                            <div class="px-2 py-1">
+                                <div>
+                                    <p>Category Name</p>
+                                    <div class="form-group">
+                                        <input type="text" formControlName="categoryName" class="form-control" />
+
+                                        <div *ngIf="addCategoryForm.controls['categoryName'].errors && addCategoryForm.controls['categoryName'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">In-valid category Name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-1">
+                            <div class="px-2 py-1">
+                                <div>
+                                    <p>Category NameEN</p>
+                                    <div class="form-group">
+                                        <input type="text" formControlName="categoryNameEn" class="form-control" />
+
+                                        <div *ngIf="addCategoryForm.controls['categoryNameEn'].errors && addCategoryForm.controls['categoryNameEn'].touched"
+                                            class="my-1 xx">
+                                            <p class="formError">In-valid category nameEn </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-1">
+                            <div class="px-2 py-1">
+                                <div>
+                                    <p>Category Description</p>
+                                    <div class="form-group">
+                                        <textarea formControlName="categoryDescription" class="form-control" name=""
+                                            id="" cols="30" rows="1"></textarea>
+
+                                        <div *ngIf="addCategoryForm.controls['categoryDescription'].errors && addCategoryForm.controls['categoryDescription'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError"> In-valid product description</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-1">
+                            <div class="px-2 py-1">
+                                <div>
+                                    <p>Category DescriptionEn</p>
+                                    <div class="form-group">
+                                        <textarea formControlName="categoryDescriptionEn" class="form-control" name=""
+                                            id="" cols="30" rows="1"></textarea>
+
+                                        <div *ngIf="addCategoryForm.controls['categoryDescriptionEn'].errors && addCategoryForm.controls['categoryDescriptionEn'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">In-valid product descriptionEn</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-1">
+                            <div class="px-2 py-1">
+                                <div>
+                                    <p>Category</p>
+                                    <div class="form-group my-1">
+                                        <select formControlName="category" class="form-select p-2"
+                                            aria-label="Default select example">
+                                            <option *ngFor="let category of categoryList ;  index as i"
+                                                [value]="category.id" [selected]=" i== 0">
+                                                {{category.nameEn}}</option>
+                                        </select>
+
+                                        <div *ngIf="addCategoryForm.controls['category'].errors && addCategoryForm.controls['category'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">In-valid category name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-100 text-end mt-2 mb-2 ">
+                            <button type="submit" class="btn btn-dark px-5 py-1 my-1"
+                                [disabled]="addCategoryForm.invalid"><span class="px-2">Add</span></button>
+                            <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
+                                (click)="closeCategoryDetailsSec()">Cancel</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

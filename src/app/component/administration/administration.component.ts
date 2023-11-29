@@ -1,7 +1,7 @@
 import {
   Component, OnInit
 } from '@angular/core';
-import { FinancialManagementComponent } from '../financial-management/financial-management.component';
+import { FinancialManagementComponent } from '../financial/financial-management/financial-management.component';
 import { ActivatedRoute, Router } from '@angular/router';
 declare let $: any
 @Component({
@@ -36,31 +36,25 @@ export class AdministrationComponent implements OnInit {
   lang: string = 'English'
   constructor(
     public _Router: Router, public _ActivatedRoute: ActivatedRoute) {
-    console.log({ dir: localStorage.getItem('dir') });
 
     this.dir = localStorage.getItem('dir') || 'ltr';
-    // this.dir = 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
-    console.log({userInfo:this.userInfo});
-    
     if (this.userInfo?.isVendor) {
-
       this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-      console.log({vv:this.vendorData});
-
     }
 
     this.photo = this.userInfo?.photo || this.photo;
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
-    this.changeDisplay(this.itemBar?.item || this.mainBar[0].item, this.itemBar?.com || this.mainBar[0].com)
     console.log({ itemBar: this.itemBar });
+    return this.changeDisplay(this.itemBar?.item || this.mainBar[0].item, this.itemBar?.com || this.mainBar[0].com)
+    
   }
 
-  getNotification(){
+  getNotification() {
     this._Router.navigateByUrl("/admin/notification")
   }
 

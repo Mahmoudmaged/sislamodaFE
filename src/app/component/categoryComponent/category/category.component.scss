@@ -1,0 +1,81 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+@import '../../order/order-management/order-management.component.scss';
+
+* {
+    padding: 0px;
+    margin: 0px;
+    // overflow: hidden;
+}
+
+.overLay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 5555555555555555;
+}
+
+.sideAlert {
+    background-color: $redColor;
+    color: $whiteColor;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    position: fixed;
+    right: -100%;
+    top: 15%;
+    padding: 10px 20px;
+    transition: all 1s;
+    z-index: 9999999999999;
+}
+
+
+.categoryContainer {
+    // background-color: $blackColor;
+    // border-radius: 15px;
+    border: 0px solid transparent;
+    box-shadow: 5px 5px 20px 2px $lighterGrayColor;
+
+}
+
+.categoryContainer .head {
+    background-color: $blackColor;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 0px solid transparent;
+}
+
+.categoryContainerBody {
+    background-color: $whiteColor;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+}
+
+.imageConatiner {
+    text-align: center;
+}
+
+.imageConatiner img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid $blackColor;
+    margin: auto;
+    cursor: pointer;
+}
+
+.addProductBtn {
+    border-radius: 15px;
+    padding: 10px 5px;
+}

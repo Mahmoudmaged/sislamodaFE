@@ -16,7 +16,7 @@
   </div>
   <div class="row  categoryContainer my-1">
     <div class="head p-3 text-light">
-      <h5> {{dir=='ltr'?'Add new offer':'اضافه عرض جديد'}}</h5>
+      <h5> {{dir=='ltr'?'Update  offer':'تعديل العرض '}}</h5>
     </div>
     <div class="categoryContainerBody px-5 py-2">
       <div class="px-3">
@@ -72,7 +72,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Name(Arabic)' :' (عربي) الاسم '}}
+                    {{dir=='ltr'?'Name(Arabic)' :' الاسم '+' (عربي)'}}
                   </p>
                   <div class="form-group">
                     <input type="text" formControlName="title" class="form-control" />
@@ -90,7 +90,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Name(English)' :'(بلانجليزيه)الاسم'}}
+                    {{dir=='ltr'?'Name(English)' :'الاسم' +'(بلانجليزيه)'}}
                   </p>
                   <div class="form-group">
                     <input type="text" formControlName="titleEn" class="form-control" />
@@ -108,7 +108,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Description(Arabic)' :'(عربي) الوصف'}}
+                    {{dir=='ltr'?'Description(Arabic)' :'الوصف'+' (عربي)'}}
                   </p>
                   <div class="form-group">
                     <textarea formControlName="description" class="form-control" name="" id="" cols="30"
@@ -129,7 +129,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Description(English)' :'(بلانجليزيه) الوصف'}}
+                    {{dir=='ltr'?'Description(English)' :'الوصف'+'(بلانجليزيه)'}}
                   </p>
                   <div class="form-group">
                     <textarea formControlName="descriptionEn" class="form-control" name="" id="" cols="30"
@@ -253,7 +253,7 @@
             </div>
             <div class="col-12  mb-1" dir="ltr">
               <div class="p-2">
-                <p>{{dir=='ltr'?'Offer state' :'حاله العرض'}}</p>
+                <p [class]="dir=='ltr'?'text-start':'text-end'">{{dir=='ltr'?'Offer state' :'حاله العرض'}}</p>
 
                 <div class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
                   <label class="form-check-label" for="flexSwitchCheckChecked"> {{dir=='ltr'?'Active' :' متاح'}}</label>

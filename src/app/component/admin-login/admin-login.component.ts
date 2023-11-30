@@ -244,5 +244,11 @@ export class AdminLoginComponent {
     }
 
   }
+
+
+  
+  createAccount() {
+    this._Router.navigateByUrl("/vendor/signup")
+  }
 }
 

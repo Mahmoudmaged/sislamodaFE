@@ -11,29 +11,29 @@
 
     <div class="row">
         <div class="col-lg-4 col-md-5 col-12 my-1">
-            <h5 class="head_title">Category Management</h5>
-            <p class="my-1">View list of category and modify them....</p>
+            <h5 class="head_title">{{dir=="ltr"?'Category Management':"اداره الفئات"}}</h5>
+            <p class="my-1"> {{dir=="ltr"?'View list of category and modify them....':" عرض قائمه بالفئات"}}</p>
         </div>
 
         <div class="col-lg-8 col-md-7 col-12">
             <div class="row">
                 <div class="col-md-9 col-8 my-1">
                     <div class="searchInputContainer">
-                        <input type="text" placeholder="Search results " [(ngModel)]="textSearch" (input)="onSearch()"
-                            class="w-100 searchInput">
+                        <input type="text" placeholder="{{dir=='ltr'?'Search results':'نتيجه البحث '}}"
+                            [(ngModel)]="textSearch" (input)="onSearch()" class="w-100 searchInput">
                         <i class="fa fa-search"></i>
                     </div>
                 </div>
                 <div class="col-md-3 col-4 my-1">
-                    <div class="ms-1">
+                    <div class="mx-1">
                         <div class="search_dropdown">
                             <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
                                 class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
                                 type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
 
                                 <div class="row align-items-center">
-                                    <div class="col-11 text-start">
-                                        <span>New </span>
+                                    <div class="col-11" [class]="dir=='rtl'?'text-end':'text-start'">
+                                        <span>{{dir=='ltr'?'New':'اضافه'}} </span>
 
                                     </div>
                                     <div class="col-1">
@@ -42,13 +42,14 @@
                                     </div>
                                 </div>
                             </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list1">
+                            <div class="dropdown-menu-list  dropdown-menu-list1"
+                                [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                                 <span class="dropdown-item"
                                     (click)="changeOrderStatus('search_dropdownMenuButton1','Category')">
-                                    Category</span>
+                                    {{dir=='ltr'?'Category':'فئه'}}</span>
                                 <span class="dropdown-item my-1"
                                     (click)="changeOrderStatus('search_dropdownMenuButton1','Notifications')">
-                                    Subcategory</span>
+                                    {{dir=='ltr'?'Subcategory':'فئه فرعيه'}}</span>
 
                             </div>
                         </div>
@@ -62,7 +63,7 @@
 
     <div class="row  categoryContainer my-2">
         <div class="head p-3 text-light">
-            <h5>Category</h5>
+            <h5> {{dir=='ltr'?'Category':'فئه'}}</h5>
         </div>
         <div *ngIf="categoryList.length ; else noCategory" class="categoryContainerBody px-5 py-2 ">
             <div class="row p-3">
@@ -72,7 +73,7 @@
                             <img class="" src="{{category.categoryPhoto?.fullLink}}" alt="" srcset="">
                         </div>
                         <div class="w-100  text-center my-2">
-                            <p class="categoryName">{{category.nameEn}}</p>
+                            <p class="categoryName">{{dir=='ltr'?category.nameEn:category.name}}</p>
                         </div>
                     </div>
                 </div>
@@ -80,7 +81,7 @@
         </div>
         <ng-template #noCategory>
             <div class="text-center p-5">
-                <h3>Ops it look's empty.....</h3>
+                <h3>{{dir=='ltr'?"Ops it look's empty.....":"لم يتم العثور علي اي نتيجه "}}</h3>
             </div>
         </ng-template>
     </div>

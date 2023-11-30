@@ -24,7 +24,7 @@
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/dashboardBalck.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/white_dashboard.svg" alt=""
                 srcset="">
-              Dashboard Overview
+              {{dir=='ltr'?'Dashboard Overview':'لوحه التحكم'}}
             </p>
           </li>
 
@@ -33,7 +33,7 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/orderBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/orderWhite.svg" alt="" srcset="">
-              Order Management
+              {{dir=='ltr'?'Order Management':'إدارة الطلبيات'}}
             </p>
           </li>
 
@@ -42,7 +42,9 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/offerBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/offerWhite.svg" alt="" srcset="">
-              offers
+              {{dir=='ltr'?' offers Management':'إدارة العروض'}}
+
+
             </p>
           </li>
 
@@ -52,19 +54,21 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/productBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/productWhite.svg" alt="" srcset="">
-              Product Management
+              {{dir=='ltr'?'Product Management':'إدارة المنتجات'}}
             </p>
           </li>
 
 
-         
+
           <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem4"
             (click)="changeDisplay('listItem4' , 'vendor')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/userBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/userWhite.svg" alt="" srcset="">
-              Vendor Management
+
+              {{dir=='ltr'?'Vendor Management':'إدارة الموردين'}}
+
             </p>
           </li>
 
@@ -75,7 +79,8 @@
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/inventoryBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/inventory_white.svg" alt=""
                 srcset="">
-              Inventory Management
+              {{dir=='ltr'?'Inventory Management':'إدارة المخازن'}}
+
             </p>
           </li>
 
@@ -85,8 +90,7 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/user_black.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/user_white.svg" alt="" srcset="">
-
-              Users Management
+              {{dir=='ltr'?'Users Management':'إدارة المستخدمين'}}
             </p>
           </li>
 
@@ -95,7 +99,9 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="image" src="../../../assets/images/Sislimoda/white/finaincialBalck.svg" alt="" srcset="">
               <img class="image2" src="../../../assets/images/Sislimoda/white/financial_white.svg" alt="" srcset="">
-              <span class="ms-1"> Financial Management</span>
+
+              {{dir=='ltr'?'Financial Management':'إدارة الحسابات'}}
+
             </p>
           </li>
 
@@ -108,8 +114,7 @@
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/categories.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/categories_white.svg" alt=""
                 srcset="">
-
-              Category Management
+              {{dir=='ltr'?'Category Management':'إدارة الفئات'}}
             </p>
           </li>
           <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem13"
@@ -119,17 +124,19 @@
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/categories.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/categories_white.svg" alt=""
                 srcset="">
-              Brand Management
+              {{dir=='ltr'?'Brand Management':'إدارة العلامات التجاريه'}}
             </p>
           </li>
           <li class="mb-1  listItem listItem18" (click)="changeDisplay('listItem18' , 'ticket')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
-              <img class="me-1 image" width="20px" src="../../../assets/images/Sislimoda/white/support-ticket.svg" alt=""
-                srcset="">
+              <img class="me-1 image" width="20px" src="../../../assets/images/Sislimoda/white/support-ticket.svg"
+                alt="" srcset="">
               <img class="me-1 image2" width="20px" src="../../../assets/images/Sislimoda/white/support_white.svg"
                 alt="" srcset="">
-              ticket
+
+              {{dir=='ltr'?'ticket Management':'إدارة الشكاوه'}}
+
             </p>
           </li>
 
@@ -138,8 +145,7 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/analysisBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/sales_white.svg" alt="" srcset="">
-
-              Sales Management
+              {{dir=='ltr'?'Sales Management':'إدارة المبيعات'}}
             </p>
           </li>
 
@@ -150,15 +156,14 @@
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/settingBlack.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/settings_white.svg" alt="" srcset="">
-
-              Settings
+              {{dir=='ltr'?'Settings Management':' الاعدادات'}}
             </p>
           </li>
 
           <li class="mb-1 listItem listItem14" (click)="logout()">
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <i class="fa fa-sign-out  mx-1 py-2" aria-hidden="true"></i>
-              Logout
+              {{dir=='ltr'?'Logout':' تسجيل الخروج'}}
             </p>
           </li>
 
@@ -167,9 +172,9 @@
 
       <!-- footer -->
       <div class="sideNav_footer">
-        <img class="me-1 image" src="../../../assets/images/Sislimoda/white/support.svg" alt="" srcset="">
+        <img class="mx-1 image" src="../../../assets/images/Sislimoda/white/support.svg" alt="" srcset="">
 
-        <span>Support and Help</span>
+        <span>{{dir=='ltr'?'Support and Help':'الدعم الفني'}}</span>
       </div>
     </div>
 

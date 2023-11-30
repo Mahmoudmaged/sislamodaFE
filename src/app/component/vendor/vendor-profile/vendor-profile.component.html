@@ -17,13 +17,9 @@
         </div>
     </div>
     <section class="VendorProfSec  p-3">
-        <!-- <div class="text-end w-100">
-            <i (click)="closeVendorProf()" class="fa fa-times  ms-auto" aria-hidden="true"></i>
-        </div> -->
         <div class="info mb-1">
             <div class="orderDetailsImage d-flex align-items-center">
                 <img class="img-fluid" src="{{vendor?.logo?.fullLink || defaultImage}}" alt="">
-
             </div>
             <div class="title my-1">
                 <h5>{{dir=='ltr'?vendor?.nameEn :vendor?.name}}</h5>
@@ -160,7 +156,7 @@
         </div>
 
         <div class="w-100 " [ngClass]="{'text-end':dir=='ltr' , 'text-start':dir=='rtl'}">
-            <button class="btn btn-dark px-3 py-2">Save</button>
+            <button class="btn btn-dark px-3 py-2">{{dir=='ltr'?'Save':'حفظ'}}</button>
         </div>
 
     </section>

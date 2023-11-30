@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-5 col-12">
-      <h4 class="head_title"> {{dir=='ltr'?'Offers':'العروض'}}Offers</h4>
+      <h4 class="head_title"> {{dir=='ltr'?'Offers':'العروض'}}</h4>
       <!-- <p class="my-1">View all offers and their details....</p> -->
     </div>
 
@@ -31,7 +31,8 @@
                         <i class="fa fa-file fa-3x"></i>
                         <p>
 
-                          {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره المناسبه للبدء  في تحميلها '}}
+                          {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره المناسبه للبدء في
+                          تحميلها '}}
                         </p>
                         <div class="d-flex align-items-center justify-content-center">
                           <p class="p11 me-1"></p>
@@ -72,7 +73,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Name(Arabic)' :' (عربي) الاسم '}}
+                    {{dir=='ltr'?'Name(Arabic)' :"الاسم " + " (عربي)"}}
                   </p>
                   <div class="form-group">
                     <input type="text" formControlName="title" class="form-control" />
@@ -90,7 +91,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Name(English)' :'(بلانجليزيه)الاسم'}}
+                    {{dir=='ltr'?'Name(English)' :'الاسم' +'(بلانجليزيه)'}}
                   </p>
                   <div class="form-group">
                     <input type="text" formControlName="titleEn" class="form-control" />
@@ -108,7 +109,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Description(Arabic)' :'(عربي) الوصف'}}
+                    {{dir=='ltr'?'Description(Arabic)' :'الوصف'+'(عربي)'}}
                   </p>
                   <div class="form-group">
                     <textarea formControlName="description" class="form-control" name="" id="" cols="30"
@@ -118,7 +119,7 @@
                       *ngIf="addOfferForm.controls['description'].errors && addOfferForm.controls['description'].touched"
                       class=" my-1 xx">
                       <p class="formError">
-                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}} 
+                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}}
                       </p>
                     </div>
                   </div>
@@ -129,7 +130,7 @@
               <div class="p-2">
                 <div>
                   <p>
-                    {{dir=='ltr'?'Description(English)' :'(بلانجليزيه) الوصف'}}
+                    {{dir=='ltr'?'Description(English)' :' الوصف'+'(بلانجليزيه)'}}
                   </p>
                   <div class="form-group">
                     <textarea formControlName="descriptionEn" class="form-control" name="" id="" cols="30"
@@ -138,7 +139,7 @@
                       *ngIf="addOfferForm.controls['descriptionEn'].errors && addOfferForm.controls['descriptionEn'].touched"
                       class=" my-1 xx">
                       <p class="formError">
-                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}} 
+                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}}
 
                       </p>
                     </div>
@@ -215,7 +216,7 @@
                       <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
                         [selected]=" i== 0">
                         {{dir=='ltr'?category.nameEn:category.name}}
-                      
+
                       </option>
                     </select>
                     <div
@@ -253,7 +254,7 @@
             </div>
             <div class="col-12  mb-1" dir="ltr">
               <div class="p-2">
-                <p>{{dir=='ltr'?'Offer state' :'حاله العرض'}}</p>
+                <p [class]="dir=='ltr'?'text-start':'text-end'">{{dir=='ltr'?'Offer state' :'حاله العرض'}}</p>
 
                 <div class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
                   <label class="form-check-label" for="flexSwitchCheckChecked"> {{dir=='ltr'?'Active' :' متاح'}}</label>

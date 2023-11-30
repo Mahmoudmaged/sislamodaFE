@@ -11,6 +11,7 @@ export class CategoryComponent implements OnInit {
   load: boolean = false;
   sideMessage: string = '';
   categoryList: any[] = []
+  dir:string='ltr'
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -21,6 +22,7 @@ export class CategoryComponent implements OnInit {
   }
   constructor(private _CategoryService: CategoryService, private _Router: Router) {
     this.getCategoryList()
+    this.dir = localStorage.getItem('dir')||'ltr'
   }
 
   ngOnInit(): void {

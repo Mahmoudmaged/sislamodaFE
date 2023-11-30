@@ -9,15 +9,15 @@
     </div>
     <div class="row">
         <div class="col-lg-3  col-md-5 col-12">
-            <h4 class="head_title">Vendor Profile</h4>
-            <p class="my-1  head_Desc">View and update my data...</p>
+            <h4 class="head_title"> {{dir=='ltr'?'Vendor Profile':'حساب المورد '}}</h4>
+            <p class="my-1  head_Desc"> {{dir=='ltr'?'View and update my data...':' مراجعه وتحديث بيانات الحساب و المتجر '}}</p>
         </div>
     </div>
     <form [formGroup]="personalForm" (ngSubmit)="personalForm.valid && handelUpdateData()">
 
         <section class="VendorProfSec  px-5 py-2">
 
-            <h6>Personal Data</h6>
+            <h6>{{dir=='ltr'?'Personal Data':'بيانات الشخصيه'}}</h6>
 
             <div class="personalForm my-2">
                 <div class="row">
@@ -64,14 +64,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">First Name</label>
+                                <label for=""> {{dir=="ltr"?'First Name':'الاسم '}}</label>
+
                                 <div>
                                     <input class="form-control my-1" type="text" placeholder="First Name" name="" id=""
                                         formControlName="firstName">
 
                                     <div *ngIf="personalForm.controls['firstName'].errors && personalForm.controls['firstName'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid first name</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid first name ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -81,14 +83,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Middle Name</label>
+                                <label for=""> {{dir=="ltr"?'Middle Name':'اسم الثاني'}}</label>
+
                                 <div>
                                     <input class="form-control my-1" type="text" placeholder="Middle Name" name="" id=""
                                         formControlName="middleName">
 
                                     <div *ngIf="personalForm.controls['middleName'].errors && personalForm.controls['middleName'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid middle name</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid middle name ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -97,14 +101,15 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Last Name</label>
+                                <label for=""> {{dir=="ltr"?'Last Name':'اسم عائله'}}</label>
                                 <div>
                                     <input class="form-control my-1" type="text" placeholder="Last Name" name="" id=""
                                         formControlName="lastName">
 
                                     <div *ngIf="personalForm.controls['lastName'].errors && personalForm.controls['lastName'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid last name</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid last name ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -114,14 +119,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for=""> Username</label>
+                                <label for=""> {{dir=="ltr"?'Username':'اسم المستخدم'}}</label>
+
                                 <div>
                                     <input class="form-control my-1" type="text" placeholder="Username" name="" id=""
                                         formControlName="userName">
 
                                     <div *ngIf="personalForm.controls['userName'].errors && personalForm.controls['userName'].touched"
                                         class="my-1 xx">
-                                        <p class="formError">In-valid Username</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid Username ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -132,14 +139,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Email</label>
+                                <label for=""> {{dir=="ltr"?'Email':'بريد الالكتروني'}}</label>
+
                                 <div>
                                     <input class="form-control mb-1" type="email" placeholder="Email" name="" id=""
                                         formControlName="email">
 
                                     <div *ngIf="personalForm.controls['email'].errors && personalForm.controls['email'].touched"
                                         class="text-center my-1 xx">
-                                        <p class="formError">In-valid email</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid email ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -150,14 +159,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Address</label>
+                                <label for=""> {{dir=="ltr"?'Address':'العنوان'}}</label>
+
                                 <div>
                                     <input class="form-control mb-1" type="text" placeholder="Address" name="" id=""
                                         formControlName="address">
 
                                     <div *ngIf="personalForm.controls['address'].errors && personalForm.controls['address'].touched"
                                         class="text-center my-1 xx">
-                                        <p class="formError">In-valid address</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid address ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -167,14 +178,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Phone</label>
+                                <label for=""> {{dir=="ltr"?'Store Phone':'رقم الهاتف'}}</label>
+
                                 <div>
                                     <input class="form-control mb-1" type="number" placeholder="Phone" name="" id=""
                                         formControlName="phone">
 
                                     <div *ngIf="personalForm.controls['phone'].errors && personalForm.controls['phone'].touched"
                                         class="text-center my-1 xx">
-                                        <p class="formError">In-valid phone</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid phone ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -189,21 +202,21 @@
 
         <section class="VendorProfSec  px-5 py-2 my-2">
 
-            <h6>Store data</h6>
+            <h6>{{dir=="ltr"?'Store data':'بيانات المتجر'}}</h6>
 
             <div class="personalForm mb-2">
                 <div class="row">
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Name(Arabic)</label>
+                                <label for="">{{dir=="ltr"?'Name(Arabic)':'الاسم(Arabic)'}}</label>
                                 <div>
                                     <input class="form-control my-1" type="text" placeholder="Name (Arabic)" name=""
                                         id="" formControlName="name">
 
                                     <div *ngIf="personalForm.controls['name'].errors && personalForm.controls['name'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid name</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid name ':'خطاء'}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -213,14 +226,15 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Name(English)</label>
+                                <label for="">{{dir=="ltr"?'Name(English)':'الاسم(English)'}}</label>
                                 <div>
                                     <input class="form-control my-1" type="text" placeholder="Name (English)" name=""
                                         id="" formControlName="nameEn">
 
                                     <div *ngIf="personalForm.controls['nameEn'].errors && personalForm.controls['nameEn'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid name</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid name ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -230,14 +244,15 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Description(Arabic)</label>
+                                <label for=""> {{dir=="ltr"?'Description(Arabic)':'الوصف(Arabic)'}}</label>
                                 <div>
                                     <textarea class="form-control my-1" type="text" placeholder="Description(Arabic)"
                                         name="" id="" formControlName="description"></textarea>
 
                                     <div *ngIf="personalForm.controls['description'].errors && personalForm.controls['description'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid description</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid description ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -247,14 +262,17 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for="">Description(English)</label>
+                                <label for="">
+                                    {{dir=="ltr"?'Description(English)':'الوصف(English)'}}
+                                </label>
                                 <div>
                                     <textarea class="form-control my-1" type="text" placeholder="Description(English)"
                                         name="" id="" formControlName="descriptionEn"></textarea>
 
                                     <div *ngIf="personalForm.controls['descriptionEn'].errors && personalForm.controls['descriptionEn'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid description</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid description ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -266,14 +284,17 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for=""> Store Phone(one)</label>
+                                <label for=""> {{dir=="ltr"?'Store Phone(one)':'رقم الهاتف(الاول)'}}</label>
+                                
+
                                 <div>
                                     <input class="form-control mb-1" type="number" placeholder="Phone" name="" id=""
                                         formControlName="phoneNumber">
 
                                     <div *ngIf="personalForm.controls['phoneNumber'].errors && personalForm.controls['phoneNumber'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid phone</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid phone ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -283,14 +304,16 @@
                     <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div class="form-group">
-                                <label for=""> Store Phone(Two)</label>
+                                <label for=""> {{dir=="ltr"?'Store Phone(Two)':'رقم الهاتف (الثاني)'}}</label>
+                                
                                 <div>
                                     <input class="form-control mb-1" type="number" placeholder="Phone" name="" id=""
                                         formControlName="phoneNumber2">
 
                                     <div *ngIf="personalForm.controls['phoneNumber2'].errors && personalForm.controls['phoneNumber2'].touched"
                                         class=" my-1 xx">
-                                        <p class="formError">In-valid phone</p>
+                                        <p class="formError">{{dir=="ltr"?'In-valid phone ':'خطاء'}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -303,8 +326,9 @@
 
         <section class="my-3">
             <div class="text-end">
-                <button [disabled]="personalForm.invalid" class="btn btn-dark px-3 py-2">Update</button>
-                <button class="btn btn-outline-dark px-3 py-2 ms-1">Cancel</button>
+                <button [disabled]="personalForm.invalid"
+                    class="btn btn-dark px-3 py-2">{{dir=='ltr'?'Update':'حفظ'}}</button>
+                <button class="btn btn-outline-dark px-3 py-2 ms-1">{{dir=='ltr'?'Cancel':'الغاء'}}</button>
             </div>
         </section>
     </form>

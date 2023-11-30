@@ -45,6 +45,9 @@ h6 , h4 {
     // border: 1px solid $barColorE7;
     // border-radius: 6px;
 }
+.row div{
+    cursor: pointer;
+}
 
 ::ng-deep{
     .p-carousel-content ul li button{

@@ -13,6 +13,7 @@ declare let $: any;
 export class AddSubcategoryComponent implements OnInit {
   load: boolean = false;
   sideMessage: string = '';
+  dir: string = 'ltr'
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -33,6 +34,7 @@ export class AddSubcategoryComponent implements OnInit {
     private _CategoryService: CategoryService,
     private _AttachmentsService: AttachmentsService,
     private _Router: Router) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.getAllCategory()
   }
 

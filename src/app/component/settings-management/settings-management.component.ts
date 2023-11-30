@@ -7,8 +7,19 @@ declare let $: any;
   styleUrls: ['./settings-management.component.scss']
 })
 export class SettingsManagementComponent implements OnInit {
+  dir: string = 'ltr';
+  textSearch: string = ''
 
+  settingsList = [
+    { nameEn: 'Notifications', nameAr: 'الاشعارات', img: '../../../assets/images/Sislimoda/notification.svg' , path:'/admin/notification' },
+    { nameEn: 'Payment methods', nameAr: 'طرق الدفع', img: '../../../assets/images/Sislimoda/white/support-ticket.svg' ,path:'/admin/payment' },
+    { nameEn: 'Option-Set', nameAr: 'مجموعات الخيارات', img: '../../../assets/images/Sislimoda/notification.svg' , path:'/admin/optionSet' },
+    { nameEn: 'Options', nameAr: 'خيارات', img: '../../../assets/images/Sislimoda/notification.svg' , path:'/admin/options' }
+  ];
+  displaySettingList: any[] = []
   constructor(private _Router: Router) {
+    this.dir = localStorage.getItem('dir') || 'ltr'
+    this.displaySettingList = this.settingsList
   }
 
   ngOnInit(): void {
@@ -45,6 +56,17 @@ export class SettingsManagementComponent implements OnInit {
     return this._Router.navigateByUrl(path)
   }
 
+
+  onSearch() {
+    if (this.textSearch) {
+
+      this.displaySettingList = this.settingsList.filter(ele => {
+        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase()) || ele.nameAr.toLowerCase().includes(this.textSearch.toLowerCase())
+      });
+    } else {
+      this.displaySettingList = this.settingsList
+    }
+  }
 
 
 

@@ -13,7 +13,7 @@ export class CategoryDetailsComponent {
   category: any;
   textSearch: string = ''
   findSub: string = `Their is no subcategory for this category...`
-
+  dir = 'ltr'
   load: boolean = false;
   sideMessage: string = '';
   showSideError(message: string) {
@@ -43,6 +43,7 @@ export class CategoryDetailsComponent {
   constructor(private _CategoryService: CategoryService, private _Router: Router, private _ActivatedRoute: ActivatedRoute) {
     this.getSubCategoriesById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
     this.getCategoryById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+    this.dir = localStorage.getItem('dir') || 'ltr'
   }
 
   ngOnInit(): void {
@@ -59,7 +60,7 @@ export class CategoryDetailsComponent {
 
     })
   }
-  
+
   getSubCategoriesById(id: any) {
     return this._CategoryService.getListOfSubCategoriesById(id).subscribe(res => {
       this.originalCategoryList = res

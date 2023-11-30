@@ -26,6 +26,7 @@ export class VendorProfileDetailsComponent implements OnInit {
   decoded: any;
   vendorData: any;
   userData: any;
+  dir: string = 'ltr'
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -78,6 +79,7 @@ export class VendorProfileDetailsComponent implements OnInit {
     private _AuthService: AuthService, public _Router: Router,
     private _ActivatedRoute: ActivatedRoute,
     private _AttachmentsService: AttachmentsService) {
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.getVendorProfile(this._ActivatedRoute.snapshot.paramMap.get('id')!)
   }
 
@@ -145,8 +147,8 @@ export class VendorProfileDetailsComponent implements OnInit {
       descriptionEn: this.personalForm.controls.descriptionEn.value,
       ownerPhoneNumber: this.personalForm.controls.phoneNumber.value,
       ownerPhoneNumber2: this.personalForm.controls.phoneNumber2.value,
-      ownerId:this.vendorData?.ownerId,
-      isApproved:true
+      ownerId: this.vendorData?.ownerId,
+      isApproved: true
 
 
     }
@@ -200,8 +202,8 @@ export class VendorProfileDetailsComponent implements OnInit {
     this.load = true;
     this._AuthService.getUserData(id).subscribe(res => {
       this.userData = res;
-      console.log({x:this.userData });
-      
+      console.log({ x: this.userData });
+
       this.personalForm.controls.firstName.setValue(this.userData?.firstName);
       this.personalForm.controls.lastName.setValue(this.userData?.lastName);
       this.personalForm.controls.middleName.setValue(this.userData?.middleName);

@@ -1,26 +1,42 @@
 @import '../user-management/user-management.component.scss';
 
+*:not(i) {
+    font-family: 'Poppins', sans-serif;
+
+}
+
+h4,
+h6,
+p {
+    font-size: 14px;
+}
+
 .head {
     height: 100vh;
 }
 
 .reportContainer {
-    border-radius: 15px;
+    border-radius: 6px;
     background-color: $whiteColor ;
-    border: 1px solid $lightGray;
-    background-color: $blackColor;
+    background-color: $whiteColor;
 }
 
 .reportContainer .reportHead {
     color: $whiteColor;
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
     padding: 10px;
+    background-color: $blackColor;
+
 }
 
 .con {
     background-color: $whiteColor;
-    padding: 20px;
+    padding: 10px;
+    border: 1px solid $lightGray;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+
 }
 
 .con2 {
@@ -29,7 +45,7 @@
 
 .chartBackGround {
     background-color: $whiteColor;
-    border-radius: 15px;
+    border-radius: 6px;
 }
 
 .form-control {
@@ -47,10 +63,12 @@
 .Notifications {
     display: none;
 }
-.cardHolder{
+
+.cardHolder {
     width: 50%;
     border: 1px solid blue;
 }
+
 .option {
     padding: 10px 10px;
 
@@ -58,4 +76,17 @@
 
 .cardsIcon {
     float: right;
+}
+
+.settingOptionHolder {
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.settingOptionHolder img {
+    width: 20px;
+}
+
+.settingOptionHolder p {
+    font-size: 12px;
 }

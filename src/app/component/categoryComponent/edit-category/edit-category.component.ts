@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttachmentsService } from 'src/app/Services/attachments.service';
@@ -9,9 +9,9 @@ declare let $: any;
   templateUrl: './edit-category.component.html',
   styleUrls: ['./edit-category.component.scss']
 })
-export class EditCategoryComponent {
+export class EditCategoryComponent implements OnInit {
 
-
+  dir: string = 'ltr'
   selectedValues: string[] = [];
   categoryList: any = []
   brandList: any = []
@@ -42,13 +42,13 @@ export class EditCategoryComponent {
     private _AttachmentsService: AttachmentsService,
     private _Router: Router,
     private _ActivatedRoute: ActivatedRoute) {
-
+      this.dir = localStorage.getItem("dir")! || 'ltr';
     this.getCategoryById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
 
   }
 
   selectImage(event: any) {
-    
+
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e: any) => {

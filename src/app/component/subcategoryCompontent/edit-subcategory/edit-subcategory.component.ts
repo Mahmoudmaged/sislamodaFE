@@ -23,6 +23,7 @@ export class EditSubcategoryComponent {
 
   load: boolean = false;
   sideMessage: string = '';
+  dir: string = 'ltr';
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -35,6 +36,7 @@ export class EditSubcategoryComponent {
     private _AttachmentsService: AttachmentsService,
     private _Router: Router,
     private _ActivatedRoute: ActivatedRoute) {
+    this.dir = localStorage.getItem('dir') || 'ltr'
     this.getCategoryById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
     this.getAllCategory()
   }
@@ -51,7 +53,7 @@ export class EditSubcategoryComponent {
     )
   }
   selectImage(event: any) {
-    
+
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e: any) => {

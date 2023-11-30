@@ -75,7 +75,7 @@
                         <div>
                             <p>Option-Set</p>
                             <div class="form-group my-1">
-                                <select formControlName="optionSetId" class="form-select p-2"
+                                <select formControlName="optionSetId" class="form-select p-2 text-start"
                                     aria-label="Default select example">
                                     <option *ngFor="let optionSet of optionSetList ;  index as i" [value]="optionSet.id">
                                         {{dir=="ltr"?optionSet.displayNameEN:optionSet.displayNameAr}}</option>

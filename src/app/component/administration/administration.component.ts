@@ -25,6 +25,10 @@ export class AdministrationComponent implements OnInit {
     { item: 'listItem12', com: 'offer' },
     { item: 'listItem13', com: 'brand' },
     { item: 'listItem18', com: 'ticket' },
+    
+    { item: 'listItem19', com: 'optionSet' },
+    { item: 'listItem19', com: 'options' },
+    { item: 'listItem19', com: 'options' },
     { item: 'listItem19', com: 'notification' }
   ]
   itemBar: any = {}

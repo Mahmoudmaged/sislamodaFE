@@ -9,7 +9,7 @@ import { AdministrationComponent } from './component/administration/administrati
 import { OrderManagementComponent } from './component/order/order-management/order-management.component';
 import { VendorManagementComponent } from './component/vendor/vendor-management/vendor-management.component';
 import { from } from 'rxjs';
-import { UserManagementComponent } from './component/user-management/user-management.component';
+import { UserManagementComponent } from './component/admin-user-management/user-management/user-management.component';
 import { SalesManagementComponent } from './component/sales/sales-management/sales-management.component';
 import { FinancialManagementComponent } from './component/financial/financial-management/financial-management.component';
 import { SettingsManagementComponent } from './component/settings-management/settings-management.component';
@@ -73,6 +73,7 @@ import { TicketManagementComponent } from './component/ticket/ticket-management/
 import { DisplayTicketComponent } from './component/ticket/display-ticket/display-ticket.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { CarouselModule } from 'primeng/carousel';
+import { UpdateUserComponent } from './component/admin-user-management/update-user/update-user.component';
 
 
 @NgModule({
@@ -136,7 +137,8 @@ import { CarouselModule } from 'primeng/carousel';
     DisplayNotificationComponent,
     TicketManagementComponent,
     DisplayTicketComponent,
-    DashboardComponent
+    DashboardComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

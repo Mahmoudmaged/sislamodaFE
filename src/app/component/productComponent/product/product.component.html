@@ -110,7 +110,7 @@
     </div>
   </div>
   <!-- Order Table  -->
-  <div *ngIf="productList.length; else noProduct">
+  <div *ngIf="productList.length; else noContent">
     <div class="my-2">
       <table class="table contentTable bordered text-center " [class]="dir=='rtl'?'tableRTL':''">
         <thead id="myTableHead">
@@ -201,8 +201,9 @@
     </div>
   </div>
 
-  <ng-template #noProduct>
-    <div class="row align-items-center justify-content-center text-center p-5 text-danger">
+  <ng-template #noContent>
+    <div class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+      <img class="" src="../../../../assets/images/Sislimoda/SislimodaAdmin/items/5.jpg" alt="" srcset="">
       <p>{{dir=='ltr'? 'No Matching Results.':'لم يتم العثور علي نتائج بحث مشابه'}}</p>
     </div>
   </ng-template>

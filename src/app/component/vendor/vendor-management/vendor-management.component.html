@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </button>
-                            <div class="dropdown-menu-list  dropdown-menu-list00"
+                            <div *ngIf="optionSet?.optionSetItems?.length" class="dropdown-menu-list  dropdown-menu-list00"
                                 [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
                                 <span class="dropdown-item"
                                     (click)="changeOrderStatusFilter('search_dropdownMenuButton00','#ffff','Vendor Status', 'التصنيف')">
@@ -88,7 +88,7 @@
         </div>
     </div>
     <!-- Order Table  -->
-    <section class="VendorTable">
+    <section *ngIf="vendorList.length ; else noContent" class="VendorTable">
         <div class="my-2">
             <table class=" table contentTable bordered text-center" [class]="dir=='rtl'?'tableRTL':''">
                 <thead>
@@ -204,6 +204,14 @@
             </ul>
         </div>
     </section>
+
+    <ng-template #noContent>
+        <div class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+            <img class="" src="../../../../assets/images/Sislimoda/SislimodaAdmin/items/5.jpg" alt="" srcset="">
+            <p>{{dir=='ltr'? 'No Matching Results.':'لم يتم العثور علي نتائج بحث مشابه'}}</p>
+        </div>
+    </ng-template>
+
 
 
 </div>

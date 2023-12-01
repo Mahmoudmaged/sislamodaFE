@@ -139,7 +139,7 @@ export class BrandManagementComponent implements OnInit{
     if (this.textSearch) {
 
       this.fullBrandList = this.fullBrandList.filter(ele => {
-        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase())
+        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase()) || ele.name.toLowerCase().includes(this.textSearch.toLowerCase())
       });
 
       this.pages = Math.ceil(this.fullBrandList.length / this.pageSize);

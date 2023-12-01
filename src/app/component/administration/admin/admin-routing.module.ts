@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FinancialManagementComponent } from '../../financial/financial-management/financial-management.component';
 import { OrderManagementComponent } from '../../order/order-management/order-management.component';
 import { VendorManagementComponent } from '../../vendor/vendor-management/vendor-management.component';
-import { UserManagementComponent } from '../../user-management/user-management.component';
+import { UserManagementComponent } from '../../admin-user-management/user-management/user-management.component';
 import { SalesManagementComponent } from '../../sales/sales-management/sales-management.component';
 import { VendorProfileComponent } from '../../vendor/vendor-profile/vendor-profile.component';
 import { FinancialManagementReportComponent } from '../../financial/financial-management-report/financial-management-report.component';
@@ -44,6 +44,9 @@ import { DisplayNotificationComponent } from '../../Notification/display-notific
 import { UpdateNotificationComponent } from '../../Notification/update-notification/update-notification.component';
 import { TicketManagementComponent } from '../../ticket/ticket-management/ticket-management.component';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
+import { UpdateUserComponent } from '../../admin-user-management/update-user/update-user.component';
+import { DisplayTicketComponent } from '../../ticket/display-ticket/display-ticket.component';
+import { AdministrationComponent } from '../administration.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -51,6 +54,7 @@ const routes: Routes = [
   { path: 'order', component: OrderManagementComponent },
   { path: 'order/:id/details', component: OrderDetailsComponent },
   { path: 'user', component: UserManagementComponent },
+  { path: 'user/:id/update', component: UpdateUserComponent },
   { path: 'product', component: ProductComponent },
   { path: 'product/:id/details', component: ProductDetailsComponent },
   { path: 'product/add', component: AddProductComponent },
@@ -97,10 +101,11 @@ const routes: Routes = [
 
 
   { path: "ticket", component: TicketManagementComponent },
+  { path: "ticket/:id/details", component: DisplayTicketComponent },
   { path: "dashboard", component: DashboardComponent },
 
 
-  { path: "**", component: NotAvailableComponent },
+  { path: "**", component: AdministrationComponent },
 
 ];
 

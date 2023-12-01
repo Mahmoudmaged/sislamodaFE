@@ -20,7 +20,13 @@ $barColorE7: #E7E7E7E7;
     // overflow-x: hidden;
 
 }
-
+.noContent img{
+    width: 50%;
+    height: auto;
+}
+.fa-spinner , .fa-spin{
+    font-size: 25px !important;
+  }
 .overLay {
     position: fixed;
     top: 0;

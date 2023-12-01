@@ -1,0 +1,182 @@
+<div class="head">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="deleteLayer">
+        <div class="row w-100 h-100 align-items-center justify-content-center">
+            <div class="deleteAlert my-2 p-5 pb-2 bg-light text-center">
+                <i class="fa fa-trash fa-2x  mb-4"></i>
+                <h3 *ngIf="dir=='ltr';else arabic">Are you sure that you want to delete this user?</h3>
+                <ng-template #arabic>
+                    <h3>برجاء التأكد من حذف هذا المستخدم ؟</h3>
+                </ng-template>
+                <div class="mt-3  justify-content-center w-100 ">
+                    <div>
+                        <button class="btn btn-danger px-2 py-1 w-100" (click)="confirmDelete()">
+                            {{dir=='ltr'?'Delete':'حذف'}}
+                        </button>
+
+                    </div>
+                    <div class="mt-1">
+                        <button class="btn  px-2 py-1  w-100 cancelBtn" (click)="closeDeleteAlert()">
+                            {{dir=='ltr'?'Cancel':'الغاء'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4  col-md-5 col-12">
+            <h5 class="head_title">{{dir=='ltr'?'User Management' :'اداره المستخدمين'}}</h5>
+            <p class="my-1 head_Desc">{{
+                dir=='ltr'?'View user details and modify them....' :' عرض وتعديل قائمه المستخدمين '}}</p>
+        </div>
+        <div class="col-lg-8 col-md-7 col-12 VendorTable">
+            <div class="row ">
+                <!-- col-md-9 col-8  -->
+                <div class="col-12 text-end">
+                    <div class="searchInputContainer">
+                        <input type="text" placeholder="{{dir=='ltr'?'Search results':'نتيجه البحث' }}"
+                            class="w-100 searchInput" [(ngModel)]="textSearch" (input)="onSearch()">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <!-- <div class="col-md-3 col-4">
+                    <div class="mx-1">
+                        <div class="search_dropdown">
+                            <button (click)="showDropDown('search_dropdownMenuButton1', 'dropdown-menu-list1')"
+                                class="btn  w-100 search_dropdownMenuButton  search_dropdown_btn search_dropdownMenuButton1"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+
+                                <div class="row align-items-center">
+                                    <div class="col-11 text-start" [class]="dir=='rtl'?'text-end':'text-start'">
+                                        <span>{{dir=="ltr"?'Inquiries' : 'تساؤلات'}} </span>
+
+                                    </div>
+                                    <div class="col-1">
+                                        <img class="" width="10px"
+                                            src="../../../assets/images/Sislimoda/Down_Arrow_3_.svg" alt="" srcset="">
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu-list  dropdown-menu-list1"
+                                [ngClass]="{'dropdown-menu-list-RTL': dir=='rtl' }">
+                                <span class="dropdown-item"
+                                    (click)="changeOrderStatus('search_dropdownMenuButton1','Inquiries')">{{dir=="ltr"?'Inquiries'
+                                    : 'تساؤلات'}}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Order Table  -->
+    <section *ngIf="userList.length; else noContent" class="VendorTable">
+        <div class="my-2">
+            <table class=" table contentTable bordered text-center" [class]="dir=='rtl'?'tableRTL':''">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 5%;">{{dir=='ltr'?'Image':'صوره'}}</th>
+                        <th scope="col" style="width: 15%;">{{dir=='ltr'?'Name':'الاسم'}}</th>
+                        <th scope="col" style="width: 20%;">{{dir=='ltr'?'Mail':'البريد الالكتروني'}}</th>
+                        <th scope="col" style="width: 15%;">{{dir=='ltr'?'Phone':'رقم الهاتف'}}</th>
+                        <!-- <th scope="col" style="width: 35%;">{{dir=='ltr'?'User Inquiries':'تساؤلات'}}</th> -->
+                        <th scope="col" style="width: 10%;">{{dir=='ltr'?'Options':'خيارات'}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userList; index as i">
+                        <td>
+                            <img class="img-fluid tableImage" src="{{user.photo?.fullLink || dummyImage}}" alt=""
+                                srcset="">
+                        </td>
+                        <td>
+                            <p>
+                                {{user?.name}}
+                            </p>
+                        </td>
+                        <td>
+                            <p>{{user?.email}}</p>
+                        </td>
+                        <td>
+                            <p>{{user?.phoneNumber}}</p>
+                        </td>
+                        <!-- <td>
+                            <p class="userInquiries">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit....
+                            </p>
+                        </td> -->
+
+                  
+
+                        <td class="optionsActions">
+                            <span class="p-2" (click)="edit(user.id)">
+                              <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt="" srcset="">
+                            </span>
+                            <span class="p-2" (click)="deletePromote(user?.id)">
+                              <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt="" srcset="">
+                            </span>
+                            <!-- <span class="p-2" >
+                              <img width="3px" src="../../../assets/images/Sislimoda/Menu.svg" alt="" srcset="">
+              
+                            </span>
+               -->
+              
+                          </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="pages > 0" class="orderTable paginateSection  my-2" [class]="dir=='rtl'?'paginateSectionRTL':''">
+            <ul class="ul" dir="ltr">
+                <li class=" mx-1" (click)="previousPage()">
+                    <!-- <i class="fa fa-angle-left"></i> -->
+                    <img src="../../../assets/images/Sislimoda/angleLeft.svg" alt="" srcset="">
+                </li>
+
+                <li *ngFor="let item of [].constructor(pages); index as i">
+                    <!-- <p *ngIf="pages > 10 && i+2 < pages" class="ActivePage">...</p> -->
+                    <p *ngIf="i+1 == currentPage ; else notCurrent " class="page page{{i+1}} ActivePage"
+                        (click)="getPageContent(i+1)">
+                        {{i+1}}
+                    </p>
+                    <ng-template #notCurrent>
+                        <p class="page page{{i+1}}" (click)="getPageContent(i+1)">
+                            {{i+1}}
+                        </p>
+                    </ng-template>
+
+                    <!-- <p *ngIf="(pages > 10 && i>10) && (i+1 != currentPage) " class="">..... </p>
+                    <p *ngIf="(pages > 10 && i> 10) && (i+1 != currentPage) " class="">.....</p> -->
+                    <!-- <p *ngIf="!(pages > 10 && i+2 < pages) && (i+1 != currentPage)" class="">{{i+1}}</p> -->
+                </li>
+
+                <li class="mx-1" (click)="nextPage()">
+                    <!-- <i class="fa fa-angle-right"></i> -->
+                    <img src="../../../assets/images/Sislimoda/angleRight.svg" alt="" srcset="">
+
+                </li>
+
+            </ul>
+        </div>
+    </section>
+    <ng-template #noContent>
+        <div class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+          <img class="" src="../../../../assets/images/Sislimoda/SislimodaAdmin/items/5.jpg" alt="" srcset="">
+          <p>{{dir=='ltr'? 'No Matching Results.':'لم يتم العثور علي نتائج بحث مشابه'}}</p>
+        </div>
+      </ng-template>
+    
+
+
+</div>

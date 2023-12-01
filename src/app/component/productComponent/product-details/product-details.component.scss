@@ -1,4 +1,9 @@
 @import '../../order/order-management/order-management.component.scss';
+
+.fa-spinner , .fa-spin{
+    font-size: 25px !important;
+  }
+
 .overLay {
     position: fixed;
     top: 0;

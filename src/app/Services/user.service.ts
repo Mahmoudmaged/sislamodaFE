@@ -22,4 +22,11 @@ export class UserService {
   deleteUser(id: string): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});
   }
+  getById(id: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`, {});
+  }
+
+  updateUser(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Update`, data);
+  }
 }

@@ -239,6 +239,13 @@ $borderColor70: #707070;
 
 
 // Right part header media
+.image2{
+  display: none;
+}
+
+.fa-spinner , .fa-spin{
+  font-size: 25px !important;
+}
 @media only screen and (max-width: 950px) {
   .profileAndLang h5 {
     font-size: 1.2rem;
@@ -248,6 +255,6 @@ $borderColor70: #707070;
     font-size: .8rem;
   }
 }
-.image2{
-  display: none;
-}
+
+
+

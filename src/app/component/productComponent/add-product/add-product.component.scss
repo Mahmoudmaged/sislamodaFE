@@ -1,5 +1,10 @@
 @import '../product-details/product-details.component.scss';
 
+.fa-spinner,
+.fa-spin {
+    font-size: 25px !important;
+}
+
 .overLay {
     position: fixed;
     top: 0;
@@ -8,7 +13,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, .7);
     z-index: 5555555555555555;
-   
+
 }
 
 .formError {

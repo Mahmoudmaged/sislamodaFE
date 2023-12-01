@@ -29,7 +29,7 @@ export class CategoryDetailsComponent {
       console.log(this.textSearch);
 
       this.categoryList = this.originalCategoryList.filter(ele => {
-        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase())
+        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase()) ||ele.name.toLowerCase().includes(this.textSearch.toLowerCase())
       });
       if (!this.categoryList.length) {
         this.findSub = `No matching result`

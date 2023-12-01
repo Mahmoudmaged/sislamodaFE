@@ -1,4 +1,4 @@
-import { Component ,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { OfferService } from 'src/app/Services/offer.service';
@@ -8,7 +8,7 @@ declare let $: any;
   templateUrl: './notification-management.component.html',
   styleUrls: ['./notification-management.component.scss']
 })
-export class NotificationManagementComponent  implements OnInit {
+export class NotificationManagementComponent implements OnInit {
   notificationList: any[] = []
   fullNotificationList: any[] = []
   userInfo: any;
@@ -20,9 +20,9 @@ export class NotificationManagementComponent  implements OnInit {
   load: boolean = false;
   sideMessage: String = '';
   photo: string = `../../../assets/images/avatar/ava.png`
-  dir:string='ltr'
+  dir: string = 'ltr'
 
-  constructor(private _Router: Router, private _OfferService: OfferService , private _NotificationService:NotificationService) {
+  constructor(private _Router: Router, private _OfferService: OfferService, private _NotificationService: NotificationService) {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
@@ -31,119 +31,120 @@ export class NotificationManagementComponent  implements OnInit {
     this.getNotifications()
 
   }
-  ngOnInit(): void {
 
+
+ngOnInit(): void {
+
+}
+showSideError(message: string) {
+  this.sideMessage = message
+  $(".sideAlert").css({ "right": "0%" })
+  setTimeout(() => {
+    $(".sideAlert").css({ "right": "-200%" })
+  }, 3000);
+}
+
+
+
+onSearch() {
+  if (this.textSearch) {
+    this.fullNotificationList = this.fullNotificationList.filter(ele => {
+      return ele.titleEn.toLowerCase().includes(this.textSearch.toLowerCase()) || ele.title.toLowerCase().includes(this.textSearch.toLowerCase())
+    });
+    this.pages = Math.ceil(this.fullNotificationList.length / this.pageSize);
+    this.notificationList = this.fullNotificationList.slice(0, this.pageSize);
+  } else {
+    this.getNotifications()
   }
-  showSideError(message: string) {
-    this.sideMessage = message
-    $(".sideAlert").css({ "right": "0%" })
-    setTimeout(() => {
-      $(".sideAlert").css({ "right": "-200%" })
-    }, 3000);
+}
+
+
+
+
+getNotifications() {
+  this.load = true
+  return this._NotificationService.allNotification().subscribe(res => {
+    this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
+    this.fullNotificationList = res;
+    this.notificationList = this.fullNotificationList.slice(0, this.pageSize);
+    this.load = false
+  }, err => {
+    this.load = false
+    this.showSideError('Fail')
   }
+  )
+}
 
 
 
-  onSearch() {
-    if (this.textSearch) {
-      this.fullNotificationList = this.fullNotificationList.filter(ele => {
-        return ele.titleEn.toLowerCase().includes(this.textSearch.toLowerCase())
-      });
-      this.pages = Math.ceil(this.fullNotificationList.length / this.pageSize);//(`${res.length / this.pageSize}`);
-      this.notificationList = this.fullNotificationList.slice(0, this.pageSize);
 
-    } else {
-      this.getNotifications()
-    }
+getPageContent(page: number) {
+  if (page <= 0) {
+    page = 1
   }
-
-
-
-
-  getNotifications() {
-    this.load = true
-      return this._NotificationService.allNotification().subscribe(res => {
-        this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
-        this.fullNotificationList = res;
-        this.notificationList = this.fullNotificationList.slice(0, this.pageSize);
-        this.load = false
-      }, err => {
-        this.load = false
-        this.showSideError('Fail')
-      }
-      )
-  }
-
-
-
-
-  getPageContent(page: number) {
-    if (page <= 0) {
-      page = 1
-    }
-    if (page >= this.pages) {
-      page = this.pages
-    }
-
-    if (this.currentPage == page) {
-      return;
-    }
-
-    $(`.page`).removeClass('ActivePage')
-    $(`.page${page}`).addClass('ActivePage')
-    this.currentPage = page
-    const skip = ((this.currentPage - 1) * this.pageSize)
-    this.notificationList = this.fullNotificationList.slice(skip, skip + this.pageSize);
-
+  if (page >= this.pages) {
+    page = this.pages
   }
 
-  previousPage() {
-    this.getPageContent(this.currentPage - 1)
-  }
-  nextPage() {
-    this.getPageContent(this.currentPage + 1)
+  if (this.currentPage == page) {
+    return;
   }
 
+  $(`.page`).removeClass('ActivePage')
+  $(`.page${page}`).addClass('ActivePage')
+  this.currentPage = page
+  const skip = ((this.currentPage - 1) * this.pageSize)
+  this.notificationList = this.fullNotificationList.slice(skip, skip + this.pageSize);
 
-  add() {
-    this._Router.navigateByUrl(`admin/notification/add`)
-  }
+}
 
-  details(id: string) {
-    this._Router.navigateByUrl(`/admin/notification/${id}/display`)
+previousPage() {
+  this.getPageContent(this.currentPage - 1)
+}
+nextPage() {
+  this.getPageContent(this.currentPage + 1)
+}
 
-  }
-  edit(id: string) {
-    this._Router.navigateByUrl(`/admin/notification/${id}/edit`)
-  }
-  delete(id: string) {
-    this.load = true;
-    this._NotificationService.deleteById(id).subscribe(res => {
-      this.getNotifications()
-      this.load = false;
-    }, err => {
-      this.load = false;
-      this.showSideError('Fail to delete please try again')
-    })
-  }
 
-  deleteItemId: string = ''
-  deletePromote(id: string) {
-    $(".deleteLayer").show()
-    this.deleteItemId = id
-  }
+add() {
+  this._Router.navigateByUrl(`admin/notification/add`)
+}
 
-  closeDeleteAlert() {
-    $(".deleteLayer").hide()
-  }
+details(id: string) {
+  this._Router.navigateByUrl(`/admin/notification/${id}/display`)
 
-  confirmDelete() {
-    this.closeDeleteAlert()
-    if (this.deleteItemId) {
-      this.delete(this.deleteItemId)
-    } else {
-      this.showSideError(`Fail`)
-    }
+}
+edit(id: string) {
+  this._Router.navigateByUrl(`/admin/notification/${id}/edit`)
+}
+delete (id: string) {
+  this.load = true;
+  this._NotificationService.deleteById(id).subscribe(res => {
+    this.getNotifications()
+    this.load = false;
+  }, err => {
+    this.load = false;
+    this.showSideError('Fail to delete please try again')
+  })
+}
+
+deleteItemId: string = ''
+deletePromote(id: string) {
+  $(".deleteLayer").show()
+  this.deleteItemId = id
+}
+
+closeDeleteAlert() {
+  $(".deleteLayer").hide()
+}
+
+confirmDelete() {
+  this.closeDeleteAlert()
+  if (this.deleteItemId) {
+    this.delete(this.deleteItemId)
+  } else {
+    this.showSideError(`Fail`)
   }
+}
 
 }

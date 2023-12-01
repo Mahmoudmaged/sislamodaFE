@@ -22,10 +22,10 @@ export class AdministrationComponent implements OnInit {
     { item: 'listItem9', com: 'category' },
     { item: 'listItem10', com: 'sales' },
     { item: 'listItem11', com: 'settings' },
-    { item: 'listItem12', com: 'offers' },
+    { item: 'listItem12', com: 'offer' },
     { item: 'listItem13', com: 'brand' },
-    { item: 'listItem15', com: 'ticket' },
     { item: 'listItem18', com: 'ticket' },
+    { item: 'listItem19', com: 'notification' }
   ]
   itemBar: any = {}
   dir: string = ''
@@ -48,10 +48,29 @@ export class AdministrationComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path);
+    console.log(this._ActivatedRoute.firstChild?.snapshot?.url);
+
     this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
     console.log({ itemBar: this.itemBar });
-    return this.changeDisplay(this.itemBar?.item || this.mainBar[0].item, this.itemBar?.com || this.mainBar[0].com)
-    
+    if (!this.itemBar) {
+      return this.changeDisplay(this.mainBar[0].item,this.mainBar[0].com)
+
+    }
+    if (this._ActivatedRoute.firstChild) {
+      if (this._ActivatedRoute.firstChild?.snapshot?.url.length == 1) {
+        return this.changeDisplay(this.itemBar.item , this.itemBar.com )
+      } else {
+        let customPath = ``
+        for (const pathItem of this._ActivatedRoute.firstChild.snapshot.url) {
+          customPath += `/${pathItem.path}`
+        }
+        return this.changeDisplay(this.itemBar.item, customPath)
+      }
+    }
+
+
   }
 
   getNotification() {
@@ -69,13 +88,19 @@ export class AdministrationComponent implements OnInit {
     $(`.listItem`).children("p").children(".image2").hide()
 
     //Display 
-    $(`.${item}`).children("i").show()
-    $(`.${item}`).children("p").addClass("ActiveCheck")
-    $(`.${item}`).children('p').children(".image2").show()
-    $(`.${item}`).children('p').children(".image").hide()
+    console.log(`.${item}`);
 
+    setTimeout(() => {
+      $(`.${item}`).children("i").show()
+      $(`.${item}`).children("p").addClass("ActiveCheck")
+      $(`.${item}`).children('p').children(".image2").show()
+      $(`.${item}`).children('p').children(".image").hide()
+    }, 200);
 
-    this._Router.navigateByUrl(`/admin/${component}`) // thanks to lazyLoading with nesting routing
+    let fullPath = `/admin/${component}`;
+    fullPath = fullPath.replaceAll("//", "/")
+
+    this._Router.navigateByUrl(fullPath) // thanks to lazyLoading with nesting routing
     window.scrollTo(0, 0)
   }
 

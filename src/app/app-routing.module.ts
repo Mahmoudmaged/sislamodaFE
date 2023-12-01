@@ -15,10 +15,10 @@ const routes: Routes = [
   {
     path: "admin",
     canActivate: [AuthGuard],
-    component:AdministrationComponent,
-    loadChildren: () => import('./component/administration/admin/admin.module').then(mod=>mod.AdminModule)
+    component: AdministrationComponent,
+    loadChildren: () => import('./component/administration/admin/admin.module').then(mod => mod.AdminModule)
   },
-  { path: "", component: UserLoginComponent },
+  { path: "", component: AdminLoginComponent },
   { path: "register", component: UserRegisterComponent },
   { path: "vendor/login", component: VendorLoginComponent },
   { path: "vendor/signup", component: RegisterVendorComponent },
@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: false })],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

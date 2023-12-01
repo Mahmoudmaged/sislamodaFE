@@ -61,11 +61,11 @@
 
     </div>
 
-    <div class="row  categoryContainer my-2">
+    <div *ngIf="categoryList.length ; else noContent" class="row  categoryContainer my-2">
         <div class="head p-3 text-light">
             <h5> {{dir=='ltr'?'Category':'فئه'}}</h5>
         </div>
-        <div *ngIf="categoryList.length ; else noCategory" class="categoryContainerBody px-5 py-2 ">
+        <div  class="categoryContainerBody px-5 py-2 ">
             <div class="row p-3">
                 <div *ngFor="let category of categoryList ; index as i" class="col-lg-2 col-md-6  my-2">
                     <div class="p-3" (click)="getCategoryDetails(category.id)">
@@ -79,10 +79,14 @@
                 </div>
             </div>
         </div>
-        <ng-template #noCategory>
-            <div class="text-center p-5">
-                <h3>{{dir=='ltr'?"Ops it look's empty.....":"لم يتم العثور علي اي نتيجه "}}</h3>
-            </div>
-        </ng-template>
+       
+
+      
     </div>
+    <ng-template #noContent>
+        <div class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+            <img class="" src="../../../../assets/images/Sislimoda/SislimodaAdmin/items/5.jpg" alt="" srcset="">
+            <p>{{dir=='ltr'? 'No Matching Results.':'لم يتم العثور علي نتائج بحث مشابه'}}</p>
+        </div>
+    </ng-template>
 </div>

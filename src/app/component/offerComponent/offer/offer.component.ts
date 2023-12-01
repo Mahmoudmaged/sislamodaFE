@@ -47,7 +47,7 @@ export class OfferComponent implements OnInit {
   onSearch() {
     if (this.textSearch) {
       this.fullOfferList = this.fullOfferList.filter(ele => {
-        return ele.titleEn.toLowerCase().includes(this.textSearch.toLowerCase())
+        return ele.titleEn.toLowerCase().includes(this.textSearch.toLowerCase()) || ele.title.toLowerCase().includes(this.textSearch.toLowerCase())
       });
 
       this.pages = Math.ceil(this.fullOfferList.length / this.pageSize);//(`${res.length / this.pageSize}`);

@@ -211,7 +211,7 @@ export class VendorManagementComponent implements OnInit {
     if (this.textSearch) {
 
       this.fullVendorList = this.fullVendorList.filter(ele => {
-        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase())
+        return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase()) || ele.name.toLowerCase().includes(this.textSearch.toLowerCase())
       });
 
       this.pages = Math.ceil(this.fullVendorList.length / this.pageSize);

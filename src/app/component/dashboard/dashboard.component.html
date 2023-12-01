@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <div *ngIf="products.length" class="row justify-content-center align-items-center mt-4 mb-2">
+    <div *ngIf="products?.length" class="row justify-content-center align-items-center mt-4 mb-2">
         <h4 class="sellingHead" [class]="dir=='rtl'?'text-end':'text-start'">{{dir=='ltr'?'Top Selling
             Products':'المنتجات الاكثر مبيعا' }}</h4>
         <div class="col-10">

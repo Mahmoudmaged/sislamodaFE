@@ -179,7 +179,7 @@
 
             </button>
 
-            <button class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
+            <button *ngIf="!this.userInfo?.isAdmin" class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
                 {{dir=='ltr'?'Save':'حفظ'}}
 
             </button>

@@ -7,7 +7,7 @@
             <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
         </div>
     </div>
- 
+
 
     <div class="deleteLayer">
         <div class="row w-100 h-100 align-items-center justify-content-center">
@@ -22,7 +22,7 @@
                         <button class="btn btn-danger px-2 py-1 w-100" (click)="confirmDelete()">
                             {{dir=='ltr'?'Delete':'حذف'}}
                         </button>
-    
+
                     </div>
                     <div class="mt-1">
                         <button class="btn  px-2 py-1  w-100 cancelBtn" (click)="closeDeleteAlert()">
@@ -35,20 +35,20 @@
     </div>
 
 
-  
+
     <div class="row">
         <div class="col-lg-4 col-md-5 col-12">
             <h5 class="head_title">{{dir=="ltr"?'Category Management':"اداره الفئات"}}</h5>
             <p class="my-1"> {{dir=="ltr"?'View list of category and modify them....':" عرض قائمه بالفئات"}}</p>
-       
+
         </div>
 
         <div *ngIf="!category.mainCategoryId" class="col-lg-8 col-md-7 col-12">
             <div class="row">
                 <div class="col-md-12 col-12">
                     <div class="searchInputContainer">
-                        <input type="text" placeholder="{{dir=='ltr'?'Search results':'نتيجه البحث' }}" [(ngModel)]="textSearch" (input)="onSearch()"
-                            class="w-100 searchInput">
+                        <input type="text" placeholder="{{dir=='ltr'?'Search results':'نتيجه البحث' }}"
+                            [(ngModel)]="textSearch" (input)="onSearch()" class="w-100 searchInput">
                         <i class="fa fa-search"></i>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <h5 *ngIf="!category.mainCategoryId ; else notCategory">
                 {{dir=='ltr'?'Category Details':'تفاصيل الفئه'}}</h5>
             <ng-template #notCategory>
-                <h5>   {{dir=='ltr'?'Subcategory Details':'تفاصيل  الفئه الفرعيه ' }} </h5>
+                <h5> {{dir=='ltr'?'Subcategory Details':'تفاصيل الفئه الفرعيه ' }} </h5>
 
             </ng-template>
         </div>
@@ -96,8 +96,8 @@
                         <div class="" [class]="dir=='ltr'?'text-end':'text-start'">
                             <button class="btn btn-outline-info px-3 py-2 mx-2"
                                 (click)="showUpdateCategory(category.id)">{{dir=="ltr"?'Update':'تحديث'}}</button>
-                            <button class="btn btn-danger px-3 py-2 mx-2"
-                                (click)="deletePromote(category.id)"> {{dir=="ltr"?'Delete':'حذف'}}</button>
+                            <button class="btn btn-danger px-3 py-2 mx-2" (click)="deletePromote(category.id)">
+                                {{dir=="ltr"?'Delete':'حذف'}}</button>
 
                         </div>
                     </div>
@@ -105,7 +105,7 @@
 
             </div>
 
-            <div *ngIf="categoryList.length ; else noCategory">
+            <div *ngIf="categoryList.length ; else noContent">
                 <hr>
                 <div class="row p-3">
                     <h4>{{dir=='ltr'?'Subcategories':'الفئات الفرعيه'}}</h4>
@@ -122,11 +122,14 @@
                 </div>
             </div>
 
-            <ng-template #noCategory>
-                <div *ngIf="!category.mainCategoryId" class="text-center p-5">
-                    <h3>{{findSub}}</h3>
-                    <button class="btn btn-danger px-3 py-2 my-2" (click)="navigateToSubCategory()"> 
-                        {{dir=='ltr'?'ADD Now':'اضافه'}} 
+          
+
+            <ng-template #noContent>
+                <div class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+                    <img class="" src="../../../../assets/images/Sislimoda/SislimodaAdmin/items/5.jpg" alt="" srcset="">
+                    <p>{{dir=='ltr'? findSub:'عفوا لا توجد اي فئات فرعيه لهذه الفئه حتي الان'}}</p>
+                    <button class="btn btn-danger px-3 py-2 my-2" (click)="navigateToSubCategory()">
+                        {{dir=='ltr'?'ADD Now':'اضافه'}}
                         <i class="fa fa-plus mx-1"></i>
                     </button>
                 </div>

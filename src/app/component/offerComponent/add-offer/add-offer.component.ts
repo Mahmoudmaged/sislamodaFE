@@ -42,6 +42,9 @@ export class AddOfferComponent {
     private _CategoryService: CategoryService, private _AttachmentsService: AttachmentsService, private _OfferService: OfferService, private _Router: Router) {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
+    this.userInfo = JSON.parse(localStorage.getItem('user')!);
+    console.log({userInfo:this.userInfo});
+    
     this.getAllCategory()
   }
 
@@ -52,10 +55,10 @@ export class AddOfferComponent {
       this.showSideError("Fail to load product category list ")
     })
   }
-   randomIntFromInterval(min:number, max:number) { // min and max included 
+  randomIntFromInterval(min: number, max: number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
-  
+
 
   addOfferForm = new FormGroup({
     photoId: new FormControl('', [Validators.required]),
@@ -64,23 +67,27 @@ export class AddOfferComponent {
     titleEn: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     descriptionEn: new FormControl('', [Validators.required]),
-    percent: new FormControl('', [Validators.required]),
+    percent: new FormControl(0, [Validators.required]),
     offerType: new FormControl(this.randomIntFromInterval(1, 4), []),
     startDate: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),
     isActive: new FormControl(true, [Validators.required]),
     offerCategoryId: new FormControl('', [Validators.required]),
     vendorId: new FormControl('', []),
+    isForVendor: new FormControl(false, [Validators.required]),
   })
 
   handelAddOffer() {
+    
     this.load = true;
     if (!this.image) {
       this.errorMessage = "Image is required"
     }
     let data = this.addOfferForm.value
     data.photoId = this.image
-    data.vendorId = this.vendorData?.id
+    data.vendorId = this.userInfo?.isVendor ? this.vendorData?.id : null;
+    data.isForVendor = this.userInfo?.isVendor ? true : false;
+    data.percent = (data.percent || 0) / 100;
     this._OfferService.addOffer(data).subscribe((res) => {
       this.load = false
       this._Router.navigateByUrl("/admin/offers")

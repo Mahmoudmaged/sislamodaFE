@@ -239,6 +239,10 @@ export class OrderManagementComponent implements OnInit {
     this._Router.navigateByUrl(`admin/order/${id}/details`)
   }
 
+  edit(id:string){
+    this._Router.navigateByUrl(`/admin/order/${id}/edit`)
+  }
+
   deleteItemId: string = ''
   deleteOrder(id: string) {
     $(".deleteLayer").show()

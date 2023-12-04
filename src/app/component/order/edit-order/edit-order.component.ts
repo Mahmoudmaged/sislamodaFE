@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AttachmentsService } from 'src/app/Services/attachments.service';
 import { BrandService } from 'src/app/Services/brand.service';
 import { CategoryService } from 'src/app/Services/category.service';
+import { OptionSetService } from 'src/app/Services/optionset.service';
+import { OrderService } from 'src/app/Services/order.service';
 import { ProductService } from 'src/app/Services/product.service';
 declare let $: any;
 @Component({
@@ -24,8 +26,22 @@ export class EditOrderComponent {
   errorMessage: string = ''
   vendorData: any;
   userInfo: any;
+  optionSet: any = {};
+  dir: string = 'ltr'
+  optionSetList: any = []
+  selectedOption: string = '';
+  selectedOPtionFilter: string = 'nameEn'
+  order: any;
+  statusData: any;
 
 
+  getOptionSetByNames() {
+    this._OptionSetService.getOptionSetByNames(['orderStatus']).subscribe(res => {
+      this.optionSet = res[0];
+    }, err => {
+      this.showSideError('Fail')
+    })
+  }
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -33,23 +49,50 @@ export class EditOrderComponent {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
-  constructor(private _Router: Router,
-    private _ProductService: ProductService,
-    private _CategoryService: CategoryService,
-    private _BrandService: BrandService,
-    private _AttachmentsService: AttachmentsService,
-    private _ActivatedRoute: ActivatedRoute) {
 
+
+  showDropDown() {
+    //Display target dropdown
+    $(`.dropdown-menu-list`).slideToggle(300)
+    $(`.search_dropdownMenuButton`).toggleClass('search_dropdownMenuButton_click')
+  }
+
+
+  changeOrderStatus(orderId: string, btnIndicator: number, color: string, statusId: string, value: any, nameEn: string, nameAr: string) {
+    // this.load = true;
+    let status = nameEn;
+    if (this.dir == 'rtl') {
+      status = nameAr
+    }
+    console.log({ color });
+
+    $(`.search_dropdownMenuButton`).text(status)
+    $(`.dropdown-menu-list`).slideUp(300)
+    $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
+    $(`.search_dropdownMenuButton`).css({ 'background-color': color })
+
+
+    this.statusData = {
+      Id: orderId,
+      Value: value,
+      Name: this.optionSet.name
+    }
+
+
+
+  }
+  constructor(private _Router: Router,
+    private _AttachmentsService: AttachmentsService,
+    private _ActivatedRoute: ActivatedRoute,
+    private _OptionSetService: OptionSetService,
+    private _OrderService: OrderService) {
+
+    this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
 
-    this.getAllCategory()
-    this.getAllBrands()
-    this.getAllOption()
-    this.getProductByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
-    setTimeout(() => {
-      this.addProductForm.controls.subcategory.setValue(this.product.categoryId)
-    }, 1000);
+    this.getOrderByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+
   }
 
 
@@ -88,175 +131,65 @@ export class EditOrderComponent {
 
   }
 
-  getAllOption() {
-    return this._ProductService.getOptionList().subscribe(res => {
-      this.optionList = res;
-      console.log({ op: this.optionList });
-
-    }, err => {
-      console.log({ err });
-      this.showSideError('Fail to load product options');
-
-    })
-  }
-  getAllCategory() {
-    return this._CategoryService.categoryList().subscribe(res => {
-      console.log({ res });
-      this.categoryList = res;
-    }, err => {
-      this.showSideError('Fail to load product category list');
 
 
-    }
-    )
-  }
-  getAllBrands() {
-    return this._BrandService.brandList().subscribe(res => {
-      this.brandList = res;
-    }, err => {
-      this.showSideError('Fail to load brand category list');
-
-    }
-    )
-  }
-  
-  getSubCategory(id: string) {
-    return this._CategoryService.getListOfSubCategoriesById(id || this.addProductForm.controls.category.value).subscribe(res => {
-      this.subcategoryList = res
-    }, err => {
-      this.showSideError('In-valid category Id');
-    })
-  }
-  addProductForm = new FormGroup({
-    image: new FormControl('', []),
-    productName: new FormControl('', [Validators.required]),
-    productNameEn: new FormControl('', [Validators.required]),
-    productDescription: new FormControl('', [Validators.required]),
-    productDescriptionEn: new FormControl('', [Validators.required]),
-
-    defaultPrice: new FormControl('', [Validators.min(1), Validators.required]),
-    oldPrice: new FormControl('', [Validators.min(1), Validators.required]),
-    amount: new FormControl('', [Validators.min(1), Validators.required]),
-
-
-    productOptions: new FormControl('', []),
-    noteForReturn: new FormControl('', []),
-    // InventoryName: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
-    subcategory: new FormControl('', [Validators.required]),
-    brand: new FormControl('', [Validators.required]),
-    available: new FormControl('available', [Validators.required]),
-
+  editOrderForm = new FormGroup({
+    orderDetails: new FormControl('', [Validators.required]),
+    shippingAddress: new FormControl('', [Validators.required])
   })
 
-  getProductByID(id: any) {
+  getOrderByID(id: any) {
     this.load = true
-    return this._ProductService.getProductWithId(id).subscribe(res => {
-
-      this.product = res
-      this.getSubCategory(this.product.category?.mainCategoryId);
-
-      this.addProductForm.controls.productName.setValue(this.product.name)
-      this.addProductForm.controls.productNameEn.setValue(this.product.nameEn)
-      this.addProductForm.controls.productDescription.setValue(this.product.description)
-      this.addProductForm.controls.productDescriptionEn.setValue(this.product.descriptionEn)
-      this.addProductForm.controls.defaultPrice.setValue(this.product.defaultPrice)
-      this.addProductForm.controls.oldPrice.setValue(this.product.oldPrice)
-      this.addProductForm.controls.amount.setValue(this.product.amount)
-      this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
-      this.addProductForm.controls.noteForReturn.setValue(this.product.noteForReturn)
-      this.addProductForm.controls.category.setValue(this.product.category.mainCategoryId)
-      this.addProductForm.controls.subcategory.setValue(this.product.categoryId)
-      this.addProductForm.controls.brand.setValue(this.product.brandId)
-      this.addProductForm.controls.available.setValue(this.product.isActive ? 'available' : 'unavailable')
-      this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
+    this._OrderService.getOrderById(id).subscribe(res => {
+      this.order = res;
+      this.editOrderForm.controls.orderDetails.setValue(this.order.addressDetails);
+      this.editOrderForm.controls.shippingAddress.setValue(this.order.address);
       this.load = false
     }, err => {
-      this.load = false
-      this.showSideError(`Fail product doesn't exist`);
-    }
-    )
+      this.load = false;
+      this.showSideError(`Fail`)
+
+    })
   }
 
 
-  handelAddProduct() {
+  handelEditOrder() {
     this.load = true;
-    if (!this.imagesList.length) {
-      this.showSideError(`Image is required`);
-    }
+    this.order.addressDetails = this.editOrderForm.controls.orderDetails.value;
+    this.order.address = this.editOrderForm.controls.shippingAddress.value;
+    this._OrderService.updateOrder(this.order).subscribe(res => {
 
-
-    let selectedOptions: any[] = []
-    console.log(this.addProductForm.controls.productOptions.value);
-
-    if (this.addProductForm.controls.productOptions.value) {
-      let selectOptions = this.addProductForm.controls.productOptions.value
-      for (let i = 0; i < selectOptions.length; i++) {
-        selectedOptions.push({
-          optionId: selectOptions[i],
-          price: 0
+      if (this.statusData) {
+        console.log({ statusData: this.statusData });
+        this._OrderService.updateOrderStatus(this.statusData).subscribe(res => {
+          this.load = false
+          // this.showSideError("Done")
+          this._Router.navigateByUrl(`/admin/order/${this.order.id}/details`)
+        }, err => {
+          this.load = false
+          console.log({ err });
+          this.showSideError("fail")
         })
-
-      }
-
-
-      selectedOptions = selectedOptions.map(ele => {
-        return {
-          optionId: ele.optionId.id,
-          price: 0
-        }
-      })
-
-    }
-
-    let data = {
-      id: this.product.id,
-      name: this.addProductForm.controls.productName.value,
-      nameEn: this.addProductForm.controls.productNameEn.value,
-      description: this.addProductForm.controls.productDescription.value,
-      descriptionEn: this.addProductForm.controls.productDescriptionEn.value,
-
-      defaultPrice: this.addProductForm.controls.defaultPrice.value,
-      oldPrice: this.addProductForm.controls.oldPrice.value,
-      orderNUmber: 0,
-
-      htmlDescriptions: "string",
-      htmlOther: "string",
-
-      isActive: (this.addProductForm.controls.available.value == 'available' || this.addProductForm.controls.available.value == `true`) ? true : false,
-
-      defaultPhotoId: this.imagesList.length ? this.imagesList[0].photoId : this.product.defaultPhotoId,
-      categoryId: this.addProductForm.controls.subcategory.value,
-      brandId: this.addProductForm.controls.brand.value,
-      vendorId: this.vendorData.id, //this.userInfo.id,,
-      paymentType: "string",
-      noteForReturn: this.addProductForm.controls.noteForReturn.value || 'string',
-      amount: this.addProductForm.controls.amount.value,
-      productImages: this.imagesList.length ? this.imagesList : this.product.imagesList,
-      productOptions: selectedOptions.length ? selectedOptions : [],
-      productDetails: [],
-
-
-
-    }
-    this._ProductService.updateProduct(data).subscribe(res => {
-      this.load = false
-      this._Router.navigateByUrl("/admin/product")
-    },
-      err => {
+      } else {
         this.load = false;
-        this.showSideError(`Fail to update your product`)
+        this._Router.navigateByUrl(`/admin/order/${this.order.id}/details`)
+
       }
-    )
+    }, err => {
+      console.log({ err });
+      this.showSideError("fail in  update order")
+    })
+
   }
 
 
   ngOnInit(): void {
+    this.getOptionSetByNames()
   }
 
 
 
   closeProductDetailsSec() {
-    this._Router.navigateByUrl(`admin/product`)
+    this._Router.navigateByUrl(`admin/order`)
   }
 }

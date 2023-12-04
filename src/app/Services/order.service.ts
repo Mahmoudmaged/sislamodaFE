@@ -26,6 +26,11 @@ export class OrderService {
     return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`);
 
   }
+
+  updateOrder(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}Update`, data);
+
+  }
   deleteOrderById(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`);
 

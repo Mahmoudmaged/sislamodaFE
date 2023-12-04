@@ -46,6 +46,7 @@ export class AddProductComponent implements OnInit {
     }, 3000);
   }
 
+  displayOptionsName: string = 'name'
   constructor(private _Router: Router,
     private _ProductService: ProductService,
     private _CategoryService: CategoryService,
@@ -57,6 +58,7 @@ export class AddProductComponent implements OnInit {
     this.getAllCategory()
     this.getAllBrands()
     this.getAllOption()
+
   }
 
 
@@ -101,6 +103,12 @@ export class AddProductComponent implements OnInit {
 
 
   getAllOption() {
+    if (this.dir == 'ltr') {
+      this.displayOptionsName = 'nameEn'
+    } else {
+      this.displayOptionsName = 'name'
+
+    }
     return this._ProductService.getOptionList().subscribe(res => {
       this.optionList = res;
 
@@ -164,6 +172,7 @@ export class AddProductComponent implements OnInit {
           data: lastArrival
         }
       ]
+      console.log({ optionsGroups: this.optionsGroups });
 
 
     }, err => {
@@ -235,7 +244,7 @@ export class AddProductComponent implements OnInit {
 
     let selectedOptions: any[] = []
     if (this.addProductForm.controls.productOptions.value) {
-      
+
       let selectOptions = this.addProductForm.controls.productOptions.value
       for (let i = 0; i < selectOptions.length; i++) {
         selectedOptions.push({
@@ -253,7 +262,7 @@ export class AddProductComponent implements OnInit {
         }
       })
 
-      
+
 
     }
 

@@ -110,9 +110,9 @@
                                     <img width="12px" src="../../../assets/images/Sislimoda/location.svg" alt=""
                                         srcset="">
 
-                                    <p class="mx-1">{{dir=='ltr'? (order.address||order.address2)?.slice(0,50) ||
+                                    <p class="mx-1">{{dir=='ltr'? (order.address||order.address2)?.slice(0,20) ||
                                         'DummyDetails'
-                                        :(order.address||order.address2)?.slice(0,50) || 'داتا وهميه للمنتج'}}...</p>
+                                        :(order.address||order.address2)?.slice(0,20) || 'داتا وهميه للمنتج'}}...</p>
                                 </div>
                             </div>
                         </td>
@@ -145,10 +145,10 @@
                         </td>
 
                         <td class="optionsActions text-center">
-                            <!-- <span *ngIf="userInfo?.isVendor" class="p-2">
+                            <span *ngIf="userInfo?.isVendor" class="p-2" (click)="edit(order.id)">
                             <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-edit.svg" alt=""
                                 srcset="">
-                        </span> -->
+                        </span>
                             <span *ngIf="userInfo?.isVendor" class="p-2" (click)="deleteOrder(order.id)">
                                 <!-- <i class="fa fa-trash"></i> -->
                                 <img width="15px" src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt=""

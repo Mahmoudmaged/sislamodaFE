@@ -139,7 +139,7 @@
                                         </div>
 
                                     </div>
-                                    <div *ngIf="userInfo?.isVendor" class="col-2 p-2 text-end ">
+                                    <div  class="col-2 p-2 text-end ">
                                         <div class=" w-100 text-end p-2 mb-1 icontainer">
                                             <i class="fa fa-close text-danger"
                                                 (click)="deleteProductFromOffer(product?.id)"></i>
@@ -157,7 +157,7 @@
                     </div>
             
                     <div class="col-12"></div>
-                    <div *ngIf="userInfo?.isVendor" class="col-md-6 mb-1">
+                    <div  class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div>
                                 <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
@@ -179,7 +179,7 @@
 
             </button>
 
-            <button *ngIf="!this.userInfo?.isAdmin" class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
+            <button  class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
                 {{dir=='ltr'?'Save':'حفظ'}}
 
             </button>

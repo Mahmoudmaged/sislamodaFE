@@ -33,7 +33,14 @@ export class EditProductComponent implements OnInit {
   optionList: any[] = [];
   optionsGroups: any[] = [];
   selectedOptions: any[] = [];
+  displayOptionsName:string ='ltr'
   getAllOption() {
+    if (this.dir == 'ltr') {
+      this.displayOptionsName = 'nameEn'
+    } else {
+      this.displayOptionsName = 'name'
+
+    }
     return this._ProductService.getOptionList().subscribe(res => {
       this.optionList = res;
 

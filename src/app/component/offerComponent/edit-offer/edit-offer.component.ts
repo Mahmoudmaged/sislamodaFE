@@ -41,6 +41,7 @@ export class EditOfferComponent implements OnInit {
     this.dir = localStorage.getItem('dir') || 'ltr';
 
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
+    this.userInfo = JSON.parse(localStorage.getItem('user')!);
 
     this.getAllCategory()
   }
@@ -66,7 +67,7 @@ export class EditOfferComponent implements OnInit {
       this.addOfferForm.controls.titleEn.setValue(this.offer.titleEn)
       this.addOfferForm.controls.description.setValue(this.offer.description)
       this.addOfferForm.controls.descriptionEn.setValue(this.offer.descriptionEn)
-      this.addOfferForm.controls.percent.setValue(this.offer.percent)
+      this.addOfferForm.controls.percent.setValue((this.offer.percent ||0)*100 )
       this.addOfferForm.controls.offerType.setValue(this.offer.offerType)
       this.addOfferForm.controls.startDate.setValue(this.offer.startDate)
       this.addOfferForm.controls.endDate.setValue(this.offer.endDate)
@@ -90,12 +91,14 @@ export class EditOfferComponent implements OnInit {
     titleEn: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     descriptionEn: new FormControl('', [Validators.required]),
-    percent: new FormControl('', [Validators.required]),
+    percent: new FormControl(0, [Validators.required]),
     offerType: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required]),
     endDate: new FormControl('', [Validators.required]),
     isActive: new FormControl(true, [Validators.required]),
     offerCategoryId: new FormControl('', [Validators.required]),
+    isForVendor: new FormControl(false, [Validators.required]),
+
   })
 
   handelUpdateOffer() {
@@ -103,7 +106,11 @@ export class EditOfferComponent implements OnInit {
     let data = this.addOfferForm.value
     data.id = this.offer.id
     data.photoId = this.image ? this.image : this.offer.photoId
-    data.vendorId = this.vendorData.id
+    data.percent = (data.percent || 0)/100;
+    data.vendorId = this.userInfo?.isVendor ? this.vendorData?.id : null;
+    data.isForVendor = this.userInfo?.isVendor ? true : false;
+
+console.log({data});
 
     this._OfferService.updateOffer(data).subscribe((res) => {
       this.load = false

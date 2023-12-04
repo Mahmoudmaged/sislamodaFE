@@ -47,12 +47,14 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UpdateUserComponent } from '../../admin-user-management/update-user/update-user.component';
 import { DisplayTicketComponent } from '../../ticket/display-ticket/display-ticket.component';
 import { AdministrationComponent } from '../administration.component';
+import { EditOrderComponent } from '../../order/edit-order/edit-order.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
   { path: 'financial/:id/report', component: FinancialManagementReportComponent },
   { path: 'order', component: OrderManagementComponent },
   { path: 'order/:id/details', component: OrderDetailsComponent },
+  { path: 'order/:id/edit', component: EditOrderComponent },
   { path: 'user', component: UserManagementComponent },
   { path: 'user/:id/update', component: UpdateUserComponent },
   { path: 'product', component: ProductComponent },

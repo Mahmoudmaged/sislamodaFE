@@ -136,6 +136,7 @@ export class OfferComponent implements OnInit {
   deleteOffer(id: string) {
     this.load = true;
     this._OfferService.deleteOfferById(id).subscribe(res => {
+      this.currentPage=1
       this.getOffersList()
       this.load = false;
     }, err => {

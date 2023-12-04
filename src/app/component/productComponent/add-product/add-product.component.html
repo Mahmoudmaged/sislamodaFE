@@ -269,8 +269,7 @@
                     <div class="px-2 py-1">
                         <div>
                             <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
-
-                            <p-multiSelect display="chip" optionLabel="name" optionGroupLabel="groupName"
+                            <p-multiSelect display="chip" [optionLabel]="displayOptionsName" optionGroupLabel="groupName"
                                 optionGroupChildren="data" [options]="optionsGroups" [group]="true"
                                 formControlName="productOptions" [style]="{'width':'100%'}"></p-multiSelect>
 

@@ -39,19 +39,29 @@ export class OfferDetailsComponent implements OnInit {
     this.photo = this.userInfo?.photo || this.photo;
     this.getOffer(this._ActivatedRoute.snapshot.paramMap.get('id')!)
 
-    this.getAllProduct()
   }
 
 
 
   getAllProduct() {
-    return this._ProductService.getProductsList().subscribe(res => {
-      this.optionList = res;
-    }, err => {
-      console.log({ err });
-      this.showSideError('Fail to load product options');
+    if (this.userInfo.isAdmin) {
+      return this._ProductService.getProductsList().subscribe(res => {
+        this.optionList = res;
+      }, err => {
+        console.log({ err });
+        this.showSideError('Fail to load product options');
 
-    })
+      })
+    } else {
+      return this._ProductService.getProductsListByVendor(this.offer.vendorId).subscribe(res => {
+        this.optionList = res;
+      }, err => {
+        console.log({ err });
+        this.showSideError('Fail to load product options');
+
+      })
+    }
+
   }
   ngOnInit(): void {
   }
@@ -60,8 +70,9 @@ export class OfferDetailsComponent implements OnInit {
     this.load = true;
     return this._OfferService.getOfferById(id).subscribe(res => {
       this.offer = res;
-      console.log({off: this.offer });
-      
+      console.log({ off: this.offer });
+      this.getAllProduct()
+
       this.load = false;
     }, err => {
       this.load = false;

@@ -1,4 +1,5 @@
 @import '../product-details/product-details.component.scss';
+@import '../product/product.component.scss';
 
 .fa-spinner,
 .fa-spin {
@@ -118,3 +119,21 @@
     border-color: 1px $blackColor;
     color: $blackColor;
 }
+
+// .productDetails_layer{
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0, 0, 0, .7);
+//     display: none;
+//     z-index: 5555555555555555;
+// }
+// .productDetails{
+//     border-radius: 8px;
+// }
+// .deleteLayer{
+//     z-index: 99999999999999999999;
+
+// }

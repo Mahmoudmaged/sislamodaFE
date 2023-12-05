@@ -49,6 +49,26 @@ export class ProductService {
     return this._HttpClient.post(`${this.baseURL}Update`, data);
 
   }
+  addProductDetail(data: any): Observable<any> {
+    console.log({data});
+    
+    return this._HttpClient.post(`${this.baseURL}AddProductDetail`, data);
+
+  }
+  updateProductDetail(data: any): Observable<any> {
+    console.log({data});
+    
+    return this._HttpClient.post(`${this.baseURL}UpdateProductDetail`, data);
+
+  }
+
+  deleteProductDetail(id: string): Observable<any> {
+    console.log({id});
+    
+    return this._HttpClient.post(`${this.baseURL}DeleteProductDetail?Id=${id}`, {});
+
+  }
+  
 
   deleteProductById(id: any): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Delete?id=${id}`, {});

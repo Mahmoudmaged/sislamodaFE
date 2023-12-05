@@ -58,4 +58,51 @@ export class ProductDetailsComponent implements OnInit {
     this._Router.navigateByUrl(`admin/product`)
 
   }
+
+
+  productDetailsArray: any[] = [];
+  addFlag: boolean = false;
+
+
+
+
+  showAddProductDetails() {
+    $(".productDetails_layer").show()
+  }
+  closeAddSection() {
+    this.addFlag = false
+    $(".productDetails_layer").hide()
+  }
+
+  deleteItemId: string='';
+  deletePromote(id: string) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id;
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    this.load = true
+
+    this._ProductService.deleteProductDetail(this.deleteItemId).subscribe(res => {
+      this.load = false
+    }, err => {
+      console.log({ er: err });
+
+      this.showSideError(`Fail`)
+      this.load = false
+    })
+  }
+
+
+  AddProductDetail() {
+    this._Router.navigateByUrl(`/admin/product/${this.product.id}/update`)
+  }
+
+
+
 }

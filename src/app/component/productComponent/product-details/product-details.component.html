@@ -20,7 +20,7 @@
 
             </div>
             <div class="px-2 pb-1">
-                <p class="OrderDetailsInfo">{{dir=='ltr'?'Product Details':'تفاصيل المنتج'}}</p>
+                <p class="OrderDetailsInfo">{{dir=='ltr'?'Product description':'تفاصيل المنتج'}}</p>
                 <p class="">
                     {{dir=='ltr'?product?.descriptionEn :product?.description}}
                 </p>
@@ -34,7 +34,7 @@
                 <p> {{dir=='ltr'?'Inventory Name':"اسم المورد"}}</p>
                 <p class="">
                     {{
-                    product?.amount 
+                    product?.amount
                     }}
                 </p>
             </div>
@@ -87,6 +87,19 @@
 
         </div>
         <hr>
+
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p>{{ dir=='ltr'?'Product details':'تفاصيل المنتج'}}</p>
+                <div class="ms-3  my-2">
+                    <p class="btn btn-danger px-5 py-2" (click)="showAddProductDetails()">
+                        {{dir=='ltr'?'Show':'عرض'}}</p>
+
+                </div>
+            </div>
+
+        </div>
+        <hr>
         <div class="w-100 mt-2 mb-2 " [ngClass]="{'text-end':dir=='ltr' , 'text-start':dir=='rtl'}">
             <button class="btn btn-dark px-5 py-1"
                 (click)="closeProductDetailsSec()">{{dir=='ltr'?'Back':'رجوع'}}</button>
@@ -94,3 +107,108 @@
     </div>
 
 </section>
+
+
+<!-- CRUD on product details Section -->
+
+
+<div class="productDetails_layer">
+    <div class="deleteLayer">
+        <div class="row w-100 h-100 align-items-center justify-content-center">
+            <div class="deleteAlert my-2 p-5 pb-2 bg-light text-center">
+                <i class="fa fa-trash fa-2x  mb-4"></i>
+                <h3 *ngIf="dir=='ltr';else arabic">Are you sure that you want to delete this product details?
+                </h3>
+                <ng-template #arabic>
+                    <h3>برجاء التأكد من حذف ؟</h3>
+                </ng-template>
+                <div class="mt-3  justify-content-center w-100 ">
+                    <div>
+                        <button class="btn btn-danger px-2 py-1 w-100" (click)="confirmDelete()">
+                            {{dir=='ltr'?'Delete':'حذف'}}
+                        </button>
+
+                    </div>
+                    <div class="mt-1">
+                        <button class="btn  px-2 py-1  w-100 cancelBtn" (click)="closeDeleteAlert()">
+                            {{dir=='ltr'?'Cancel':'الغاء'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-center p-5 h-100">
+        <div class="container  bg-light  productDetails p-3">
+            <div (click)="closeAddSection()" [class]="dir=='ltr'?'text-end' : 'text-start'">
+                <i class="fa fa-close p-2 m-2"></i>
+            </div>
+            <div class="w-100">
+                <p class="text-center">Display list of product details for this product.</p>
+            </div>
+
+            <div class="displayProductDetails my-2">
+                <div *ngIf="product?.productDetails.length ; else noContent">
+                    <div class="my-2">
+                        <table class="table contentTable bordered text-center " [class]="dir=='rtl'?'tableRTL':''">
+                            <thead id="myTableHead">
+                                <tr>
+                                    <th scope="col" style="width: 20%;">{{dir=='ltr'?'Kay name (English)':'اسم
+                                        (الانجليزيه) '}}</th>
+                                    <th scope="col" style="width: 20%;">{{dir=='ltr'?'key name (Arabic)':'اسم
+                                        (العربيه) '}}</th>
+                                    <th scope="col" style="width: 20%;">{{dir=='ltr'?'value(English)':'القيمه
+                                        (الانجليزيه) '}}</th>
+                                    <th scope="col" style="width: 20%;">{{dir=='ltr'?'value(Arabic)':'القيمه
+                                        (العربيه) '}}</th>
+                                    <th scope="col" style="width: 20%;">{{dir=='ltr'?'options':'خيارات'}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of product.productDetails ; index as i">
+
+                                    <td>
+                                        <p>{{product?.keyEn}}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{product?.key}}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{product?.valueEn}}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{product?.value}}</p>
+                                    </td>
+
+                                    <td class="optionsActions">
+                                        <span *ngIf="userInfo?.isVendor" class="p-2"
+                                            (click)="deletePromote(product.id)">
+                                            <img width="15px"
+                                                src="../../../assets/images/Sislimoda/Icon feather-trash-2.svg" alt=""
+                                                srcset="">
+                                        </span>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <ng-template #noContent>
+                    <div class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+                        <!-- <img class="" src="../../../../assets/images/Sislimoda/SislimodaAdmin/items/5.jpg" alt=""
+                            srcset=""> -->
+                        <!-- <p>{{dir=='ltr'? 'Ops their is no product details yet.':'عفوا لم يتم اضافه اي تفاصيل عن هذا المنتج بعد'}}</p> -->
+                        <div>
+                            <button class="btn btn-danger px-3 py-2" (click)="AddProductDetail()"> <i
+                                    class="fa fa-plus mx-1"></i>
+                                {{dir=='ltr'?'Add Now':'اضافه'}}</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>

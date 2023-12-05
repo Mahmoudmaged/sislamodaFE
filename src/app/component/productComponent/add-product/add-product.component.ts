@@ -293,7 +293,7 @@ export class AddProductComponent implements OnInit {
       amount: this.addProductForm.controls.amount.value,
       productImages: this.imagesList,
       productOptions: selectedOptions.length ? selectedOptions : [],
-      productDetails: [],
+      productDetails: this.productDetailsArray,
 
     }
 
@@ -321,4 +321,84 @@ export class AddProductComponent implements OnInit {
     this._Router.navigateByUrl(`admin/product`)
 
   }
+
+
+  addProductDetailsForm = new FormGroup({
+    keyName: new FormControl('', [Validators.required]),
+    keyNameEn: new FormControl('', [Validators.required]),
+    value: new FormControl('', [Validators.required]),
+    valueEn: new FormControl('', [Validators.required]),
+  })
+
+  productDetailsArray: any[] = [];
+  addFlag: boolean = false;
+  handelAddProductDetails(flag: boolean) {
+
+    this.load = true;
+    if (!flag) {
+      //add
+      this.productDetailsArray.push({
+        productId: '',
+        key: this.addProductDetailsForm.controls.keyName.value,
+        keyEn: this.addProductDetailsForm.controls.keyNameEn.value,
+        value: this.addProductDetailsForm.controls.value.value,
+        valueEn: this.addProductDetailsForm.controls.valueEn.value,
+        icon: ''
+      })
+      this.addProductDetailsForm.reset();
+      this.load = false
+    } else {
+      //update
+
+      const index = $("#detailsID").val();
+      this.productDetailsArray[index].key = this.addProductDetailsForm.controls.keyName.value;
+      this.productDetailsArray[index].keyEn = this.addProductDetailsForm.controls.keyNameEn.value;
+      this.productDetailsArray[index].value = this.addProductDetailsForm.controls.value.value;
+      this.productDetailsArray[index].valueEn = this.addProductDetailsForm.controls.valueEn.value;
+      this.addProductDetailsForm.reset();
+      this.addFlag = false
+      this.load = false
+    }
+
+  }
+
+  showAddProductDetails() {
+    this.addProductDetailsForm.reset();
+
+    $(".productDetails_layer").show()
+  }
+  closeAddSection() {
+    this.addFlag = false
+    $(".productDetails_layer").hide()
+  }
+  updateProductDetails(index: number) {
+    if (this.productDetailsArray[index]) {
+      this.addFlag = true
+      $("#detailsID").val(index);
+      this.addProductDetailsForm.controls.keyName.setValue(this.productDetailsArray[index].key);
+      this.addProductDetailsForm.controls.keyNameEn.setValue(this.productDetailsArray[index].keyEn);
+      this.addProductDetailsForm.controls.value.setValue(this.productDetailsArray[index].value);
+      this.addProductDetailsForm.controls.valueEn.setValue(this.productDetailsArray[index].valueEn);
+    } else {
+      this.showSideError(`Fail`)
+    }
+  }
+
+  deleteItemId: any;
+  deletePromote(id: number) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id;
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    this.productDetailsArray.splice(this.deleteItemId, 1)
+  }
+
+
+
 }

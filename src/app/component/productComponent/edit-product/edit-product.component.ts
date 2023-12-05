@@ -33,7 +33,11 @@ export class EditProductComponent implements OnInit {
   optionList: any[] = [];
   optionsGroups: any[] = [];
   selectedOptions: any[] = [];
-  displayOptionsName:string ='ltr'
+  displayOptionsName: string = 'ltr'
+
+  //////////////////////////////////////////////////////////////////////////////
+  productDetailsArray: any[] = [];
+  addFlag: boolean = false;
   getAllOption() {
     if (this.dir == 'ltr') {
       this.displayOptionsName = 'nameEn'
@@ -249,6 +253,7 @@ export class EditProductComponent implements OnInit {
       this.addProductForm.controls.brand.setValue(this.product.brandId)
       this.addProductForm.controls.available.setValue(this.product.isActive ? 'available' : 'unavailable')
       this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
+      this.productDetailsArray = this.product.productDetails
       this.load = false
     }, err => {
       this.load = false
@@ -260,9 +265,9 @@ export class EditProductComponent implements OnInit {
 
   handelAddProduct() {
     this.load = true;
-    if (!this.imagesList.length) {
-      this.showSideError(`Image is required`);
-    }
+    // if (!this.imagesList.length) {
+    //   this.showSideError(`Image is required`);
+    // }
 
 
     let selectedOptions: any[] = []
@@ -287,6 +292,9 @@ export class EditProductComponent implements OnInit {
       })
 
     }
+
+
+    console.log({ pp: this.productDetailsArray });
 
     let data = {
       id: this.product.id,
@@ -313,7 +321,7 @@ export class EditProductComponent implements OnInit {
       amount: this.addProductForm.controls.amount.value,
       productImages: this.imagesList.length ? this.imagesList : this.product.imagesList,
       productOptions: selectedOptions.length ? selectedOptions : [],
-      productDetails: [],
+      productDetails: this.productDetailsArray
 
 
 
@@ -337,5 +345,118 @@ export class EditProductComponent implements OnInit {
 
   closeProductDetailsSec() {
     this._Router.navigateByUrl(`admin/product`)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // productDetailsArray: any[] = [];
+  // addFlag: boolean = false;
+
+  addProductDetailsForm = new FormGroup({
+    key: new FormControl('', [Validators.required]),
+    keyEn: new FormControl('', [Validators.required]),
+    value: new FormControl('', [Validators.required]),
+    valueEn: new FormControl('', [Validators.required]),
+  })
+
+
+  handelAddProductDetails(flag: boolean) {
+
+    this.load = true;
+    if (!flag) {
+      //add
+      this.productDetailsArray.push({
+        productId: this.product.id,
+        key: this.addProductDetailsForm.controls.key.value,
+        keyEn: this.addProductDetailsForm.controls.keyEn.value,
+        value: this.addProductDetailsForm.controls.value.value,
+        valueEn: this.addProductDetailsForm.controls.valueEn.value,
+        icon: ''
+      })
+      this._ProductService.addProductDetail({
+        productId: this.product.id,
+        key: this.addProductDetailsForm.controls.key.value,
+        keyEn: this.addProductDetailsForm.controls.keyEn.value,
+        value: this.addProductDetailsForm.controls.value.value,
+        valueEn: this.addProductDetailsForm.controls.valueEn.value,
+        icon: ''
+      }).subscribe(res => {
+        this.addProductDetailsForm.reset();
+        this.load = false
+      }, err => {
+        this.showSideError(`Fail`)
+        this.load = false
+      })
+      this.addProductDetailsForm.reset();
+      this.load = false
+    } else {
+      //update
+
+      const index = $("#detailsID").val();
+      this.productDetailsArray[index].key = this.addProductDetailsForm.controls.key.value;
+      this.productDetailsArray[index].keyEn = this.addProductDetailsForm.controls.keyEn.value;
+      this.productDetailsArray[index].value = this.addProductDetailsForm.controls.value.value;
+      this.productDetailsArray[index].valueEn = this.addProductDetailsForm.controls.valueEn.value;
+      this._ProductService.updateProductDetail(this.productDetailsArray[index]).subscribe(res => {
+        this.addProductDetailsForm.reset();
+        this.addFlag = false
+        this.load = false
+      }, err => {
+        // this.addProductDetailsForm.reset();
+        // this.addFlag = false
+
+        this.showSideError(`Fail`)
+        this.load = false
+      })
+
+    }
+
+  }
+
+  showAddProductDetails() {
+    this.addProductDetailsForm.reset();
+
+    $(".productDetails_layer").show()
+  }
+  closeAddSection() {
+    this.addFlag = false
+    $(".productDetails_layer").hide()
+  }
+  updateProductDetails(index: number) {
+    if (this.productDetailsArray[index]) {
+      this.addFlag = true
+      $("#detailsID").val(index);
+      this.addProductDetailsForm.controls.key.setValue(this.productDetailsArray[index].key);
+      this.addProductDetailsForm.controls.keyEn.setValue(this.productDetailsArray[index].keyEn);
+      this.addProductDetailsForm.controls.value.setValue(this.productDetailsArray[index].value);
+      this.addProductDetailsForm.controls.valueEn.setValue(this.productDetailsArray[index].valueEn);
+    } else {
+      this.showSideError(`Fail`)
+    }
+  }
+
+  deleteItemId: any;
+  deletePromote(id: number) {
+    $(".deleteLayer").show()
+    this.deleteItemId = id;
+  }
+
+  closeDeleteAlert() {
+    $(".deleteLayer").hide()
+  }
+
+  confirmDelete() {
+    this.closeDeleteAlert()
+    this.load = true
+    console.log({ iddd: this.productDetailsArray[this.deleteItemId]?.id });
+
+    this._ProductService.deleteProductDetail(this.productDetailsArray[this.deleteItemId]?.id).subscribe(res => {
+      this.productDetailsArray.splice(this.deleteItemId, 1)
+      this.load = false
+    }, err => {
+      console.log({ er: err });
+
+      this.showSideError(`Fail`)
+      this.load = false
+    })
   }
 }

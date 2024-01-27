@@ -234,9 +234,200 @@
         </div>
       </div>
 
-      <div class="w-100  my-1 px-1  py-3">
+      <div class="w-100  my-1 px-1  py-3 h-100">
         <router-outlet></router-outlet>
 
+
+        <div class="chatDiv" dir="rtl">
+          <div class="row d-flex align-items-end ">
+            <div class="cc">
+              <div class="p-2">
+                <div>
+                  <i class="fa fa-comment showChatUsers"></i>
+                </div>
+              </div>
+            </div>
+            <div class="chatHolderList mx-1">
+              <div class="p-2">
+                <div class="listUserHold">
+                  <div class="close"  dir="ltr">
+                    <i class="fa fa-times" (click)="closeUserList()"></i>
+                  </div>
+                  <div class="mt-4">
+                    <ul>
+                      <li (click)="showChatDialog('5545343')">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+
+
+                      <li>
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chatDialog mx-1 " >
+              <div class="p-2">
+                <div class="p-2">
+                  <div class="closeChat" dir="rtl">
+                    <i class="fa fa-times" (click)="closeChatDialog()"></i>
+                  </div>
+                  <div class="chatContent" (scroll)="changeBack()">
+                    <div class="">
+                      <div class="leftUser my-1" dir="ltr">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+
+                      <div class="rightUser my-1">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+                    </div>
+
+                    <div class="">
+                      <div class="leftUser my-1" dir="ltr">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+
+                      <div class="rightUser my-1">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+                    </div>
+
+
+                    <div class="">
+                      <div class="leftUser my-1" dir="ltr">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+
+                      <div class="rightUser my-1">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+                    </div>
+
+
+                    <div class="">
+                      <div class="leftUser my-1" dir="ltr">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+
+                      <div class="rightUser my-1">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+                    </div>
+
+
+                    <div class="">
+                      <div class="leftUser my-1" dir="ltr">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+
+                      <div class="rightUser my-1">
+                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
+                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="chatControl p-2 text-center bg-light" dir="ltr">
+                    <div class="row align-items-center">
+                      <div class="col-10">
+                        <input class="form-control messageInput" type="text" name="" id="">
+                      </div>
+                      <div class="col-2">
+                        <div class="px-2">
+                          <i class="fa fa-paper-plane" (click)="sendMessage('toID')"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

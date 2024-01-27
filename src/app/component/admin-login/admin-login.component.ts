@@ -95,7 +95,7 @@ export class AdminLoginComponent {
       localStorage.setItem('token', res.token);
       localStorage.setItem('user', JSON.stringify(res.user));
       localStorage.setItem('dir', 'ltr');
-      console.log({ ressss:res });
+      console.log({ res:res });
 
       if (res.vendorData) {
         localStorage.setItem('vendorData', JSON.stringify(res.vendorData));

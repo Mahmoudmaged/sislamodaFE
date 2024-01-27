@@ -55,6 +55,12 @@ $redColor: #D80008;
     border: 0px solid transparent;
 }
 
+.hh{
+    background-color: $blackColor;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 0px solid transparent;  
+}
 .categoryContainerBody {
     background-color: $whiteColor;
     border-bottom-left-radius: 15px;

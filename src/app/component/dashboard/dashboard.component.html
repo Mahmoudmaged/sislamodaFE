@@ -136,7 +136,7 @@
         <h4 class="sellingHead" [class]="dir=='rtl'?'text-end':'text-start'">{{dir=='ltr'?'Top Selling
             Products':'المنتجات الاكثر مبيعا' }}</h4>
         <div class="col-10">
-            <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false"
+            <p-carousel dir="ltr" [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false"
                 [responsiveOptions]="responsiveOptions">
                 <ng-template let-product pTemplate="item">
                     <div class="px-2 py-1">

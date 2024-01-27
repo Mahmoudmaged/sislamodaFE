@@ -25,7 +25,7 @@ export class AdministrationComponent implements OnInit {
     { item: 'listItem12', com: 'offer' },
     { item: 'listItem13', com: 'brand' },
     { item: 'listItem18', com: 'ticket' },
-    
+
     { item: 'listItem19', com: 'optionSet' },
     { item: 'listItem19', com: 'options' },
     { item: 'listItem19', com: 'options' },
@@ -53,18 +53,22 @@ export class AdministrationComponent implements OnInit {
 
   ngOnInit() {
 
+    $(".showChatUsers").on('click', function () {
+      $(".chatHolderList").toggle()
+    })
+
     console.log(this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path);
     console.log(this._ActivatedRoute.firstChild?.snapshot?.url);
 
     this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
     console.log({ itemBar: this.itemBar });
     if (!this.itemBar) {
-      return this.changeDisplay(this.mainBar[0].item,this.mainBar[0].com)
+      return this.changeDisplay(this.mainBar[0].item, this.mainBar[0].com)
 
     }
     if (this._ActivatedRoute.firstChild) {
       if (this._ActivatedRoute.firstChild?.snapshot?.url.length == 1) {
-        return this.changeDisplay(this.itemBar.item , this.itemBar.com )
+        return this.changeDisplay(this.itemBar.item, this.itemBar.com)
       } else {
         let customPath = ``
         for (const pathItem of this._ActivatedRoute.firstChild.snapshot.url) {
@@ -76,7 +80,32 @@ export class AdministrationComponent implements OnInit {
 
 
   }
+  showChatDialog(id: string) {
+    $(".chatDialog").show()
+  }
+  closeChatDialog() {
+    $(".chatDialog").hide()
 
+  }
+  closeChat(id: string) {
+    $(".chatDialog").show()
+  }
+  closeUserList() {
+    $(".chatHolderList").hide()
+
+  }
+  changeBack() {
+    $(".closeChat").css('background-color', 'rgba(0, 0, 0, .2)')
+  }
+
+  sendMessage(id: string) {
+    let data = {
+      id,
+      message: $(".messageInput").val()
+    }
+    
+    $(".messageInput").val('')
+  }
   getNotification() {
     this._Router.navigateByUrl("/admin/notification")
   }
@@ -84,7 +113,6 @@ export class AdministrationComponent implements OnInit {
   changeDisplay(item: string, component: string): any {
     //hide all
 
-    console.log({ item, component });
 
     $(`.listItem`).children("i").hide();
     $(`.listItem`).children("p").removeClass("ActiveCheck")

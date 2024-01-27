@@ -148,9 +148,10 @@ $borderColor70: #707070;
 // End
 
 // Start RightPart Head Section
-.noti img{
+.noti img {
   cursor: pointer;
 }
+
 .profileAndLang {
   background-color: $barColor;
   border-radius: 15px;
@@ -185,7 +186,8 @@ $borderColor70: #707070;
   border-left: 2px solid $borderColor;
   cursor: pointer;
 }
-.changeLangRTL{
+
+.changeLangRTL {
   border: 0px;
   border-right: 2px solid $borderColor;
 
@@ -239,13 +241,136 @@ $borderColor70: #707070;
 
 
 // Right part header media
-.image2{
+.image2 {
   display: none;
 }
 
-.fa-spinner , .fa-spin{
+.fa-spinner,
+.fa-spin {
   font-size: 25px !important;
 }
+
+// chatButton
+.chatButton {
+  position: fixed;
+  bottom: 5%;
+  right: 2%;
+}
+
+// chatDiv
+.chatDiv {
+  position: fixed;
+  bottom: 2%;
+  right: 0;
+  left: 0;
+  padding: 10px;
+}
+
+
+.chatHolderList {
+  background-color: $barColor;
+  padding: 8px;
+  border-radius: 15px;
+  width: 200px;
+  max-height: 250px;
+  display: none;
+
+
+}
+
+.cc {
+  width: 50px;
+}
+.cc i {
+ color:  $lightGray;
+ cursor: pointer;
+}
+.closeChat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  z-index: 55555555555;
+  // background-color: rgba(0, 0, 0, .2);
+}
+
+.closeChat i , .fa-times{
+  cursor: pointer;
+  z-index: 11111;
+
+}
+.listUserHold{
+  position: relative;
+}
+.listUserHold .close{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 444444;
+}
+.chatDialog {
+  position: relative;
+  max-width: 300px;
+  background-color: $barColor;
+  padding: 10px;
+  border-radius: 15px;
+  min-height: 200px;
+  max-height: 250px;
+  display: none;
+
+}
+
+
+
+.chatContent {
+  position: absolute;
+  top: 3%;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+  padding: 8px;
+}
+
+.chatControl {
+  position: absolute;
+  top:80%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+// .listUserHold ul{
+//   position: relative;
+//   top: 5%;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+// }
+.chatHolderList ul li {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.chatControl i {
+  cursor: pointer;
+}
+
+
+.chatImage {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.chatTitle {
+  font-size: 12px;
+}
+
+
+
+
 @media only screen and (max-width: 950px) {
   .profileAndLang h5 {
     font-size: 1.2rem;
@@ -255,6 +380,3 @@ $borderColor70: #707070;
     font-size: .8rem;
   }
 }
-
-
-

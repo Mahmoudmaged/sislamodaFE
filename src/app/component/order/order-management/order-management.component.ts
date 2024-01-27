@@ -58,8 +58,8 @@ export class OrderManagementComponent implements OnInit {
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.photo = this.userInfo?.photo || this.photo;
     if (this.userInfo.isVendor || this._ActivatedRoute.snapshot.queryParams['vendorId']) {
-      console.log(({ vh: this._ActivatedRoute.snapshot.queryParams['vendorId'] }));
-      this.GetVendorOrderedProduct(this.vendorData?.id || this._ActivatedRoute.snapshot.queryParams['vendorId'])
+      console.log(({ dID:this.vendorData, vh: this._ActivatedRoute.snapshot.queryParams['vendorId'] }));
+      this.GetVendorOrderedProduct( this.vendorData?.id || this._ActivatedRoute.snapshot.queryParams['vendorId'])
     } else {
       this.getAllOrders(this.userInfo?.id)
     }

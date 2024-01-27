@@ -111,8 +111,8 @@ export class RegisterVendorComponent implements OnInit {
           phoneNumber: this.signupForm.controls.phone.value,
           otherPhoneNumber: '',
           password: this.signupForm.controls.password.value,
-          photoId: '',
-          birthDate: '',
+          photoId: null,
+          // birthDate: '',
           pantsMeasurement: '',
           coachMeasurement: '',
           tShirtmeasurement: ''
@@ -127,9 +127,9 @@ export class RegisterVendorComponent implements OnInit {
           ownerName: this.signupForm.controls.firstName.value,
           ownerPhoneNumber: this.storeForm.controls.phone.value,
           ownerPhoneNumber2: this.storeForm.controls.phone2.value,
-          logoId: '',
-          banerId: '',
-          ownerId: ''
+          // logoId: '',
+          // banerId: '',
+          // ownerId: ''
         }
 
       }

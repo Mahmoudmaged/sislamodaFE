@@ -42,7 +42,7 @@ export class EditCategoryComponent implements OnInit {
     private _AttachmentsService: AttachmentsService,
     private _Router: Router,
     private _ActivatedRoute: ActivatedRoute) {
-      this.dir = localStorage.getItem("dir")! || 'ltr';
+    this.dir = localStorage.getItem("dir")! || 'ltr';
     this.getCategoryById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
 
   }
@@ -51,25 +51,30 @@ export class EditCategoryComponent implements OnInit {
 
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.selectedImage = e.target.result;
-
-      this.base = this.selectedImage
-      console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
-
-      return this._AttachmentsService.uploadAttachBase64({
-        fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
-      }).subscribe(res => {
-        this.image = res
-        console.log({ res });
-      }, err => {
-        console.log({ err });
-      }
-      )
-
-    };
     reader.readAsDataURL(file);
 
+
+    reader.onload = (e: any) => {
+      const acceptTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif']
+      if (!acceptTypes.includes(event.target.files[0].type)) {
+        return this.showSideError(`In-valid file type ${event.target.files[0].type?.split("/")[1]}`);
+      } else {
+        this.selectedImage = e.target.result;
+
+        this.base = this.selectedImage
+        console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
+
+        return this._AttachmentsService.uploadAttachBase64({
+          fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
+        }).subscribe(res => {
+          this.image = res
+          console.log({ res });
+        }, err => {
+          console.log({ err });
+        })
+      }
+
+    };
 
 
 

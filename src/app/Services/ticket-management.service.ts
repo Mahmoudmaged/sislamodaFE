@@ -15,10 +15,17 @@ export class TicketManagementService {
     this.token = localStorage.getItem("token")
     this.id = JSON.parse(localStorage.getItem('user')!)?.id;
 
+
+
   }
 
   getTickets(): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetAll`);
+
+  }
+
+  getVendorTickets(vendorId: string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAllByVendor?vendorId=${vendorId}`);
 
   }
 

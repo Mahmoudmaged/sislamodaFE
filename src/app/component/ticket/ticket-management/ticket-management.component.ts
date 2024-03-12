@@ -65,16 +65,30 @@ export class TicketManagementComponent implements OnInit {
   getTicketList() {
     this.load = true
 
-    this._TicketManagementService.getTickets().subscribe(res => {
-      this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
-      this.fullTicketList = res;
-      this.ticketList = this.fullTicketList.slice(0, this.pageSize);
-      this.load = false
-    }, err => {
-      this.load = false
-      this.showSideError('Fail')
+    if (this.userInfo.isVendor) {
+      this._TicketManagementService.getVendorTickets(this.vendorData?.id).subscribe(res => {
+        this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
+        this.fullTicketList = res;
+        this.ticketList = this.fullTicketList.slice(0, this.pageSize);
+        this.load = false
+      }, err => {
+        this.load = false
+        this.showSideError('Fail')
+      }
+      )
+    } else {
+      this._TicketManagementService.getTickets().subscribe(res => {
+        this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
+        this.fullTicketList = res;
+        this.ticketList = this.fullTicketList.slice(0, this.pageSize);
+        this.load = false
+      }, err => {
+        this.load = false
+        this.showSideError('Fail')
+      }
+      )
     }
-    )
+
 
 
   }

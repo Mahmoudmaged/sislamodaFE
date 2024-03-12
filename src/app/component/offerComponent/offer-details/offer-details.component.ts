@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OfferService } from 'src/app/Services/offer.service';
 import { OrderService } from 'src/app/Services/order.service';
@@ -28,7 +28,9 @@ export class OfferDetailsComponent implements OnInit {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
-  constructor(private _Router: Router,
+  constructor(
+    private formBuilder: FormBuilder,
+    private _Router: Router,
     private _ProductService: ProductService,
     private _OfferService: OfferService,
     public _ActivatedRoute: ActivatedRoute) {
@@ -43,10 +45,33 @@ export class OfferDetailsComponent implements OnInit {
 
 
 
+  removeSelectedProductsFromOptionList(offersProducts: any, res: any) {
+    for (let i = 0; i < offersProducts.length; i++) {
+      for (let j = 0; j < res.length; j++) {
+        if (res[j].id == offersProducts[i].productId) {
+          res.splice(j, 1)
+        }
+      }
+
+    }
+
+    this.optionList = res;
+    this.addProductForm.controls['productOptions'].setValue([])
+
+    console.log({ res });
+    console.log({ fv: this.addProductForm.controls['productOptions'].value });
+
+
+  }
+
   getAllProduct() {
+
     if (this.userInfo.isAdmin) {
+
       return this._ProductService.getProductsList().subscribe(res => {
-        this.optionList = res;
+
+        this.removeSelectedProductsFromOptionList(this.offer?.offersProducts, res)
+
       }, err => {
         console.log({ err });
         this.showSideError('Fail to load product options');
@@ -54,7 +79,10 @@ export class OfferDetailsComponent implements OnInit {
       })
     } else {
       return this._ProductService.getProductsListByVendor(this.offer.vendorId).subscribe(res => {
-        this.optionList = res;
+
+        this.removeSelectedProductsFromOptionList(this.offer?.offersProducts, res)
+
+
       }, err => {
         console.log({ err });
         this.showSideError('Fail to load product options');
@@ -63,16 +91,28 @@ export class OfferDetailsComponent implements OnInit {
     }
 
   }
+
+  form!: FormGroup;
+
+
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      selectedItems: new FormControl([]) // Initialize the form control with an empty array
+    });
   }
 
+  clearSelection() {
+    console.log('Clearing selection...');
+    this.form.controls['selectedItems'].setValue([]); // Set the value of the form control to an empty array
+    console.log('Selected items after clearing:', this.form.get('selectedItems')?.value);
+  
+  }
+  
   getOffer(id: string) {
     this.load = true;
     return this._OfferService.getOfferById(id).subscribe(res => {
       this.offer = res;
-      console.log({ off: this.offer });
       this.getAllProduct()
-
       this.load = false;
     }, err => {
       this.load = false;
@@ -95,6 +135,7 @@ export class OfferDetailsComponent implements OnInit {
 
     this.load = true;
     this._OfferService.deleteProductFromOfferById(id).subscribe(res => {
+
       this.load = false;
       this.getOffer(this.offer.id)
     }, err => {
@@ -107,12 +148,13 @@ export class OfferDetailsComponent implements OnInit {
   }
 
   addProductForm = new FormGroup({
-    productOptions: new FormControl('', []),
+    productOptions: new FormControl([]),
   })
   addProducts() {
     let selectedOptions: any[] = []
     if (this.addProductForm.controls.productOptions.value) {
       let selectOptions = this.addProductForm.controls.productOptions.value
+      this.addProductForm.controls.productOptions.setValue([])
       for (let i = 0; i < selectOptions.length; i++) {
         selectedOptions.push(selectOptions[i])
       }
@@ -122,11 +164,11 @@ export class OfferDetailsComponent implements OnInit {
       })
 
       for (const product of selectedOptions) {
-
         this._OfferService.addProductToOffer({
           offersId: this._ActivatedRoute.snapshot.paramMap.get('id'),
           productId: product,
         }).subscribe(res => {
+          this.addProductForm.controls['productOptions'].setValue([])
           this.getOffer(this.offer.id)
         }, err => {
           this.showSideError("Fail")

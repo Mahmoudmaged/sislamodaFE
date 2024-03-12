@@ -48,6 +48,7 @@ export class EditProductComponent implements OnInit {
     return this._ProductService.getOptionList().subscribe(res => {
       this.optionList = res;
 
+
       let color = [];
       let size = [];
       let price = [];
@@ -124,34 +125,50 @@ export class EditProductComponent implements OnInit {
     }, 3000);
   }
 
-
   selectImage(event: any) {
+    const acceptTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif']
 
-    // this.selectedImages = []
-    // this.imagesList = []
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i];
       const reader = new FileReader();
+
+
+
+      reader.readAsDataURL(file);
+
+
+
       reader.onload = (e: any) => {
-        this.selectedImage = e.target.result;
-        this.selectedImages.push(e.target.result)
-        return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
-          this.imagesList.push({
-            photoId: res
-          })
-        }, err => {
-          this.showSideError('Fail to upload please try again')
+
+        if (!acceptTypes.includes(event.target.files[i].type)) {
+          this.load = false;
+          return this.showSideError(`In-valid file type ${event.target.files[i].type?.split("/")[1]}`);
+        } else {
+          this.selectedImage = e.target.result;
+          this.selectedImages.push(e.target.result)
+          return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
+            this.imagesList.push({
+              photoId: res
+            })
+          }, err => {
+            this.showSideError('Fail to upload please try again')
+          }
+          )
         }
-        )
 
       };
-      reader.readAsDataURL(file);
     }
 
 
 
 
 
+  }
+  defaultImageIndex: number = 0;
+  saveAsDefault(i: number) {
+    $(`.fa-check`).hide()
+    $(`.fa-check-${i}`).show()
+    this.defaultImageIndex = i;
   }
 
   removeImage(i: number) {
@@ -177,6 +194,7 @@ export class EditProductComponent implements OnInit {
     this.getProductByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
     setTimeout(() => {
       this.addProductForm.controls.subcategory.setValue(this.product.categoryId)
+    
     }, 1000);
   }
 
@@ -232,11 +250,15 @@ export class EditProductComponent implements OnInit {
 
   })
 
+
+  // p-highlight
   getProductByID(id: any) {
     this.load = true
     return this._ProductService.getProductWithId(id).subscribe(res => {
 
       this.product = res
+      console.log({ op: this.product.productOptions });
+
       this.getSubCategory(this.product.category?.mainCategoryId);
 
       this.addProductForm.controls.productName.setValue(this.product.name)
@@ -254,7 +276,9 @@ export class EditProductComponent implements OnInit {
       this.addProductForm.controls.available.setValue(this.product.isActive ? 'available' : 'unavailable')
       this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
       this.productDetailsArray = this.product.productDetails
-      this.load = false
+
+
+      this.load = false;
     }, err => {
       this.load = false
       this.showSideError(`Fail product doesn't exist`);
@@ -271,7 +295,7 @@ export class EditProductComponent implements OnInit {
 
 
     let selectedOptions: any[] = []
-    console.log(this.addProductForm.controls.productOptions.value);
+    console.log({ sop: this.addProductForm.controls.productOptions.value });
 
     if (this.addProductForm.controls.productOptions.value) {
       let selectOptions = this.addProductForm.controls.productOptions.value
@@ -312,7 +336,7 @@ export class EditProductComponent implements OnInit {
 
       isActive: (this.addProductForm.controls.available.value == 'available' || this.addProductForm.controls.available.value == `true`) ? true : false,
 
-      defaultPhotoId: this.imagesList.length ? this.imagesList[0].photoId : this.product.defaultPhotoId,
+      defaultPhotoId: this.imagesList.length ? this.imagesList[this.defaultImageIndex].photoId : this.product.defaultPhotoId,
       categoryId: this.addProductForm.controls.subcategory.value,
       brandId: this.addProductForm.controls.brand.value,
       vendorId: this.vendorData.id, //this.userInfo.id,,
@@ -339,6 +363,14 @@ export class EditProductComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
+
+    setTimeout(() => {
+      this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
+    
+    }, 0);
+
   }
 
 

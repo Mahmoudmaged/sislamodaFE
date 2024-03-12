@@ -43,8 +43,8 @@ export class AddOfferComponent {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
-    console.log({userInfo:this.userInfo});
-    
+    console.log({ userInfo: this.userInfo });
+
     this.getAllCategory()
   }
 
@@ -78,7 +78,7 @@ export class AddOfferComponent {
   })
 
   handelAddOffer() {
-    
+
     this.load = true;
     if (!this.image) {
       this.errorMessage = "Image is required"
@@ -102,26 +102,36 @@ export class AddOfferComponent {
     this.load = true;
     const file = event.target.files[0];
     const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+
     reader.onload = (e: any) => {
-      this.selectedImage = e.target.result;
 
-      this.base = this.selectedImage
-      console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
-
-      return this._AttachmentsService.uploadAttachBase64({
-        fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
-      }).subscribe(res => {
+      const acceptTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif']
+      if (!acceptTypes.includes(event.target.files[0].type)) {
         this.load = false;
+        return this.showSideError(`In-valid file type ${event.target.files[0].type?.split("/")[1]}`);
+      } else {
+        this.selectedImage = e.target.result;
 
-        this.image = res
-      }, err => {
-        this.load = false;
-        this.showSideError('Fail to upload ');
+        this.base = this.selectedImage
+        console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
+
+        return this._AttachmentsService.uploadAttachBase64({
+          fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
+        }).subscribe(res => {
+          this.image = res
+          this.load = false;
+
+          console.log({ res });
+        }, err => {
+          this.load = false;
+
+          console.log({ err });
+        })
       }
-      )
 
     };
-    reader.readAsDataURL(file);
   }
 
   close() {

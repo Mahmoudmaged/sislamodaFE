@@ -55,8 +55,16 @@
                         <div class="col-lg-8"></div>
                         <div *ngFor="let image of selectedImages ; index as i" class="col-4  mb-2">
                             <div class="px-2 py-2 displayImageCont">
+                                <div class="imageLayer">
+                                    <div class="row align-items-center justify-content-center text-center h-100">
+                                        <div class="col-12">
+                                            <button class="btn btn-success p-1 savedefBtn" (click)="saveAsDefault(i)">Mark as default Image</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="text-end trashSection">
                                     <i class="fa fa-trash text-danger" (click)="removeImage(i)"></i>
+                                    <i class="fa fa-check text-success mx-1b fa-check-{{i}}" ></i>
                                 </div>
                                 <div class="px-2 py-1 w-100 text-center uploadParent">
                                     <img class="" [src]="image" alt="" srcset="">
@@ -189,12 +197,12 @@
 
                 <div class="col-6 mb-1">
                     <div class="px-2 py-1">
-                        <p> {{dir=='ltr'?'Product amount' :'الكميه'}}</p>
+                        <p> {{dir=='ltr'?'Stock amount' :'كمية المنتج في المخزن'}}</p>
                         <div class="form-group">
                             <input type="number" min="1" formControlName="amount" class="form-control" />
                             <div *ngIf="addProductForm.controls['amount'].errors && addProductForm.controls['amount'].touched"
                                 class=" my-1 xx">
-                                <p class="formError"> {{dir=='ltr'?'In-valid product amount' :'خطاء'}} </p>
+                                <p class="formError"> {{dir=='ltr'?'In-valid stock amount' :'خطاء'}} </p>
 
                             </div>
                         </div>
@@ -305,7 +313,8 @@
                             <p class="btn btn-outline-danger px-3 py-2 w-100 form-control"
                                 (click)="showAddProductDetails()"> <i class="fa fa-plus mx-1"></i>
                                 {{dir=='ltr'?'Add':'اضافه'}}</p>
-                            <p> {{productDetailsArray.length>0 ? dir=='ltr'?'you have add ('+ productDetailsArray.length +') of product details until
+                            <p> {{productDetailsArray.length>0 ? dir=='ltr'?'you have add ('+ productDetailsArray.length
+                                +') of product details until
                                 now':'رائع لقم قمت باضافه'+' ('+( productDetailsArray.length)+") "+
                                 ' من تفاصيل المنتجات الي هذا المنتج حتي الان ':''}}</p>
 

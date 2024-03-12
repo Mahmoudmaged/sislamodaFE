@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
 
   getDashBoardAnalysis() {
     if (this.userInfo?.isVendor) {
-      this._VendorService.dashboard(this.userInfo?.id).subscribe(res => {
+      this._VendorService.dashboard(this.vendorData?.id).subscribe(res => {
         this.data = res
         this.products = this.data?.topSellingProducts
       }, err => {

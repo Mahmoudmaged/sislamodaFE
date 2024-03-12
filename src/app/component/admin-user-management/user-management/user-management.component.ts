@@ -90,8 +90,6 @@ export class UserManagementComponent implements OnInit {
     this.load = true;
     return this._UserService.allUsers().subscribe(res => {
       this.pages = Math.ceil(res.length / this.pageSize);
-      console.log({ ress: res });
-
       this.fullUserList = res;
       this.userList = this.fullUserList.slice(0, this.pageSize);
       this.load = false;

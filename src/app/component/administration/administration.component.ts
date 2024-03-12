@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import { FinancialManagementComponent } from '../financial/financial-management/financial-management.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChatService } from 'src/app/Services/chat.service';
 declare let $: any
 @Component({
   selector: 'app-administration',
@@ -38,8 +39,10 @@ export class AdministrationComponent implements OnInit {
   userInfo: any;
   vendorData: any;
   lang: string = 'English'
+  chatList: any[] = []
+  chatInstance: any;
   constructor(
-    public _Router: Router, public _ActivatedRoute: ActivatedRoute) {
+    public _Router: Router, public _ActivatedRoute: ActivatedRoute, public _ChatService: ChatService) {
 
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
@@ -48,6 +51,7 @@ export class AdministrationComponent implements OnInit {
     }
 
     this.photo = this.userInfo?.photo || this.photo;
+    this.getChatList()
 
   }
 
@@ -80,12 +84,70 @@ export class AdministrationComponent implements OnInit {
 
 
   }
+
+
+  getChatList(page = 1, size = 1000) {
+    this._ChatService.getAllChatList(page, size).subscribe(res => {
+      this.chatList = res
+      this.chatInstance = this.chatList[0]
+      console.log({ chat: this.chatList });
+
+    },
+      err => {
+        this.load = false;
+
+      }
+    )
+  }
+
+  getChatInstance(chatId: any, page = 1, size = 1000) {
+    this._ChatService.getChatData(chatId, page, size).subscribe(res => {
+
+      this.chatInstance = { chat: res?.reverse(), myAppUserId: chatId, userChatId: res[0].userChatId }
+      console.log({ getChatInstance: this.chatInstance });
+
+    },
+      err => {
+        this.load = false;
+
+      }
+    )
+  }
+
+  sendMessageToClientOrVendor(data: any) {
+
+    this._ChatService.messageToUser(data).subscribe(res => {
+      console.log({ sentRes: res });
+      $(".messageInput").val('');
+    },
+      err => {
+        this.load = false;
+
+      }
+    )
+  }
+
+
+  sendMessageToAdmin(data: any) {
+
+    this._ChatService.messageFromUser(data).subscribe(res => {
+      console.log({ sentRes: res });
+      $(".messageInput").val('');
+    },
+      err => {
+        this.load = false;
+
+      }
+    )
+  }
+
+
   showChatDialog(id: string) {
+    this.getChatInstance(id, 1, 1000)
     $(".chatDialog").show()
   }
   closeChatDialog() {
     $(".chatDialog").hide()
-
   }
   closeChat(id: string) {
     $(".chatDialog").show()
@@ -98,13 +160,29 @@ export class AdministrationComponent implements OnInit {
     $(".closeChat").css('background-color', 'rgba(0, 0, 0, .2)')
   }
 
-  sendMessage(id: string) {
-    let data = {
-      id,
-      message: $(".messageInput").val()
+  sendMessage(myAppUserId: string, userChatId: string) {
+
+    const data = {
+      "myAppUserId": myAppUserId, //vendorID
+      "userChatId": userChatId, //chatID
+      "message": $(".messageInput").val(),
+      "replayUserId": ""
     }
+    console.log({nn:this.userInfo});
     
-    $(".messageInput").val('')
+    if (this.userInfo.isAdmin) {
+      this.sendMessageToClientOrVendor(data)
+
+    } else {
+
+      //vendor send message to admin
+      this.sendMessageToAdmin({
+        "myAppUserId": myAppUserId, //vendorID
+        "message": $(".messageInput").val()
+      })
+    }
+
+
   }
   getNotification() {
     this._Router.navigateByUrl("/admin/notification")

@@ -48,6 +48,20 @@
         <hr>
 
         <div class="mb-1">
+            <div class="px-2 py-1">
+                <p>
+                    {{dir=='ltr'?'Category':'الفئه التابع لها'}}
+                </p>
+                <p class="">
+                    {{dir=='ltr'?offer?.offerCategory?.nameEn :offer?.offerCategory?.name}}
+
+                </p>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="mb-1">
             <div class="">
                 <div class="row">
                     <div class="col-md-4 my-1">
@@ -134,12 +148,12 @@
                                 <div class="row justify-content-center">
                                     <div class="col-10">
                                         <div class=" my-2 ">
-                                            <img class="productsImage" [src]="product.product?.defaultPhoto?.fullLink" alt=""
-                                                srcset="" (click)="showProduct(product?.product?.id)">
+                                            <img class="productsImage" [src]="product.product?.defaultPhoto?.fullLink"
+                                                alt="" srcset="" (click)="showProduct(product?.product?.id)">
                                         </div>
 
                                     </div>
-                                    <div  class="col-2 p-2 text-end ">
+                                    <div class="col-2 p-2 text-end ">
                                         <div class=" w-100 text-end p-2 mb-1 icontainer">
                                             <i class="fa fa-close text-danger"
                                                 (click)="deleteProductFromOffer(product?.id)"></i>
@@ -147,24 +161,43 @@
                                     </div>
                                 </div>
                                 <div class="containerData">
-                                    <h6 class="title my-1 text-center">{{dir=='ltr'?product.product?.nameEn:product.product?.name}}.</h6>
-                                    <p class="Desc my-2">{{dir=='ltr'?product.product?.descriptionEn.slice(0,50):product.product?.description.slice(0,50)}}...</p>
+                                    <h6 class="title my-1 text-center">
+                                        {{dir=='ltr'?product.product?.nameEn:product.product?.name}}.</h6>
+                                    <p class="Desc my-2">
+                                        {{dir=='ltr'?product.product?.descriptionEn.slice(0,50):product.product?.description.slice(0,50)}}...
+                                    </p>
                                     <p class="price my-1 text-danger">{{product.product?.defaultPrice}}$</p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-            
+
                     <div class="col-12"></div>
-                    <div  class="col-md-6 mb-1">
+                    <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div>
                                 <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
-                                <form [formGroup]="addProductForm">
-                                    <p-multiSelect formControlName="productOptions" [options]="optionList"
-                                        optionLabel="nameEn" [style]="{'width':'100%'}"></p-multiSelect>
+                                <form [formGroup]="addProductForm" (ngSubmit)="addProductForm.valid && addProducts()">
+                                    <div class="form-group">
+                                        <p-multiSelect formControlName="productOptions" [options]="optionList"
+                                            placeholder="Select product" optionLabel="nameEn"
+                                            [style]="{'width':'100%'}"></p-multiSelect>
+                                    </div>
+                                    <!-- 
+                                    <div class="form-group mt-5 ">
+                                        <button [disabled]="addProductForm.invalid" class="btn btn-dark w-100 p-2">LOGIN</button>
+                                     
+                                    </div> -->
                                 </form>
+                            </div>
+
+                            <div>
+                                <form [formGroup]="form">
+                                    <p-multiSelect [options]="optionList"  optionLabel="nameEn"   placeholder="Select product" 
+                                   formControlName="selectedItems" class="h"></p-multiSelect>
+                                    <button class="btn btn-danger" (click)="clearSelection()">Clear Selection</button>
+                                  </form>
                             </div>
 
                         </div>
@@ -179,7 +212,7 @@
 
             </button>
 
-            <button  class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
+            <button class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
                 {{dir=='ltr'?'Save':'حفظ'}}
 
             </button>

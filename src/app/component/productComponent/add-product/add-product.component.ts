@@ -67,32 +67,50 @@ export class AddProductComponent implements OnInit {
 
 
   selectImage(event: any) {
+    const acceptTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif']
 
-    // this.selectedImages = []
-    // this.imagesList = []
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i];
       const reader = new FileReader();
+
+
+
+      reader.readAsDataURL(file);
+
+
+
       reader.onload = (e: any) => {
-        this.selectedImage = e.target.result;
-        this.selectedImages.push(e.target.result)
-        return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
-          this.imagesList.push({
-            photoId: res
-          })
-        }, err => {
-          this.showSideError('Fail to upload please try again')
+
+        if (!acceptTypes.includes(event.target.files[i].type)) {
+          this.load = false;
+          return this.showSideError(`In-valid file type ${event.target.files[i].type?.split("/")[1]}`);
+        } else {
+          this.selectedImage = e.target.result;
+          this.selectedImages.push(e.target.result)
+          return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
+            this.imagesList.push({
+              photoId: res
+            })
+          }, err => {
+            this.showSideError('Fail to upload please try again')
+          }
+          )
         }
-        )
 
       };
-      reader.readAsDataURL(file);
     }
 
 
 
 
 
+  }
+
+  defaultImageIndex: number = 0;
+  saveAsDefault(i: number) {
+    $(`.fa-check`).hide()
+    $(`.fa-check-${i}`).show()
+    this.defaultImageIndex = i;
   }
 
   removeImage(i: number) {
@@ -284,7 +302,7 @@ export class AddProductComponent implements OnInit {
 
 
 
-      defaultPhotoId: this.imagesList[0].photoId,
+      defaultPhotoId: this.imagesList[this.defaultImageIndex || 0].photoId,
       categoryId: this.addProductForm.controls.subcategory.value,
       brandId: this.addProductForm.controls.brand.value,
       vendorId: this.vendorData?.id,//this.userInfo.id ,//"06eff051-2254-4eb7-d4fc-08dbbb387eb9",

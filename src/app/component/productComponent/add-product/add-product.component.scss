@@ -137,3 +137,29 @@
 //     z-index: 99999999999999999999;
 
 // }
+
+.imageLayer {
+    position: absolute;
+    top: 150%;
+    height: 100%;
+    width: 100%;
+    transition: all 1s;
+
+}
+
+.savedefBtn {
+    font-size: 12px;
+}
+
+.displayImageCont {
+    overflow: hidden;
+    transform: all 1s;
+}
+
+.displayImageCont:hover>.imageLayer {
+    top: 0%
+}
+
+.fa-check {
+    display: none;
+}

@@ -14,9 +14,18 @@ $redColor: #D80008;
 }
 
 .head h5 {
+  
   font-size: 15px;
 }
 
+
+
+.hh{
+  background-color: $blackColor;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: 0px solid transparent;  
+}
 ::ng-deep .p-calendar {
   max-width: unset;
   width: 100%;

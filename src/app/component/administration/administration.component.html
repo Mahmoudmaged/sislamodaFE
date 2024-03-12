@@ -254,82 +254,10 @@
                     <i class="fa fa-times" (click)="closeUserList()"></i>
                   </div>
                   <div class="mt-4">
-                    <ul>
-                      <li (click)="showChatDialog('5545343')">
+                    <ul *ngFor="let chat of chatList">
+                      <li (click)="showChatDialog(chat.myAppUserId)">
                         <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                      </li>
-
-
-                      <li>
-                        <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                        <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                        <span class="chatTitle mx-1">{{chat?.myAppUserId}}</span>
                       </li>
                     </ul>
                   </div>
@@ -417,7 +345,7 @@
                       </div>
                       <div class="col-2">
                         <div class="px-2">
-                          <i class="fa fa-paper-plane" (click)="sendMessage('toID')"></i>
+                          <i class="fa fa-paper-plane" (click)="sendMessage(chatInstance?.myAppUserId,chatInstance?.userChatId)"></i>
                         </div>
                       </div>
                     </div>

@@ -35,6 +35,7 @@ export class EditProductComponent implements OnInit {
   selectedOptions: any[] = [];
   displayOptionsName: string = 'ltr'
 
+  combineImages: any = []
   //////////////////////////////////////////////////////////////////////////////
   productDetailsArray: any[] = [];
   addFlag: boolean = false;
@@ -164,11 +165,19 @@ export class EditProductComponent implements OnInit {
 
 
   }
-  defaultImageIndex: number = 0;
+  defaultImageIndex: number = -1;
+  defaultImageIndexOld: number = -1;
+  saveAsDefaultOldImage(i: number) {
+    $(`.fa-check , .fa-check-old`).hide()
+    $(`.fa-check-old-${i}`).show()
+    this.defaultImageIndex = -1;
+    this.defaultImageIndexOld = i;
+  }
   saveAsDefault(i: number) {
-    $(`.fa-check`).hide()
+    $(`.fa-check  , .fa-check-old`).hide()
     $(`.fa-check-${i}`).show()
     this.defaultImageIndex = i;
+    this.defaultImageIndexOld = -1;
   }
 
   removeImage(i: number) {
@@ -192,9 +201,9 @@ export class EditProductComponent implements OnInit {
     this.getAllBrands()
     this.getAllOption()
     this.getProductByID(this._ActivatedRoute.snapshot.paramMap.get('id')!)
+    // this.combineImages = [...this.product.productImages]
     setTimeout(() => {
       this.addProductForm.controls.subcategory.setValue(this.product.categoryId)
-    
     }, 1000);
   }
 
@@ -318,6 +327,9 @@ export class EditProductComponent implements OnInit {
     }
 
 
+    console.log({ dd: this.imagesList, pI: this.product.productImages });
+
+
     console.log({ pp: this.productDetailsArray });
 
     let data = {
@@ -336,18 +348,34 @@ export class EditProductComponent implements OnInit {
 
       isActive: (this.addProductForm.controls.available.value == 'available' || this.addProductForm.controls.available.value == `true`) ? true : false,
 
-      defaultPhotoId: this.imagesList.length ? this.imagesList[this.defaultImageIndex].photoId : this.product.defaultPhotoId,
+      defaultPhotoId:
+        this.defaultImageIndex < 0 ?
+          this.defaultImageIndexOld < 0 ? this.product.defaultPhotoId : this.product.productImages[this.defaultImageIndexOld].photoId
+          :
+          this.imagesList[this.defaultImageIndex].photoId,
+      // defaultPhotoId: this.imagesList.length ? this.imagesList[this.defaultImageIndex >= 0 ? this.defaultImageIndex : 0].photoId : this.product.defaultPhotoId,
       categoryId: this.addProductForm.controls.subcategory.value,
       brandId: this.addProductForm.controls.brand.value,
       vendorId: this.vendorData.id, //this.userInfo.id,,
       paymentType: "string",
       noteForReturn: this.addProductForm.controls.noteForReturn.value || 'string',
       amount: this.addProductForm.controls.amount.value,
-      productImages: this.imagesList.length ? this.imagesList : this.product.imagesList,
+      productImages: this.product.productImages,
+      // productImages: this.imagesList.length ? this.imagesList : this.product.imagesList,
       productOptions: selectedOptions.length ? selectedOptions : [],
       productDetails: this.productDetailsArray
 
 
+
+    }
+    for (let i = 0; i < this.imagesList.length; i++) {
+      this._ProductService.addProductImage({ productId: this.product.id, photoId: this.imagesList[i].photoId }).subscribe(res => {
+      },
+        err => {
+          this.load = false;
+          this.showSideError(`Fail to add new  product image `)
+        }
+      )
 
     }
     this._ProductService.updateProduct(data).subscribe(res => {
@@ -368,7 +396,6 @@ export class EditProductComponent implements OnInit {
 
     setTimeout(() => {
       this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
-    
     }, 0);
 
   }
@@ -390,6 +417,10 @@ export class EditProductComponent implements OnInit {
     valueEn: new FormControl('', [Validators.required]),
   })
 
+
+  removeImageFromProduct(i: any) {
+
+  }
 
   handelAddProductDetails(flag: boolean) {
 
@@ -466,6 +497,44 @@ export class EditProductComponent implements OnInit {
     }
   }
 
+  deleteImage: any;
+  deleteImageKey: any = { EN: 'Are you sure that you want to delete this product Image ?', AR: " برجاء التأكد من حذف ؟" }
+  showDeleteImage: boolean = true;
+  deleteImagePromote(id: number, image: any) {
+    console.log({ id, image });
+
+    //check if  it was a default image 
+    if (image.photo?.fullLink == this.product.defaultPhoto?.fullLink && (this.defaultImageIndex < 0 || this.defaultImageIndexOld < 0)) {
+      this.showDeleteImage = false;
+      this.deleteImageKey = { EN: `Sorry can't delete the default image please mark other one as default before delete it`, AR: 'عفو لا يمكن حذف الصوره الرئسيه بدون تحديد اخري!' }
+    } else {
+      this.showDeleteImage = true;
+      this.deleteImageKey = { EN: 'Are you sure that you want to delete this product Image ?', AR: " برجاء التأكد من حذف ؟" }
+    }
+    //--> if yes stop 
+    //--> if their is new  image marked as default then ok
+    //remove from product image list
+
+    $(".deleteLayerImage").show()
+    this.deleteImage = { index: id, image };
+  }
+
+  confirmDeleteImage() {
+    this.closeDeleteAlert()
+    this.load = true
+
+    this._ProductService.deleteProductImage(this.deleteImage?.image?.id).subscribe(res => {
+      this.product.productImages.splice(this.deleteImage?.index, 1)
+      this.load = false
+    }, err => {
+      console.log({ er: err });
+
+      this.showSideError(`Fail`)
+      this.load = false
+    })
+  }
+
+
   deleteItemId: any;
   deletePromote(id: number) {
     $(".deleteLayer").show()
@@ -473,7 +542,7 @@ export class EditProductComponent implements OnInit {
   }
 
   closeDeleteAlert() {
-    $(".deleteLayer").hide()
+    $(".deleteLayer , .deleteLayerImage").hide()
   }
 
   confirmDelete() {

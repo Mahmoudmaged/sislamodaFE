@@ -171,7 +171,7 @@
       </div>
 
       <!-- footer -->
-      <div class="sideNav_footer">
+      <div class="sideNav_footer listItem listItem25" (click)="support()">
         <img class="mx-1 image" src="../../../assets/images/Sislimoda/white/support.svg" alt="" srcset="">
 
         <span>{{dir=='ltr'?'Support and Help':'الدعم الفني'}}</span>
@@ -238,7 +238,7 @@
         <router-outlet></router-outlet>
 
 
-        <div class="chatDiv" dir="rtl">
+        <!-- <div class="chatDiv" dir="rtl">
           <div class="row d-flex align-items-end ">
             <div class="cc">
               <div class="p-2">
@@ -250,7 +250,7 @@
             <div class="chatHolderList mx-1">
               <div class="p-2">
                 <div class="listUserHold">
-                  <div class="close"  dir="ltr">
+                  <div class="close" dir="ltr">
                     <i class="fa fa-times" (click)="closeUserList()"></i>
                   </div>
                   <div class="mt-4">
@@ -265,7 +265,7 @@
               </div>
             </div>
 
-            <div class="chatDialog mx-1 " >
+            <div class="chatDialog mx-1 ">
               <div class="p-2">
                 <div class="p-2">
                   <div class="closeChat" dir="rtl">
@@ -345,7 +345,8 @@
                       </div>
                       <div class="col-2">
                         <div class="px-2">
-                          <i class="fa fa-paper-plane" (click)="sendMessage(chatInstance?.myAppUserId,chatInstance?.userChatId)"></i>
+                          <i class="fa fa-paper-plane"
+                            (click)="sendMessage(chatInstance?.myAppUserId,chatInstance?.userChatId)"></i>
                         </div>
                       </div>
                     </div>
@@ -355,7 +356,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

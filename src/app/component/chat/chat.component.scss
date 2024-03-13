@@ -1,0 +1,111 @@
+$whiteColor: #ffffff;
+$blackColor: #000000;
+$lightGreen: #81ffca;
+$lightPink: #FFDCDC;
+$middlePink: #FFEDC3;
+$lightGray: #d1d1d1;
+$lighterGrayColor: #EFEFFF; //grayColor
+$middleGrayColor: #EAEAFF;
+$redColor: #D80008;
+
+
+
+$barColor: #f7f7f7f7;
+$barColorE7: #E7E7E7E7;
+$borderColor: #c5c5c5;
+$borderColor70: #707070;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+h3 {
+    overflow: hidden;
+    font-size: 16px;
+
+}
+
+.chatList {
+    background-color: $barColor;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px 2px $lighterGrayColor;
+    vertical-align: bottom;
+
+}
+
+.chatUser,
+.fa-paper-plane {
+    cursor: pointer;
+}
+
+.chatImage {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+
+}
+
+
+.chatTitle {
+    font-size: 12px;
+}
+
+.messageInput:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: transparent;
+    padding: 5px;
+}
+
+
+.chatDialog {
+    position: relative;
+    background-color: $barColor;
+    padding: 10px;
+    border-radius: 15px;
+    min-height: 400px;
+    max-height: 700px;
+    display: none;
+
+}
+
+
+.closeChat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    z-index: 55555555555;
+    // background-color: rgba(0, 0, 0, .2);
+}
+
+.closeChat i,
+.fa-times {
+    cursor: pointer;
+    z-index: 11111;
+
+}
+
+.chatContent {
+    position: absolute;
+    top: 3%;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    padding: 8px;
+}
+
+.chatContent::-webkit-scrollbar {
+   display: none;
+}
+
+.chatControl {
+    position: absolute;
+    top: 80%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

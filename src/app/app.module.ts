@@ -74,6 +74,7 @@ import { DisplayTicketComponent } from './component/ticket/display-ticket/displa
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { CarouselModule } from 'primeng/carousel';
 import { UpdateUserComponent } from './component/admin-user-management/update-user/update-user.component';
+import { ChatComponent } from './component/chat/chat.component';
 
 
 @NgModule({
@@ -138,7 +139,8 @@ import { UpdateUserComponent } from './component/admin-user-management/update-us
     TicketManagementComponent,
     DisplayTicketComponent,
     DashboardComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

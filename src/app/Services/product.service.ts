@@ -18,7 +18,13 @@ export class ProductService {
 
   }
 
+  deleteProductImage(id: string): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}DeleteProductImages?Id=${id}`, {})
+  }
 
+  addProductImage(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}AddProductImages`, data)
+  }
   getProductWithId(id: string): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}GetById?Id=${id}`)
   }

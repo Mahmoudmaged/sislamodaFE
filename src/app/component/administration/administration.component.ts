@@ -265,4 +265,9 @@ export class AdministrationComponent implements OnInit {
     })
   }
 
+
+  support(){
+    this._Router.navigateByUrl('admin/chat')
+  }
+
 }

@@ -48,6 +48,7 @@ import { UpdateUserComponent } from '../../admin-user-management/update-user/upd
 import { DisplayTicketComponent } from '../../ticket/display-ticket/display-ticket.component';
 import { AdministrationComponent } from '../administration.component';
 import { EditOrderComponent } from '../../order/edit-order/edit-order.component';
+import { ChatComponent } from '../../chat/chat.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -105,6 +106,7 @@ const routes: Routes = [
   { path: "ticket", component: TicketManagementComponent },
   { path: "ticket/:id/details", component: DisplayTicketComponent },
   { path: "dashboard", component: DashboardComponent },
+  { path: "chat", component: ChatComponent },
 
 
   { path: "**", component: AdministrationComponent },

@@ -46,15 +46,15 @@ export class VendorProfileDetailsComponent implements OnInit {
       this.selectedImage = e.target.result;
 
       this.base = this.selectedImage
-      console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
+      // console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
 
       return this._AttachmentsService.uploadAttachBase64({
         fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
       }).subscribe(res => {
         this.image = res
-        console.log({ res });
+        // console.log({ res });
       }, err => {
-        console.log({ err });
+        // console.log({ err });
       }
       )
 
@@ -152,8 +152,8 @@ export class VendorProfileDetailsComponent implements OnInit {
 
 
     }
-    console.log({ userData });
-    console.log({ storeData });
+    // console.log({ userData });
+    // console.log({ storeData });
 
     this._AuthService.updateUserData(userData).subscribe(res => {
 
@@ -162,14 +162,14 @@ export class VendorProfileDetailsComponent implements OnInit {
         this.showSideError("Done")
       }, err => {
         this.load = false;
-        console.log({ err });
+        // console.log({ err });
         this.showSideError(`Fail vendor`)
       })
 
     },
       err => {
         this.load = false;
-        console.log({ err });
+        // console.log({ err });
         this.showSideError(`Fail `)
       }
     )
@@ -202,7 +202,7 @@ export class VendorProfileDetailsComponent implements OnInit {
     this.load = true;
     this._AuthService.getUserData(id).subscribe(res => {
       this.userData = res;
-      console.log({ x: this.userData });
+      // console.log({ x: this.userData });
 
       this.personalForm.controls.firstName.setValue(this.userData?.firstName);
       this.personalForm.controls.lastName.setValue(this.userData?.lastName);

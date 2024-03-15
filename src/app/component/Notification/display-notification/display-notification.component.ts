@@ -44,12 +44,12 @@ export class DisplayNotificationComponent implements OnInit {
   getNotification(id: any) {
     this.load = true;
     return this._NotificationService.getById(id).subscribe(res => {
-      console.log({ res });
+      // console.log({ res });
       this.notification = res
       this.load = false;
     }, err => {
       this.load = false;
-      console.log({ err });
+      // console.log({ err });
       this.showSideError("Fail")
     }
     )

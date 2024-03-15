@@ -130,7 +130,7 @@ export class VendorLoginComponent {
     },
       err => {
         this.load = false;
-        console.log({ err: err });
+        // console.log({ err: err });
 
         this.showSideError(err?.error?.message || 'something went wrong')
       }
@@ -159,7 +159,7 @@ export class VendorLoginComponent {
         this.load = false;
         this.loginError = true;
         const { message } = err.error
-        console.log(message);
+        // console.log(message);
         if (message == 'Validation error') {
           this.loginErrorMessage = "In-valid data please enter valid data";
         } else if (message == "Email not Exist") {
@@ -199,7 +199,7 @@ export class VendorLoginComponent {
         this.load = false;
         this.loginError = true;
         const { message } = err.error
-        console.log(message);
+        // console.log(message);
         if (message == 'Validation error') {
           this.loginErrorMessage = "In-valid data please enter valid data";
         } else if (message == "Email not Exist") {

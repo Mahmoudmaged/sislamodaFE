@@ -157,7 +157,7 @@ export class FinancialManagementReportComponent implements OnInit {
       },
       labels: ["Average Results"]
     };
-    console.log(this.chartOptions)
+    // console.log(this.chartOptions)
   }
 
 

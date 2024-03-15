@@ -76,6 +76,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { UpdateUserComponent } from './component/admin-user-management/update-user/update-user.component';
 import { ChatComponent } from './component/chat/chat.component';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -154,7 +156,8 @@ import { ChatComponent } from './component/chat/chat.component';
     DropdownModule,
     MultiSelectModule,
     ColorPickerModule,
-    CarouselModule
+    CarouselModule,
+    NgMultiSelectDropDownModule.forRoot()
 
   ],
   providers: [],

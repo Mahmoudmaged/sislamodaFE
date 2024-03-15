@@ -9,6 +9,9 @@
         </div>
     </div>
 
+
+
+
     <div class="deleteLayerImage">
         <div class="row w-100 h-100 align-items-center justify-content-center">
             <div class="deleteAlert my-2 p-5 pb-2 bg-light text-center">
@@ -37,6 +40,7 @@
     </div>
 
     <div class="my-1">
+      
         <form [formGroup]="addProductForm" (ngSubmit)="addProductForm.valid && handelAddProduct()">
             <div class="row pe-5 ">
                 <div class="col-12 mb-1">
@@ -94,7 +98,8 @@
                                         <div class="text-end trashSection">
                                             <i class="fa fa-trash text-danger"
                                                 (click)="deleteImagePromote(i , image)"></i>
-                                            <i class="fa fa-check text-success mx-1b fa-check-old fa-check-old-{{i}}"></i>
+                                            <i
+                                                class="fa fa-check text-success mx-1b fa-check-old fa-check-old-{{i}}"></i>
                                         </div>
                                         <div class="px-2 py-1 w-100 text-center uploadParent">
                                             <img class="" [src]="image.photo?.fullLink" alt="" srcset="">
@@ -326,22 +331,71 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
+
+                            <div class="dropDownHolder">
+                                <div class="dropDownHead d-flex border p-2">
+                                    <div class="col-10 topSelect">
+                                        <span class="mx-1 ">{{optionIds.length}} selected  items </span>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="px-2">
+                                            <div class="text-end arrowAn">
+                                                <i class="fa fa-angle-down"></i>
+                                                <i class="fa fa-angle-up "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropDownBody p-2">
+
+
+                                    <div *ngFor="let option of optionsGroups" class="groupLabel">
+                                        <p>{{option.groupName}}</p>
+
+                                        <div *ngFor="let item of option.data" class="form-check mt-1 ms-1">
+
+                                            <input (click)="addOption(item.id)"  class="" type="checkbox" value="" id="item.id" [checked]="optionIds.includes(item.id)">
+                                            <label class="form-check-label mx-1" for="item.id">
+                                                {{dir=='ltr'?item.nameEn:item.name}}
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 mb-1">
                     <div class="px-2 py-1">
                         <div>
                             <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
 
                             <p-multiSelect display="chip" [optionLabel]="displayOptionsName"
                                 optionGroupLabel="groupName" optionGroupChildren="data" [options]="optionsGroups"
-                                [group]="true" formControlName="productOptions"
-                                [style]="{'width':'100%'}"></p-multiSelect>
+                                [group]="true" formControlName="productOptions" [style]="{'width':'100%'}">
+                            </p-multiSelect>
+
+
+
+
+
 
                         </div>
 
 
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-6 mb-1">
                     <div class="px-2 py-1">
                         <p> {{dir=='ltr'?'Availability ' :'الاتاحه'}} </p>

@@ -64,7 +64,7 @@ export class EditOrderComponent {
     if (this.dir == 'rtl') {
       status = nameAr
     }
-    console.log({ color });
+    // console.log({ color });
 
     $(`.search_dropdownMenuButton`).text(status)
     $(`.dropdown-menu-list`).slideUp(300)
@@ -108,16 +108,16 @@ export class EditOrderComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.selectedImage = e.target.result;
-        console.log({ im: this.selectedImage });
+        // console.log({ im: this.selectedImage });
 
         return this._AttachmentsService.uploadAttachBase64({ fileName: event.target.files[i].name, file: this.selectedImage.split("base64,")[1] }).subscribe(res => {
           this.imagesList.push({
 
             photoId: res
           })
-          console.log({ res });
+          // console.log({ res });
         }, err => {
-          console.log({ err });
+          // console.log({ err });
         }
         )
 
@@ -160,14 +160,14 @@ export class EditOrderComponent {
     this._OrderService.updateOrder(this.order).subscribe(res => {
 
       if (this.statusData) {
-        console.log({ statusData: this.statusData });
+        // console.log({ statusData: this.statusData });
         this._OrderService.updateOrderStatus(this.statusData).subscribe(res => {
           this.load = false
           // this.showSideError("Done")
           this._Router.navigateByUrl(`/admin/order/${this.order.id}/details`)
         }, err => {
           this.load = false
-          console.log({ err });
+          // console.log({ err });
           this.showSideError("fail")
         })
       } else {
@@ -176,7 +176,7 @@ export class EditOrderComponent {
 
       }
     }, err => {
-      console.log({ err });
+      // console.log({ err });
       this.showSideError("fail in  update order")
     })
 

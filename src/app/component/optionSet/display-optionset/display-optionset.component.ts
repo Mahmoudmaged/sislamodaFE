@@ -48,7 +48,7 @@ export class DisplayOptionsetComponent implements OnInit {
     this.load = true;
 
     this._OptionSetService.getOptionSetById(id).subscribe(res => {
-      console.log({ res });
+      // console.log({ res });
       this.optionSet = res;
       this.pages = Math.ceil(res.optionSetItems.length / this.pageSize);
       this.fullOptionSetList = res.optionSetItems;
@@ -56,7 +56,7 @@ export class DisplayOptionsetComponent implements OnInit {
       this.load = false;
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

@@ -69,11 +69,11 @@ export class UpdateOptionSetItemComponent implements OnInit {
     this._OptionSetService.getOptionSet().subscribe(res => {
       this.load = false;
       this.optionSetList = res
-      console.log({ op: this.optionSetList });
+      // console.log({ op: this.optionSetList });
 
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }
@@ -86,7 +86,7 @@ export class UpdateOptionSetItemComponent implements OnInit {
     this._OptionSetItemService.getOptionSetItemById(id).subscribe(res => {
       this.load = false;
       this.optionSet = res
-      console.log({ op: this.optionSet });
+      // console.log({ op: this.optionSet });
       this.addOptionForm.controls.color.setValue(this.optionSet.color)
       this.addOptionForm.controls.nameAr.setValue(this.optionSet.nameAr)
       this.addOptionForm.controls.nameEn.setValue(this.optionSet.nameEn)
@@ -95,7 +95,7 @@ export class UpdateOptionSetItemComponent implements OnInit {
 
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }
@@ -127,14 +127,14 @@ export class UpdateOptionSetItemComponent implements OnInit {
       color: this.addOptionForm.controls.color.value,
       isDefault: true
     }
-    console.log({ data });
+    // console.log({ data });
 
     this._OptionSetItemService.updateOptionSet(data).subscribe(res => {
       this.load = false;
       this.cancel()
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

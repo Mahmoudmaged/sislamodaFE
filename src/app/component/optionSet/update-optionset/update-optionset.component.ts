@@ -48,7 +48,7 @@ export class UpdateOptionsetComponent implements OnInit {
     this.load = true;
 
     this._OptionSetService.getOptionSetById(id).subscribe(res => {
-      console.log({res});
+      // console.log({res});
       
       this.optionSet = res;
       this.addOptionForm.controls.name.setValue(this.optionSet.name)
@@ -57,7 +57,7 @@ export class UpdateOptionsetComponent implements OnInit {
       this.load = false;
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }
@@ -85,7 +85,7 @@ export class UpdateOptionsetComponent implements OnInit {
       this.cancel()
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

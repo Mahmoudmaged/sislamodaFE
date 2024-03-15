@@ -44,8 +44,8 @@ export class CategoryComponent implements OnInit {
 
   onSearch() {
     if (this.textSearch) {
-      console.log(this.categoryList);
-      console.log(this.textSearch);
+      // console.log(this.categoryList);
+      // console.log(this.textSearch);
 
       this.categoryList = this.categoryList.filter(ele => {
         return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase()) ||ele.name.toLowerCase().includes(this.textSearch.toLowerCase())

@@ -162,8 +162,7 @@ export class AddProductComponent implements OnInit {
         }
 
       }
-      console.log({ res });
-      console.log({ color, size, price });
+ 
       this.optionsGroups = [
         {
           groupName: 'color',
@@ -190,7 +189,7 @@ export class AddProductComponent implements OnInit {
           data: lastArrival
         }
       ]
-      console.log({ optionsGroups: this.optionsGroups });
+      // console.log({ optionsGroups: this.optionsGroups });
 
 
     }, err => {
@@ -209,7 +208,7 @@ export class AddProductComponent implements OnInit {
 
   getAllBrands() {
     return this._BrandService.brandList().subscribe(res => {
-      console.log({ res });
+      // console.log({ res });
       this.brandList = res;
     }, err => {
       this.showSideError("Fail to load product brand list ")
@@ -249,7 +248,7 @@ export class AddProductComponent implements OnInit {
         this.showSideError(`Ops their is no Subcategory under this  category yet.`)
       }
     }, err => {
-      console.log("iN-VALID CATEGORY ID");
+      // console.log("iN-VALID CATEGORY ID");
       this.showSideError("In-valid category id")
     })
   }
@@ -315,13 +314,14 @@ export class AddProductComponent implements OnInit {
 
     }
 
+    // console.log({ sss: this.selectedOptions });
 
     this._ProductService.addProduct(data).subscribe(res => {
       this.load = false;
       this._Router.navigateByUrl("/admin/product")
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
 
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)

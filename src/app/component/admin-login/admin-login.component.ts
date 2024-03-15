@@ -82,7 +82,6 @@ export class AdminLoginComponent {
   })
   handelSignIn() {
     this.load = true;
-    // console.log({ rem: $(".checkBoxInput").is(":checked") });
 
     let Data = {
       email: this.loginForm.controls.email.value,
@@ -95,7 +94,7 @@ export class AdminLoginComponent {
       localStorage.setItem('token', res.token);
       localStorage.setItem('user', JSON.stringify(res.user));
       localStorage.setItem('dir', 'ltr');
-      console.log({ res:res });
+      // console.log({ res:res });
 
       if (res.vendorData) {
         localStorage.setItem('vendorData', JSON.stringify(res.vendorData));
@@ -145,7 +144,7 @@ export class AdminLoginComponent {
     },
       err => {
         this.load = false;
-        console.log({ err: err });
+        // console.log({ err: err });
 
         this.showSideError(err?.error?.message || 'something went wrong')
       }
@@ -174,7 +173,7 @@ export class AdminLoginComponent {
         this.load = false;
         this.loginError = true;
         const { message } = err.error
-        console.log(message);
+        // console.log(message);
         if (message == 'Validation error') {
           this.loginErrorMessage = "In-valid data please enter valid data";
         } else if (message == "Email not Exist") {
@@ -214,7 +213,7 @@ export class AdminLoginComponent {
         this.load = false;
         this.loginError = true;
         const { message } = err.error
-        console.log(message);
+        // console.log(message);
         if (message == 'Validation error') {
           this.loginErrorMessage = "In-valid data please enter valid data";
         } else if (message == "Email not Exist") {

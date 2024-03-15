@@ -66,11 +66,11 @@ export class AddOptionSetItemComponent implements OnInit {
     this._OptionSetService.getOptionSet().subscribe(res => {
       this.load = false;
       this.optionSetList = res
-      console.log({ op: this.optionSetList });
+      // console.log({ op: this.optionSetList });
 
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }
@@ -103,14 +103,14 @@ export class AddOptionSetItemComponent implements OnInit {
       color: this.addOptionForm.controls.color.value,
       isDefault: true
     }
-    console.log({ data });
+    // console.log({ data });
 
     this._OptionSetItemService.addOptionSetItem(data).subscribe(res => {
       this.load = false;
       this.cancel()
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

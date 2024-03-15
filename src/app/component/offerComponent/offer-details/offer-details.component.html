@@ -11,7 +11,15 @@
         </div>
     </div>
     <div class="productDataContainer">
+        <!-- <div class="">
+            <p-multiSelect [(ngModel)]="productOptions" [options]="optionList" placeholder="Select product"
+                optionLabel="nameEn" [style]="{'width':'100%'}"></p-multiSelect>
 
+
+            <p>{{productOptions}}</p>
+            <button (click)="testCase()">click</button>
+
+        </div> -->
         <div class="info mb-1">
             <div class="row w-100 mb-1 text-center">
                 <div class="col-md-2">
@@ -174,7 +182,7 @@
                     </div>
 
                     <div class="col-12"></div>
-                    <div class="col-md-6 mb-1">
+                    <!-- <div class="col-md-6 mb-1">
                         <div class="px-2 py-1">
                             <div>
                                 <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
@@ -184,21 +192,58 @@
                                             placeholder="Select product" optionLabel="nameEn"
                                             [style]="{'width':'100%'}"></p-multiSelect>
                                     </div>
-                                    <!-- 
-                                    <div class="form-group mt-5 ">
-                                        <button [disabled]="addProductForm.invalid" class="btn btn-dark w-100 p-2">LOGIN</button>
-                                     
-                                    </div> -->
+
                                 </form>
                             </div>
 
+
+
+
+                        </div>
+                    </div> -->
+
+
+
+                    <div class="col-md-6 mb-1">
+                        <div class="px-2 py-1">
                             <div>
-                                <form [formGroup]="form">
-                                    <p-multiSelect [options]="optionList"  optionLabel="nameEn"   placeholder="Select product" 
-                                   formControlName="selectedItems" class="h"></p-multiSelect>
-                                    <button class="btn btn-danger" (click)="clearSelection()">Clear Selection</button>
-                                  </form>
+                                <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
+
+                                <div class="dropDownHolder">
+                                    <div class="dropDownHead d-flex border p-2">
+                                        <div class="col-10 topSelect">
+                                            <span class="mx-1 ">{{selectedOp.length}} selected items </span>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="px-2">
+                                                <div class="text-end arrowAn">
+                                                    <i class="fa fa-angle-down"></i>
+                                                    <i class="fa fa-angle-up "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropDownBody p-2">
+
+
+                                        <div *ngFor="let option of optionList" class="groupLabel">
+
+
+                                            <input (click)="addOption(option.id)" class="" type="checkbox" value=""
+                                                id="option.id" [checked]="selectedOp.includes(option.id)">
+                                            <label class="form-check-label mx-1" for="option.id">
+                                                {{dir=='ltr'?option.nameEn:option.name}}
+                                            </label>
+
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
                             </div>
+
 
                         </div>
                     </div>

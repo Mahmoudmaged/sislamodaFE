@@ -125,7 +125,7 @@ export class BrandManagementComponent implements OnInit{
       return;
     }
 
-    console.log({ page });
+    // console.log({ page });
     $(`.page`).removeClass('ActivePage')
     $(`.page${page}`).addClass('ActivePage')
     this.currentPage = page

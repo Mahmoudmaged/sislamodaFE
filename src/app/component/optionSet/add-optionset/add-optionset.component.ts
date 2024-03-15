@@ -80,7 +80,7 @@ export class AddOptionsetComponent implements OnInit {
       this.cancel()
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

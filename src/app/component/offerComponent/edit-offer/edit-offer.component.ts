@@ -134,14 +134,14 @@ export class EditOfferComponent implements OnInit {
     data.vendorId = this.userInfo?.isVendor ? this.vendorData?.id : null;
     data.isForVendor = this.userInfo?.isVendor ? true : false;
 
-    console.log({ data });
+    // console.log({ data });
 
     this._OfferService.updateOffer(data).subscribe((res) => {
       this.load = false
       this._Router.navigateByUrl("/admin/offers")
     }, err => {
       this.load = false;
-      console.log({ err });
+      // console.log({ err });
 
       this.showSideError('Fail to update please try again')
     })
@@ -164,7 +164,7 @@ export class EditOfferComponent implements OnInit {
         this.selectedImage = e.target.result;
 
         this.base = this.selectedImage
-        console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
+        // console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
 
         return this._AttachmentsService.uploadAttachBase64({
           fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
@@ -172,11 +172,11 @@ export class EditOfferComponent implements OnInit {
           this.image = res
           this.load = false;
 
-          console.log({ res });
+          // console.log({ res });
         }, err => {
           this.load = false;
 
-          console.log({ err });
+          // console.log({ err });
         })
       }
 

@@ -58,7 +58,7 @@ export class OrderManagementComponent implements OnInit {
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.photo = this.userInfo?.photo || this.photo;
     if (this.userInfo.isVendor || this._ActivatedRoute.snapshot.queryParams['vendorId']) {
-      console.log(({ dID:this.vendorData, vh: this._ActivatedRoute.snapshot.queryParams['vendorId'] }));
+      // console.log(({ dID:this.vendorData, vh: this._ActivatedRoute.snapshot.queryParams['vendorId'] }));
       this.GetVendorOrderedProduct( this.vendorData?.id || this._ActivatedRoute.snapshot.queryParams['vendorId'])
     } else {
       this.getAllOrders(this.userInfo?.id)
@@ -158,7 +158,7 @@ export class OrderManagementComponent implements OnInit {
     if (this.dir == 'rtl') {
       status = nameAr
     }
-    console.log({ color });
+    // console.log({ color });
 
     $(`.search_dropdownMenuButton${btnIndicator}`).text(status)
     $(`.dropdown-menu-list`).slideUp(300)
@@ -171,14 +171,14 @@ export class OrderManagementComponent implements OnInit {
       Value: value,
       Name: this.optionSet.name
     }
-    console.log({ data });
+    // console.log({ data });
     this._OrderService.updateOrderStatus(data).subscribe(res => {
       this.load = false
       this.showSideError("Done")
 
     }, err => {
       this.load = false
-      console.log({ err });
+      // console.log({ err });
       this.showSideError("fail")
     })
 

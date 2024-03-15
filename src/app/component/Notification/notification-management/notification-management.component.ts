@@ -26,7 +26,7 @@ export class NotificationManagementComponent implements OnInit {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-    console.log(this.userInfo);
+    // console.log(this.userInfo);
     this.photo = this.userInfo?.photo || this.photo;
     this.getNotifications()
 

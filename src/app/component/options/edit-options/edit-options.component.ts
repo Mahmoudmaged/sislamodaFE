@@ -102,7 +102,7 @@ export class EditOptionsComponent implements OnInit {
       nameEn: this.addOptionForm.controls.nameEn.value,
       other: this.addOptionForm.controls.color.value,
     }
-    console.log({ data });
+    // console.log({ data });
 
 
     this._OptionsService.updateOptions(data).subscribe(res => {
@@ -110,7 +110,7 @@ export class EditOptionsComponent implements OnInit {
       this.cancel()
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

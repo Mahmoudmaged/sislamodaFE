@@ -54,15 +54,15 @@ export class AddSubcategoryComponent implements OnInit {
         this.selectedImage = e.target.result;
 
         this.base = this.selectedImage
-        console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
+        // console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
 
         return this._AttachmentsService.uploadAttachBase64({
           fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
         }).subscribe(res => {
           this.image = res
-          console.log({ res });
+          // console.log({ res });
         }, err => {
-          console.log({ err });
+          // console.log({ err });
         })
       }
 
@@ -81,10 +81,10 @@ export class AddSubcategoryComponent implements OnInit {
 
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
-      console.log({ res });
+      // console.log({ res });
       this.categoryList = res;
     }, err => {
-      console.log({ err });
+      // console.log({ err });
 
     }
     )
@@ -115,7 +115,7 @@ export class AddSubcategoryComponent implements OnInit {
       mainCategoryId: this.addCategoryForm.controls.category.value,
     }
 
-    console.log({ data });
+    // console.log({ data });
 
     this._CategoryService.addCategory(data).subscribe(res => {
       this.load = false

@@ -25,8 +25,7 @@ export class CategoryDetailsComponent {
   }
   onSearch() {
     if (this.textSearch) {
-      console.log(this.categoryList);
-      console.log(this.textSearch);
+
 
       this.categoryList = this.originalCategoryList.filter(ele => {
         return ele.nameEn.toLowerCase().includes(this.textSearch.toLowerCase()) ||ele.name.toLowerCase().includes(this.textSearch.toLowerCase())
@@ -53,10 +52,10 @@ export class CategoryDetailsComponent {
   getCategoryById(id: any) {
     return this._CategoryService.getCategoryWithId(id).subscribe(res => {
       this.category = res
-      console.log({ res });
+      // console.log({ res });
 
     }, err => {
-      console.log({ err });
+      // console.log({ err });
 
     })
   }
@@ -65,10 +64,10 @@ export class CategoryDetailsComponent {
     return this._CategoryService.getListOfSubCategoriesById(id).subscribe(res => {
       this.originalCategoryList = res
       this.categoryList = res
-      console.log({ res });
+      // console.log({ res });
 
     }, err => {
-      console.log({ err });
+      // console.log({ err });
 
     })
   }

@@ -56,7 +56,7 @@ export class UserRegisterComponent {
 
   handelSignUp() {
     this.load = true;
-    console.log({ rem: $(".checkBoxInput").is(":checked") });
+    // console.log({ rem: $(".checkBoxInput").is(":checked") });
 
     let Data = {
       email: this.signupForm.controls.email.value,
@@ -77,7 +77,7 @@ export class UserRegisterComponent {
         this.load = false;
         this.loginError = true;
         const { message } = err.error
-        console.log(message);
+        // console.log(message);
         if (message == 'Validation error') {
           this.loginErrorMessage = "In-valid data please enter valid data";
         } else if (message == "Email not Exist") {

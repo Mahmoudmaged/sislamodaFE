@@ -43,7 +43,7 @@ export class AddOfferComponent {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
-    console.log({ userInfo: this.userInfo });
+    // console.log({ userInfo: this.userInfo });
 
     this.getAllCategory()
   }
@@ -115,7 +115,7 @@ export class AddOfferComponent {
         this.selectedImage = e.target.result;
 
         this.base = this.selectedImage
-        console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
+        // console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
 
         return this._AttachmentsService.uploadAttachBase64({
           fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
@@ -123,11 +123,11 @@ export class AddOfferComponent {
           this.image = res
           this.load = false;
 
-          console.log({ res });
+          // console.log({ res });
         }, err => {
           this.load = false;
 
-          console.log({ err });
+          // console.log({ err });
         })
       }
 

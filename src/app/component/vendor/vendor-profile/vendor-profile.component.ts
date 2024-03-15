@@ -80,7 +80,7 @@ export class VendorProfileComponent implements OnInit {
     if (this.dir == 'rtl') {
       status = nameAr
     }
-    console.log({ color });
+    // console.log({ color });
 
     $(`.search_dropdownMenuButton${btnIndicator}`).text(status)
     $(`.dropdown-menu-list`).slideUp(300)
@@ -93,14 +93,14 @@ export class VendorProfileComponent implements OnInit {
       Value: value,
       Name: this.optionSet.name
     }
-    console.log({ data });
+    // console.log({ data });
     this._vendorService.updateVendorStatus(data).subscribe(res => {
       this.load = false
       this.showSideError("Done")
       
     }, err => {
       this.load = false
-      console.log({ err });
+      // console.log({ err });
       this.showSideError("fail")
     })
 

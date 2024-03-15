@@ -26,7 +26,7 @@ export class OfferComponent implements OnInit {
 
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-    console.log(this.userInfo);
+    // console.log(this.userInfo);
     this.photo = this.userInfo?.photo || this.photo;
     this.getOffersList()
 
@@ -106,7 +106,7 @@ export class OfferComponent implements OnInit {
       return;
     }
 
-    console.log({ page });
+    // console.log({ page });
     $(`.page`).removeClass('ActivePage')
     $(`.page${page}`).addClass('ActivePage')
     this.currentPage = page

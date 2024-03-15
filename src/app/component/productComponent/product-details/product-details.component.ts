@@ -91,7 +91,7 @@ export class ProductDetailsComponent implements OnInit {
     this._ProductService.deleteProductDetail(this.deleteItemId).subscribe(res => {
       this.load = false
     }, err => {
-      console.log({ er: err });
+      // console.log({ er: err });
 
       this.showSideError(`Fail`)
       this.load = false

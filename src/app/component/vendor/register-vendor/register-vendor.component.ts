@@ -79,7 +79,7 @@ export class RegisterVendorComponent implements OnInit {
 
 
   handelSignUp() {
-    console.log({ p: this.signupForm.controls.password.value, c: this.signupForm.controls.confirmPassword.value });
+    // console.log({ p: this.signupForm.controls.password.value, c: this.signupForm.controls.confirmPassword.value });
 
     if (this.signupForm.controls.password.value != this.signupForm.controls.confirmPassword.value) {
       this.showSideError(`Password MisMatch confirmation Password`)
@@ -136,12 +136,12 @@ export class RegisterVendorComponent implements OnInit {
 
       return this._AuthService.registerVendor(data).subscribe(res => {
         this.load = false
-        console.log({ res });
+        // console.log({ res });
         this._Router.navigateByUrl("/vendor/login")
       },
         err => {
           this.load = false;
-          console.log({ err });
+          // console.log({ err });
           this.showSideError(`${err?.error?.message || 'Something went wrong please try again.'}`)
         }
       )

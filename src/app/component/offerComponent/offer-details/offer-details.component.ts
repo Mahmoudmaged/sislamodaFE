@@ -44,7 +44,19 @@ export class OfferDetailsComponent implements OnInit {
   }
 
 
+  productOptions: any = []
+  selectedOp: any = []
+  addOption(id: any) {
 
+    if (!this.selectedOp.includes(id)) {
+      this.selectedOp.push(id)
+    } else {
+      this.selectedOp = this.selectedOp.filter((ele: any) => {
+        return ele != id;
+      })
+
+    }
+  }
   removeSelectedProductsFromOptionList(offersProducts: any, res: any) {
     for (let i = 0; i < offersProducts.length; i++) {
       for (let j = 0; j < res.length; j++) {
@@ -58,9 +70,7 @@ export class OfferDetailsComponent implements OnInit {
     this.optionList = res;
     this.addProductForm.controls['productOptions'].setValue([])
 
-    console.log({ res });
-    console.log({ fv: this.addProductForm.controls['productOptions'].value });
-
+  
 
   }
 
@@ -73,7 +83,7 @@ export class OfferDetailsComponent implements OnInit {
         this.removeSelectedProductsFromOptionList(this.offer?.offersProducts, res)
 
       }, err => {
-        console.log({ err });
+        // console.log({ err });
         this.showSideError('Fail to load product options');
 
       })
@@ -84,7 +94,7 @@ export class OfferDetailsComponent implements OnInit {
 
 
       }, err => {
-        console.log({ err });
+        // console.log({ err });
         this.showSideError('Fail to load product options');
 
       })
@@ -99,15 +109,23 @@ export class OfferDetailsComponent implements OnInit {
     this.form = this.formBuilder.group({
       selectedItems: new FormControl([]) // Initialize the form control with an empty array
     });
+
+
+    $(".fa-angle-down").on('click', function () {
+      $(".dropDownBody").slideDown()
+      $(".fa-angle-down").hide()
+      $(".fa-angle-up").show()
+    })
+
+    $(".fa-angle-up").on('click', function () {
+      $(".dropDownBody").slideUp()
+      $(".fa-angle-down").show()
+      $(".fa-angle-up").hide()
+    })
+
   }
 
-  clearSelection() {
-    console.log('Clearing selection...');
-    this.form.controls['selectedItems'].setValue([]); // Set the value of the form control to an empty array
-    console.log('Selected items after clearing:', this.form.get('selectedItems')?.value);
-  
-  }
-  
+
   getOffer(id: string) {
     this.load = true;
     return this._OfferService.getOfferById(id).subscribe(res => {
@@ -139,7 +157,7 @@ export class OfferDetailsComponent implements OnInit {
       this.load = false;
       this.getOffer(this.offer.id)
     }, err => {
-      console.log(err);
+      // console.log(err);
 
       this.load = false;
 
@@ -150,37 +168,58 @@ export class OfferDetailsComponent implements OnInit {
   addProductForm = new FormGroup({
     productOptions: new FormControl([]),
   })
+  // addProducts() {
+  //   let selectedOptions: any[] = []
+  //   if (this.addProductForm.controls.productOptions.value) {
+  //     let selectOptions = this.addProductForm.controls.productOptions.value
+  //     this.addProductForm.controls.productOptions.setValue([])
+  //     for (let i = 0; i < selectOptions.length; i++) {
+  //       selectedOptions.push(selectOptions[i])
+  //     }
+
+  //     selectedOptions = selectedOptions.map(ele => {
+  //       return ele.id;
+  //     })
+
+  //     for (const product of selectedOptions) {
+  //       this._OfferService.addProductToOffer({
+  //         offersId: this._ActivatedRoute.snapshot.paramMap.get('id'),
+  //         productId: product,
+  //       }).subscribe(res => {
+  //         this.addProductForm.controls['productOptions'].setValue([])
+  //         this.getOffer(this.offer.id)
+  //       }, err => {
+  //         this.showSideError("Fail")
+  //       })
+  //     }
+
+  //   } else {
+  //     this.showSideError("please select products first")
+  //   }
+
+  // }
+
   addProducts() {
-    let selectedOptions: any[] = []
-    if (this.addProductForm.controls.productOptions.value) {
-      let selectOptions = this.addProductForm.controls.productOptions.value
-      this.addProductForm.controls.productOptions.setValue([])
-      for (let i = 0; i < selectOptions.length; i++) {
-        selectedOptions.push(selectOptions[i])
-      }
 
-      selectedOptions = selectedOptions.map(ele => {
-        return ele.id;
-      })
+    if (this.selectedOp.length) {
 
-      for (const product of selectedOptions) {
+      for (const product of this.selectedOp) {
         this._OfferService.addProductToOffer({
           offersId: this._ActivatedRoute.snapshot.paramMap.get('id'),
           productId: product,
         }).subscribe(res => {
-          this.addProductForm.controls['productOptions'].setValue([])
           this.getOffer(this.offer.id)
         }, err => {
           this.showSideError("Fail")
         })
       }
+      this.selectedOp = []
 
     } else {
       this.showSideError("please select products first")
     }
 
   }
-
 
 
 }

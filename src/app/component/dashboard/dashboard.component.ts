@@ -21,12 +21,12 @@ export class DashboardComponent implements OnInit {
     this.dir = localStorage.getItem('dir') || 'ltr';
     // this.dir = 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
-    console.log({ userInfo: this.userInfo });
+    // console.log({ userInfo: this.userInfo });
 
     if (this.userInfo?.isVendor) {
 
       this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-      console.log({ vv: this.vendorData });
+      // console.log({ vv: this.vendorData });
 
     }
 
@@ -72,17 +72,17 @@ export class DashboardComponent implements OnInit {
         this.data = res
         this.products = this.data?.topSellingProducts
       }, err => {
-        console.log({ err });
+        // console.log({ err });
 
       })
     } else {
       this._OrderService.dashboard().subscribe(res => {
         this.data = res;
         this.products = this.data?.topSellingProducts
-        console.log({ data: this.data });
+        // console.log({ data: this.data });
 
       }, err => {
-        console.log({ err });
+        // console.log({ err });
 
       })
     }

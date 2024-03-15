@@ -63,15 +63,15 @@ export class AddNotificationComponent implements OnInit {
       this.selectedImage = e.target.result;
 
       this.base = this.selectedImage
-      console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
+      // console.log({ fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1] });
 
       return this._AttachmentsService.uploadAttachBase64({
         fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
       }).subscribe(res => {
         this.image = res
-        console.log({ res });
+        // console.log({ res });
       }, err => {
-        console.log({ err });
+        // console.log({ err });
       }
       )
 
@@ -130,7 +130,7 @@ export class AddNotificationComponent implements OnInit {
       this._Router.navigateByUrl("/admin/notification")
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

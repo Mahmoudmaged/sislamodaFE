@@ -110,7 +110,7 @@ export class ProductComponent implements OnInit {
 
   getAllBrands() {
     return this._BrandService.brandList().subscribe(res => {
-      console.log({ br: res });
+      // console.log({ br: res });
       this.brandList = res;
 
       if (this.dir == 'ltr') {
@@ -136,7 +136,7 @@ export class ProductComponent implements OnInit {
       return this._ProductService.getProductsListByVendor(this.vendorData?.id || this._ActivatedRoute.snapshot.queryParams['vendorId']!).subscribe(res => {
 
         this.pages = Math.ceil(res.length / this.pageSize);//(`${res.length / this.pageSize}`);
-        console.log(this.pages);
+        // console.log(this.pages);
 
         this.fullProductList = res;
         this.productList = this.fullProductList.slice(0, this.pageSize);
@@ -227,7 +227,7 @@ export class ProductComponent implements OnInit {
       return;
     }
 
-    console.log({ page });
+    // console.log({ page });
     $(`.page`).removeClass('ActivePage')
     $(`.page${page}`).addClass('ActivePage')
     this.currentPage = page
@@ -295,7 +295,7 @@ export class ProductComponent implements OnInit {
         })
       }
     }, err => {
-      console.log({ err });
+      // console.log({ err });
     })
     return this.getByCategoryId(id);
   }
@@ -310,7 +310,7 @@ export class ProductComponent implements OnInit {
       this.copyProductList = res;
       this.productList = this.fullProductList.slice(0, this.pageSize);
     }, err => {
-      console.log({ err });
+      // console.log({ err });
 
     })
   }
@@ -331,7 +331,7 @@ export class ProductComponent implements OnInit {
       this.fullProductList = res;
       this.productList = this.fullProductList.slice(0, this.pageSize);
     }, err => {
-      console.log({ err });
+      // console.log({ err });
 
     })
   }
@@ -344,7 +344,7 @@ export class ProductComponent implements OnInit {
         this.fullProductList = res;
         this.productList = this.fullProductList.slice(0, this.pageSize);
       }, err => {
-        console.log({ err });
+        // console.log({ err });
 
       })
     } else {

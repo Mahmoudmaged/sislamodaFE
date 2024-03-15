@@ -61,11 +61,11 @@ export class AdministrationComponent implements OnInit {
       $(".chatHolderList").toggle()
     })
 
-    console.log(this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path);
-    console.log(this._ActivatedRoute.firstChild?.snapshot?.url);
+    // console.log(this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path);
+    // console.log(this._ActivatedRoute.firstChild?.snapshot?.url);
 
     this.itemBar = this.mainBar.find(ele => ele.com == `${this._ActivatedRoute.firstChild?.snapshot?.url[0]?.path}`)
-    console.log({ itemBar: this.itemBar });
+    // console.log({ itemBar: this.itemBar });
     if (!this.itemBar) {
       return this.changeDisplay(this.mainBar[0].item, this.mainBar[0].com)
 
@@ -90,7 +90,7 @@ export class AdministrationComponent implements OnInit {
     this._ChatService.getAllChatList(page, size).subscribe(res => {
       this.chatList = res
       this.chatInstance = this.chatList[0]
-      console.log({ chat: this.chatList });
+      // console.log({ chat: this.chatList });
 
     },
       err => {
@@ -104,7 +104,7 @@ export class AdministrationComponent implements OnInit {
     this._ChatService.getChatData(chatId, page, size).subscribe(res => {
 
       this.chatInstance = { chat: res?.reverse(), myAppUserId: chatId, userChatId: res[0].userChatId }
-      console.log({ getChatInstance: this.chatInstance });
+      // console.log({ getChatInstance: this.chatInstance });
 
     },
       err => {
@@ -117,7 +117,7 @@ export class AdministrationComponent implements OnInit {
   sendMessageToClientOrVendor(data: any) {
 
     this._ChatService.messageToUser(data).subscribe(res => {
-      console.log({ sentRes: res });
+      // console.log({ sentRes: res });
       $(".messageInput").val('');
     },
       err => {
@@ -131,7 +131,7 @@ export class AdministrationComponent implements OnInit {
   sendMessageToAdmin(data: any) {
 
     this._ChatService.messageFromUser(data).subscribe(res => {
-      console.log({ sentRes: res });
+      // console.log({ sentRes: res });
       $(".messageInput").val('');
     },
       err => {
@@ -168,7 +168,7 @@ export class AdministrationComponent implements OnInit {
       "message": $(".messageInput").val(),
       "replayUserId": ""
     }
-    console.log({nn:this.userInfo});
+    // console.log({nn:this.userInfo});
     
     if (this.userInfo.isAdmin) {
       this.sendMessageToClientOrVendor(data)
@@ -198,7 +198,7 @@ export class AdministrationComponent implements OnInit {
     $(`.listItem`).children("p").children(".image2").hide()
 
     //Display 
-    console.log(`.${item}`);
+    // console.log(`.${item}`);
 
     setTimeout(() => {
       $(`.${item}`).children("i").show()
@@ -256,11 +256,11 @@ export class AdministrationComponent implements OnInit {
 
   reloadComponent(self: boolean, urlToNavigateTo?: string) {
     //skipLocationChange:true means dont update the url to / when navigating
-    console.log("Current route I am on:", this._Router.url);
+    // console.log("Current route I am on:", this._Router.url);
     const url = self ? this._Router.url : urlToNavigateTo;
     this._Router.navigateByUrl(`/admin/${url}`, { skipLocationChange: true }).then(() => {
       this._Router.navigate([`/${url}`]).then(() => {
-        console.log(`After navigation I am on:${this._Router.url}`)
+        // console.log(`After navigation I am on:${this._Router.url}`)
       })
     })
   }

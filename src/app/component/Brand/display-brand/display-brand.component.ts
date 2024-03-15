@@ -42,7 +42,7 @@ export class DisplayBrandComponent {
       this.load = false;
     },
       err => {
-        console.log({ err });
+        // console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

@@ -5,6 +5,8 @@ import { AttachmentsService } from 'src/app/Services/attachments.service';
 import { BrandService } from 'src/app/Services/brand.service';
 import { CategoryService } from 'src/app/Services/category.service';
 import { ProductService } from 'src/app/Services/product.service';
+
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 declare let $: any;
 @Component({
   selector: 'app-edit-product',
@@ -39,6 +41,71 @@ export class EditProductComponent implements OnInit {
   //////////////////////////////////////////////////////////////////////////////
   productDetailsArray: any[] = [];
   addFlag: boolean = false;
+
+
+  // dropdownSettings: IDropdownSettings = {};
+  // // //////////////////////////////
+  // dropdownList: any = [
+  //   { id: 1, itemName: 'Option 1', category: 'Category 1' },
+  //   { id: 4, itemName: 'Option 4', category: 'Category 2' },
+  //   { id: 2, itemName: 'Option 2', category: 'Category 1' },
+  //   { id: 3, itemName: 'Option 3', category: 'Category 2' },
+  //   { id: 5, itemName: 'Option 5', category: 'Category 3' }
+  // ];
+  // selectedItems: any = [
+  //   { id: 3, itemName: 'Option 3', category: 'Category 2' },
+  //   { id: 4, itemName: 'Option 4', category: 'Category 2' },
+  // ];
+  // dropdownSettings: any = {
+  //   singleSelection: false,
+  //   idField: 'id',
+  //   textField: 'itemName',
+  //   selectAllText: 'Select All',
+  //   unSelectAllText: 'Unselect All',
+  //   itemsShowLimit: 3,
+  //   allowSearchFilter: true,
+  //   enableCheckAll: true,
+  //   groupBy: 'category',
+  //   addGroupLabel: true
+
+  // };
+
+  onItemSelect(item: any) {
+    // console.log(item);
+  }
+  onSelectAll(items: any) {
+    // console.log(items);
+  }
+  ngOnInit(): void {
+
+
+    $(".fa-angle-down").on('click', function () {
+      $(".dropDownBody").slideDown()
+      $(".fa-angle-down").hide()
+      $(".fa-angle-up").show()
+    })
+
+    $(".fa-angle-up").on('click', function () {
+      $(".dropDownBody").slideUp()
+      $(".fa-angle-down").show()
+      $(".fa-angle-up").hide()
+    })
+
+
+
+    // setTimeout(() => {
+    //   this.dropdownList = [
+    //     { id: 1, itemName: 'Option 1', category: 'Category 1' },
+    //     { id: 2, itemName: 'Option 2', category: 'Category 1' },
+    //     { id: 3, itemName: 'Option 3', category: 'Category 2' },
+    //     { id: 4, itemName: 'Option 4', category: 'Category 2' },
+    //     { id: 5, itemName: 'Option 5', category: 'Category 3' }
+    //   ];
+
+    // }, 0);
+  }
+
+  ////////////////////////////
   getAllOption() {
     if (this.dir == 'ltr') {
       this.displayOptionsName = 'nameEn'
@@ -82,8 +149,8 @@ export class EditProductComponent implements OnInit {
         }
 
       }
-      console.log({ res });
-      console.log({ color, size, price });
+      // console.log({ res });
+      // console.log({ color, size, price });
       this.optionsGroups = [
         {
           groupName: 'color',
@@ -116,6 +183,72 @@ export class EditProductComponent implements OnInit {
       this.showSideError('Fail to load product options please try again.')
     }
     )
+  }
+  selectedOptionsGroups: any = [];
+  handelPreSelected(selectedData: any) {
+    let color = [];
+    let size = [];
+    let price = [];
+    let materials = [];
+    let occasion = [];
+    let lastArrival = [];
+    for (let i = 0; i < selectedData.length; i++) {
+
+      switch (selectedData[i].option.optionType) {
+        case 1:
+          color.push(selectedData[i].option)
+          break;
+        case 2:
+          size.push(selectedData[i].option)
+          break;
+        case 3:
+          price.push(selectedData[i].option)
+          break;
+        case 4:
+          materials.push(selectedData[i].option)
+          break;
+        case 5:
+          occasion.push(selectedData[i].option)
+          break;
+        case 6:
+          lastArrival.push(selectedData[i].option)
+          break;
+        default:
+          break;
+      }
+
+    }
+    // console.log({ color, size, price });
+    this.selectedOptionsGroups = [
+      {
+        groupName: 'color',
+        data: color
+      },
+      {
+        groupName: 'size',
+        data: size
+      },
+      {
+        groupName: 'price',
+        data: price
+      },
+      {
+        groupName: 'materials',
+        data: materials
+      },
+      {
+        groupName: 'occasion',
+        data: occasion
+      },
+      {
+        groupName: 'last arrival',
+        data: lastArrival
+      }
+    ]
+    // console.log({ select: this.selectedOptionsGroups, data: this.optionsGroups });
+
+    return this.addProductForm.controls.productOptions.setValue(this.selectedOptionsGroups)
+
   }
 
   showSideError(message: string) {
@@ -186,12 +319,29 @@ export class EditProductComponent implements OnInit {
     // this.addCategoryForm.controls.image.setValue('')
   }
 
-  constructor(private _Router: Router,
+  constructor(
+    private _Router: Router,
     private _ProductService: ProductService,
     private _CategoryService: CategoryService,
     private _BrandService: BrandService,
     private _AttachmentsService: AttachmentsService,
     private _ActivatedRoute: ActivatedRoute) {
+
+
+    // this.dropdownSettings = {
+    //   singleSelection: false,
+    //   idField: 'id',
+    //   textField: 'itemName',
+    //   selectAllText: 'Select All',
+    //   unSelectAllText: 'Unselect All',
+    //   enableCheckAll: true,
+    //   itemsShowLimit: 3,
+    //   allowSearchFilter: true,
+    //   // groupBy: 'category'
+    // };
+
+
+
     this.dir = localStorage.getItem('dir') || 'ltr';
 
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
@@ -207,10 +357,9 @@ export class EditProductComponent implements OnInit {
     }, 1000);
   }
 
-
   getAllCategory() {
     return this._CategoryService.categoryList().subscribe(res => {
-      console.log({ res });
+      // console.log({ res });
       this.categoryList = res;
     }, err => {
       this.showSideError('Fail to load product category list');
@@ -259,14 +408,27 @@ export class EditProductComponent implements OnInit {
 
   })
 
+  optionIds: any = []
+  addOption(id: any) {
+
+    if (this.optionIds.includes(id)) {
+      this.optionIds = this.optionIds.filter((ele: any) => {
+        return ele != id
+      })
+    } else {
+      this.optionIds.push(id)
+    }
+
+  }
 
   // p-highlight
+  select: any = []
   getProductByID(id: any) {
     this.load = true
     return this._ProductService.getProductWithId(id).subscribe(res => {
 
       this.product = res
-      console.log({ op: this.product.productOptions });
+      // console.log({ op: this.product.productOptions });
 
       this.getSubCategory(this.product.category?.mainCategoryId);
 
@@ -287,6 +449,19 @@ export class EditProductComponent implements OnInit {
       this.productDetailsArray = this.product.productDetails
 
 
+      this.optionIds = this.product.productOptions.map((item: any) => {
+        // console.log({ item });
+
+        return item.option.id
+      })
+
+
+ 
+      // this.select = this.product.productOptions;
+      this.handelPreSelected(this.product.productOptions)
+
+
+
       this.load = false;
     }, err => {
       this.load = false
@@ -298,39 +473,66 @@ export class EditProductComponent implements OnInit {
 
   handelAddProduct() {
     this.load = true;
-    // if (!this.imagesList.length) {
-    //   this.showSideError(`Image is required`);
-    // }
 
 
     let selectedOptions: any[] = []
-    console.log({ sop: this.addProductForm.controls.productOptions.value });
 
-    if (this.addProductForm.controls.productOptions.value) {
-      let selectOptions = this.addProductForm.controls.productOptions.value
-      for (let i = 0; i < selectOptions.length; i++) {
-        selectedOptions.push({
-          optionId: selectOptions[i],
-          price: 0
-        })
+    // if (this.addProductForm.controls.productOptions.value) {
+    //   let selectOptions = this.addProductForm.controls.productOptions.value
+    //   for (let i = 0; i < selectOptions.length; i++) {
+    //     selectedOptions.push({
+    //       optionId: selectOptions[i],
+    //       price: 0
+    //     })
 
-      }
+    //   }
 
 
-      selectedOptions = selectedOptions.map(ele => {
+    //   selectedOptions = selectedOptions.map(ele => {
+    //     return {
+    //       optionId: ele.optionId.id,
+    //       price: 0
+    //     }
+    //   })
+
+    // }
+
+    // if (this.optionIds.length) {
+    //   let selectOptions = this.addProductForm.controls.productOptions.value
+    //   for (let i = 0; i < selectOptions.length; i++) {
+    //     selectedOptions.push({
+    //       optionId: selectOptions[i],
+    //       price: 0
+    //     })
+
+    //   }
+
+
+    //   selectedOptions = selectedOptions.map(ele => {
+    //     return {
+    //       optionId: ele.optionId.id,
+    //       price: 0
+    //     }
+    //   })
+
+    // }
+
+
+    if (this.optionIds.length) {
+
+
+      selectedOptions = this.optionIds.map((ele: any) => {
         return {
-          optionId: ele.optionId.id,
+          optionId: ele,
+          productId: this.product.id,
           price: 0
         }
       })
 
     }
 
+    // console.log({ selectedOptions, sd: this.product.productOptions });
 
-    console.log({ dd: this.imagesList, pI: this.product.productImages });
-
-
-    console.log({ pp: this.productDetailsArray });
 
     let data = {
       id: this.product.id,
@@ -362,7 +564,7 @@ export class EditProductComponent implements OnInit {
       amount: this.addProductForm.controls.amount.value,
       productImages: this.product.productImages,
       // productImages: this.imagesList.length ? this.imagesList : this.product.imagesList,
-      productOptions: selectedOptions.length ? selectedOptions : [],
+      productOptions: selectedOptions.length ? selectedOptions : this.product.productOptions,
       productDetails: this.productDetailsArray
 
 
@@ -390,15 +592,7 @@ export class EditProductComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
 
-
-
-    setTimeout(() => {
-      this.addProductForm.controls.productOptions.setValue(this.product.productOptions)
-    }, 0);
-
-  }
 
 
 
@@ -501,7 +695,7 @@ export class EditProductComponent implements OnInit {
   deleteImageKey: any = { EN: 'Are you sure that you want to delete this product Image ?', AR: " برجاء التأكد من حذف ؟" }
   showDeleteImage: boolean = true;
   deleteImagePromote(id: number, image: any) {
-    console.log({ id, image });
+    // console.log({ id, image });
 
     //check if  it was a default image 
     if (image.photo?.fullLink == this.product.defaultPhoto?.fullLink && (this.defaultImageIndex < 0 || this.defaultImageIndexOld < 0)) {
@@ -527,7 +721,7 @@ export class EditProductComponent implements OnInit {
       this.product.productImages.splice(this.deleteImage?.index, 1)
       this.load = false
     }, err => {
-      console.log({ er: err });
+      // console.log({ er: err });
 
       this.showSideError(`Fail`)
       this.load = false
@@ -548,13 +742,13 @@ export class EditProductComponent implements OnInit {
   confirmDelete() {
     this.closeDeleteAlert()
     this.load = true
-    console.log({ iddd: this.productDetailsArray[this.deleteItemId]?.id });
+    // console.log({ iddd: this.productDetailsArray[this.deleteItemId]?.id });
 
     this._ProductService.deleteProductDetail(this.productDetailsArray[this.deleteItemId]?.id).subscribe(res => {
       this.productDetailsArray.splice(this.deleteItemId, 1)
       this.load = false
     }, err => {
-      console.log({ er: err });
+      // console.log({ er: err });
 
       this.showSideError(`Fail`)
       this.load = false

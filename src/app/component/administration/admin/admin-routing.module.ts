@@ -60,6 +60,8 @@ import { InfluencerComponent } from '../../influencer/influencer/influencer.comp
 import { AddInfluencerComponent } from '../../influencer/add-influencer/add-influencer.component';
 import { EditInfluencerComponent } from '../../influencer/edit-influencer/edit-influencer.component';
 import { InfluencerDetailsComponent } from '../../influencer/influencer-details/influencer-details.component';
+import { CountryComponent } from '../../country/country/country.component';
+import { AddCountryComponent } from '../../country/add-country/add-country.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -130,6 +132,12 @@ const routes: Routes = [
   { path: "coupon/add", component: AddcouponComponent },
   { path: "coupon/:id/edit", component: EditcouponComponent },
   { path: "coupon/:id/details", component: CouponDetailsComponent },
+
+
+  { path: "country", component: CountryComponent },
+  { path: "country/add", component: AddCountryComponent },
+  { path: "country/:id/edit", component: EditCategoryComponent },
+  // { path: "country/:id/details", component: countryDetailsComponent },
 
 
   { path: "influencer", component: InfluencerComponent },

@@ -13,8 +13,9 @@ export class SettingsManagementComponent implements OnInit {
   settingsList = [
     { nameEn: 'Notifications', nameAr: 'الاشعارات', img: '../../../assets/images/Sislimoda/notification.svg' , path:'/admin/notification' },
     { nameEn: 'Payment methods', nameAr: 'طرق الدفع', img: '../../../assets/images/Sislimoda/white/support-ticket.svg' ,path:'/admin/payment' },
-    { nameEn: 'Option-Set', nameAr: 'مجموعات الخيارات', img: '../../../assets/images/Sislimoda/notification.svg' , path:'/admin/optionSet' },
-    { nameEn: 'Options', nameAr: 'خيارات', img: '../../../assets/images/Sislimoda/notification.svg' , path:'/admin/options' }
+    { nameEn: 'Option-Set', nameAr: 'مجموعات الخيارات', img: '../../../assets/images/Sislimoda/answer.svg' , path:'/admin/optionSet' },
+    { nameEn: 'Options', nameAr: 'خيارات', img: '../../../assets/images/Sislimoda/answer.svg' , path:'/admin/options' },
+    { nameEn: 'Country', nameAr: 'الدول', img: '../../../assets/images/Sislimoda/countries.svg' , path:'/admin/country' }
   ];
   displaySettingList: any[] = []
   constructor(private _Router: Router) {

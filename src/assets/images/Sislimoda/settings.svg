@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512" height="512">
+<g>
+	
+		<circle style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="159.6" cy="304.2" r="32.133"/>
+	
+		<circle style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="352.4" cy="400.6" r="32.133"/>
+	
+		<line style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="79.267" y1="304.2" x2="127.467" y2="304.2"/>
+	
+		<line style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="432.733" y1="400.6" x2="384.533" y2="400.6"/>
+	
+		<line style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="191.733" y1="304.2" x2="432.733" y2="304.2"/>
+	
+		<line style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="320.267" y1="400.6" x2="79.267" y2="400.6"/>
+	
+		<polyline style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="&#10;&#9;&#9;143.533,127.467 15,127.467 15,497 497,497 497,127.467 368.467,127.467 &#9;"/>
+	
+		<circle style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="256" cy="127.467" r="32.133"/>
+	<path style="fill:none;stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="&#10;&#9;&#9;M284.454,35.341c5.768,1.783,11.295,4.089,16.549,6.868l17.48-11.311l34.077,34.077l-11.311,17.48&#10;&#9;&#9;c2.779,5.254,5.085,10.781,6.868,16.549l20.349,4.362v48.2l-20.349,4.354c-1.783,5.768-4.089,11.295-6.868,16.549l11.311,17.481&#10;&#9;&#9;l-34.077,34.077l-17.48-11.311c-5.246,2.78-10.781,5.085-16.549,6.869l-4.354,20.348h-48.2l-4.362-20.348&#10;&#9;&#9;c-5.76-1.784-11.295-4.089-16.549-6.869l-17.481,11.311l-34.077-34.077l11.311-17.481c-2.78-5.246-5.085-10.781-6.868-16.549&#10;&#9;&#9;l-20.34-4.354v-48.2l20.34-4.362c1.783-5.76,4.089-11.295,6.868-16.549l-11.311-17.48l34.077-34.077l17.481,11.311&#10;&#9;&#9;c5.254-2.779,10.781-5.085,16.549-6.868L231.9,15h48.2L284.454,35.341z"/>
+</g>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</svg>

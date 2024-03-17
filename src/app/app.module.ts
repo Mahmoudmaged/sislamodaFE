@@ -88,6 +88,9 @@ import { InfluencerComponent } from './component/influencer/influencer/influence
 import { AddInfluencerComponent } from './component/influencer/add-influencer/add-influencer.component';
 import { EditInfluencerComponent } from './component/influencer/edit-influencer/edit-influencer.component';
 import { InfluencerDetailsComponent } from './component/influencer/influencer-details/influencer-details.component';
+import { CountryComponent } from './component/country/country/country.component';
+import { AddCountryComponent } from './component/country/add-country/add-country.component';
+import { UpdateCountryComponent } from './component/country/update-country/update-country.component';
 
 
 @NgModule({
@@ -164,7 +167,10 @@ import { InfluencerDetailsComponent } from './component/influencer/influencer-de
     InfluencerComponent,
     AddInfluencerComponent,
     EditInfluencerComponent,
-    InfluencerDetailsComponent
+    InfluencerDetailsComponent,
+    CountryComponent,
+    AddCountryComponent,
+    UpdateCountryComponent
   ],
   imports: [
     BrowserModule,

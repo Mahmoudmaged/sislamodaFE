@@ -1,0 +1,49 @@
+@import '../../productComponent/add-product/add-product.component.scss';
+
+$barColor: #f7f7f7f7;
+$barColorE7: #E7E7E7E7;
+$borderColor: #c5c5c5;
+$borderColor70: #707070;
+
+.group-label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dropDownHead {
+    cursor: pointer;
+    border: 1px solid $lighterGrayColor;
+    border-radius: 5px;
+
+}
+
+.fa-angle-up {
+    display: none;
+}
+
+.topSelect span {
+    border: 1px solid $lighterGrayColor;
+    background-color: $barColor;
+    border-radius: 20px;
+    padding: 2px;
+    font-size: 13px;
+}
+
+// .form-check-input{
+//     width: auto;
+//     height: auto;
+//     padding: auto;
+//     margin: auto;
+// }
+.dropDownBody {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: visible;
+    border: 1px solid $lighterGrayColor;
+    background-color: $barColor;
+    display: none;
+}
+
+.dropDownBody::-webkit-scrollbar {
+    display: none;
+}

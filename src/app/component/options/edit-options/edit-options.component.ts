@@ -76,7 +76,7 @@ export class EditOptionsComponent implements OnInit {
       this.addOptionForm.controls.nameAr.setValue(res.name)
       this.addOptionForm.controls.nameEn.setValue(res.nameEn)
       this.addOptionForm.controls.color.setValue(res.other)
-      this.color=res.other
+      this.color = res.other
       this.load = false;
     }, err => {
       this.load = false
@@ -92,9 +92,16 @@ export class EditOptionsComponent implements OnInit {
     color: new FormControl(this.color, [Validators.required]),
   })
 
+  startShowError: boolean = false
   handelAddOption() {
 
     this.load = true;
+
+    if (this.addOptionForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    }
     let data = {
       id: this.option.id,
       optionType: this.addOptionForm.controls.optionType.value,

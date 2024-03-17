@@ -33,7 +33,7 @@ export class UpdateOptionSetItemComponent implements OnInit {
   color: string = '#6466f1';
   optionSetList: any[] = []
   optionSet: any;
-
+  startShowError: boolean = false
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -45,7 +45,7 @@ export class UpdateOptionSetItemComponent implements OnInit {
   constructor(
     private _Router: Router,
     private _OptionSetItemService: OptionSetItemService,
-    private _OptionSetService: OptionSetService , private _ActivatedRoute: ActivatedRoute) {
+    private _OptionSetService: OptionSetService, private _ActivatedRoute: ActivatedRoute) {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.getOptionSetItem(this._ActivatedRoute.snapshot.paramMap.get('id')!)
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
@@ -83,6 +83,7 @@ export class UpdateOptionSetItemComponent implements OnInit {
   getOptionSetItem(id: string) {
     this.load = true;
 
+
     this._OptionSetItemService.getOptionSetItemById(id).subscribe(res => {
       this.load = false;
       this.optionSet = res
@@ -117,7 +118,11 @@ export class UpdateOptionSetItemComponent implements OnInit {
 
   handelAddOption() {
     this.load = true;
-
+    if (this.addOptionForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    }
     let data = {
       id: this.optionSet.id,
       value: this.addOptionForm.controls.value.value,
@@ -129,7 +134,7 @@ export class UpdateOptionSetItemComponent implements OnInit {
     }
     // console.log({ data });
 
-    this._OptionSetItemService.updateOptionSet(data).subscribe(res => {
+    return this._OptionSetItemService.updateOptionSet(data).subscribe(res => {
       this.load = false;
       this.cancel()
     },

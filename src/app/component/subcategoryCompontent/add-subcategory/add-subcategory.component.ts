@@ -30,6 +30,8 @@ export class AddSubcategoryComponent implements OnInit {
 
   userInfo: any;
   selectedImage: string = '';
+  startShowError: boolean = false;
+
   constructor(
     private _CategoryService: CategoryService,
     private _AttachmentsService: AttachmentsService,
@@ -71,7 +73,7 @@ export class AddSubcategoryComponent implements OnInit {
 
   removeImage() {
     this.selectedImage = ''
-    this.image = false;
+    this.image = '';
     this.addCategoryForm.controls.image.setValue('')
   }
 
@@ -100,9 +102,16 @@ export class AddSubcategoryComponent implements OnInit {
 
   handelAddCategory() {
     this.load = true;
-    if (!this.image) {
+
+
+    if (this.addCategoryForm.invalid) {
+      this.startShowError = true;
       this.load = false;
-      this.showSideError("Image is required");
+      return;
+    }
+    if (!this.image?.length) {
+      this.load = false;
+      return this.showSideError("Image is required");
     }
 
     let data = {
@@ -117,7 +126,7 @@ export class AddSubcategoryComponent implements OnInit {
 
     // console.log({ data });
 
-    this._CategoryService.addCategory(data).subscribe(res => {
+    return this._CategoryService.addCategory(data).subscribe(res => {
       this.load = false
       this._Router.navigateByUrl("/admin/category")
     },

@@ -32,6 +32,7 @@ export class EditProductComponent implements OnInit {
   dir: string = 'ltr'
 
 
+  startShowError: boolean = false;
   optionList: any[] = [];
   optionsGroups: any[] = [];
   selectedOptions: any[] = [];
@@ -456,7 +457,7 @@ export class EditProductComponent implements OnInit {
       })
 
 
- 
+
       // this.select = this.product.productOptions;
       this.handelPreSelected(this.product.productOptions)
 
@@ -474,6 +475,12 @@ export class EditProductComponent implements OnInit {
   handelAddProduct() {
     this.load = true;
 
+    if (this.addProductForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
+    }
 
     let selectedOptions: any[] = []
 
@@ -580,7 +587,7 @@ export class EditProductComponent implements OnInit {
       )
 
     }
-    this._ProductService.updateProduct(data).subscribe(res => {
+    return this._ProductService.updateProduct(data).subscribe(res => {
       this.load = false
       this._Router.navigateByUrl("/admin/product")
     },

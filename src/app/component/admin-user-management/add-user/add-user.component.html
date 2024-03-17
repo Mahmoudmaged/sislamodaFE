@@ -10,7 +10,7 @@
     </div>
 
     <div class="my-1">
-        <form [formGroup]="addUserForm" (ngSubmit)="addUserForm.valid && handelAddUser()">
+        <form [formGroup]="addUserForm" (ngSubmit)="handelAddUser()">
             <div class="row pe-5 ">
                 <div class="col-12 mb-1">
                     <div class="row">
@@ -35,11 +35,11 @@
                                         <input formControlName="image" class="d-none" type="file" id="uploadImage"
                                             (change)="selectImage($event)">
 
-                                        <div *ngIf="addUserForm.controls['image'].errors && addUserForm.controls['image'].touched"
+                                        <div *ngIf="(addUserForm.controls['image'].errors && addUserForm.controls['image'].touched) || ( startShowError  && addUserForm.controls['image'].errors)"
                                             class=" my-1 xx">
 
-                                            <p class="formError">
-                                                {{dir=='ltr'?'In-valid brand image' :'ملف خاطئ'}}
+                                            <p class="formError text-danger">
+                                                {{dir=='ltr'?'In-valid user image' :'ملف خاطئ'}}
                                             </p>
                                         </div>
 
@@ -71,7 +71,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="firstName" class="form-control" />
 
-                                <div *ngIf="addUserForm.controls['firstName'].errors && addUserForm.controls['firstName'].touched"
+                                <div *ngIf="(addUserForm.controls['firstName'].errors && addUserForm.controls['firstName'].touched) || ( startShowError  && addUserForm.controls['firstName'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid firstName' :'خطاء'}}
@@ -91,7 +91,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="middleName" class="form-control" />
 
-                                <div *ngIf="addUserForm.controls['middleName'].errors && addUserForm.controls['middleName'].touched"
+                                <div *ngIf="(addUserForm.controls['middleName'].errors && addUserForm.controls['middleName'].touched) || ( startShowError  && addUserForm.controls['middleName'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid middleName' :'خطاء'}}
@@ -112,7 +112,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="lastName" class="form-control" />
 
-                                <div *ngIf="addUserForm.controls['lastName'].errors && addUserForm.controls['lastName'].touched"
+                                <div *ngIf="(addUserForm.controls['lastName'].errors && addUserForm.controls['lastName'].touched) || ( startShowError  && addUserForm.controls['lastName'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid lastName' :'خطاء'}}
@@ -133,7 +133,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="userName" class="form-control" />
 
-                                <div *ngIf="addUserForm.controls['userName'].errors && addUserForm.controls['userName'].touched"
+                                <div *ngIf="(addUserForm.controls['userName'].errors && addUserForm.controls['userName'].touched) || ( startShowError  && addUserForm.controls['userName'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid userName' :'خطاء'}}
@@ -151,7 +151,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="phoneNumber" class="form-control" />
 
-                                <div *ngIf="addUserForm.controls['phoneNumber'].errors && addUserForm.controls['phoneNumber'].touched"
+                                <div *ngIf="(addUserForm.controls['phoneNumber'].errors && addUserForm.controls['phoneNumber'].touched) || ( startShowError  && addUserForm.controls['phoneNumber'].errors)"
                                     class=" my-1 xx">
 
                                     <p class="formError"> {{dir=='ltr'?'In-valid phones' :'خطاء'}} </p>
@@ -171,7 +171,7 @@
                             <div class="form-group">
                                 <input formControlName="email" class="form-control" type="email">
 
-                                <div *ngIf="addUserForm.controls['email'].errors && addUserForm.controls['email'].touched"
+                                <div *ngIf="(addUserForm.controls['email'].errors && addUserForm.controls['email'].touched) || ( startShowError  && addUserForm.controls['email'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError"> {{dir=='ltr'?'In-valid  email' :'خطاء'}} </p>
 
@@ -189,7 +189,7 @@
                             <div class="form-group">
                                 <input formControlName="password" type="password" class="form-control">
 
-                                <div *ngIf="addUserForm.controls['password'].errors && addUserForm.controls['password'].touched"
+                                <div *ngIf="(addUserForm.controls['password'].errors && addUserForm.controls['password'].touched) || ( startShowError  && addUserForm.controls['password'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError"> {{dir=='ltr'?'In-valid  password' :'خطاء'}} </p>
 
@@ -207,7 +207,7 @@
                                 <textarea formControlName="address" class="form-control" name="" id="" cols="30"
                                     rows="1"></textarea>
 
-                                <div *ngIf="addUserForm.controls['address'].errors && addUserForm.controls['address'].touched"
+                                <div *ngIf="(addUserForm.controls['address'].errors && addUserForm.controls['address'].touched) || ( startShowError  && addUserForm.controls['address'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError"> {{dir=='ltr'?'In-valid  address' :'خطاء'}} </p>
 
@@ -231,7 +231,7 @@
                 </div>
 
                 <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
-                    <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addUserForm.invalid"><span
+                    <button type="submit" class="btn  px-5 py-1 my-1"  [class]="addUserForm.invalid ? 'disabledBtn':'btn-dark'"><span
                             class="px-2"> {{dir=='ltr'?'Add ' :'اضافه'}}</span></button>
                     <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1" (click)="cancel()">{{dir=='ltr'?'Cancel '
                         :'الغاء'}}</button>

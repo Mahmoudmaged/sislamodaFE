@@ -25,6 +25,7 @@ export class EditOfferComponent implements OnInit {
   offer: any;
   vendorData: any;
   dir: string = 'ltr';
+  startShowError: boolean = false;
 
   defaultDate: any;
   showSideError(message: string) {
@@ -127,6 +128,13 @@ export class EditOfferComponent implements OnInit {
 
   handelUpdateOffer() {
     this.load = true;
+
+    if (this.addOfferForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
+    }
     let data = this.addOfferForm.value
     data.id = this.offer.id
     data.photoId = this.image ? this.image : this.offer.photoId
@@ -136,7 +144,7 @@ export class EditOfferComponent implements OnInit {
 
     // console.log({ data });
 
-    this._OfferService.updateOffer(data).subscribe((res) => {
+    return this._OfferService.updateOffer(data).subscribe((res) => {
       this.load = false
       this._Router.navigateByUrl("/admin/offers")
     }, err => {

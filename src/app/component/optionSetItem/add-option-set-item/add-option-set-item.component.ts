@@ -32,7 +32,7 @@ export class AddOptionSetItemComponent implements OnInit {
   base: any;
   color: string = '#6466f1';
   optionSetList: any[] = []
-
+  startShowError: boolean = false
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -94,6 +94,11 @@ export class AddOptionSetItemComponent implements OnInit {
   handelAddOption() {
     this.load = true;
 
+    if (this.addOptionForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    }
     let data = {
 
       value: this.addOptionForm.controls.value.value,
@@ -105,7 +110,7 @@ export class AddOptionSetItemComponent implements OnInit {
     }
     // console.log({ data });
 
-    this._OptionSetItemService.addOptionSetItem(data).subscribe(res => {
+    return this._OptionSetItemService.addOptionSetItem(data).subscribe(res => {
       this.load = false;
       this.cancel()
     },

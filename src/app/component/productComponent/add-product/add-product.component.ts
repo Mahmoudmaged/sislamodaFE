@@ -38,6 +38,9 @@ export class AddProductComponent implements OnInit {
   vendorData: any;
   dir: string = 'ltr'
 
+  startShowError: boolean = false;
+
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -162,7 +165,7 @@ export class AddProductComponent implements OnInit {
         }
 
       }
- 
+
       this.optionsGroups = [
         {
           groupName: 'color',
@@ -255,8 +258,16 @@ export class AddProductComponent implements OnInit {
 
   handelAddProduct() {
     this.load = true;
+
+    if (this.addProductForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
+    }
+
     if (!this.imagesList.length) {
-      this.showSideError(`Please upload  product images`)
+      return this.showSideError(`Please upload  product images`)
     }
 
     let selectedOptions: any[] = []
@@ -316,7 +327,7 @@ export class AddProductComponent implements OnInit {
 
     // console.log({ sss: this.selectedOptions });
 
-    this._ProductService.addProduct(data).subscribe(res => {
+    return this._ProductService.addProduct(data).subscribe(res => {
       this.load = false;
       this._Router.navigateByUrl("/admin/product")
     },

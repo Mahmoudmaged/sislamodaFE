@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="nameAr" class="form-control" />
 
-                                <div *ngIf="addOptionForm.controls['nameAr'].errors && addOptionForm.controls['nameAr'].touched"
+                                <div *ngIf="(addOptionForm.controls['nameAr'].errors && addOptionForm.controls['nameAr'].touched)  || ( startShowError  && addOptionForm.controls['nameAr'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid Option name' :'خطاء'}}
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="nameEn" class="form-control" />
 
-                                <div *ngIf="addOptionForm.controls['nameEn'].errors && addOptionForm.controls['nameEn'].touched"
+                                <div *ngIf="(addOptionForm.controls['nameEn'].errors && addOptionForm.controls['nameEn'].touched) || ( startShowError  && addOptionForm.controls['nameEn'].errors)"
                                     class=" my-1 xx">
 
                                     <p class="formError"> {{dir=='ltr'?'In-valid Option name' :'خطاء'}} </p>
@@ -64,7 +64,7 @@
                                         {{dir=="ltr"?optionSet.nameEn:optionSet.name}}</option>
                                 </select>
 
-                                <div *ngIf="addOptionForm.controls['optionType'].errors && addOptionForm.controls['optionType'].touched"
+                                <div *ngIf="(addOptionForm.controls['optionType'].errors && addOptionForm.controls['optionType'].touched) || ( startShowError  && addOptionForm.controls['optionType'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">In-valid optionSet name</p>
                                 </div>
@@ -80,7 +80,7 @@
                             <div class="form-group my-1">
                                 <p-colorPicker formControlName="color" [(ngModel)]="color"></p-colorPicker>
 
-                                <div *ngIf="addOptionForm.controls['color'].errors && addOptionForm.controls['color'].touched"
+                                <div *ngIf="(addOptionForm.controls['color'].errors && addOptionForm.controls['color'].touched) || ( startShowError  && addOptionForm.controls['color'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">In-valid color</p>
                                 </div>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
-                    <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addOptionForm.invalid"><span
+                    <button type="submit" class="btn  px-5 py-1 my-1" [class]="addOptionForm.invalid ? 'disabledBtn':'btn-dark'"><span
                             class="px-2"> {{dir=='ltr'?'Update' :'حفظ'}}</span></button>
                     <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1" (click)="cancel()">{{dir=='ltr'?'Cancel'
                         :'الغاء'}}</button>

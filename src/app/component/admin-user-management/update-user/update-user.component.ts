@@ -30,6 +30,8 @@ export class UpdateUserComponent implements OnInit {
   base: any;
   user: any;
 
+  startShowError:boolean=false;
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -124,6 +126,12 @@ export class UpdateUserComponent implements OnInit {
 
   handelAddUser() {
     this.load = true;
+
+    if (this.addUserForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+    }
     if (this.image) {
       this.showSideError(`Please upload  product images`)
     }

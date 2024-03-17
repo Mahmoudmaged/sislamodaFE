@@ -31,7 +31,7 @@ export class AddOptionsetComponent implements OnInit {
   vendorData: any;
   dir: string = 'ltr'
   base: any;
-
+  startShowError: boolean = false
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -68,14 +68,18 @@ export class AddOptionsetComponent implements OnInit {
 
   handelAddOption() {
     this.load = true;
-
+    if (this.addOptionForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    }
     let data = {
       name: this.addOptionForm.controls.name.value,
       displayNameAr: this.addOptionForm.controls.displayNameAr.value,
       displayNameEN: this.addOptionForm.controls.displayNameEN.value,
     }
 
-    this._OptionSetService.addOptionSet(data).subscribe(res => {
+    return this._OptionSetService.addOptionSet(data).subscribe(res => {
       this.load = false;
       this.cancel()
     },

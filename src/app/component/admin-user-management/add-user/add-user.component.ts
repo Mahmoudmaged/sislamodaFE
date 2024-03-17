@@ -30,6 +30,8 @@ export class AddUserComponent {
   base: any;
   user: any;
 
+  startShowError:boolean=false;
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -107,7 +109,11 @@ export class AddUserComponent {
     if (this.image) {
       this.showSideError(`Please upload  product images`)
     }
-
+    if (this.addUserForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+    }
 
 
     let data = {

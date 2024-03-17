@@ -16,11 +16,11 @@
   </div>
   <div class="row  categoryContainer my-1">
     <div class="hh p-3 text-light">
-      <h5> {{dir=='ltr'?'Update  offer':'تعديل العرض '}}</h5>
+      <h5> {{dir=='ltr'?'Update offer':'تعديل العرض '}}</h5>
     </div>
     <div class="categoryContainerBody px-5 py-2">
       <div class="px-3">
-        <form [formGroup]="addOfferForm" (ngSubmit)="addOfferForm.valid && handelUpdateOffer()">
+        <form [formGroup]="addOfferForm" (ngSubmit)=" handelUpdateOffer()">
           <div class="row pe-5">
             <div class="col-12">
               <div class="row">
@@ -31,7 +31,8 @@
                         <i class="fa fa-file fa-3x"></i>
                         <p>
 
-                          {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره المناسبه للبدء  في تحميلها '}}
+                          {{dir=='ltr'?'Attach image here to start uploading':'قم باختيار الصوره المناسبه للبدء في
+                          تحميلها '}}
                         </p>
                         <div class="d-flex align-items-center justify-content-center">
                           <p class="p11 me-1"></p>
@@ -44,9 +45,10 @@
                         <input formControlName="photoId" class="d-none" multiple type="file" id="uploadImage"
                           (change)="selectImage($event)">
 
-                        <div *ngIf="addOfferForm.controls['photoId'].errors && addOfferForm.controls['photoId'].touched"
+                        <div
+                          *ngIf="(addOfferForm.controls['photoId'].errors && addOfferForm.controls['photoId'].touched) || ( startShowError  && addOfferForm.controls['photoId'].errors)"
                           class=" my-1 xx">
-                          <p class="formError">
+                          <p class="formError text-danger">
                             {{dir=='ltr'?'In-valid offer image' :'ملف خاطئ'}}
                           </p>
                         </div>
@@ -76,7 +78,8 @@
                   </p>
                   <div class="form-group">
                     <input type="text" formControlName="title" class="form-control" />
-                    <div *ngIf="addOfferForm.controls['title'].errors && addOfferForm.controls['title'].touched"
+                    <div
+                      *ngIf="(addOfferForm.controls['title'].errors && addOfferForm.controls['title'].touched)  || ( startShowError  && addOfferForm.controls['title'].errors)"
                       class=" my-1 xx">
                       <p class="formError">
                         {{dir=='ltr'?' In-valid title' :'يوجد خطاء بالاسم'}}
@@ -94,7 +97,8 @@
                   </p>
                   <div class="form-group">
                     <input type="text" formControlName="titleEn" class="form-control" />
-                    <div *ngIf="addOfferForm.controls['titleEn'].errors && addOfferForm.controls['titleEn'].touched"
+                    <div
+                      *ngIf="(addOfferForm.controls['titleEn'].errors && addOfferForm.controls['titleEn'].touched)   || ( startShowError  && addOfferForm.controls['titleEn'].errors)"
                       class="my-1 xx">
                       <p class="formError">
                         {{dir=='ltr'?' In-valid title' :'يوجد خطاء بالاسم'}}
@@ -115,10 +119,10 @@
                       rows="1"></textarea>
 
                     <div
-                      *ngIf="addOfferForm.controls['description'].errors && addOfferForm.controls['description'].touched"
+                      *ngIf="(addOfferForm.controls['description'].errors && addOfferForm.controls['description'].touched) || ( startShowError  && addOfferForm.controls['description'].errors)"
                       class=" my-1 xx">
                       <p class="formError">
-                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}} 
+                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}}
                       </p>
                     </div>
                   </div>
@@ -135,10 +139,10 @@
                     <textarea formControlName="descriptionEn" class="form-control" name="" id="" cols="30"
                       rows="1"></textarea>
                     <div
-                      *ngIf="addOfferForm.controls['descriptionEn'].errors && addOfferForm.controls['descriptionEn'].touched"
+                      *ngIf="(addOfferForm.controls['descriptionEn'].errors && addOfferForm.controls['descriptionEn'].touched) || ( startShowError  && addOfferForm.controls['descriptionEn'].errors)"
                       class=" my-1 xx">
                       <p class="formError">
-                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}} 
+                        {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}}
 
                       </p>
                     </div>
@@ -155,7 +159,7 @@
                   <div class="form-group">
                     <input type="text" formControlName="code" class="form-control" />
 
-                    <div *ngIf="addOfferForm.controls['code'].errors && addOfferForm.controls['code'].touched"
+                    <div *ngIf="(addOfferForm.controls['code'].errors && addOfferForm.controls['code'].touched) || ( startShowError  && addOfferForm.controls['code'].errors)"
                       class=" my-1 xx">
                       <p class="formError">
                         {{dir=='ltr'?' In-valid offer code' :'خطاء بالكود'}}
@@ -174,7 +178,7 @@
                   <div class="form-group">
                     <input type="text" formControlName="percent" class="form-control" />
 
-                    <div *ngIf="addOfferForm.controls['percent'].errors && addOfferForm.controls['percent'].touched"
+                    <div *ngIf="(addOfferForm.controls['percent'].errors && addOfferForm.controls['percent'].touched) || ( startShowError  && addOfferForm.controls['percent'].errors)"
                       class=" my-1 xx">
                       <p class="formError">
                         {{dir=='ltr'?' In-valid offer code' :'خطاء بسعر العرض'}}
@@ -191,11 +195,12 @@
                     {{dir=='ltr'?'Offer Type' :'نوع العرض'}}
                   </p>
                   <div class="form-group">
-                    <select formControlName="offerType" class="form-select p-2 text-start" aria-label="Default select example">
+                    <select formControlName="offerType" class="form-select p-2 text-start"
+                      aria-label="Default select example">
                       <option *ngFor="let item of [].constructor(4); index as i" [value]="i+1" [selected]=" i== 0">
                         {{i+1}}</option>
                     </select>
-                    <div *ngIf="addOfferForm.controls['offerType'].errors && addOfferForm.controls['offerType'].touched"
+                    <div *ngIf="(addOfferForm.controls['offerType'].errors && addOfferForm.controls['offerType'].touched) || ( startShowError  && addOfferForm.controls['offerType'].errors)"
                       class=" my-1 xx">
                       <p class="formError">
                         {{dir=='ltr'?'In-valid offer type' :'خطاء بنوع العرض '}}
@@ -215,11 +220,11 @@
                       <option *ngFor="let category of categoryList ;  index as i" [value]="category.id"
                         [selected]=" i== 0">
                         {{dir=='ltr'?category.nameEn:category.name}}
-                      
+
                       </option>
                     </select>
                     <div
-                      *ngIf="addOfferForm.controls['offerCategoryId'].errors && addOfferForm.controls['offerCategoryId'].touched"
+                      *ngIf="(addOfferForm.controls['offerCategoryId'].errors && addOfferForm.controls['offerCategoryId'].touched) || ( startShowError  && addOfferForm.controls['offerCategoryId'].errors)"
                       class=" my-1 xx">
                       <p class="formError">{{dir=='ltr'?'In-valid category ':'خطاء '}}</p>
                     </div>
@@ -232,7 +237,7 @@
                 <p>{{dir=='ltr'?'Start Date' :'تاريخ بدء العرض'}}</p>
                 <p-calendar formControlName="startDate" class="bg-danger">
                 </p-calendar>
-                <div *ngIf="addOfferForm.controls['startDate'].errors && addOfferForm.controls['startDate'].touched"
+                <div *ngIf="(addOfferForm.controls['startDate'].errors && addOfferForm.controls['startDate'].touched) || ( startShowError  && addOfferForm.controls['startDate'].errors)"
                   class=" my-1 xx">
                   <p class="formError">{{dir=='ltr'?'In-valid offer startDate ':'خطاء '}}</p>
 
@@ -245,7 +250,7 @@
 
                 <p-calendar formControlName="endDate">
                 </p-calendar>
-                <div *ngIf="addOfferForm.controls['endDate'].errors && addOfferForm.controls['endDate'].touched"
+                <div *ngIf="(addOfferForm.controls['endDate'].errors && addOfferForm.controls['endDate'].touched) || ( startShowError  && addOfferForm.controls['endDate'].errors)"
                   class=" my-1 xx">
                   <p class="formError">{{dir=='ltr'?'In-valid offer startDate ':'خطاء '}}</p>
                 </div>
@@ -263,8 +268,9 @@
               </div>
             </div>
             <div class="w-100  mt-4 mb-1 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
-              <button type="submit" class="btn btn-dark px-5 py-2 my-1" [disabled]="addOfferForm.invalid"><span
-                  class="px-2">{{dir=='ltr'?'Update' :' اضافه'}}</span></button>
+              <button type="submit" class="btn  px-5 py-2 my-1"
+                [class]="addOfferForm.invalid ? 'disabledBtn':'btn-dark'"><span class="px-2">{{dir=='ltr'?'Update' :'
+                  اضافه'}}</span></button>
               <button type=" button" class="btn btn-outline-dark px-5 py-2 mx-2 my-1"
                 (click)="close()">{{dir=='ltr'?'Cancel' :' الغاء'}}</button>
             </div>

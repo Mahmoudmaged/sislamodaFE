@@ -30,6 +30,7 @@ export class AddTicketComponent {
   dir: string = 'ltr'
   base: any;
   user: any;
+  startShowError: boolean = false;
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -68,8 +69,15 @@ export class AddTicketComponent {
 
   handelAddTicket() {
     this.load = true;
+
+    if (this.addTicketForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
+    }
     if (this.image) {
-      this.showSideError(`Please upload  product images`)
+      return this.showSideError(`Please upload  product images`)
     }
 
 
@@ -85,10 +93,10 @@ export class AddTicketComponent {
     }
 
 
-    this._ticketService.addTicket(data).subscribe(res => {
+    return this._ticketService.addTicket(data).subscribe(res => {
       this.load = false;
-      console.log({res});
-      
+      console.log({ res });
+
       this._Router.navigateByUrl("/admin/ticket")
     },
       err => {

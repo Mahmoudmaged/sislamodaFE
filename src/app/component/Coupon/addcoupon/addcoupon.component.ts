@@ -23,6 +23,9 @@ export class AddcouponComponent implements OnInit {
   load: boolean = false;
   sideMessage: string = '';
   dir: string = 'ltr';
+
+  startShowError:boolean=false;
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -112,10 +115,16 @@ export class AddcouponComponent implements OnInit {
   handelDate() {
     this.minimumDate = new Date(String(this.addCouponForm.controls.startDate.value))
   }
-  minimumDate = new Date()
+  minimumDate = new Date();
   handelAddCoupon() {
 
     this.load = true;
+
+    if (this.addCouponForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+    }
 
     let data = this.addCouponForm.value
 

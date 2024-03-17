@@ -20,7 +20,7 @@ export class AddInfluencerComponent implements OnInit {
   categoryList: any = []
   optionList: any = []
   userList: any = []
-  image: any = false;
+  image: any;
   errorMessage: string = ''
   userInfo: any;
   selectedImage: string = '';
@@ -88,19 +88,27 @@ export class AddInfluencerComponent implements OnInit {
 
 
   addUserForm = new FormGroup({
-    image: new FormControl('', []),
+    image: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     isActive: new FormControl(false, [Validators.required]),
   })
 
 
 
+  startShowError: boolean = false;
+
 
 
   handelAddUser() {
     this.load = true;
+
+    if (this.addUserForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+    }
     if (this.image) {
-      this.showSideError(`Please upload  product images`)
+      return this.showSideError(`Please upload  product images`)
     }
 
 
@@ -113,13 +121,14 @@ export class AddInfluencerComponent implements OnInit {
     }
 
 
-    this._InfluencerService.addInfluencer(data).subscribe(res => {
+    return this._InfluencerService.addInfluencer(data).subscribe(res => {
       this.load = false;
       this._Router.navigateByUrl("/admin/influencer")
     },
       err => {
-        console.log({ err });
         this.load = false;
+        console.log({err});
+        
         this.showSideError(`Some thing went wrong please try again`)
       }
     )

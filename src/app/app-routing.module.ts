@@ -18,7 +18,7 @@ const routes: Routes = [
     component: AdministrationComponent,
     loadChildren: () => import('./component/administration/admin/admin.module').then(mod => mod.AdminModule)
   },
-  { path: "", component: AdminLoginComponent },
+  { path: "", component: VendorLoginComponent },
   { path: "register", component: UserRegisterComponent },
   { path: "vendor/login", component: VendorLoginComponent },
   { path: "vendor/signup", component: RegisterVendorComponent },

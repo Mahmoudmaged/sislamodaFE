@@ -23,6 +23,7 @@ export class AddOfferComponent {
   load: boolean = false;
   sideMessage: string = '';
   dir: string = 'ltr';
+  startShowError: boolean = false;
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -80,6 +81,13 @@ export class AddOfferComponent {
   handelAddOffer() {
 
     this.load = true;
+
+    if (this.addOfferForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
+    }
     if (!this.image) {
       this.errorMessage = "Image is required"
     }

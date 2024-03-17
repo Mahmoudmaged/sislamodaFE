@@ -54,14 +54,22 @@ export class AddCategoryComponent {
 
         this.base = this.selectedImage
         // console.log({ fileName: event.target.files[0].type, file: this.selectedImage.split("base64,")[1] });
-
+        this.load = true;
         return this._AttachmentsService.uploadAttachBase64({
           fileName: event.target.files[0].name, file: this.selectedImage.split("base64,")[1]
         }).subscribe(res => {
           this.image = res
+          this.load = false;
+
           // console.log({ res });
         }, err => {
-          // console.log({ err });
+          console.log({ err });
+
+          this.load = false;
+          this.showSideError("fail to upload please try again")
+          this.selectedImage = ''
+
+
         })
       }
 
@@ -76,7 +84,7 @@ export class AddCategoryComponent {
 
   removeImage() {
     this.selectedImage = ''
-    this.image = false;
+    this.image = '';
     this.addCategoryForm.controls.image.setValue('')
   }
 
@@ -92,11 +100,19 @@ export class AddCategoryComponent {
     categoryDescription: new FormControl('', [Validators.required]),
     categoryDescriptionEn: new FormControl('', [Validators.required]),
   })
-
+  startShowError: boolean = false
   handelAddCategory() {
 
+
     this.load = true;
-    if (!this.image) {
+
+    if (this.addCategoryForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return
+    }
+
+    if (!this.image?.length) {
       this.load = false;
       this.showSideError("Image is required");
     }
@@ -110,6 +126,8 @@ export class AddCategoryComponent {
       order: 0,
       mainCategoryId: "",
     }
+
+    console.log({ data });
 
 
     this._CategoryService.addCategory(data).subscribe(res => {

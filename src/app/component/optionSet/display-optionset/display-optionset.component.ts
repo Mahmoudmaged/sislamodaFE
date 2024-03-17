@@ -50,9 +50,15 @@ export class DisplayOptionsetComponent implements OnInit {
     this._OptionSetService.getOptionSetById(id).subscribe(res => {
       // console.log({ res });
       this.optionSet = res;
-      this.pages = Math.ceil(res.optionSetItems.length / this.pageSize);
-      this.fullOptionSetList = res.optionSetItems;
-      this.optionSetList = this.fullOptionSetList.slice(0, this.pageSize);
+      console.log(this.optionSet);
+      if (this.optionSet) {
+        this.pages = Math.ceil(res?.optionSetItems?.length || 0 / this.pageSize);
+        this.fullOptionSetList = res.optionSetItems;
+        this.optionSetList = this.fullOptionSetList.slice(0, this.pageSize);
+      this.load = false;
+
+      }
+
       this.load = false;
     },
       err => {
@@ -163,6 +169,6 @@ export class DisplayOptionsetComponent implements OnInit {
     this._Router.navigateByUrl(`/admin/optionSet/${id}/details`)
   }
   displayOption(id: string) {
- 
+
   }
 }

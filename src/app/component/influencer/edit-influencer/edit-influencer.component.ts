@@ -124,6 +124,8 @@ export class EditInfluencerComponent {
     )
   }
 
+  startShowError:boolean=false;
+
   handelAddUser() {
     this.load = true;
 
@@ -131,6 +133,11 @@ export class EditInfluencerComponent {
 
 
 
+    if (this.addUserForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+    }
 
     let data = {
       isActive: this.addUserForm.controls.isActive.value,
@@ -139,8 +146,8 @@ export class EditInfluencerComponent {
       userId: this.userInfo?.id,
       id: this.user.id
     }
-    console.log({data});
-    
+    console.log({ data });
+
 
     this._InfluencerService.updateInfluencer(data).subscribe(res => {
       this.load = false;

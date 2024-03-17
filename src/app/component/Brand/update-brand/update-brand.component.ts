@@ -32,6 +32,7 @@ export class UpdateBrandComponent implements OnInit {
   dir: string = 'ltr'
   base: any;
   brand: any;
+  startShowError: boolean = false;
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -125,11 +126,14 @@ export class UpdateBrandComponent implements OnInit {
 
   handelAddBrand() {
     this.load = true;
-    if (this.image) {
-      this.showSideError(`Please upload  product images`)
+
+
+    if (this.addBrandForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
     }
-
-
 
     let data = {
       id: this._ActivatedRoute.snapshot.paramMap.get('id'),
@@ -142,7 +146,7 @@ export class UpdateBrandComponent implements OnInit {
     }
 
 
-    this._BrandService.updateBrand(data).subscribe(res => {
+    return this._BrandService.updateBrand(data).subscribe(res => {
       this.load = false;
       this._Router.navigateByUrl("/admin/brand")
     },

@@ -22,7 +22,7 @@
         </div>
         <div class="categoryContainerBody px-5 ">
             <div class="px-3 py-1">
-                <form [formGroup]="addCategoryForm" (ngSubmit)="addCategoryForm.valid && handelAddCategory()">
+                <form [formGroup]="addCategoryForm" (ngSubmit)="handelAddCategory()">
                     <div class="row pe-5">
                         <div class="col-12">
                             <div class="row">
@@ -41,9 +41,9 @@
                                         (change)="selectImage($event)">
               
                                       <div
-                                        *ngIf="addCategoryForm.controls['image'].errors && addCategoryForm.controls['image'].touched"
+                                        *ngIf="(addCategoryForm.controls['image'].errors && addCategoryForm.controls['image'].touched) || ( startShowError  && addCategoryForm.controls['image'].errors)"
                                         class=" my-1 xx">
-                                        <p class="formError">{{dir=='ltr'?'In-valid category image':'خطاء'}}</p>
+                                        <p class="formError text-danger">{{dir=='ltr'?'In-valid category image':'خطاء'}}</p>
 
                                       </div>
               
@@ -73,7 +73,7 @@
                                     <div class="form-group">
                                         <input type="text" formControlName="categoryName" class="form-control" />
 
-                                        <div *ngIf="addCategoryForm.controls['categoryName'].errors && addCategoryForm.controls['categoryName'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryName'].errors && addCategoryForm.controls['categoryName'].touched)  || ( startShowError  && addCategoryForm.controls['categoryName'].errors)"
                                             class=" my-1 xx">
                                             <p class="formError">{{dir=='ltr'?'In-valid category name':'خطاء'}}</p>
 
@@ -90,7 +90,7 @@
                                     <div class="form-group">
                                         <input type="text" formControlName="categoryNameEn" class="form-control" />
 
-                                        <div *ngIf="addCategoryForm.controls['categoryNameEn'].errors && addCategoryForm.controls['categoryNameEn'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryNameEn'].errors && addCategoryForm.controls['categoryNameEn'].touched)  || ( startShowError  && addCategoryForm.controls['categoryNameEn'].errors)"
                                             class="my-1 xx">
                                             <p class="formError">{{dir=='ltr'?'In-valid category name':'خطاء'}}</p>
 
@@ -108,7 +108,7 @@
                                         <textarea formControlName="categoryDescription" class="form-control" name=""
                                             id="" cols="30" rows="1"></textarea>
 
-                                        <div *ngIf="addCategoryForm.controls['categoryDescription'].errors && addCategoryForm.controls['categoryDescription'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryDescription'].errors && addCategoryForm.controls['categoryDescription'].touched)  || ( startShowError  && addCategoryForm.controls['categoryDescription'].errors)"
                                             class=" my-1 xx">
                                             <p class="formError">{{dir=='ltr'?'In-valid category description':'خطاء'}}</p>
 
@@ -125,7 +125,7 @@
                                         <textarea formControlName="categoryDescriptionEn" class="form-control" name=""
                                             id="" cols="30" rows="1"></textarea>
 
-                                        <div *ngIf="addCategoryForm.controls['categoryDescriptionEn'].errors && addCategoryForm.controls['categoryDescriptionEn'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryDescriptionEn'].errors && addCategoryForm.controls['categoryDescriptionEn'].touched)  || ( startShowError  && addCategoryForm.controls['categoryDescriptionEn'].errors)"
                                             class=" my-1 xx">
                                             <p class="formError">{{dir=='ltr'?'In-valid category description':'خطاء'}}</p>
                                         </div>
@@ -146,7 +146,7 @@
                                                 {{category.nameEn}}</option>
                                         </select>
 
-                                        <div *ngIf="addCategoryForm.controls['category'].errors && addCategoryForm.controls['category'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['category'].errors && addCategoryForm.controls['category'].touched)  || ( startShowError  && addCategoryForm.controls['category'].errors)"
                                             class=" my-1 xx">
                                             <p class="formError">In-valid category name</p>
                                         </div>
@@ -156,8 +156,8 @@
                         </div>
 
                         <div class="w-100  mt-2 mb-2 " [class]="dir=='ltr'?'text-end':'text-start'">
-                            <button type="submit" class="btn btn-dark px-5 py-1 my-1"
-                                [disabled]="addCategoryForm.invalid"><span class="px-2">{{dir=='ltr'?'Add':'اضافه'}}</span></button>
+                            <button type="submit" class="btn  px-5 py-1 my-1"
+                            [class]="addCategoryForm.invalid ? 'disabledBtn':'btn-dark'"><span class="px-2">{{dir=='ltr'?'Add':'اضافه'}}</span></button>
                             <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
                                 (click)="closeCategoryDetailsSec()">{{dir=='ltr'?'Cancel':'الغاء'}}</button>
                         </div>

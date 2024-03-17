@@ -17,54 +17,58 @@
 
     <div class="row  categoryContainer my-2">
         <div class="hh p-3 text-light">
-            <h5>{{dir=="ltr"?'Create  Category ':'انشاء فئه جديده'}}</h5>
+            <h5>{{dir=="ltr"?'Create Category ':'انشاء فئه جديده'}}</h5>
 
         </div>
         <div class="categoryContainerBody px-5 ">
             <div class="px-3 py-1">
-                <form [formGroup]="addCategoryForm" (ngSubmit)="addCategoryForm.valid && handelAddCategory()">
+                <form [formGroup]="addCategoryForm" (ngSubmit)=" handelAddCategory()">
                     <div class="row pe-5">
                         <div class="col-12">
                             <div class="row">
-                              <div class="col-lg-4  mt-1  mb-2">
-                                <div class="px-2 py-1">
-                                  <div class="px-2 py-2 w-100 text-center uploadParent">
-                                    <div class="uploadDiv p-2 text-center">
-                                      <i class="fa fa-file fa-3x"></i>
-                                      <p>{{dir=='ltr'?'Attach image here to start uploading':"قم باختيار الملف للبدء في تحميله"}}</p>
-                                      <div class="d-flex align-items-center justify-content-center">
-                                         <p class="p11 me-1"></p> <p>{{dir=='ltr'?'Or':'او'}}</p>  <p class="ms-1 p11"></p></div>
-                                      <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">
-                                        {{dir=='ltr'?'Browse file':'اختبار الملف'}}
-                                    </label>
-                                      <input formControlName="image" class="d-none" multiple type="file" id="uploadImage"
-                                        (change)="selectImage($event)">
-              
-                                      <div
-                                        *ngIf="addCategoryForm.controls['image'].errors && addCategoryForm.controls['image'].touched"
-                                        class=" my-1 xx">
-                                        <p class="formError">{{dir=='ltr'?'In-valid category image':'خطاء'}}</p>
+                                <div class="col-lg-4  mt-1  mb-2">
+                                    <div class="px-2 py-1">
+                                        <div class="px-2 py-2 w-100 text-center uploadParent">
+                                            <div class="uploadDiv p-2 text-center">
+                                                <i class="fa fa-file fa-3x"></i>
+                                                <p>{{dir=='ltr'?'Attach image here to start uploading':"قم باختيار الملف
+                                                    للبدء في تحميله"}}</p>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <p class="p11 me-1"></p>
+                                                    <p>{{dir=='ltr'?'Or':'او'}}</p>
+                                                    <p class="ms-1 p11"></p>
+                                                </div>
+                                                <label for="uploadImage" class="btn btn-primary browseFile px-2 py-1">
+                                                    {{dir=='ltr'?'Browse file':'اختبار الملف'}}
+                                                </label>
+                                                <input formControlName="image" class="d-none" multiple type="file"
+                                                    id="uploadImage" (change)="selectImage($event)">
 
-                                      </div>
-              
+                                                <div *ngIf="(addCategoryForm.controls['image'].errors && addCategoryForm.controls['image'].touched)  || ( startShowError  && addCategoryForm.controls['image'].errors)"
+                                                    class=" my-1 xx">
+                                                    <p class="formError text-danger">{{dir=='ltr'?'In-valid category image':'خطاء'}}
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
-              
-                              <div *ngIf="selectedImage" class="col-lg-4 mb-2">
-                                <div class="px-2 py-2 displayImageCont">
-                                  <div class="text-end trashSection">
-                                    <i class="fa fa-trash text-danger" (click)="removeImage()"></i>
-                                  </div>
-                                  <div class="px-2 py-1 w-100 text-center uploadParent">
-                                    <img class="img-fluid" [src]="selectedImage" alt="" srcset="">
-                                  </div>
+
+                                <div *ngIf="selectedImage" class="col-lg-4 mb-2">
+                                    <div class="px-2 py-2 displayImageCont">
+                                        <div class="text-end trashSection">
+                                            <i class="fa fa-trash text-danger" (click)="removeImage()"></i>
+                                        </div>
+                                        <div class="px-2 py-1 w-100 text-center uploadParent">
+                                            <img class="img-fluid" [src]="selectedImage" alt="" srcset="">
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                          </div>
-                       
+                        </div>
+
                         <div class="col-6 mb-1">
                             <div class="px-2 py-1">
                                 <div>
@@ -73,7 +77,7 @@
                                     <div class="form-group">
                                         <input type="text" formControlName="categoryName" class="form-control" />
 
-                                        <div *ngIf="addCategoryForm.controls['categoryName'].errors && addCategoryForm.controls['categoryName'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryName'].errors && addCategoryForm.controls['categoryName'].touched) || ( startShowError  && addCategoryForm.controls['categoryName'].errors)"
                                             class=" my-1 xx">
                                             <p class="formError">{{dir=='ltr'?'In-valid category name':'خطاء'}}</p>
 
@@ -90,7 +94,7 @@
                                     <div class="form-group">
                                         <input type="text" formControlName="categoryNameEn" class="form-control" />
 
-                                        <div *ngIf="addCategoryForm.controls['categoryNameEn'].errors && addCategoryForm.controls['categoryNameEn'].touched"
+                                        <div *ngIf="((addCategoryForm.controls['categoryNameEn'].errors && addCategoryForm.controls['categoryNameEn'].touched ) || ( startShowError  && addCategoryForm.controls['categoryNameEn'].errors))"
                                             class="my-1 xx">
                                             <p class="formError">{{dir=='ltr'?'In-valid category name':'خطاء'}}</p>
 
@@ -108,9 +112,10 @@
                                         <textarea formControlName="categoryDescription" class="form-control" name=""
                                             id="" cols="30" rows="1"></textarea>
 
-                                        <div *ngIf="addCategoryForm.controls['categoryDescription'].errors && addCategoryForm.controls['categoryDescription'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryDescription'].errors && addCategoryForm.controls['categoryDescription'].touched)  || ( startShowError  && addCategoryForm.controls['categoryDescription'].errors)"
                                             class=" my-1 xx">
-                                            <p class="formError">{{dir=='ltr'?'In-valid category description':'خطاء'}}</p>
+                                            <p class="formError">{{dir=='ltr'?'In-valid category description':'خطاء'}}
+                                            </p>
 
                                         </div>
                                     </div>
@@ -125,9 +130,10 @@
                                         <textarea formControlName="categoryDescriptionEn" class="form-control" name=""
                                             id="" cols="30" rows="1"></textarea>
 
-                                        <div *ngIf="addCategoryForm.controls['categoryDescriptionEn'].errors && addCategoryForm.controls['categoryDescriptionEn'].touched"
+                                        <div *ngIf="(addCategoryForm.controls['categoryDescriptionEn'].errors && addCategoryForm.controls['categoryDescriptionEn'].touched) || ( startShowError  && addCategoryForm.controls['categoryDescriptionEn'].errors)"
                                             class=" my-1 xx">
-                                            <p class="formError">{{dir=='ltr'?'In-valid category description':'خطاء'}}</p>
+                                            <p class="formError">{{dir=='ltr'?'In-valid category description':'خطاء'}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -135,8 +141,9 @@
                         </div>
 
                         <div class="w-100  mt-2 mb-2 " [class]="dir=='ltr'?'text-end':'text-start'">
-                            <button type="submit" class="btn btn-dark px-5 py-1 my-1"
-                                [disabled]="addCategoryForm.invalid"><span class="px-2">{{dir=='ltr'?'Add':'اضافه'}}</span></button>
+                            <button type="submit" class="btn  px-5 py-1 my-1"
+                                [class]="addCategoryForm.invalid ? 'disabledBtn':'btn-dark'"><span
+                                    class="px-2">{{dir=='ltr'?'Add':'اضافه'}}</span></button>
                             <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
                                 (click)="closeCategoryDetailsSec()">{{dir=='ltr'?'Cancel':'الغاء'}}</button>
                         </div>

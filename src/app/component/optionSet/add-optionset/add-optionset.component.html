@@ -10,7 +10,7 @@
     </div>
 
     <div class="my-1">
-        <form [formGroup]="addOptionForm" (ngSubmit)="addOptionForm.valid && handelAddOption()">
+        <form [formGroup]="addOptionForm" (ngSubmit)=" handelAddOption()">
             <div class="row pe-5 ">
                 <div class="col-12 mb-1">
                     <div class="px-2 py-1">
@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="name" class="form-control" />
 
-                                <div *ngIf="addOptionForm.controls['name'].errors && addOptionForm.controls['name'].touched"
+                                <div *ngIf="(addOptionForm.controls['name'].errors && addOptionForm.controls['name'].touched) || ( startShowError  && addOptionForm.controls['name'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid Option name' :'خطاء'}}
@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="displayNameAr" class="form-control" />
 
-                                <div *ngIf="addOptionForm.controls['displayNameAr'].errors && addOptionForm.controls['displayNameAr'].touched"
+                                <div *ngIf="(addOptionForm.controls['displayNameAr'].errors && addOptionForm.controls['displayNameAr'].touched) || ( startShowError  && addOptionForm.controls['displayNameAr'].errors)"
                                     class=" my-1 xx">
                                     <p class="formError">
                                         {{dir=='ltr'?'In-valid Option name' :'خطاء'}}
@@ -58,7 +58,7 @@
                             <div class="form-group">
                                 <input type="text" formControlName="displayNameEN" class="form-control" />
 
-                                <div *ngIf="addOptionForm.controls['displayNameEN'].errors && addOptionForm.controls['displayNameEN'].touched"
+                                <div *ngIf="(addOptionForm.controls['displayNameEN'].errors && addOptionForm.controls['displayNameEN'].touched) || ( startShowError  && addOptionForm.controls['displayNameEN'].errors)"
                                     class=" my-1 xx">
 
                                     <p class="formError"> {{dir=='ltr'?'In-valid Option name' :'خطاء'}} </p>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
-                    <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addOptionForm.invalid"><span
+                    <button type="submit" class="btn  px-5 py-1 my-1" [class]="addOptionForm.invalid ? 'disabledBtn':'btn-dark'"><span
                             class="px-2"> {{dir=='ltr'?'Add' :'اضافه'}}</span></button>
                     <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1"
                         (click)="cancel()">{{dir=='ltr'?'Cancel' :'الغاء'}}</button>

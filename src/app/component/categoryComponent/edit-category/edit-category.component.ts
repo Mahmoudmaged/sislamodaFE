@@ -34,7 +34,7 @@ export class EditCategoryComponent implements OnInit {
 
   removeImage() {
     this.selectedImage = ''
-    this.image = false;
+    this.image = '';
     this.addCategoryForm.controls.image.setValue('')
   }
 
@@ -109,30 +109,39 @@ export class EditCategoryComponent implements OnInit {
     categoryDescriptionEn: new FormControl('', [Validators.required]),
   })
 
+  startShowError: boolean = false;
   handelAddCategory() {
+
     this.load = true;
-    let data = {
-      id: this.category.id,
-      name: this.addCategoryForm.controls.categoryName.value,
-      nameEn: this.addCategoryForm.controls.categoryNameEn.value,
-      description: this.addCategoryForm.controls.categoryDescription.value,
-      descriptionEn: this.addCategoryForm.controls.categoryDescriptionEn.value,
-      categoryPhotoId: this.image ? this.image : this.category.categoryPhotoId,
-      order: 0,
-      mainCategoryId: "",
+    if (this.addCategoryForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    } else {
+      let data = {
+        id: this.category.id,
+        name: this.addCategoryForm.controls.categoryName.value,
+        nameEn: this.addCategoryForm.controls.categoryNameEn.value,
+        description: this.addCategoryForm.controls.categoryDescription.value,
+        descriptionEn: this.addCategoryForm.controls.categoryDescriptionEn.value,
+        categoryPhotoId: this.image?.length ? this.image : this.category.categoryPhotoId,
+        order: 0,
+        mainCategoryId: "",
+      }
+
+
+      return this._CategoryService.updateCategory(data).subscribe(res => {
+        this.load = false;
+        this._Router.navigateByUrl("/admin/category")
+
+      },
+        err => {
+          this.load = false;
+          this.showSideError(`Fail to edit please check and try again`)
+        }
+      )
     }
 
-
-    this._CategoryService.updateCategory(data).subscribe(res => {
-      this.load = false;
-      this._Router.navigateByUrl("/admin/category")
-
-    },
-      err => {
-        this.load = false;
-        this.showSideError(`Fail to edit please check and try again`)
-      }
-    )
   }
 
 

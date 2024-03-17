@@ -16,7 +16,7 @@ export class UpdateOptionsetComponent implements OnInit {
   userInfo: any;
   vendorData: any;
   optionSet: any;
-
+  startShowError: boolean = false
   showSideError(message: string) {
     this.sideMessage = message;
     $(".sideAlert").css({ "right": "0%" })
@@ -49,7 +49,7 @@ export class UpdateOptionsetComponent implements OnInit {
 
     this._OptionSetService.getOptionSetById(id).subscribe(res => {
       // console.log({res});
-      
+
       this.optionSet = res;
       this.addOptionForm.controls.name.setValue(this.optionSet.name)
       this.addOptionForm.controls.displayNameAr.setValue(this.optionSet.displayNameAr)
@@ -72,7 +72,11 @@ export class UpdateOptionsetComponent implements OnInit {
   })
   handelAddOption() {
     this.load = true;
-
+    if (this.addOptionForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    }
     let data = {
       id: this.optionSet.id,
       name: this.addOptionForm.controls.name.value,

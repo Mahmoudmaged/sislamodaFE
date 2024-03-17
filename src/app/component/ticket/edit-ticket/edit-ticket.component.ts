@@ -32,6 +32,8 @@ export class EditTicketComponent implements OnInit {
   dir: string = 'ltr'
   base: any;
   user: any;
+  startShowError:boolean=false;
+
 
   showSideError(message: string) {
     this.sideMessage = message
@@ -136,12 +138,16 @@ export class EditTicketComponent implements OnInit {
 
 
 
-
   handelAddTicket() {
     this.load = true;
-    if (this.image) {
-      this.showSideError(`Please upload  product images`)
+
+    if (this.addTicketForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
     }
+  
 
 
 

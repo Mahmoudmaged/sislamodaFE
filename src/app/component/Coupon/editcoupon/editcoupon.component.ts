@@ -24,6 +24,7 @@ export class EditcouponComponent implements OnInit {
   sideMessage: string = '';
   dir: string = 'ltr';
   coupon: any;
+  startShowError: boolean = false
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -122,7 +123,12 @@ export class EditcouponComponent implements OnInit {
   handelAddCoupon() {
 
     this.load = true;
+    if (this.addCouponForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
 
+    }
     let data = this.addCouponForm.value
 
     if (!this.isForAllValue && !this.selectedOp.length) {

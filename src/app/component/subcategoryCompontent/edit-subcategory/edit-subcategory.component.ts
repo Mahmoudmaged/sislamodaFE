@@ -24,6 +24,8 @@ export class EditSubcategoryComponent {
   load: boolean = false;
   sideMessage: string = '';
   dir: string = 'ltr';
+  startShowError: boolean = false;
+
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -84,7 +86,7 @@ export class EditSubcategoryComponent {
 
   removeImage() {
     this.selectedImage = ''
-    this.image = false;
+    this.image = '';
     this.addCategoryForm.controls.image.setValue('')
   }
 
@@ -120,18 +122,26 @@ export class EditSubcategoryComponent {
 
   handelAddCategory() {
     this.load = true;
+
+
+    if (this.addCategoryForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+    }
     let data = {
       id: this.category.id,
       name: this.addCategoryForm.controls.categoryName.value,
       nameEn: this.addCategoryForm.controls.categoryNameEn.value,
       description: this.addCategoryForm.controls.categoryDescription.value,
       descriptionEn: this.addCategoryForm.controls.categoryDescriptionEn.value,
-      categoryPhotoId: this.image ? this.image : this.category.categoryPhotoId,
+      categoryPhotoId: this.image?.length ? this.image : this.category.categoryPhotoId,
       order: 0,
       mainCategoryId: this.addCategoryForm.controls.category.value,
     }
 
-
+    console.log({data});
+    
     this._CategoryService.updateCategory(data).subscribe(res => {
       this.load = false;
       this._Router.navigateByUrl("/admin/category")

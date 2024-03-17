@@ -30,6 +30,8 @@ export class AddOptionsComponent implements OnInit {
   dir: string = 'ltr'
   base: any;
   color: string = '#6466f1';
+
+  startShowError: boolean = false
   optionSetList: any[] = [
     { type: 1, name: 'لون', nameEn: 'Color' },
     { type: 2, name: 'مقاس', nameEn: 'Size' },
@@ -75,6 +77,11 @@ export class AddOptionsComponent implements OnInit {
 
   handelAddOption() {
     this.load = true;
+    if (this.addOptionForm.invalid) {
+      this.load = false;
+      this.startShowError = true;
+      return;
+    }
     let data = {
       optionType: this.addOptionForm.controls.optionType.value,
       name: this.addOptionForm.controls.nameAr.value,

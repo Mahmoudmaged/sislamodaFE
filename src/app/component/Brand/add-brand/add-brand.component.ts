@@ -31,7 +31,7 @@ export class AddBrandComponent implements OnInit {
   vendorData: any;
   dir: string = 'ltr'
   base: any;
-
+  startShowError: boolean = false;
   showSideError(message: string) {
     this.sideMessage = message
     $(".sideAlert").css({ "right": "0%" })
@@ -103,8 +103,15 @@ export class AddBrandComponent implements OnInit {
 
   handelAddBrand() {
     this.load = true;
+
+    if (this.addBrandForm.invalid) {
+      this.startShowError = true;
+      this.load = false;
+      return;
+
+    }
     if (!this.image) {
-      this.showSideError(`Please upload  product images`)
+      return this.showSideError(`Please upload  product images`)
     }
 
 
@@ -119,7 +126,7 @@ export class AddBrandComponent implements OnInit {
     }
 
 
-    this._BrandService.addBrand(data).subscribe(res => {
+    return this._BrandService.addBrand(data).subscribe(res => {
       this.load = false;
       this._Router.navigateByUrl("/admin/brand")
     },
@@ -137,7 +144,7 @@ export class AddBrandComponent implements OnInit {
 
   }
 
-  cancel(){
+  cancel() {
     this._Router.navigateByUrl('/admin/brand')
   }
 }

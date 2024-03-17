@@ -47,6 +47,15 @@
 
             </p>
           </li>
+          <li *ngIf="!userInfo.isVendor" class="mb-1  listItem listItem25" (click)="changeDisplay('listItem25' , 'coupon')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1 image" src="../../../assets/images/Sislimoda/white/offerBlack.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/offerWhite.svg" alt="" srcset="">
+              {{dir=='ltr'?' Coupon Management':'إدارة الخوصمات'}}
+            </p>
+          </li>
+
 
 
           <li class="mb-1 listItem listItem3" (click)="changeDisplay('listItem3', 'product')">
@@ -60,7 +69,7 @@
 
 
 
-          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem4"
+          <li *ngIf="!userInfo?.isVendor" class="mb-1  listItem listItem4"
             (click)="changeDisplay('listItem4' , 'vendor')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
@@ -85,12 +94,21 @@
           </li>
 
 
-          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem6" (click)="changeDisplay('listItem6' ,'user')">
+          <li *ngIf="!userInfo?.isVendor" class="mb-1  listItem listItem6" (click)="changeDisplay('listItem6' ,'user')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
               <img class="me-1 image" src="../../../assets/images/Sislimoda/white/user_black.svg" alt="" srcset="">
               <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/user_white.svg" alt="" srcset="">
               {{dir=='ltr'?'Users Management':'إدارة المستخدمين'}}
+            </p>
+          </li>
+
+          <li *ngIf="!userInfo?.isVendor" class="mb-1  listItem listItem26" (click)="changeDisplay('listItem26' ,'influencer')">
+            <i class="fa fa-circle"></i>
+            <p class="ms-1 py-2 px-2 d-flex align-items-center">
+              <img class="me-1 image" src="../../../assets/images/Sislimoda/white/user_black.svg" alt="" srcset="">
+              <img class="me-1 image2" src="../../../assets/images/Sislimoda/white/user_white.svg" alt="" srcset="">
+              {{dir=='ltr'?'Influencer Management':'إدارة المشاهير'}}
             </p>
           </li>
 
@@ -107,7 +125,7 @@
 
 
 
-          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem9"
+          <li *ngIf="!userInfo?.isVendor" class="mb-1  listItem listItem9"
             (click)="changeDisplay('listItem9' , 'category')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
@@ -117,7 +135,7 @@
               {{dir=='ltr'?'Category Management':'إدارة الفئات'}}
             </p>
           </li>
-          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem13"
+          <li *ngIf="!userInfo?.isVendor" class="mb-1  listItem listItem13"
             (click)="changeDisplay('listItem13' , 'brand')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">
@@ -150,7 +168,7 @@
           </li>
 
 
-          <li *ngIf="userInfo?.isAdmin" class="mb-1  listItem listItem11"
+          <li *ngIf="!userInfo?.isVendor" class="mb-1  listItem listItem11"
             (click)="changeDisplay('listItem11', 'settings')">
             <i class="fa fa-circle"></i>
             <p class="ms-1 py-2 px-2 d-flex align-items-center">

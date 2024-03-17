@@ -82,7 +82,7 @@ export class AdminLoginComponent {
   })
   handelSignIn() {
     this.load = true;
-
+alert("aaaa")
     let Data = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
@@ -90,24 +90,32 @@ export class AdminLoginComponent {
     this._AuthService.signIn(Data).subscribe(res => {
 
       this.load = false;
-      //set token localStorage
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('user', JSON.stringify(res.user));
-      localStorage.setItem('dir', 'ltr');
-      // console.log({ res:res });
+    
+      if (res.user.isVendor || res.user.isAdmin || res.user.isSupperAdmin) {
+        //set token localStorage
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('dir', 'ltr');
+        // console.log({ res:res });
 
-      if (res.vendorData) {
-        localStorage.setItem('vendorData', JSON.stringify(res.vendorData));
-      }
-      if ($(".checkBoxInput").is(":checked")) {
-        // Set a cookie that expires in 30*12 days (1Year)
-        this._CookieService.set('loginCredential', JSON.stringify(Data), 30 * 12);
+        if (res.vendorData) {
+          localStorage.setItem('vendorData', JSON.stringify(res.vendorData));
+        }
+        if ($(".checkBoxInput").is(":checked")) {
+          // Set a cookie that expires in 30*12 days (1Year)
+          this._CookieService.set('loginCredential', JSON.stringify(Data), 30 * 12);
+
+        }
+        // redirect homePage
+        this._Router.navigateByUrl("/admin")
+        // Navigate DashBored
+        this.loginForm.reset();
+      } else {
+        this.loginErrorMessage = `Sorry but This site  for sislimoda administration member only`;
 
       }
-      // redirect homePage
-      this._Router.navigateByUrl("/admin")
-      // Navigate DashBored
-      this.loginForm.reset();
+
+
     },
       err => {
         this.load = false;
@@ -115,19 +123,7 @@ export class AdminLoginComponent {
         const { message } = err.error;
         this.showSideError(`In-valid Email Or Password`)
 
-        // if (message == 'Validation error') {
-        //   this.loginErrorMessage = "In-valid data please enter valid data";
-        // } else if (message == "Email not Exist") {
-        //   this.loginErrorMessage = "This user is not registered please signUp first";
-        // } else if (message == "Email not confirmed yet") {
-        //   this.loginErrorMessage = "Please confirm your email";
-        // } else if (message == "In-valid Password") {
-        //   this.loginErrorMessage = "Please enter the correct password";
-        // } else {
-        //   // this.loginErrorMessage = `${message}`;
-        //   this.showSideError(`In-valid Email Or Password`)
-
-        // }
+      
       }
     )
   }
@@ -245,7 +241,7 @@ export class AdminLoginComponent {
   }
 
 
-  
+
   createAccount() {
     this._Router.navigateByUrl("/vendor/signup")
   }

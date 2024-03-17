@@ -6,8 +6,8 @@
                 <div dir="rtl" class="chatList p-3">
                     <h3 dir="ltr">Contact</h3>
 
-                    <ul *ngFor="let chat of chatList">
-                        <li (click)="showChatDialog(chat.myAppUserId)" class="mt-1 chatUser">
+                    <ul *ngFor="let chat of chatList ; index as i">
+                        <li (click)="showChatDialog(chat.myAppUserId  , i)" class="mt-1 chatUser">
                             <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
                             <span class="chatTitle mx-1">{{chat?.myAppUserId}}</span>
                         </li>
@@ -25,82 +25,38 @@
                                 <div class="closeChat" dir="rtl">
                                     <i class="fa fa-times" (click)="closeChatDialog()"></i>
                                 </div>
-                                <div class="chatContent" (scroll)="changeBack()">
-                                    <div class="">
-                                        <div class="leftUser my-1" dir="ltr">
+                                <div *ngIf="chatInstance?.userMessages.length ; else noContent" class="chatContent"
+                                    (scroll)="changeBack()">
+                                    <div *ngFor="let message of chatInstance?.userMessages" class="">
+
+
+                                        <div *ngIf="message.replayUserId != userInfo.id" class="rightUser my-1">
                                             <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
                                                 srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                                            <span class="chatTitle mx-1">{{message.message}}</span>
                                         </div>
 
-                                        <div class="rightUser my-1">
+                                        <div *ngIf="message.replayUserId == userInfo.id" class="leftUser my-1"
+                                            dir="ltr">
                                             <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
                                                 srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="">
-                                        <div class="leftUser my-1" dir="ltr">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-
-                                        <div class="rightUser my-1">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
+                                            <span class="chatTitle mx-1">{{message.message}}</span>
                                         </div>
                                     </div>
 
 
-                                    <div class="">
-                                        <div class="leftUser my-1" dir="ltr">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-
-                                        <div class="rightUser my-1">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="">
-                                        <div class="leftUser my-1" dir="ltr">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-
-                                        <div class="rightUser my-1">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="">
-                                        <div class="leftUser my-1" dir="ltr">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-
-                                        <div class="rightUser my-1">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
-                                            <span class="chatTitle mx-1">Mahmoud Elwan</span>
-                                        </div>
-                                    </div>
 
 
                                 </div>
+
+
+                                <ng-template #noContent>
+                                    <div
+                                        class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
+                                        <p>{{dir=='ltr'? 'Empty Chat  start you first message':'لم يتم العثور علي نتائج بحث مشابه'}}
+                                        </p>
+                                    </div>
+                                </ng-template>
 
                                 <div class="chatControl px-1 py-3 text-center" dir="ltr">
                                     <hr>
@@ -111,8 +67,7 @@
                                         </div>
                                         <div class="col-1">
                                             <div class="px-1">
-                                                <i class="fa fa-paper-plane"
-                                                    (click)="sendMessage(chatInstance?.myAppUserId,chatInstance?.userChatId)"></i>
+                                                <i class="fa fa-paper-plane" (click)="sendMessage(chatInstance)"></i>
                                             </div>
                                         </div>
                                     </div>

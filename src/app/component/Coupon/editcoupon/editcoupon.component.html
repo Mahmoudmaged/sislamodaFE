@@ -1,0 +1,280 @@
+<div class="head">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-5 col-12">
+            <h4 class="head_title"> {{dir=='ltr'?'coupons':'العروض'}}</h4>
+            <!-- <p class="my-1">View all coupons and their details....</p> -->
+        </div>
+
+    </div>
+    <div class="row  categoryContainer my-1">
+        <div class="hh p-3 text-light">
+            <h5> {{dir=='ltr'?'Add new coupon':'اضافه عرض جديد'}}</h5>
+        </div>
+        <div class="categoryContainerBody px-5 py-2">
+            <div class="px-3">
+                <form [formGroup]="addCouponForm" (ngSubmit)="addCouponForm.valid && handelAddCoupon()">
+                    <div class="row pe-5">
+
+                        <div class="col-md-4 mb-1">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Coupon code ' :'كود الخصم'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="text" formControlName="code" class="form-control" />
+
+                                        <div *ngIf="addCouponForm.controls['code'].errors && addCouponForm.controls['code'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?' In-valid coupon code' :'خطاء بالكود'}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Description(Arabic)' :'الوصف'+'(عربي)'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <textarea formControlName="description" class="form-control" name="" id=""
+                                            cols="30" rows="1"></textarea>
+
+                                        <div *ngIf="addCouponForm.controls['description'].errors && addCouponForm.controls['description'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-1">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Description(English)' :' الوصف'+'(بلانجليزيه)'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <textarea formControlName="descriptionEn" class="form-control" name="" id=""
+                                            cols="30" rows="1"></textarea>
+                                        <div *ngIf="addCouponForm.controls['descriptionEn'].errors && addCouponForm.controls['descriptionEn'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?' In-valid description' :'يوجد خطاء بالوصف'}}
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-1 ">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Coupon Type' :'نوع العرض'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <select (click)="changeCouponType()" formControlName="couponType"
+                                            class="form-select p-2" aria-label="Default select example">
+                                            <option value="1" selected>Amount</option>
+                                            <option value="2">Percent</option>
+
+                                        </select>
+                                        <div *ngIf="addCouponForm.controls['couponType'].errors && addCouponForm.controls['couponType'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?'In-valid coupon type' :'خطاء بنوع العرض '}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-1   pay percent">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Coupon Rate (%)' :'% نسبه الخصم'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="text" formControlName="percent" class="form-control " />
+
+                                        <div *ngIf="addCouponForm.controls['percent'].errors && addCouponForm.controls['percent'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?' In-valid coupon code' :'خطاء بسعر العرض'}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-1  pay amount">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Coupon amount' :'سعر العرض'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="text" formControlName="amount" class="form-control" />
+
+                                        <div *ngIf="addCouponForm.controls['amount'].errors && addCouponForm.controls['amount'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?' In-valid coupon amount' :'خطاء بسعر العرض'}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-1">
+                            <div class="p-2">
+                                <div>
+                                    <p>
+                                        {{dir=='ltr'?'Coupon must exceed' :'اقل سعر للمنتج'}}
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="text" formControlName="mustExceed" class="form-control" />
+
+                                        <div *ngIf="addCouponForm.controls['mustExceed'].errors && addCouponForm.controls['mustExceed'].touched"
+                                            class=" my-1 xx">
+                                            <p class="formError">
+                                                {{dir=='ltr'?' In-valid coupon must exceed price' :'خطاء بسعر العرض'}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-1">
+                            <div class="p-2">
+                                <p>{{dir=='ltr'?'Start Date' :'تاريخ بدء العرض'}}</p>
+                                <p-calendar (click)="handelDate()" formControlName="startDate" class="bg-danger">
+                                </p-calendar>
+                                <div *ngIf="addCouponForm.controls['startDate'].errors && addCouponForm.controls['startDate'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError">{{dir=='ltr'?'In-valid coupon start date ':'خطاء '}}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4  mb-1">
+                            <div class="p-2">
+                                <p>{{dir=='ltr'?'End Date' :'تاريخ انتهاء العرض'}}</p>
+
+                                <p-calendar formControlName="endDate" [minDate]="minimumDate">
+                                </p-calendar>
+                                <div *ngIf="addCouponForm.controls['endDate'].errors && addCouponForm.controls['endDate'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError">{{dir=='ltr'?'In-valid coupon end date ':'خطاء '}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-1" dir="ltr">
+                            <div class="p-2">
+                                <p [class]="dir=='ltr'?'text-start':'text-end'">{{dir=='ltr'?'coupon state' :'حاله
+                                    العرض'}}</p>
+
+                                <div
+                                    class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked"> {{dir=='ltr'?'Active'
+                                        :' متاح'}}</label>
+                                    <input class="form-check-input mt-1" formControlName="isActive" type="checkbox"
+                                        role="switch" id="flexSwitchCheckChecked" checked>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-1" dir="ltr">
+                            <div class="p-2">
+                                <p [class]="dir=='ltr'?'text-start':'text-end'">{{dir=='ltr'?'coupon is for all' :'
+                                    اتاحه للجميع'}}</p>
+
+                                <div
+                                    class="form-check form-switch d-flex justify-content-between border border-2 rounded-2 p-2">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked"> {{dir=='ltr'?'Active'
+                                        :' متاح'}}</label>
+                                    <input (click)="isForAll()" class="form-check-input mt-1 nn" formControlName="isForAll"
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!isForAllValue" class="col-md-6 mb-1 ulist">
+                            <div class="px-2 py-1">
+                                <div>
+                                    <p> {{dir=='ltr'?'Product options' :'خيارات'}}</p>
+
+                                    <div class="dropDownHolder">
+                                        <div class="dropDownHead d-flex border p-2">
+                                            <div class="col-10 topSelect">
+                                                <span class="mx-1 ">{{selectedOp.length}} selected items </span>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="px-2">
+                                                    <div class="text-end arrowAn">
+                                                        <i class="fa fa-angle-down"></i>
+                                                        <i class="fa fa-angle-up "></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropDownBody p-2">
+
+
+                                            <div *ngFor="let option of optionList" class="groupLabel">
+
+
+                                                <input (click)="addOption(option.id)" class="" type="checkbox" value=""
+                                                    id="option.id" [checked]="selectedOp.includes(option.id)">
+                                                <label class="form-check-label  mx-1" for="option.id">
+                                                    {{dir=='ltr'?option.nameEn:option.name}}
+                                                </label>
+
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="w-100  mt-4 mb-1 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
+                            <button type="submit" class="btn btn-dark px-5 py-2 my-1"
+                                [disabled]="addCouponForm.invalid"><span class="px-2">{{dir=='ltr'?'Update' :'
+                                    حفظ'}}</span></button>
+                            <button type=" button" class="btn btn-outline-dark px-5 py-2 mx-2 my-1"
+                                (click)="close()">{{dir=='ltr'?'Cancel' :' الغاء'}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

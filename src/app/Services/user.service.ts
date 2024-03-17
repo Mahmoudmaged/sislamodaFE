@@ -29,4 +29,8 @@ export class UserService {
   updateUser(data: any): Observable<any> {
     return this._HttpClient.post(`${this.baseURL}Update`, data);
   }
+
+  addUser(data: any): Observable<any> {
+    return this._HttpClient.post(`https://sislimoda.com/api/Auth/RegisterUser`, data);
+  }
 }

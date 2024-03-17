@@ -33,9 +33,9 @@ export class VendorLoginComponent {
   constructor(
     private _CookieService: CookieService,
     private _AuthService: AuthService, public _Router: Router) {
-      if (localStorage.getItem("token")) {
-        this._Router.navigateByUrl("/admin/")
-      }
+    if (localStorage.getItem("token")) {
+      this._Router.navigateByUrl("/admin/")
+    }
   }
 
 
@@ -90,24 +90,37 @@ export class VendorLoginComponent {
       password: this.loginForm.controls.password.value,
     }
     this._AuthService.signIn(Data).subscribe(res => {
-
       this.load = false;
-      //set token localStorage
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('user', JSON.stringify(res.user));
-      if (res.vendorData) {
-      localStorage.setItem('vendorData', JSON.stringify(res.vendorData));
-        
-      }
-      if ($(".checkBoxInput").is(":checked")) {
-        // Set a cookie that expires in 30*12 days (1Year)
-        this._CookieService.set('loginCredential', JSON.stringify(Data), 30 * 12);
+
+      if (res.user.isVendor || res.user.isAdmin || res.user.isSupperAdmin) {
+
+        if (res.user.isVendor && res.vendorData?.vendorStatus?.nameEn?.toLowerCase() == 'rejected') {
+          this.showSideError(`Sorry but This your account is rejected`);
+
+        } else {
+          //set token localStorage
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('user', JSON.stringify(res.user));
+          if (res.vendorData) {
+            localStorage.setItem('vendorData', JSON.stringify(res.vendorData));
+
+          }
+          if ($(".checkBoxInput").is(":checked")) {
+            // Set a cookie that expires in 30*12 days (1Year)
+            this._CookieService.set('loginCredential', JSON.stringify(Data), 30 * 12);
+
+          }
+          //redirect homePage
+          this._Router.navigateByUrl("/admin")
+          //Navigate DashBored
+          this.loginForm.reset();
+        }
+
+      } else {
+        this.showSideError(`Sorry but This site  for sislimoda administration member only`)
 
       }
-      //redirect homePage
-      this._Router.navigateByUrl("/admin")
-      //Navigate DashBored
-      this.loginForm.reset();
+
     },
       err => {
         this.load = false;

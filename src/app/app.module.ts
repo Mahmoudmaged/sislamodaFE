@@ -77,6 +77,17 @@ import { UpdateUserComponent } from './component/admin-user-management/update-us
 import { ChatComponent } from './component/chat/chat.component';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AddUserComponent } from './component/admin-user-management/add-user/add-user.component';
+import { AddTicketComponent } from './component/ticket/add-ticket/add-ticket.component';
+import { EditTicketComponent } from './component/ticket/edit-ticket/edit-ticket.component';
+import { CouponComponent } from './component/Coupon/coupon/coupon.component';
+import { CouponDetailsComponent } from './component/Coupon/coupon-details/coupon-details.component';
+import { EditcouponComponent } from './component/Coupon/editcoupon/editcoupon.component';
+import { AddcouponComponent } from './component/Coupon/addcoupon/addcoupon.component';
+import { InfluencerComponent } from './component/influencer/influencer/influencer.component';
+import { AddInfluencerComponent } from './component/influencer/add-influencer/add-influencer.component';
+import { EditInfluencerComponent } from './component/influencer/edit-influencer/edit-influencer.component';
+import { InfluencerDetailsComponent } from './component/influencer/influencer-details/influencer-details.component';
 
 
 @NgModule({
@@ -142,7 +153,18 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     DisplayTicketComponent,
     DashboardComponent,
     UpdateUserComponent,
-    ChatComponent
+    ChatComponent,
+    AddUserComponent,
+    AddTicketComponent,
+    EditTicketComponent,
+    CouponComponent,
+    CouponDetailsComponent,
+    EditcouponComponent,
+    AddcouponComponent,
+    InfluencerComponent,
+    AddInfluencerComponent,
+    EditInfluencerComponent,
+    InfluencerDetailsComponent
   ],
   imports: [
     BrowserModule,

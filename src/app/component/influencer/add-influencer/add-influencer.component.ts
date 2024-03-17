@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttachmentsService } from 'src/app/Services/attachments.service';
+import { InfluencerService } from 'src/app/Services/influencer.service';
 import { UserService } from 'src/app/Services/user.service';
 declare let $: any;
 @Component({
-  selector: 'app-update-user',
-  templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  selector: 'app-add-influencer',
+  templateUrl: './add-influencer.component.html',
+  styleUrls: ['./add-influencer.component.scss']
 })
-export class UpdateUserComponent implements OnInit {
+export class AddInfluencerComponent implements OnInit {
   load: boolean = false;
   sideMessage: string = '';
   productOptions: any = [];
@@ -19,7 +20,7 @@ export class UpdateUserComponent implements OnInit {
   categoryList: any = []
   optionList: any = []
   userList: any = []
-  image: any;
+  image: any = false;
   errorMessage: string = ''
   userInfo: any;
   selectedImage: string = '';
@@ -39,12 +40,12 @@ export class UpdateUserComponent implements OnInit {
   }
 
   constructor(private _Router: Router,
-    private _userService: UserService,
-    private _AttachmentsService: AttachmentsService, private _ActivatedRoute: ActivatedRoute) {
+    private _InfluencerService: InfluencerService,
+    private _AttachmentsService: AttachmentsService,
+    private _ActivatedRoute: ActivatedRoute) {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-    this.getUserById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
   }
 
 
@@ -83,39 +84,13 @@ export class UpdateUserComponent implements OnInit {
     this.addUserForm.controls.image.setValue('')
   }
 
-  getUserById(id: string) {
-    this.load = true;
 
-
-
-    this._userService.getById(id).subscribe(res => {
-      this.user = res
-      // console.log({ user: this.user});
-
-      this.addUserForm.controls.name.setValue(this.user.name)
-      this.addUserForm.controls.email.setValue(this.user.email)
-      this.addUserForm.controls.isSupperAdmin.setValue(this.user.isSupperAdmin)
-      this.addUserForm.controls.phoneNumber.setValue(this.user.phoneNumber)
-      this.load = false;
-
-    },
-      err => {
-        // console.log({ err });
-        this.load = false;
-        this.showSideError(`Some thing went wrong please try again`)
-      }
-    )
-
-
-  }
 
 
   addUserForm = new FormGroup({
     image: new FormControl('', []),
     name: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    isSupperAdmin: new FormControl(false, [Validators.required]),
+    isActive: new FormControl(false, [Validators.required]),
   })
 
 
@@ -131,24 +106,19 @@ export class UpdateUserComponent implements OnInit {
 
 
     let data = {
-      id: this.user.id,
-      userTypes: 1,
-      isSupperAdmin: this.addUserForm.controls.isSupperAdmin.value,
+      isActive: this.addUserForm.controls.isActive.value,
       name: this.addUserForm.controls.name.value,
-      phoneNumber: this.addUserForm.controls.phoneNumber.value,
-      email: this.addUserForm.controls.email.value,
-      photoId: this.image ? this.image : this.user.photoId,
-      appUserId: this.user.appUserId,
-      vendorId: null
+      photoId: this.image,
+      userId: this.userInfo?.id
     }
 
 
-    this._userService.updateUser(data).subscribe(res => {
+    this._InfluencerService.addInfluencer(data).subscribe(res => {
       this.load = false;
-      this._Router.navigateByUrl("/admin/user")
+      this._Router.navigateByUrl("/admin/influencer")
     },
       err => {
-        // console.log({ err });
+        console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }
@@ -162,6 +132,6 @@ export class UpdateUserComponent implements OnInit {
   }
 
   cancel() {
-    this._Router.navigateByUrl('/admin/user')
+    this._Router.navigateByUrl('/admin/influencer')
   }
 }

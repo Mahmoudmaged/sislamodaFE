@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/Services/user.service';
+import { InfluencerService } from 'src/app/Services/influencer.service';
 declare let $: any;
 @Component({
-  selector: 'app-user-management',
-  templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.scss']
+  selector: 'app-influencer',
+  templateUrl: './influencer.component.html',
+  styleUrls: ['./influencer.component.scss']
 })
-export class UserManagementComponent implements OnInit {
+export class InfluencerComponent {
   dummyImage: string = '../../../assets/images/Sislimoda/SislimodaAdmin/items/images.png'
   userList: any[] = []
   fullUserList: any[] = []
@@ -25,9 +25,9 @@ export class UserManagementComponent implements OnInit {
       $(".sideAlert").css({ "right": "-200%" })
     }, 3000);
   }
-  constructor(private _UserService: UserService, private _Router: Router) {
+  constructor(private _InfluencerService: InfluencerService, private _Router: Router) {
     this.dir = localStorage.getItem('dir') || 'ltr';
-    this.getAllUsers()
+    this.getAllInfluencer()
   }
 
   ngOnInit(): void {
@@ -35,60 +35,9 @@ export class UserManagementComponent implements OnInit {
   }
 
 
-  showDropDown(classSelector: string, dropdownSelector: string) {
-    //remover from siblings
-    $(`.dropdown-menu-list`).not(`.${dropdownSelector}`).slideUp(300)
-    $('.search_dropdownMenuButton').not(`.${classSelector}`).removeClass('search_dropdownMenuButton_click')
-    //Display target dropdown
-    $(`.${dropdownSelector}`).slideToggle(300)
-    $(`.${classSelector}`).toggleClass('search_dropdownMenuButton_click')
-  }
-
-
-  changeOrderStatus(btn: string, status: string) {
-    $(`.${btn}`).text(status)
-    $(`.dropdown-menu-list`).slideUp(300)
-    $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
-
-    switch (status) {
-      case "declined":
-        $(`.${btn}`).css({ 'background-color': '#D80008' })
-        break;
-      case "suspended":
-        $(`.${btn}`).css({ 'background-color': '#ffdcdc' })
-        break;
-      case "continue":
-        $(`.${btn}`).css({ 'background-color': '#81ffca' })
-        break;
-      default:
-        break;
-    }
-  }
-
-  changeVendorStatus(btn: string, status: string) {
-    $(`.${btn}`).text(status)
-    $(`.dropdown-menu-list`).slideUp(300)
-    $('.search_dropdownMenuButton').removeClass('search_dropdownMenuButton_click')
-
-    switch (status) {
-      case "declined":
-        $(`.${btn}`).css({ 'background-color': '#D80008' })
-        break;
-      case "suspended":
-        $(`.${btn}`).css({ 'background-color': '#ffdcdc' })
-        break;
-      case "continue":
-        $(`.${btn}`).css({ 'background-color': '#81ffca' })
-        break;
-      default:
-        break;
-    }
-  }
-
-
-  getAllUsers() {
+  getAllInfluencer() {
     this.load = true;
-    return this._UserService.allUsers().subscribe(res => {
+    return this._InfluencerService.getAllInfluencerList().subscribe(res => {
       this.pages = Math.ceil(res.length / this.pageSize);
       this.fullUserList = res;
       this.userList = this.fullUserList.slice(0, this.pageSize);
@@ -130,8 +79,8 @@ export class UserManagementComponent implements OnInit {
     this.getPageContent(this.currentPage + 1)
   }
 
-  addUser(){
-    this._Router.navigateByUrl('admin/user/add')
+  addUser() {
+    this._Router.navigateByUrl('admin/influencer/add')
   }
   displayUserInquiries() {
 
@@ -155,7 +104,7 @@ export class UserManagementComponent implements OnInit {
       this.userList = this.fullUserList.slice(0, this.pageSize);
 
     } else {
-      this.getAllUsers()
+      this.getAllInfluencer()
     }
 
   }
@@ -163,10 +112,10 @@ export class UserManagementComponent implements OnInit {
 
   deleteUserById(id: string) {
     this.load = true
-    this._UserService.deleteUser(id).subscribe(res => {
+    this._InfluencerService.deleteInfluencer(id).subscribe(res => {
       this.load = false
       this.showSideError("Done")
-      this.getAllUsers()
+      this.getAllInfluencer()
     }, err => {
       this.load = false;
       this.showSideError(`Fail`)
@@ -194,6 +143,10 @@ export class UserManagementComponent implements OnInit {
   }
 
   edit(id: string) {
-    this._Router.navigateByUrl(`/admin/user/${id}/update`)
+    this._Router.navigateByUrl(`/admin/influencer/${id}/edit`)
+  }
+
+  view(id: string) {
+    this._Router.navigateByUrl(`/admin/influencer/${id}/details`)
   }
 }

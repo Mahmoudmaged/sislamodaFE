@@ -1,0 +1,122 @@
+<section class="OrderDetailsSec  px-3 py-2">
+
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+
+    <div class="my-1">
+        <form [formGroup]="addTicketForm" (ngSubmit)="addTicketForm.valid && handelAddTicket()">
+            <div class="row pe-5 ">
+                
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p>
+                                {{dir=='ltr'?'Name' :'الاسم'}}
+                            </p>
+                            <div class="form-group">
+                                <input type="text" formControlName="name" class="form-control" />
+
+                                <div *ngIf="addTicketForm.controls['name'].errors && addTicketForm.controls['name'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError">
+                                        {{dir=='ltr'?'In-valid name' :'خطاء'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+
+                            <p> {{dir=='ltr'?'Phone' :'رقم الهاتف'}} </p>
+                            <div class="form-group">
+                                <input type="text" formControlName="phoneNumber" class="form-control" />
+
+                                <div *ngIf="addTicketForm.controls['phoneNumber'].errors && addTicketForm.controls['phoneNumber'].touched"
+                                    class=" my-1 xx">
+
+                                    <p class="formError"> {{dir=='ltr'?'In-valid phones' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+
+                            <p> {{dir=='ltr'?'description' :'رقم الهاتف'}} </p>
+                            <div class="form-group">
+                                <textarea type="text" formControlName="description" class="form-control" rows="1"></textarea>
+
+                                <div *ngIf="addTicketForm.controls['description'].errors && addTicketForm.controls['description'].touched"
+                                    class=" my-1 xx">
+
+                                    <p class="formError"> {{dir=='ltr'?'In-valid description' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+
+                            <p> {{dir=='ltr'?'message' :'رقم الهاتف'}} </p>
+                            <div class="form-group">
+                                <textarea type="text" formControlName="message" class="form-control" rows="1"></textarea>
+
+                                <div *ngIf="addTicketForm.controls['message'].errors && addTicketForm.controls['message'].touched"
+                                    class=" my-1 xx">
+
+                                    <p class="formError"> {{dir=='ltr'?'In-valid message' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-6 mb-1">
+                    <div class="px-2 py-1">
+                        <div>
+                            <p> {{dir=='ltr'?'Email' :'البريد الالكتروني'}}</p>
+
+                            <div class="form-group">
+                                <textarea formControlName="email" class="form-control" name="" id="" cols="30"
+                                    rows="1"></textarea>
+
+                                <div *ngIf="addTicketForm.controls['email'].errors && addTicketForm.controls['email'].touched"
+                                    class=" my-1 xx">
+                                    <p class="formError"> {{dir=='ltr'?'In-valid brand email' :'خطاء'}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="w-100  mt-4 mb-2 " [ngClass]="{'text-end': dir=='ltr' , 'text-start': dir=='rtl' }">
+                    <button type="submit" class="btn btn-dark px-5 py-1 my-1" [disabled]="addTicketForm.invalid"><span
+                            class="px-2"> {{dir=='ltr'?'Add ' :'اضافه'}}</span></button>
+                    <button class="btn btn-outline-dark px-5 py-1 mx-2 my-1" (click)="cancel()">{{dir=='ltr'?'Cancel '
+                        :'الغاء'}}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</section>

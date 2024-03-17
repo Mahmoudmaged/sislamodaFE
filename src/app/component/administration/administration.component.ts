@@ -30,7 +30,9 @@ export class AdministrationComponent implements OnInit {
     { item: 'listItem19', com: 'optionSet' },
     { item: 'listItem19', com: 'options' },
     { item: 'listItem19', com: 'options' },
-    { item: 'listItem19', com: 'notification' }
+    { item: 'listItem19', com: 'notification' },
+    { item: 'listItem25', com: 'coupon' },
+    { item: 'listItem26', com: 'influencer' }
   ]
   itemBar: any = {}
   dir: string = ''
@@ -226,12 +228,12 @@ export class AdministrationComponent implements OnInit {
 
   logout() {
     localStorage.clear();
-    if (this.userInfo?.isAdmin) {
-      this._Router.navigateByUrl("/admin/login")
-    } else {
+    // if (this.userInfo?.isAdmin) {
+    //   this._Router.navigateByUrl("/admin/login")
+    // } else {
       this._Router.navigateByUrl("/vendor/login")
 
-    }
+    // }
   }
   load: boolean = false
   changeLanguage() {

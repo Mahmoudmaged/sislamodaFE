@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/Services/chat.service';
 
-declare  let $:any;
+declare let $: any;
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit {
   lang: string = 'English'
   chatList: any[] = []
   chatInstance: any;
-  load:boolean=false;
+  load: boolean = false;
   constructor(
     public _Router: Router, public _ActivatedRoute: ActivatedRoute, public _ChatService: ChatService) {
 
@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
 
-   
+
 
   }
 
@@ -93,6 +93,16 @@ export class ChatComponent implements OnInit {
 
     this._ChatService.messageToUser(data).subscribe(res => {
       console.log({ sentRes: res });
+      for (let i = 0; i < this.chatList.length; i++) {
+        if (this.chatInstance.id == this.chatList[i].id) {
+          this.chatList.push($(".messageInput").val())
+          this.chatInstance = { ...this.chatList[i] }
+          this.chatInstance.userMessages = this.chatInstance.userMessages.reverse()
+
+          break;
+        }
+
+      }
       $(".messageInput").val('');
     },
       err => {
@@ -117,8 +127,12 @@ export class ChatComponent implements OnInit {
   }
 
 
-  showChatDialog(id: string) {
-    this.getChatInstance(id, 1, 1000)
+  showChatDialog(id: string, index: number) {
+    // this.getChatInstance(id, 1, 1000)
+    this.chatInstance = { ...this.chatList[index] }
+    this.chatInstance.userMessages = this.chatInstance.userMessages.reverse()
+    console.log({ chatIn: this.chatInstance });
+
     $(".chatDialog").show()
   }
   closeChatDialog() {
@@ -132,26 +146,30 @@ export class ChatComponent implements OnInit {
 
   }
 
-  sendMessage(myAppUserId: string, userChatId: string) {
+  sendMessage(chatInstance: any) {
 
     const data = {
-      "myAppUserId": myAppUserId, //vendorID
-      "userChatId": userChatId, //chatID
-      "message": $(".messageInput").val(),
-      "replayUserId": ""
+      myAppUserId: chatInstance.myAppUserId, //vendorID
+      userChatId: chatInstance.id, //chatID
+      message: $(".messageInput").val(),
+      replayUserId: ""
     }
-    console.log({nn:this.userInfo});
-    
-    if (this.userInfo.isAdmin) {
-      this.sendMessageToClientOrVendor(data)
 
-    } else {
 
+    if (this.userInfo.isVendor) {
       //vendor send message to admin
       this.sendMessageToAdmin({
-        "myAppUserId": myAppUserId, //vendorID
-        "message": $(".messageInput").val()
+        myAppUserId: data.myAppUserId, //vendorID
+        message: data.message
       })
+
+    } else {
+      alert(" admin send")
+      //admin  send message to user or vendor
+      data.replayUserId = this.userInfo.id
+      console.log({ chatInstance, data });
+
+      this.sendMessageToClientOrVendor(data)
     }
 
 

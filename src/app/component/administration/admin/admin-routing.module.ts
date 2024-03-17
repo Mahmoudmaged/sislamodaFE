@@ -49,6 +49,17 @@ import { DisplayTicketComponent } from '../../ticket/display-ticket/display-tick
 import { AdministrationComponent } from '../administration.component';
 import { EditOrderComponent } from '../../order/edit-order/edit-order.component';
 import { ChatComponent } from '../../chat/chat.component';
+import { AddUserComponent } from '../../admin-user-management/add-user/add-user.component';
+import { AddTicketComponent } from '../../ticket/add-ticket/add-ticket.component';
+import { EditTicketComponent } from '../../ticket/edit-ticket/edit-ticket.component';
+import { CouponComponent } from '../../Coupon/coupon/coupon.component';
+import { CouponDetailsComponent } from '../../Coupon/coupon-details/coupon-details.component';
+import { AddcouponComponent } from '../../Coupon/addcoupon/addcoupon.component';
+import { EditcouponComponent } from '../../Coupon/editcoupon/editcoupon.component';
+import { InfluencerComponent } from '../../influencer/influencer/influencer.component';
+import { AddInfluencerComponent } from '../../influencer/add-influencer/add-influencer.component';
+import { EditInfluencerComponent } from '../../influencer/edit-influencer/edit-influencer.component';
+import { InfluencerDetailsComponent } from '../../influencer/influencer-details/influencer-details.component';
 
 const routes: Routes = [
   { path: 'financial', component: FinancialManagementComponent },
@@ -57,7 +68,10 @@ const routes: Routes = [
   { path: 'order/:id/details', component: OrderDetailsComponent },
   { path: 'order/:id/edit', component: EditOrderComponent },
   { path: 'user', component: UserManagementComponent },
+  { path: "user/add", component: AddUserComponent },
   { path: 'user/:id/update', component: UpdateUserComponent },
+
+
   { path: 'product', component: ProductComponent },
   { path: 'product/:id/details', component: ProductDetailsComponent },
   { path: 'product/add', component: AddProductComponent },
@@ -104,9 +118,24 @@ const routes: Routes = [
 
 
   { path: "ticket", component: TicketManagementComponent },
+  { path: "ticket/add", component: AddTicketComponent },
+  { path: "ticket/:id/edit", component: EditTicketComponent },
   { path: "ticket/:id/details", component: DisplayTicketComponent },
   { path: "dashboard", component: DashboardComponent },
   { path: "chat", component: ChatComponent },
+
+
+
+  { path: "coupon", component: CouponComponent },
+  { path: "coupon/add", component: AddcouponComponent },
+  { path: "coupon/:id/edit", component: EditcouponComponent },
+  { path: "coupon/:id/details", component: CouponDetailsComponent },
+
+
+  { path: "influencer", component: InfluencerComponent },
+  { path: "influencer/add", component: AddInfluencerComponent },
+  { path: "influencer/:id/edit", component: EditInfluencerComponent },
+  { path: "influencer/:id/details", component: InfluencerDetailsComponent },
 
 
   { path: "**", component: AdministrationComponent },

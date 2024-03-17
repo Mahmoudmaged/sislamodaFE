@@ -34,4 +34,12 @@ export class TicketManagementService {
 
   }
 
+  addTicket(data: any) {
+    return this._HttpClient.post(`${this.baseURL}Add`, data );
+  }
+
+  updateTicket(data: any) {
+    return this._HttpClient.post(`${this.baseURL}Update`, data );
+  }
+
 }

@@ -5,11 +5,11 @@ import { AttachmentsService } from 'src/app/Services/attachments.service';
 import { UserService } from 'src/app/Services/user.service';
 declare let $: any;
 @Component({
-  selector: 'app-update-user',
-  templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.scss']
 })
-export class UpdateUserComponent implements OnInit {
+export class AddUserComponent {
   load: boolean = false;
   sideMessage: string = '';
   productOptions: any = [];
@@ -19,7 +19,7 @@ export class UpdateUserComponent implements OnInit {
   categoryList: any = []
   optionList: any = []
   userList: any = []
-  image: any;
+  image: any ;
   errorMessage: string = ''
   userInfo: any;
   selectedImage: string = '';
@@ -44,7 +44,6 @@ export class UpdateUserComponent implements OnInit {
     this.dir = localStorage.getItem('dir') || 'ltr';
     this.userInfo = JSON.parse(localStorage.getItem('user')!);
     this.vendorData = JSON.parse(localStorage.getItem('vendorData')!);
-    this.getUserById(this._ActivatedRoute.snapshot.paramMap.get('id')!)
   }
 
 
@@ -68,7 +67,7 @@ export class UpdateUserComponent implements OnInit {
         this.image = res
         // console.log({ res });
       }, err => {
-        // console.log({ err });
+        console.log({ err });
       }
       )
 
@@ -83,38 +82,19 @@ export class UpdateUserComponent implements OnInit {
     this.addUserForm.controls.image.setValue('')
   }
 
-  getUserById(id: string) {
-    this.load = true;
 
-
-
-    this._userService.getById(id).subscribe(res => {
-      this.user = res
-      // console.log({ user: this.user});
-
-      this.addUserForm.controls.name.setValue(this.user.name)
-      this.addUserForm.controls.email.setValue(this.user.email)
-      this.addUserForm.controls.isSupperAdmin.setValue(this.user.isSupperAdmin)
-      this.addUserForm.controls.phoneNumber.setValue(this.user.phoneNumber)
-      this.load = false;
-
-    },
-      err => {
-        // console.log({ err });
-        this.load = false;
-        this.showSideError(`Some thing went wrong please try again`)
-      }
-    )
-
-
-  }
 
 
   addUserForm = new FormGroup({
     image: new FormControl('', []),
-    name: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    middleName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    userName: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.required]),
     isSupperAdmin: new FormControl(false, [Validators.required]),
   })
 
@@ -131,24 +111,39 @@ export class UpdateUserComponent implements OnInit {
 
 
     let data = {
-      id: this.user.id,
-      userTypes: 1,
-      isSupperAdmin: this.addUserForm.controls.isSupperAdmin.value,
-      name: this.addUserForm.controls.name.value,
-      phoneNumber: this.addUserForm.controls.phoneNumber.value,
-      email: this.addUserForm.controls.email.value,
-      photoId: this.image ? this.image : this.user.photoId,
-      appUserId: this.user.appUserId,
-      vendorId: null
+      user: {
+        userTypes: 1,
+        isSupperAdmin: this.addUserForm.controls.isSupperAdmin.value,
+        name: this.addUserForm.controls.userName.value,
+        phoneNumber: this.addUserForm.controls.phoneNumber.value,
+        email: this.addUserForm.controls.email.value,
+        photoId: this.image
+      },
+
+      appUser: {
+        firstName: this.addUserForm.controls.firstName.value,
+        middleName: this.addUserForm.controls.middleName.value,
+        lastName: this.addUserForm.controls.lastName.value,
+        userName: this.addUserForm.controls.userName.value,
+        address: this.addUserForm.controls.address.value,
+        phoneNumber: this.addUserForm.controls.phoneNumber.value,
+        email: this.addUserForm.controls.email.value,
+        password: this.addUserForm.controls.password.value,
+        photoId: this.image
+      }
     }
+    console.log({ data });
 
 
-    this._userService.updateUser(data).subscribe(res => {
+
+    this._userService.addUser(data).subscribe(res => {
+      console.log({ res });
+
       this.load = false;
       this._Router.navigateByUrl("/admin/user")
     },
       err => {
-        // console.log({ err });
+        console.log({ err });
         this.load = false;
         this.showSideError(`Some thing went wrong please try again`)
       }

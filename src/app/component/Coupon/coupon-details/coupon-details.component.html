@@ -1,0 +1,218 @@
+<section>
+    <h4 class="offerhead my-2">{{dir=='ltr'?'coupon Details':"بيانات العرض"}}</h4>
+</section>
+<section class="OrderDetailsSec  p-3">
+    <div class="sideAlert">
+        {{sideMessage}}
+    </div>
+    <div class="overLay" *ngIf="load">
+        <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+            <i class="fa fa-spinner fa-5x fa-spin text-light"></i>
+        </div>
+    </div>
+    <div class="productDataContainer">
+
+        <div class="mb-1">
+            <div class="px-2 py-1">
+                <p>
+                    {{dir=='ltr'?'Code':'ركم كود الخصم'}}
+                </p>
+                <p class="">
+                    {{dir=='ltr'?coupon?.code :coupon?.code}}
+
+                </p>
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="info mb-1">
+
+            <div class="px-2">
+                <p class="OrderDetailsInfo"> {{dir=='ltr'?'Description':'الوصف'}}</p>
+                <p class="w-75">
+                    {{dir=='ltr'?coupon?.descriptionEn :coupon?.description}}
+                </p>
+            </div>
+
+        </div>
+        <hr>
+
+
+        <div class="row">
+            <div class="col-4">
+                <div class="p-2">
+
+                    <div>
+                        <div class="info mb-1">
+
+                            <div class="">
+                                <p class="OrderDetailsInfo"> {{dir=='ltr'?'coupon type':'نوع الخصم'}}</p>
+                                <p class="w-75">
+                                    {{coupon?.couponType == 1 ? dir=="ltr"? 'Amount':" خصم بالقيمه" : dir=="ltr"?
+                                    "Percent (%)" :"(%) خصم بالنسبه "}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="p-2">
+
+                    <div *ngIf="coupon?.couponType == 1 ">
+                        <div class="info mb-1">
+
+                            <div class="">
+                                <p class="OrderDetailsInfo"> {{dir=='ltr'?'Amount':'قيمه الخصم'}}</p>
+                                <p class="w-75">
+                                    {{coupon?.amount}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="coupon?.couponType == 2 ">
+                        <div class="info mb-1">
+
+                            <div class="">
+                                <p class="OrderDetailsInfo"> {{dir=='ltr'?'Percent (%)':'(%) نسبه الخصم'}}</p>
+                                <p class="w-75">
+                                    {{coupon?.percent}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-2">
+
+                  
+
+                    <div >
+                        <div class="info mb-1">
+
+                            <div class="">
+                                <p class="OrderDetailsInfo"> {{dir=='ltr'?'Coupon must exceed limit':'  الحد المطلوب حتي يكون الخصم فعال'}}</p>
+                                <p class="w-75">
+                                    {{coupon?.mustExceed}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="mb-1">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-4 my-1">
+                        <div class="px-2 py-1">
+                            <p>
+                                {{dir=='ltr'?'Start Date':' التاريخ'}}
+                            </p>
+                            <p class="">
+                                {{coupon?.startDate.split(" ")[0]}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-1">
+                        <div class="px-2 py-1">
+                            {{dir=='ltr'?'End Date':' تاريخ الانتهاء '}}
+                            <p class="">
+                                {{coupon?.endDate.split(" ")[0]}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="p-2">
+
+                    <div>
+                        <div class="mb-1">
+                            <div class="py-1">
+
+                                <p>
+                                    {{dir=='ltr'?'coupon Status':' الحاله'}} </p>
+                                <p *ngIf="coupon?.isActive ; else notActive" class="">
+                                    <i class="fa fa-circle text-success mr-2" aria-hidden="true"></i>
+                                    {{dir=='ltr'?'Available':' متاح'}}
+
+                                </p>
+                                <ng-template #notActive>
+                                    <p>
+                                        <i class="fa fa-circle text-danger mr-2" aria-hidden="true"></i>
+
+                                        {{dir=='ltr'?' Not Available':' غير متاح'}}
+
+                                    </p>
+                                </ng-template>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="p-2">
+
+                    <div>
+                        <div class="mb-1">
+                            <div class="py-1">
+
+                                <p>
+                                    {{dir=='ltr'?'Available for all users ':' متاح لجميع العملاء'}} </p>
+                                <p *ngIf="coupon?.isActive ; else notActive" class="">
+                                    <i class="fa fa-circle text-success mr-2" aria-hidden="true"></i>
+                                    {{dir=='ltr'?'Available':' متاح'}}
+
+                                </p>
+                                <ng-template #notActive>
+                                    <p>
+                                        <i class="fa fa-circle text-danger mr-2" aria-hidden="true"></i>
+
+                                        {{dir=='ltr'?' Not Available':' غير متاح'}}
+
+                                    </p>
+                                </ng-template>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+
+        <div class="w-100 text-end mt-4 mb-2 mx-2">
+            <button class="btn btn-dark px-3 py-1 mx-1" (click)="closeProductDetailsSec()">
+                {{dir=='ltr'?'Back':' رجوع'}}
+
+            </button>
+            <!-- 
+            <button class="btn btn-danger px-3 py-1 mx-1" (click)="addProducts()">
+                {{dir=='ltr'?'Save':'حفظ'}} 
+
+            </button>-->
+        </div>
+    </div>
+
+</section>

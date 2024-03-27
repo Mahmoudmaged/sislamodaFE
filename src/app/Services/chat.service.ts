@@ -22,11 +22,11 @@ export class ChatService {
   }
 
   messageToUser(data: any): Observable<any> {  // message from  admin to vendor or user 
-    return this._HttpClient.post(`${this.baseURL}messageFromUser`, data);
+    return this._HttpClient.post(`${this.baseURL}MessageToUser`, data);
   }
 
-  getChatData(vendorId: string, page: number = 1, size: number = 1000): Observable<any> {
-    return this._HttpClient.get(`${this.baseURL}GetAllByUserId?myAppUserId=${vendorId}&page=${page}&pageSize=${size}`);
+  getChatData(myAppUserId: string, page: number = 1, size: number = 1000): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}GetAllByUserId?myAppUserId=${myAppUserId}&page=${page}&pageSize=${size}`);
   }
 
 

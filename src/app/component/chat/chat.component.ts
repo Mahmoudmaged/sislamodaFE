@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/Services/chat.service';
 
@@ -50,12 +51,18 @@ export class ChatComponent implements OnInit {
     }
 
     this.photo = this.userInfo?.photo || this.photo;
-    this.getChatList()
+
 
   }
 
   ngOnInit() {
 
+    if (this.vendorData) {
+      this.clientName = this.userInfo?.firstName + '' + this.userInfo?.lastName
+      this.showChatDialog(this.userInfo?.id)
+    } else {
+      this.getChatList()
+    }
 
 
   }
@@ -78,8 +85,15 @@ export class ChatComponent implements OnInit {
   getChatInstance(chatId: any, page = 1, size = 1000) {
     this._ChatService.getChatData(chatId, page, size).subscribe(res => {
 
-      this.chatInstance = { chat: res?.reverse(), myAppUserId: chatId, userChatId: res[0].userChatId }
-      console.log({ getChatInstance: this.chatInstance });
+      console.log({ chatIn: res });
+      if (res.length) {
+        this.chatInstance = { chat: res?.reverse(), myAppUserId: chatId, userChatId: res[0].userChatId }
+
+      } else {
+        this.chatInstance = { chat: res?.reverse(), myAppUserId: chatId, userChatId: null }
+
+
+      }
 
     },
       err => {
@@ -92,18 +106,14 @@ export class ChatComponent implements OnInit {
   sendMessageToClientOrVendor(data: any) {
 
     this._ChatService.messageToUser(data).subscribe(res => {
-      console.log({ sentRes: res });
-      for (let i = 0; i < this.chatList.length; i++) {
-        if (this.chatInstance.id == this.chatList[i].id) {
-          this.chatList.push($(".messageInput").val())
-          this.chatInstance = { ...this.chatList[i] }
-          this.chatInstance.userMessages = this.chatInstance.userMessages.reverse()
 
-          break;
-        }
+      console.log({ data });
 
-      }
-      $(".messageInput").val('');
+      this.getChatInstance(this.chatInstance?.myAppUserId)
+      this.messageForm.controls['message'].setValue('')
+
+
+
     },
       err => {
         this.load = false;
@@ -117,7 +127,10 @@ export class ChatComponent implements OnInit {
 
     this._ChatService.messageFromUser(data).subscribe(res => {
       console.log({ sentRes: res });
-      $(".messageInput").val('');
+      // $(".messageInput").val('');
+      this.messageForm.controls['message'].setValue('')
+      this.getChatInstance(this.chatInstance?.myAppUserId)
+
     },
       err => {
         this.load = false;
@@ -126,14 +139,17 @@ export class ChatComponent implements OnInit {
     )
   }
 
+  clientName: string = ''
 
-  showChatDialog(id: string, index: number) {
-    // this.getChatInstance(id, 1, 1000)
-    this.chatInstance = { ...this.chatList[index] }
-    this.chatInstance.userMessages = this.chatInstance.userMessages.reverse()
-    console.log({ chatIn: this.chatInstance });
+  showChatDialog(id: string, index: number = 0) {
 
+    if (this.chatList[index]) {
+      this.clientName = this.chatList[index].myAppUser?.firstName + '' + this.chatList[index].myAppUser?.lastName
+    }
+    this.getChatInstance(id, 1, 1000)
     $(".chatDialog").show()
+    // $(".chatDialog").animate({ scrollTop: $('.chatDialog').get(0).scrollHeight }, 1000);
+    // $('.chatDialog').scrollTop($('.chatDialog').height());
   }
   closeChatDialog() {
     $(".chatDialog").hide()
@@ -146,12 +162,16 @@ export class ChatComponent implements OnInit {
 
   }
 
+  messageForm = new FormGroup({
+    message: new FormControl('', [Validators.required]),
+  })
+
   sendMessage(chatInstance: any) {
 
     const data = {
-      myAppUserId: chatInstance.myAppUserId, //vendorID
-      userChatId: chatInstance.id, //chatID
-      message: $(".messageInput").val(),
+      myAppUserId: chatInstance?.myAppUserId, //vendorID
+      userChatId: chatInstance?.userChatId, //chatID
+      message: this.messageForm.controls['message'].value,
       replayUserId: ""
     }
 
@@ -164,10 +184,10 @@ export class ChatComponent implements OnInit {
       })
 
     } else {
-      alert(" admin send")
+      // alert(" admin send")
       //admin  send message to user or vendor
       data.replayUserId = this.userInfo.id
-      console.log({ chatInstance, data });
+      // console.log({ chatInstance, data });
 
       this.sendMessageToClientOrVendor(data)
     }

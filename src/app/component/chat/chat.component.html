@@ -1,7 +1,7 @@
 <div class="chatComponent h-100 w-100 p-2">
 
     <div dir="rtl" class="row h-100">
-        <div class="col-4">
+        <div [class]="this.vendorData?'d-none':'col-4'" >
             <div class="p-2">
                 <div dir="rtl" class="chatList p-3">
                     <h3 dir="ltr">Contact</h3>
@@ -9,37 +9,44 @@
                     <ul *ngFor="let chat of chatList ; index as i">
                         <li (click)="showChatDialog(chat.myAppUserId  , i)" class="mt-1 chatUser">
                             <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt="" srcset="">
-                            <span class="chatTitle mx-1">{{chat?.myAppUserId}}</span>
+                            <span class="chatTitle mx-1">{{chat.myAppUser?.firstName}}</span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="col-8">
+        <div [class]="this.vendorData?'col-12':'col-8'">
             <div class="p-2">
                 <div class="">
                     <div class="chatDialog mx-1 ">
                         <div class="p-2">
                             <div class="p-2">
-                                <div class="closeChat" dir="rtl">
+                                <div [class]="this.vendorData?'d-none':'closeChat'"  dir="rtl">
                                     <i class="fa fa-times" (click)="closeChatDialog()"></i>
                                 </div>
-                                <div *ngIf="chatInstance?.userMessages.length ; else noContent" class="chatContent"
+                                <div *ngIf="chatInstance?.chat?.length ; else noContent" class="chatContent"
                                     (scroll)="changeBack()">
-                                    <div *ngFor="let message of chatInstance?.userMessages" class="">
+                                    <div *ngFor="let message of chatInstance?.chat" class="">
 
 
-                                        <div *ngIf="message.replayUserId != userInfo.id" class="rightUser my-1">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
+                                        <div *ngIf="message.fromAdmin" class="rightUser my-1 ">
+                                            <span>
+                                                <span class="senderName">{{message.replayUser?.firstName}} {{message.replayUsers?.lastName}}</span>
+                                                <br>
+                                                <img class="chatImage" src="../../../assets/images/avatar/ava.png"
+                                                    alt="" srcset="">
+                                            </span>
                                             <span class="chatTitle mx-1">{{message.message}}</span>
                                         </div>
 
-                                        <div *ngIf="message.replayUserId == userInfo.id" class="leftUser my-1"
-                                            dir="ltr">
-                                            <img class="chatImage" src="../../../assets/images/avatar/ava.png" alt=""
-                                                srcset="">
+                                        <div *ngIf="!message.fromAdmin" class="leftUser my-1" dir="ltr">
+                                            <span>
+                                                <span class="senderName">{{clientName}} </span>
+                                                <br>
+                                                <img class="chatImage" src="../../../assets/images/avatar/ava.png"
+                                                    alt="" srcset="">
+                                            </span>
                                             <span class="chatTitle mx-1">{{message.message}}</span>
                                         </div>
                                     </div>
@@ -53,7 +60,8 @@
                                 <ng-template #noContent>
                                     <div
                                         class="row align-items-center justify-content-center text-center p-5 text-danger noContent">
-                                        <p>{{dir=='ltr'? 'Empty Chat  start you first message':'لم يتم العثور علي نتائج بحث مشابه'}}
+                                        <p>{{dir=='ltr'? 'Empty Chat start you first message':'لم يتم العثور علي نتائج
+                                            بحث مشابه'}}
                                         </p>
                                     </div>
                                 </ng-template>
@@ -61,16 +69,23 @@
                                 <div class="chatControl px-1 py-3 text-center" dir="ltr">
                                     <hr>
                                     <hr>
-                                    <div class="row align-items-center mt-2">
-                                        <div class="col-11">
-                                            <input class="form-control messageInput" type="text" name="" id="">
-                                        </div>
-                                        <div class="col-1">
-                                            <div class="px-1">
-                                                <i class="fa fa-paper-plane" (click)="sendMessage(chatInstance)"></i>
+                                    <form [formGroup]="messageForm"
+                                        (ngSubmit)="messageForm.valid && sendMessage(chatInstance)">
+                                        <div class="row align-items-center mt-2">
+                                            <div class="col-11">
+                                                <input formControlName="message" class="form-control messageInput"
+                                                    type="text" name="" id="">
+                                            </div>
+                                            <div class="col-1">
+                                                <div class="px-1">
+                                                    <button class=" messageBtn" [disabled]="messageForm.invalid">
+                                                        <i class="fa fa-paper-plane"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
